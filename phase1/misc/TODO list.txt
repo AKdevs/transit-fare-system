@@ -1,0 +1,55 @@
+1. write method signature
+    Admin User (Yang Chen)
+    CardHolder (Yang Chen)
+    EventHandler (Atharva)
+    TansitLines (Atharva)
+    TransitSystem (Jingjing Zhan, Wenyue Feng) 
+    Trip (Jingjing Zhan, Wenyue Feng)
+    Card (Jingjing Zhan, Wenyue Feng)
+
+
+2nd meeting, June 28
+1. talk about method signatures we wrote, explain what your methods will be doing if necessary
+
+2. Q&A 
+    - Ask any question about anything related to our project
+    - reach out if you have any question about handout/method signatures/anything 
+
+2. decide our main classes. Add to the repo (i.e finish setting up)
+
+3. assign work
+
+    3.1 find pairs
+        — every class has two people working on it.
+
+        — different combination of pairs for different classes, so everyone knows about the whole project and communicate with each other.
+            pros:1.easier to find and fix problems in one class before everyone’s work merging together
+                 2.easier for people working on other classes to reach out if they need some help from      
+                   other class
+
+                         e.g class1 (studentA, studentB)
+                             class2 (studentA, studentC)
+                             class1 (studentB, studentC)
+    
+    3.2 we can start coding!!!(TODO list before next meeting)
+        
+        events.txt ()
+        README.txt ()
+        design.txt ()
+        
+        EventHandler (Atharva Karandikar,everyone)
+        
+        TransitLine (Atharva Karandikar, Wenyue Feng)
+        Card (Atharva Karandikar, Jingjing Zhan, Yang Chen)
+        TripSegment (Jingjing Zhan, Wenyue Feng)
+        TransitSystem (Yang Chen, Jingjing Zhan, Atharva Karandikar)
+        
+        UserAccount (Yang Chen, Wenyue Feng)
+        CardHolder (Yang Chen, Wenyue Feng)
+        AdminUser (Yang Chen, Wenyue Feng)
+        
+
+
+ 
+
+ 
