@@ -1,9 +1,9 @@
 public class UserAccount {
     private String name;
     private String email;
-    private int accountNumber;
+    protected long accountNumber;
 
-    public UserAccount(String name, String email){
+    public UserAccount(String name, String email) {
         this.name = name;
         this.email = email;
     }
