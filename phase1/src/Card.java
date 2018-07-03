@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Card {
-    private int cardNumber;// static
+    private static int cardNumber;// static
     private int balance;
     private CardHolder owner;
     private String status;
@@ -14,11 +14,11 @@ public class Card {
     // registered = linked, different from "activate"
 
     public Card(String cardNumber){
-        this.cardNumber += 1;
+        cardNumber += 1;
         this.owner = null;
         this.balance = 19;
         this.status = "deactivated";
-        this.trips = new ArrayList<ArrayList>(); // only keeps track of 3 most recent trips
+        this.trips = ArrayList<ArrayList<tripSegment>>; // only keeps track of 3 most recent trips
         this.currentFare = 0;
         this.totalFares = 0;
         this.currentTime = 0;
@@ -41,13 +41,19 @@ public class Card {
         this.status = "activated";
     }
 
-    void viewRecentTrips(){}
+    void viewRecentTrips(){
+        System.out.println(this.trips);
+    }
 
-    void getCardNumber(){}
+    void getCardNumber(){
+        System.out.println(cardNumber);
+    }
 
-    void getBalance(){}
+    void getBalance(){
+        System.out.println(this.balance);
+    }
 
-    String getOwner(){}
+    CardHolder getOwner(){return this.owner;}// do we print out this?
 
     String getStatus(){return this.status;}
 
