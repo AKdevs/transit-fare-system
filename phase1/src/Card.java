@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 public class Card {
-    private static int cardNumber;// static
+    private static int nextCardNumber = 1;
+    private int cardNumber;
     private int balance;
     private CardHolder owner;
     private String status;
@@ -14,7 +15,8 @@ public class Card {
     // registered = linked, different from "activate"
 
     public Card(String cardNumber){
-        cardNumber += 1;
+        nextCardNumber += 1;
+        this.cardNumber = nextCardNumber;
         this.owner = null;
         this.balance = 19;
         this.status = "deactivated";
@@ -46,11 +48,11 @@ public class Card {
     }
 
     void printCardNumber(){
-        System.out.println(cardNumber);
+        System.out.println(this.cardNumber);
     }
 
     int getCardNumber(){
-        return cardNumber;
+        return this.cardNumber;
     }
 
     void getBalance(){
@@ -70,7 +72,7 @@ public class Card {
     void updateTime(int time){}
 
     boolean equals(Card other){
-        return cardNumber == other.getCardNumber();
+        return this.cardNumber == other.getCardNumber();
     }
 
 
