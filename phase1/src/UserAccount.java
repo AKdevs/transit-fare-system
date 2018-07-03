@@ -47,5 +47,9 @@ public class UserAccount {
         System.out.println("Account Number: " + this.accountNumber);
     }
 
+    boolean equals(UserAccount other){
+        return this.accountNumber == other.getAccountNum();
+    }
+
 
 }

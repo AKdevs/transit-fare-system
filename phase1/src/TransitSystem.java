@@ -5,8 +5,8 @@ public class TransitSystem {
     private ArrayList<Card> cards;
     //[Card(123), Card(24), Card(678), .....]
 
-    private ArrayList userAccounts;
-    //[cardHolder(1),cardHolder(2), cardHolder(3), .....]
+    private ArrayList<CardHolder> userAccounts;
+    //[CardHolder(1),CardHolder(2), CardHolder(3), .....]
 
     private ArrayList<TransitLines> transitLines;
 
@@ -21,16 +21,23 @@ public class TransitSystem {
 
     void removeCard(Card card){
         for (Card c: cards){
-            if(c.getCardNumber()card.getCardNumber()){
-
+            if (c.equals(card)){
+                cards.remove(c);
             }
         }
-
     }
 
-    void addUserAccount(CardHolder newUser){}
+    void addUserAccount(CardHolder newUser){
+        this.userAccounts.add(newUser);
+    }
 
-    void removeUserAccount(CardHolder user){}
+    void removeUserAccount(CardHolder user){
+        for (CardHolder holder: userAccounts){
+            if (holder.equals(user)){
+                userAccounts.remove(holder);
+            }
+        }
+    }
 
     void addTransitLines(ArrayList newTransitLine){}
 
