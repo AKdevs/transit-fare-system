@@ -1,3 +1,6 @@
+import java.io.*;
+
+
 public class UserAccount {
     private String name;
     private String email;
@@ -8,25 +11,27 @@ public class UserAccount {
         this.email = email;
     }
 
-    public String getName(){
-
+    public String getName() {
+        return this.name;
     }
 
-    public String getEmail(){
-
+    public String getEmail() {
+        return this.email;
     }
 
-    public String getAccountNum(){
-
+    public long getAccountNum() {
+        return this.accountNumber;
     }
 
-    public String changeName(String newName){
-
+    public String changeName(String newName) {
+        this.name = newName;
+        return "Name has been changed to " + this.name + " successfully.";
     }
 
+    /* Functionality handled by Card for phase 1
     public String viewBalance(Card card){
 
-    }
+    } */
 
     public String activateCard(Card card){
 
@@ -36,7 +41,10 @@ public class UserAccount {
 
     }
 
-    public void viewInfo(){
+    public void viewInfo() {
+        System.out.println("Name: " + this.name);
+        System.out.println("Email: "+ this.email);
+        System.out.println("Account Number: " + this.accountNumber);
     }
 
 
