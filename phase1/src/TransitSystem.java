@@ -8,7 +8,7 @@ public class TransitSystem {
     private ArrayList<CardHolder> userAccounts;
     //[CardHolder(1),CardHolder(2), CardHolder(3), .....]
 
-    private ArrayList<TransitLines> transitLines;
+    private ArrayList<TransitLine> transitLines;
 
     private ArrayList allFares; //print out
 
@@ -39,7 +39,9 @@ public class TransitSystem {
         }
     }
 
-    void addTransitLines(ArrayList newTransitLine){}
+    void addTransitLines(TransitLine newTransitLine){
+        this.transitLines.add(newTransitLine);
+    }
 
     void addFares(int fares){}
 
