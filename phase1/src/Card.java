@@ -45,8 +45,12 @@ public class Card {
         System.out.println(this.trips);
     }
 
-    void getCardNumber(){
+    void printCardNumber(){
         System.out.println(cardNumber);
+    }
+
+    int getCardNumber(){
+        return cardNumber;
     }
 
     void getBalance(){
@@ -64,6 +68,10 @@ public class Card {
     }
 
     void updateTime(int time){}
+
+    boolean equals(Card other){
+        return cardNumber == other.getCardNumber();
+    }
 
 
 }

@@ -2,23 +2,31 @@ import java.util.ArrayList;
 
 public class TransitSystem {
 
-    private ArrayList cards;
-    [Card(123), Card(24), Card(678), .....]
+    private ArrayList<Card> cards;
+    //[Card(123), Card(24), Card(678), .....]
 
     private ArrayList userAccounts;
-    [cardHolder(1),cardHolder(2), cardHolder(3), .....]
+    //[cardHolder(1),cardHolder(2), cardHolder(3), .....]
 
     private ArrayList<TransitLines> transitLines;
-    [subway1, bus1, bus2, ....]
 
     private ArrayList allFares; //print out
 
     private ArrayList numberOfStation; //print out
 
 
-    void addCard(Card newCard){}
+    void addCard(Card newCard){
+        this.cards.add(newCard);
+    }
 
-    void removeCard(Card card){}
+    void removeCard(Card card){
+        for (Card c: cards){
+            if(c.getCardNumber()card.getCardNumber()){
+
+            }
+        }
+
+    }
 
     void addUserAccount(CardHolder newUser){}
 
