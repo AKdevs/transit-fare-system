@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class TransitLine {
-    ArrayList<String> points;
-    String type;
+    private ArrayList<String> points;
+    private String type;
 
     TransitLine(ArrayList<String> points, String type) {
         this.points = points;
