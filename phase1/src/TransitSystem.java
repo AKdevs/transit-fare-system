@@ -51,6 +51,10 @@ public class TransitSystem {
 
     void deductNumberOfStation(int newStation){}
 
+    ArrayList getCards() {
+        return this.cards;
+    }
+
 
 }
 
