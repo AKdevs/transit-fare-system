@@ -20,6 +20,7 @@ public class TripSegment {
         this.transitType = transitType;
         this.exitTime = exitTime;
         calculateDuration(this.enterTime, this.exitTime);
+        // add TripSegment to trips in Card (Find card first)
     }
 
     private void calculateDuration(String enterTime, String exitTime){

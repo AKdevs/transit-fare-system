@@ -15,6 +15,14 @@ public class TransitSystem {
     static int numberOfStation; //print out
 
 
+    Card findCard(int cardNumber){
+        for (Card c: cards){
+            if (c.getCardNumber() == cardNumber){
+                return c;
+            }
+        }
+        return null;
+    }
     void addCard(Card newCard){
         this.cards.add(newCard);
     }
