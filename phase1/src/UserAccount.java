@@ -33,13 +33,13 @@ public class UserAccount {
 
     } */
 
-    public String activateCard(Card card){
+    //public String activateCard(Card card){
 
-    }
+    //}
 
-    public String deactivateCard(Card card){
+    //public String deactivateCard(Card card){
 
-    }
+    //}
 
     public void viewInfo() {
         System.out.println("Name: " + this.name);
