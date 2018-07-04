@@ -21,8 +21,12 @@ public class EventHandler {
             case "exit":
             case "create":
                 if (eventTokens[1].equals("account")) {
-                    system.createAccount(eventTokens[2], eventTokens[3]);
+                    //system.createAccount(eventTokens[2], eventTokens[3]);
+                    UserAccount newAccount = new UserAccount(eventTokens[2], eventTokens[3]);
+                    system.addUserAccount(newAccount);
                 } else if (eventTokens[1].equals("card")) {
+                    Card newCard = new Card();
+                    system.addCard(newCard);
 
                 }
 
