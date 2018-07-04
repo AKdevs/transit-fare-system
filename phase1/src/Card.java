@@ -35,11 +35,11 @@ public class Card {
     this.balance -= value;
   }
 
-  private void deactivate() {
+  void deactivate() {
     this.status = "deactivated";
   }
 
-  private void activate() {
+  void activate() {
     this.status = "activated";
   }
 

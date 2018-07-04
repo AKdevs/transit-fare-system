@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-
 public class EventHandler {
   private TransitSystem system;
   private Scanner eventsBuffer;
@@ -30,6 +29,10 @@ public class EventHandler {
           // Card newCard = new Card();
           // system.addCard(newCard);
         }
+      case "activate":
+        system.findCard(Integer.parseInt(eventTokens[1])).activate();
+      case "deactivate":
+        system.findCard(Integer.parseInt(eventTokens[1])).deactivate();
     }
   }
 }
