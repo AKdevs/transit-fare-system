@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Card {
     private static int nextCardNumber = 1;
@@ -8,13 +10,13 @@ public class Card {
     private String status;
     private int currentFare;
     private ArrayList<ArrayList<TripSegment>> trips; // key-value pair
-    private int totalFares; // key-value pair, past 12 months
+    private HashMap<Integer, Double> totalFares; // key-value pair, past 12 months
     private int currentTime;
 
 
     // registered = linked, different from "activate"
 
-    public Card(String cardNumber){
+    public Card(){
         nextCardNumber += 1;
         this.cardNumber = nextCardNumber;
         this.owner = null;
@@ -22,7 +24,7 @@ public class Card {
         this.status = "deactivated";
         this.trips = new ArrayList<ArrayList<TripSegment>>(); // only keeps track of 3 most recent trips
         this.currentFare = 0;
-        this.totalFares = 0;
+        this.totalFares = new HashMap<>();
         this.currentTime = 0;
     }
 
@@ -45,6 +47,17 @@ public class Card {
 
     void viewRecentTrips(){
         System.out.println(this.trips);
+    }// only print 3 most recent trips
+
+    void viewAverageFares(){
+        //view the average fares of the past 12 months
+        // use iterator?
+        Double sumOfFares = 0.0;
+        for(Map.Entry m:this.totalFares.entrySet()){
+            sumOfFares += (Double) m.getValue();
+            System.out.println(sumOfFares/12);
+        }
+
     }
 
     void printCardNumber(){
