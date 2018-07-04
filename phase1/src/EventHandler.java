@@ -18,7 +18,9 @@ public class EventHandler {
         String action = eventTokens[0];
         switch (action) {
             case "entry":
+                TripSegment ts = new TripSegment(eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4]);
             case "exit":
+
             case "create":
                 if (eventTokens[1].equals("account")) {
                     //system.createAccount(eventTokens[2], eventTokens[3]);

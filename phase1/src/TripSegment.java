@@ -8,8 +8,8 @@ public class TripSegment {
     private String exitTime;
     private int duration;
 
-    public TripSegment(int cardNumber, String enterSpot, String transitType, String enterTime){
-        this.associatedCard = cardNumber;
+    public TripSegment(String cardNumber, String enterSpot, String transitType, String enterTime){
+        this.associatedCard = Integer.parseInt(cardNumber);
         this.enterSpot = enterSpot;
         this.transitType = transitType;
         this.enterTime = enterTime;
