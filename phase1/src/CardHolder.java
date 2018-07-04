@@ -16,7 +16,6 @@ public class CardHolder extends UserAccount {
         // if the card is not created in the system, return error message
 
 
-
         // link a valid card
         this.travelCards.add(card);
         card.setOwner(this);
@@ -25,14 +24,13 @@ public class CardHolder extends UserAccount {
     }
 
     public void deLinkCard(Card card) {
-
+        this.travelCards.remove(card);
+        System.out.println("Card " + card.getCardNumber() + " is removed from your account.");
     }
 
     public void  getMonthlyCost(){
 
     }
-
-
 
 
 
