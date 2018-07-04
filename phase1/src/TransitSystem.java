@@ -10,9 +10,9 @@ public class TransitSystem {
 
     private ArrayList<TransitLine> transitLines;
 
-    private int allFares; //print out key-value pair?
+    static int allFares; //print out key-value pair?
 
-    private int numberOfStation; //print out
+    static int numberOfStation; //print out
 
 
     void addCard(Card newCard){
@@ -47,11 +47,11 @@ public class TransitSystem {
 
     void deductFares(int fares){}
 
-    int getAllFares(){
-        return this.allFares;
+    static int getAllFares(){
+        return allFares;
     }
 
-    int getNumberOfStation(){
+    static int getNumberOfStation(){
         return getNumberOfStation();
     }
 
