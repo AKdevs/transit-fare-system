@@ -33,6 +33,13 @@ public class EventHandler {
         system.findCard(Integer.parseInt(eventTokens[1])).activate();
       case "deactivate":
         system.findCard(Integer.parseInt(eventTokens[1])).deactivate();
+      case "link":
+        Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
+        UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+        ((CardHolder) currentHolder).linkCard(currentCard);
+      case "unlink":
+      case "load":
+
     }
   }
 }
