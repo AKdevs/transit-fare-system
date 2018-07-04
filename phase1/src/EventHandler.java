@@ -1,10 +1,33 @@
+import java.io.File;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.ArrayList;
+
+
 public class EventHandler {
     private TransitSystem system;
-    EventHandler(TransitSystem system) {
+    private Scanner eventsBuffer;
+    EventHandler(TransitSystem system) throws Exception {
         this.system = system;
+        this.eventsBuffer = new Scanner(new File("events.txt"));
     }
 
     void play() {
+        String currentEvent = eventsBuffer.nextLine();
+        String[] eventTokens = currentEvent.split("|");
+        String action = eventTokens[0];
+        switch (action) {
+            case "entry":
+            case "exit":
+            case "create":
+                if (eventTokens[1].equals("account")) {
+                    system.createAccount(eventTokens[2], eventTokens[3]);
+                } else if (eventTokens[1].equals("card")) {
+
+                }
+
+        }
+
 
     }
 }

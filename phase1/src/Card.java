@@ -7,7 +7,7 @@ public class Card {
     private CardHolder owner;
     private String status;
     private int currentFare;
-    private ArrayList<ArrayList<tripSegment>> trips; // key-value pair
+    private ArrayList<ArrayList<TripSegment>> trips; // key-value pair
     private int totalFares; // key-value pair, past 12 months
     private int currentTime;
 
@@ -20,7 +20,7 @@ public class Card {
         this.owner = null;
         this.balance = 19;
         this.status = "deactivated";
-        this.trips = ArrayList<ArrayList<tripSegment>>; // only keeps track of 3 most recent trips
+        this.trips = new ArrayList<ArrayList<TripSegment>>(); // only keeps track of 3 most recent trips
         this.currentFare = 0;
         this.totalFares = 0;
         this.currentTime = 0;
