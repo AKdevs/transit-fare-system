@@ -1,3 +1,5 @@
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
+
 import java.util.ArrayList;
 
 public class TransitSystem {
@@ -23,12 +25,18 @@ public class TransitSystem {
     return null;
   }
 
-
-
   void addCard(Card newCard) {
-    this.cards.add(newCard);
+    cards.add(newCard);
   }
 
+  void createCard() {
+    Card newCard = new Card();
+    addCard(newCard);
+  }
+
+  void removeCard(int cardNumber) {
+    cards.remove(findCard(cardNumber));
+  }
   /*
   void removeCard(Card card) {
     for (Card c : cards) {
@@ -39,8 +47,13 @@ public class TransitSystem {
   }
   */
 
-  void removeCard(int cardNumber) {
-      cards.remove(findCard(cardNumber));
+  UserAccount findUserAccount(long accountNumber) {
+    for (UserAccount ua : userAccounts) {
+      if (ua.getAccountNum() == accountNumber) {
+        return ua;
+      }
+    }
+    return null;
   }
 
   void createUserAccount(String name, String email) {
@@ -52,6 +65,11 @@ public class TransitSystem {
     this.userAccounts.add(newUser);
   }
 
+  void removeUserAccount(int accountNumber) {
+      userAccounts.remove(findUserAccount(accountNumber));
+  }
+
+  /*
   void removeUserAccount(UserAccount user) {
     for (UserAccount u : userAccounts) {
       if (u.equals(user)) {
@@ -59,9 +77,10 @@ public class TransitSystem {
       }
     }
   }
+  */
 
   void addTransitLines(TransitLine newTransitLine) {
-    this.transitLines.add(newTransitLine);
+    transitLines.add(newTransitLine);
   }
 
   void addFares(int fares) {}

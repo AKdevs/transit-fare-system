@@ -22,12 +22,13 @@ public class EventHandler {
       case "exit":
       case "create":
         if (eventTokens[1].equals("account")) {
-          // system.createUserAccount(eventTokens[2], eventTokens[3]);
-          UserAccount newAccount = new UserAccount(eventTokens[2], eventTokens[3]);
-          system.addUserAccount(newAccount);
+          system.createUserAccount(eventTokens[2], eventTokens[3]);
+          // UserAccount newAccount = new UserAccount(eventTokens[2], eventTokens[3]);
+          // system.addUserAccount(newAccount);
         } else if (eventTokens[1].equals("card")) {
-          Card newCard = new Card();
-          system.addCard(newCard);
+          system.createCard();
+          // Card newCard = new Card();
+          // system.addCard(newCard);
         }
     }
   }
