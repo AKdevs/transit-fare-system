@@ -61,6 +61,10 @@ public class Card {
 
     CardHolder getOwner(){return this.owner;}// do we print out this?
 
+    void setOwner(CardHolder owner) {
+        this.owner = owner;
+    }
+
     String getStatus(){return this.status;}
 
     int getCurrentFare(){return this.currentFare;}
