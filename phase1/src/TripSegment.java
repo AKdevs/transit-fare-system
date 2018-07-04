@@ -22,7 +22,7 @@ public class TripSegment {
         calculateDuration(this.enterTime, this.exitTime);
     }
 
-    public void calculateDuration(String enterTime, String exitTime){
+    private void calculateDuration(String enterTime, String exitTime){
         // int version of enterTime: Hour converted to minutes + minutes
         int enter = Integer.parseInt(this.enterTime.substring(0, 2)) * 60 + Integer.parseInt(this.enterTime.substring(3, 5));
         // int version of exitTime: Hour converted to minutes + minutes
