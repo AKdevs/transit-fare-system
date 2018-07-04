@@ -30,5 +30,19 @@ public class TripSegment {
         this.duration = exit - enter;
     }
 
-    
+    public int getAssociatedCard(){return this.associatedCard;}
+
+    public String getEnterSpot(){return this.enterSpot;}
+
+    public String getExitSpot(){return this.exitSpot;}
+
+    public String getTransitType(){return this.transitType;}
+
+    public String getEnterTime(){return this.enterTime;}
+
+    public String getExitTime(){return this.exitTime;}
+
+    public int getDuration(){return this.duration;}
+
+
 }
