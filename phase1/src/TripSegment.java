@@ -8,21 +8,12 @@ public class TripSegment {
   private String exitTime;
   private int duration;
 
-<<<<<<< HEAD
-    public TripSegment(String cardNumber, String enterSpot, String transitType, String enterTime){
-        this.associatedCard = Integer.parseInt(cardNumber);
-        this.enterSpot = enterSpot;
-        this.transitType = transitType;
-        this.enterTime = enterTime;
-    }
-=======
-  public TripSegment(int cardNumber, String enterSpot, String transitType, String enterTime) {
-    this.associatedCard = cardNumber;
-    this.enterSpot = enterSpot;
-    this.transitType = transitType;
-    this.enterTime = enterTime;
+  public TripSegment(String cardNumber, String enterSpot, String transitType, String enterTime){
+      this.associatedCard = Integer.parseInt(cardNumber);
+      this.enterSpot = enterSpot;
+      this.transitType = transitType;
+      this.enterTime = enterTime;
   }
->>>>>>> 259cd65b5a20f4331f196f9136e1777e35408348
 
   public void recordTapOut(String exitSpot, String transitType, String exitTime) {
     this.exitSpot = exitSpot;
