@@ -3,7 +3,8 @@ public class TripSegment {
   private int associatedCard; // associated card number
   private String enterSpot;
   private String exitSpot;
-  private String transitType;
+  private String enterTransitType;
+  private String exitTransitType;
   private String enterTime;
   private String exitTime;
   private int duration;
@@ -11,13 +12,13 @@ public class TripSegment {
   public TripSegment(String cardNumber, String enterSpot, String transitType, String enterTime){
       this.associatedCard = Integer.parseInt(cardNumber);
       this.enterSpot = enterSpot;
-      this.transitType = transitType;
+      this.enterTransitType = transitType;
       this.enterTime = enterTime;
   }
 
   public void recordTapOut(String exitSpot, String transitType, String exitTime) {
     this.exitSpot = exitSpot;
-    this.transitType = transitType;
+    this.exitTransitType = transitType;
     this.exitTime = exitTime;
     calculateDuration(this.enterTime, this.exitTime);
     // add TripSegment to trips in Card (Find card first)
@@ -36,30 +37,43 @@ public class TripSegment {
   }
 
   public int getAssociatedCard() {
-    return this.associatedCard;
+
+      return this.associatedCard;
   }
 
   public String getEnterSpot() {
-    return this.enterSpot;
+
+      return this.enterSpot;
   }
 
   public String getExitSpot() {
-    return this.exitSpot;
+
+      return this.exitSpot;
   }
 
-  public String getTransitType() {
-    return this.transitType;
+  public String getEnterTransitType(){
+      return this.enterTransitType;
   }
+
+  public String getExitTransitType(){
+      return this.exitTransitType;
+  }
+
+  //public String getTransitType() {}
+
 
   public String getEnterTime() {
-    return this.enterTime;
+
+      return this.enterTime;
   }
 
   public String getExitTime() {
-    return this.exitTime;
+
+      return this.exitTime;
   }
 
   public int getDuration() {
-    return this.duration;
+
+      return this.duration;
   }
 }

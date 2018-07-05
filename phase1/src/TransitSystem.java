@@ -12,6 +12,8 @@ public class TransitSystem {
 
   private ArrayList<TransitLine> transitLines;
 
+  protected TripSegment currentTripSegment;
+
   static int allFares; // print out key-value pair?
 
   static int numberOfStation; // print out
@@ -83,9 +85,9 @@ public class TransitSystem {
     transitLines.add(newTransitLine);
   }
 
-  void addFares(int fares) {}
+  void addAllFares(int fares) {}
 
-  void deductFares(int fares) {}
+  void deductAllFares(int fares) {}
 
   //int getAllFares() {return this.allFares;}
 
@@ -97,6 +99,13 @@ public class TransitSystem {
 
   ArrayList getCards() {
     return this.cards;
+  }
+
+  void calculateTripSegementFares(TripSegment currentTripSegment){
+      if (currentTripSegment.getEnterTransitType().equals("B")) {
+          // deduct 2 dollars on card's balance
+          // currentFare in Card increment by 2
+      }
   }
 
   static void printDailyReport(){

@@ -9,7 +9,8 @@ public class Card {
   private CardHolder owner;
   private String status;
   private int currentFare;
-  private ArrayList<ArrayList<TripSegment>> trips; // key-value pair
+  private HashMap<Integer, ArrayList<TripSegment>> trips;
+  //private ArrayList<ArrayList<TripSegment>> trips; // key-value pair
   private HashMap<Integer, Double> totalFares; // key-value pair, past 12 months
   private int currentTime;
 
@@ -21,7 +22,7 @@ public class Card {
     this.owner = null;
     this.balance = 19;
     this.status = "deactivated";
-    this.trips = new ArrayList<ArrayList<TripSegment>>(); // only keeps track of 3 most recent trips
+    this.trips = new HashMap<>(); // only keeps track of 3 most recent trips
     this.currentFare = 0;
     this.totalFares = new HashMap<>();
     this.currentTime = 0;
@@ -96,4 +97,6 @@ public class Card {
   boolean equals(Card other) {
     return this.cardNumber == other.getCardNumber();
   }
+
+  void addTripSegment(TripSegment ts){}
 }

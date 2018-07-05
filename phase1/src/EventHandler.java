@@ -17,8 +17,11 @@ public class EventHandler {
     String[] eventTokens = currentEvent.split("|");
     String action = eventTokens[0];
     switch (action) {
-      case "entry":
+      case "entry":// we can also do it in TransitSystem ???
+          TripSegment ts = new TripSegment(eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4]);
+          system.currentTripSegment = ts;
       case "exit":
+          system.currentTripSegment.recordTapOut(eventTokens[2], eventTokens[3], eventTokens[4]);
       case "create":
         if (eventTokens[1].equals("account")) {
           system.createUserAccount(eventTokens[2], eventTokens[3]);
