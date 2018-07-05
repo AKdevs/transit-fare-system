@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class EventHandler {
-    private TransitSystem system;
-    private Scanner eventsBuffer;
+  private TransitSystem system;
+  private Scanner eventsBuffer;
 
   EventHandler(TransitSystem system) throws Exception {
     this.system = system;
@@ -17,11 +17,12 @@ public class EventHandler {
     String[] eventTokens = currentEvent.split("|");
     String action = eventTokens[0];
     switch (action) {
-      case "entry":// we can also do it in TransitSystem ???
-          TripSegment ts = new TripSegment(eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4]);
-          system.currentTripSegment = ts;
+      case "entry": // we can also do it in TransitSystem ???
+        TripSegment ts =
+            new TripSegment(eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4]);
+        system.currentTripSegment = ts;
       case "exit":
-          system.currentTripSegment.recordTapOut(eventTokens[2], eventTokens[3], eventTokens[4]);
+        system.currentTripSegment.recordTapOut(eventTokens[2], eventTokens[3], eventTokens[4]);
       case "create":
         if (eventTokens[1].equals("account")) {
           system.createUserAccount(eventTokens[2], eventTokens[3]);
@@ -40,15 +41,15 @@ public class EventHandler {
         Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
         UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
         ((CardHolder) currentHolder).linkCard(currentCard);
-        case "unlink":
-            UserAccount ua = system.findUserAccount(Integer.parseInt(eventTokens[1]));
-            Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
-            ((CardHolder)ua).deLinkCard(cc);
-        case "load":
-        case "view":
-            if (eventTokens[1].equals("report")) {
-                TransitSystem.printDailyReport(); //static??
-                }
+      case "unlink":
+        UserAccount ua = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+        Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
+        ((CardHolder) ua).deLinkCard(cc);
+      case "load":
+      case "view":
+        if (eventTokens[1].equals("report")) {
+          TransitSystem.printDailyReport(); // static??
+        }
     }
   }
 }
