@@ -69,6 +69,8 @@ public class Card {
     System.out.println(this.balance);
   }
 
+  HashMap<Integer, Double> getTotalFares(){ return this.totalFares;}
+
   CardHolder getOwner() {
     return this.owner;
   } // do we print out this?
