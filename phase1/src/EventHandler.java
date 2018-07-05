@@ -38,13 +38,14 @@ public class EventHandler {
         UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
         ((CardHolder) currentHolder).linkCard(currentCard);
         case "unlink":
+            UserAccount ua = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+            Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
+            ((CardHolder)ua).deLinkCard(cc);
         case "load":
         case "view":
             if (eventTokens[1].equals("report")) {
                 TransitSystem.printDailyReport(); //static??
-
                 }
-            }
     }
   }
 }
