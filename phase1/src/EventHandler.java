@@ -37,9 +37,14 @@ public class EventHandler {
         Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
         UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
         ((CardHolder) currentHolder).linkCard(currentCard);
-      case "unlink":
-      case "load":
+        case "unlink":
+        case "load":
+        case "view":
+            if (eventTokens[1].equals("report")) {
+                TransitSystem.printDailyReport(); //static??
 
+                }
+            }
     }
   }
 }

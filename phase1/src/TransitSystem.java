@@ -87,13 +87,9 @@ public class TransitSystem {
 
   void deductFares(int fares) {}
 
-  static int getAllFares() {
-    return allFares;
-  }
+  //int getAllFares() {return this.allFares;}
 
-  static int getNumberOfStation() {
-    return getNumberOfStation();
-  }
+  //int getNumberOfStation() {return this.getNumberOfStation();}
 
   void addNumberOfStation(int newStation) {}
 
@@ -102,4 +98,9 @@ public class TransitSystem {
   ArrayList getCards() {
     return this.cards;
   }
+
+  static void printDailyReport(){
+      System.out.println(allFares);
+      System.out.println(numberOfStation);
+  } // static????
 }

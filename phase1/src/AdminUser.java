@@ -10,10 +10,8 @@ public class AdminUser extends UserAccount {
 
 
     public void getDailyReport() {
-        System.out.println(TransitSystem.getAllFares());
-        System.out.println(TransitSystem.getNumberOfStation());
-
-    }
+        TransitSystem.printDailyReport();
+    }//static issue?
 
 
 
