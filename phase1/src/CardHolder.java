@@ -29,9 +29,10 @@ public class CardHolder extends UserAccount {
         System.out.println("Card " + card.getCardNumber() + " is removed from your account.");
     }
 
-    public Double getMonthlyCost(Integer month){
+    public void getMonthlyCost(Integer month){
         Card card = new Card();
-        return card.getTotalFares().get(month);
+        Double monthlycost =  card.getTotalFares().get(month);
+        System.out.println("The total cost of " + month + "th month is " + monthlycost);
     }
 
 
