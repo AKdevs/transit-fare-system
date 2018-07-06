@@ -37,9 +37,8 @@ public class Card {
   }
 
   void deactivate() {
-    if (this.owner == null) {
       this.status = "deactivated";
-      }
+
   }// check status in every card method
     // use accountNumber in events.txt
 
