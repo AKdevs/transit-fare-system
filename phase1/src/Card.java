@@ -36,14 +36,8 @@ public class Card {
     this.balance -= value;
   }
 
-  void deactivate() {
-      this.status = "deactivated";
-
-  }// check status in every card method
-    // use accountNumber in events.txt
-
-  void activate() {
-    this.status = "activated";
+  void setStatus(String status){
+    this.status = status;
   }
 
   void viewRecentTrips() {
