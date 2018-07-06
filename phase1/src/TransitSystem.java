@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class TransitSystem {
 
@@ -8,7 +10,8 @@ public class TransitSystem {
   private ArrayList<UserAccount> userAccounts;
   // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
-  private ArrayList<TransitLine> transitLines;
+  //kep for transitlines is transit type. value for transitlines is the arraylist of transitline
+  private static HashMap<String, ArrayList<TransitLine>> transitLines;
 
   protected TripSegment currentTripSegment;
 
@@ -79,8 +82,21 @@ public class TransitSystem {
   }
   */
 
-  void addTransitLines(TransitLine newTransitLine) {
-    transitLines.add(newTransitLine);
+
+  void addTransitLines(String type, TransitLine newTransitLine) {
+    if (transitLines.containsKey(type)) {
+      ArrayList<TransitLine> originalline = transitLines.get(type);
+
+      //https://blog.csdn.net/mustbehard/article/details/17310043
+      Iterator<TransitLine> iter = originalline.iterator();
+      ArrayList<TransitLine> newlines = new ArrayList<>();
+      while (iter.hasNext()) {
+        TransitLine lines = iter.next();
+        newlines.add(lines);
+      }
+      newlines.add(newTransitLine);
+      transitLines.put(type,newlines);
+    }
   }
 
   void addAllFares(int fares) {}
