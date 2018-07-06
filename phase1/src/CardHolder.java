@@ -29,6 +29,28 @@ public class CardHolder extends UserAccount {
         System.out.println("Card " + card.getCardNumber() + " is removed from your account.");
     }
 
+    //CardHolder is able to activate a card that is linked to his/her account.
+    public void activateCard(Card card) {
+        if (this.travelCards.contains(card)) {
+            card.activate();
+            System.out.println("Card " + card.getCardNumber() + " has been activated successfully.");
+        }
+        else {
+            System.out.println("Action denied. Card" + card.getCardNumber() + " is not linked to your account.");
+        }
+    }
+
+    //CardHolder is able to deactivate a card that is linked to his/her account.
+    public String deactivateCard(Card card) {
+        if (this.travelCards.contains(card)) {
+            card.deactivate();
+            System.out.println("Card " + card.getCardNumber() + " has been deactivated.");
+        }
+        else {
+            System.out.println("Action denied. Card" + card.getCardNumber() + " is not linked to your account.");
+        }
+    }
+
     public void getMonthlyCost(Integer month){
         Card card = new Card();
         Double monthlycost =  card.getTotalFares().get(month);
