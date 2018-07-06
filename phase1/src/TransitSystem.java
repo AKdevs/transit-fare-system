@@ -1,5 +1,3 @@
-//import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
-
 import java.util.ArrayList;
 
 public class TransitSystem {
@@ -8,7 +6,7 @@ public class TransitSystem {
   // [Card(123), Card(24), Card(678), .....]
 
   private ArrayList<UserAccount> userAccounts;
-  // [CardHolder(1),CardHolder(2), CardHolder(3), .....]
+  // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
   private ArrayList<TransitLine> transitLines;
 

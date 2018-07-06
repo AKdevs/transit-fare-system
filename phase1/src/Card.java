@@ -9,8 +9,8 @@ public class Card {
   private CardHolder owner;
   private String status;
   private int currentFare;
-  private HashMap<Integer, ArrayList<TripSegment>> trips;
-  //private ArrayList<ArrayList<TripSegment>> trips; // key-value pair
+  private HashMap<Integer, ArrayList<ArrayList<TripSegment>>> trips;
+  private ArrayList<ArrayList> mostRecentTrips;//[completeTrio1, completeTrip2, completeTrip3]
   private HashMap<Integer, Double> totalFares; // key-value pair, past 12 months
   private int currentTime;
 
@@ -37,8 +37,11 @@ public class Card {
   }
 
   void deactivate() {
-    this.status = "deactivated";
-  }
+    if (this.owner == null) {
+      this.status = "deactivated";
+      }
+  }// check status in every card method
+    // use accountNumber in events.txt
 
   void activate() {
     this.status = "activated";
