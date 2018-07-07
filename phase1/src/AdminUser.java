@@ -12,7 +12,4 @@ public class AdminUser extends UserAccount {
     public void getDailyReport() {
         TransitSystem.printDailyReport();
     }//static issue?
-
-
-
 }

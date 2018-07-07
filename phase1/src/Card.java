@@ -10,7 +10,7 @@ public class Card {
   private String status;
   private int currentFare;
   private HashMap<Integer, ArrayList<ArrayList<TripSegment>>> trips;
-  private ArrayList<ArrayList> mostRecentTrips;//[completeTrio1, completeTrip2, completeTrip3]
+  private ArrayList<ArrayList> mostRecentTrips; // [completeTrio1, completeTrip2, completeTrip3]
   private HashMap<Integer, Double> totalFares; // key-value pair, past 12 months
   private int currentTime;
 
@@ -36,7 +36,7 @@ public class Card {
     this.balance -= value;
   }
 
-  void setStatus(String status){
+  void setStatus(String status) {
     this.status = status;
   }
 
@@ -66,7 +66,9 @@ public class Card {
     System.out.println(this.balance);
   }
 
-  HashMap<Integer, Double> getTotalFares(){ return this.totalFares;}
+  HashMap<Integer, Double> getTotalFares() {
+    return this.totalFares;
+  }
 
   CardHolder getOwner() {
     return this.owner;
@@ -94,18 +96,15 @@ public class Card {
     return this.cardNumber == other.getCardNumber();
   }
 
-  void addTripSegment(TripSegment ts){}
-
+  void addTripSegment(TripSegment ts) {}
 
   boolean isEntryAllowed() {
     if ((this.balance > 0) && (this.status.equals("activated"))) {
       System.out.println("Accepted");
       return true;
-    }
-    else {
+    } else {
       System.out.println("Rejected");
       return false;
     }
-
   }
 }
