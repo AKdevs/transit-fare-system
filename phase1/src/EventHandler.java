@@ -26,17 +26,17 @@ public class EventHandler {
       case "create":
         if (eventTokens[1].equals("account")) {
           system.createUserAccount(eventTokens[2], eventTokens[3]);
-          // UserAccount newAccount = new UserAccount(eventTokens[2], eventTokens[3]);
-          // system.addUserAccount(newAccount);
         } else if (eventTokens[1].equals("card")) {
           system.createCard();
-          // Card newCard = new Card();
-          // system.addCard(newCard);
         }
       case "activate":
-        system.findCard(Integer.parseInt(eventTokens[1])).activate();
+        Card ca = system.findCard(Integer.parseInt(eventTokens[2]));
+        CardHolder cha = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
+        cha.activateCard(ca);
       case "deactivate":
-        system.findCard(Integer.parseInt(eventTokens[1])).deactivate();
+          Card cd = system.findCard(Integer.parseInt(eventTokens[2]));
+          CardHolder chd = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
+          chd.activateCard(cd);
       case "link":
         Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
         UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
