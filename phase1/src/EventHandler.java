@@ -21,9 +21,9 @@ public class EventHandler {
         TripSegment ts =
             new TripSegment(eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4]);
         system.currentTripSegment = ts;
+        system.addTripSegmentToCard();
       case "exit":
         system.currentTripSegment.recordTapOut(eventTokens[2], eventTokens[3], eventTokens[4]);
-        system.completeTripSegment();
       case "create":
         if (eventTokens[1].equals("account")) {
           system.createUserAccount(eventTokens[2], eventTokens[3]);

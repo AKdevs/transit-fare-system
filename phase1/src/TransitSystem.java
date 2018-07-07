@@ -81,7 +81,7 @@ public class TransitSystem {
     }
   }
   */
-  void completeTripSegment() {
+  void addTripSegmentToCard() {
     int currentCardNumber = currentTripSegment.getAssociatedCard();
     findCard(currentCardNumber).addTripSegment(currentTripSegment);
   }
