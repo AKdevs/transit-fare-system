@@ -1,6 +1,6 @@
 public class AdminUser extends UserAccount {
 
-    private static long nextAccountNum = 888800000;
+    private static long nextAccountNum = 20000001;
 
     public AdminUser(String name, String email) {
         super(name, email);

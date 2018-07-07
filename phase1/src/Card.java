@@ -3,8 +3,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Card {
-  private static int nextCardNumber = 1;
   private int cardNumber;
+  private static int nextCardNumber = 10000001;
   private int balance;
   private CardHolder owner;
   private String status;
@@ -17,8 +17,8 @@ public class Card {
   // registered = linked, different from "activate"
 
   public Card() {
-    nextCardNumber += 1;
     this.cardNumber = nextCardNumber;
+    nextCardNumber += 1;
     this.owner = null;
     this.balance = 19;
     this.status = "deactivated";

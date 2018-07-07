@@ -4,7 +4,7 @@ import java.util.HashMap;
 public class CardHolder extends UserAccount {
 
     private ArrayList<Card> travelCards;
-    private static int nextAccountNum = 1;
+    private static int nextAccountNum = 10000001;
 
     public CardHolder(String name, String email) {
         super(name, email);
