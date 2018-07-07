@@ -10,7 +10,7 @@ public class TransitSystem {
   private ArrayList<UserAccount> userAccounts;
   // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
-  //kep for transitlines is transit type. value for transitlines is the arraylist of transitline
+  // kep for transitlines is transit type. value for transitlines is the arraylist of transitline
   private static HashMap<String, ArrayList<TransitLine>> transitLines;
 
   protected TripSegment currentTripSegment;
@@ -69,7 +69,7 @@ public class TransitSystem {
   }
 
   void removeUserAccount(int accountNumber) {
-      userAccounts.remove(findUserAccount(accountNumber));
+    userAccounts.remove(findUserAccount(accountNumber));
   }
 
   /*
@@ -82,12 +82,11 @@ public class TransitSystem {
   }
   */
 
-
   void addTransitLines(String type, TransitLine newTransitLine) {
     if (transitLines.containsKey(type)) {
       ArrayList<TransitLine> originalline = transitLines.get(type);
 
-      //https://blog.csdn.net/mustbehard/article/details/17310043
+      // https://blog.csdn.net/mustbehard/article/details/17310043
       Iterator<TransitLine> iter = originalline.iterator();
       ArrayList<TransitLine> newlines = new ArrayList<>();
       while (iter.hasNext()) {
@@ -95,7 +94,7 @@ public class TransitSystem {
         newlines.add(lines);
       }
       newlines.add(newTransitLine);
-      transitLines.put(type,newlines);
+      transitLines.put(type, newlines);
     }
   }
 
@@ -103,9 +102,9 @@ public class TransitSystem {
 
   void deductAllFares(int fares) {}
 
-  //int getAllFares() {return this.allFares;}
+  // int getAllFares() {return this.allFares;}
 
-  //int getNumberOfStation() {return this.getNumberOfStation();}
+  // int getNumberOfStation() {return this.getNumberOfStation();}
 
   void addNumberOfStation(int newStation) {}
 
@@ -115,15 +114,15 @@ public class TransitSystem {
     return this.cards;
   }
 
-  void calculateTripSegementFares(TripSegment currentTripSegment){
-      if (currentTripSegment.getEnterTransitType().equals("B")) {
-          // deduct 2 dollars on card's balance
-          // currentFare in Card increment by 2
-      }
+  void calculateTripSegementFares(TripSegment currentTripSegment) {
+    if (currentTripSegment.getEnterTransitType().equals("B")) {
+      // deduct 2 dollars on card's balance
+      // currentFare in Card increment by 2
+    }
   }
 
-  static void printDailyReport(){
-      System.out.println(allFares);
-      System.out.println(numberOfStation);
+  static void printDailyReport() {
+    System.out.println(allFares);
+    System.out.println(numberOfStation);
   } // static????
 }
