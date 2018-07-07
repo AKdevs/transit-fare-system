@@ -1,39 +1,36 @@
 create | account | James | james@gmail.com
 create | card
-activate | 1204
-deactivate | 18 | 1204
-view | info | 18
-view | trips | 1204
-view | balance | 1204
-view | cost | 18
-change | 18 | David
-remove | card | 1204
-remove | account | 18
-load | 1204
-link | 18 | 1204
-unlink | 18 | 1204
-view | report
-entry | 1204 | Bloor | S | 10:49 | 2018-02-11
-exit | 1204 | Bloor | S | 10:56 | 2018-02-11
-entry | 1204 | Bloor | B | 10:58 | 2018-02-11
-create | account | Alek | alek@gmail.com
+change | 10000001 | David
+view | info | 10000001
+link | 10000001 | 30000001
+unlink | 10000001 | 30000001
+link | 10000001 | 30000001
+activate | 10000001 | 30000001 // we need account number to activate a card
+deactivate | 10000001 | 30000001
+activate | 10000001 | 30000001 // we need account number to activate a card
+load | 30000001 | 20 // we need the value the cardHolder load to card 1204 // we also need to add the account number
+view | balance | 10000001
+entry | 30000001 | Bloor | S | 10:49 | 2018-02-11
+exit | 30000001 | Bloor | S | 10:56 | 2018-02-11
+entry | 30000001 | Bloor | B | 10:58 | 2018-02-11
+view | trips | 30000001
+view | cost | 10000001
+remove | card | 30000001 //what does remove card do??
+remove | account | 10000001
+create | account | Alex | alex@gmail.com
 create | card
-activate | 1206
-deactivate | 19 | 1206
-view | info | 19
-view | trips | 1206
-view | balance | 1206
-view | cost | 19
-change | 19 | David
-remove | card | 1206
-remove | account | 19
-load | 1206
-link | 19 | 1206
-unlink | 19 | 1206
+link | 10000002 | 30000002
+activate | 10000002 | 30000002
+view | info | 10000002
+load | 30000002 | 10
+load | 30000002 | 30
+view | balance | 30000002
+entry | 30000002 | Bloor | S | 10:49 | 2018-02-11
+exit | 30000002 | Union | S | 11:15 | 2018-02-11
+entry | 30000002 | Union | B | 10:58 | 2018-02-11
+entry | 30000002 | Queen | S | 10:49 | 2018-02-12
+exit | 30000002 | Finch | S | 11:49 | 2018-02-12
+entry | 30000002 | Union | B | 11:52 | 2018-02-12
+view | trips | 30000002
+view | cost | 10000002
 view | report
-entry | 1206 | Bloor | S | 10:49 | 2018-02-11
-exit | 1206 | Union | S | 11:15 | 2018-02-11
-entry | 1206 | Union | B | 10:58 | 2018-02-11
-entry | 1206 | Queen | S | 10:49 | 2018-02-12
-exit | 1206 | Finch | S | 11:49 | 2018-02-12
-entry | 1206 | Union | B | 11:52 | 2018-02-12
