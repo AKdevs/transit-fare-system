@@ -95,4 +95,17 @@ public class Card {
   }
 
   void addTripSegment(TripSegment ts){}
+
+
+  boolean isEntryAllowed() {
+    if ((this.balance > 0) && (this.status.equals("activated"))) {
+      System.out.println("Accepted");
+      return true;
+    }
+    else {
+      System.out.println("Rejected");
+      return false;
+    }
+
+  }
 }
