@@ -1,6 +1,6 @@
 public class TripSegment {
 
-  private int associatedCard; // associated card number
+  private Card associatedCard; // associated card number
   private String enterSpot;
   private String exitSpot;
   private String enterTransitType;
@@ -9,8 +9,8 @@ public class TripSegment {
   private String exitTime;
   private int duration;
 
-  public TripSegment(String cardNumber, String enterSpot, String transitType, String enterTime) {
-    this.associatedCard = Integer.parseInt(cardNumber);
+  public TripSegment(Card card, String enterSpot, String transitType, String enterTime) {
+    this.associatedCard = card;
     this.enterSpot = enterSpot;
     this.enterTransitType = transitType;
     this.enterTime = enterTime;
@@ -34,11 +34,6 @@ public class TripSegment {
         Integer.parseInt(this.exitTime.substring(0, 2)) * 60
             + Integer.parseInt(this.exitTime.substring(3, 5));
     this.duration = exit - enter;
-  }
-
-  public int getAssociatedCard() {
-
-    return this.associatedCard;
   }
 
   public String getEnterSpot() {

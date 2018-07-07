@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class Card {
   private int cardNumber;
-  private static int nextCardNumber = 10000001;
+  private static int nextCardNumber = 30000001;
   private int balance;
   private CardHolder owner;
   private String status;
