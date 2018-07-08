@@ -29,6 +29,13 @@ public class TransitSystem {
 
   String getCurrentDate() { return this.currentDate;}
 
+  //Fare is capped at $6.0 for continuous trips travlled within timeForCap
+  private static double fareCap = 6.0;
+
+  //Time allowed to be eligible for capped fare is 120 minutes in our TransitSystem
+  private static int timeForCap = 120;
+
+
   protected TripSegment currentTripSegment;
 
   static HashMap<String, Double> allFares; //key is date, value is all the fares

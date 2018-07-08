@@ -88,8 +88,10 @@ public class CardHolder extends UserAccount {
   }
 
   public void getMonthlyCost(Integer month) {
-    Card card = new Card();
-    Double monthlycost = card.getTotalFares().get(month);
-    System.out.println("The total cost of " + month + "th month is " + monthlycost);
+
+  }
+
+  public void viewRecentTrips(){
+
   }
 }
