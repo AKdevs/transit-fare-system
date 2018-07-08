@@ -141,81 +141,53 @@ public class Card {
       this.lastTripSegment = tripSegment;
       this.lastCompleteTrip = firstCompleteTrip;
       this.updateFares(tripSegment, 0.0);
-    } // if tripSegment and lastTripSegment can form a continuous Trip
-    else if (lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
-      for (Map.Entry date : this.trips.entrySet()) {
-        if (date.equals(tripSegment.getExitDate())) {
-          ArrayList<ArrayList<TripSegment>> dayTrips =
-              (ArrayList<ArrayList<TripSegment>>) date.getValue();
-          for (ArrayList<TripSegment> ct : dayTrips) {
-            if (ct.equals(this.lastCompleteTrip)) {
-              ct.add(tripSegment);
-              this.lastCompleteTrip.add(tripSegment);
-              this.lastTripSegment = tripSegment;
-              // currentFares + this trip fare > 6 and within 2 hours
-              if (this.currentFares + tripSegment.getSegmentFares() >= 6
-                  && this.currentDuration < 120) { // tap in time limit
-                double difference = 6 - this.currentFares;
-                this.currentFares = 6;
-                this.updateFares(tripSegment, difference);
-                // currentFares + this trip fare > 6 and within 2 hours
-              } else if (this.currentDuration < 120
-                  && this.currentFares + tripSegment.getSegmentFares() < 6) {
-                this.updateFares(tripSegment, 0.0);
-              } else {
-              }
-            }
-          }
-        }
-      }
-    }
     // if tripSegment is the start of a new complete trip
-    else if (!lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
-      // within 3 hours and all subway trips
-      // check whether the past TripSegments are all subway TripSegment
-      String types = "";
-      for (Map.Entry d : this.trips.entrySet()) {
-        if (d.equals(tripSegment.getExitDate())) {
-          ArrayList<ArrayList<TripSegment>> dayTrips =
-              (ArrayList<ArrayList<TripSegment>>) d.getValue();
-          for (ArrayList<TripSegment> contiTrip : dayTrips) {
-            for (TripSegment ts : contiTrip) {
-              types += ts.getExitTransitType();
+    }else if (!lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
+        for (Map.Entry date : this.trips.entrySet()) {
+            if (date.equals(tripSegment.getExitDate())) {
+                ArrayList<ArrayList<TripSegment>> dayTrips =
+                        (ArrayList<ArrayList<TripSegment>>) date.getValue();
+                ArrayList<TripSegment> newCompleteTrip = new ArrayList<>();
+                newCompleteTrip.add(tripSegment);
+                dayTrips.add(newCompleteTrip);
+                this.updateFares(tripSegment, 0.0);
             }
-          }
         }
-      }
-      if (!types.contains("B")) {
-        if (this.currentDuration < 3 && this.currentFares + tripSegment.getSegmentFares() >= 6) {
-          double difference = 6 - this.currentFares;
-          this.currentFares = 6;
-          this.updateFares(tripSegment, difference);
-        } else if (this.currentDuration < 3
-            && this.currentFares + tripSegment.getSegmentFares() < 6) {
-          this.updateFares(tripSegment, 0.0);
+  // if tripSegment and lastTripSegment can form a continuous Trip
+    } else if (lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
+        for (Map.Entry date : this.trips.entrySet()) {
+            if (date.equals(tripSegment.getExitDate())) {
+                ArrayList<ArrayList<TripSegment>> dayTrips =
+                        (ArrayList<ArrayList<TripSegment>>) date.getValue();
+                for (ArrayList<TripSegment> ct : dayTrips) {
+                    if (ct.equals(this.lastCompleteTrip)) {
+                        ct.add(tripSegment);
+                        this.lastCompleteTrip.add(tripSegment);
+                        this.lastTripSegment = tripSegment;
+                        // currentFares + this trip fare > 6 and within 2 hours
+                        if (this.currentFares + tripSegment.getSegmentFares() >= 6
+                                && this.currentDuration < 120) { // tap in time limit
+                            double difference = 6 - this.currentFares;
+                            this.currentFares = 6;
+                            this.updateFares(tripSegment, difference);
+                            // currentFares + this trip fare > 6 and within 2 hours
+                        } else if (this.currentDuration < 120
+                                && this.currentFares + tripSegment.getSegmentFares() < 6) {
+                            this.updateFares(tripSegment, 0.0);
+                        }
+                    }
+                }
+            }
         }
-      }
-    } else {
-
-      // new start
-      for (Map.Entry date : this.trips.entrySet()) {
-        if (date.equals(tripSegment.getExitDate())) {
-          ArrayList<ArrayList<TripSegment>> dayTrips =
-              (ArrayList<ArrayList<TripSegment>>) date.getValue();
-          ArrayList<TripSegment> newCompleteTrip = new ArrayList<>();
-          newCompleteTrip.add(tripSegment);
-          dayTrips.add(newCompleteTrip);
-          this.updateFares(tripSegment, 0.0);
-        }
-      }
-        }
-
-
+      
+    }
   }
-    private void updateFares(TripSegment tripSegment, Double fares) {
+
+  private void updateFares(TripSegment tripSegment, Double fares) {
         // deduct fares from card balance
         this.deductBalance(tripSegment.getSegmentFares());
         // add currentFares
+        // if there is no local variable 'difference' in method 'addTripSegment'
         if (fares.equals(0.0)) {
             this.addCurrentFares(tripSegment.getSegmentFares());
         }
