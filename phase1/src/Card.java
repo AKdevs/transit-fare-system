@@ -35,6 +35,12 @@ public class Card {
 
   void setBalance(Double balance){ this.balance = balance; }
 
+  void addBalance(Double fares) {this.balance += fares;}
+
+  void deductBalance(Double fares) {this.balance -= fares;}
+
+  void viewBalance() {System.out.println(this.balance);}
+  
   void setactivated() {
     this.status = "activated";
   }
@@ -46,7 +52,7 @@ public class Card {
     System.out.println(this.mostRecentTrips);
   }
 
-  void viewAverageFares() {
+  void viewMonthlyCost() {
     // view the average fares of the past 12 months
     // use iterator?
     Double sumOfFares = 0.0;
@@ -130,20 +136,8 @@ public class Card {
       this.trips.put(date, firstDayTrips);
       this.lastTripSegment = tripSegment;
       this.lastCompleteTrip = firstCompleteTrip;
-      // deduct fares from card balance
-      this.deductBalance(tripSegment.getSegmentFares());
-      // add currentFares
-      this.addCurrentFares(tripSegment.getSegmentFares());
-      // add fares to totalFares
-      for (Map.Entry month : this.totalFares.entrySet()) {
-        if (month.equals(tripSegment.getMonth())) {
-          Double tf = (Double) month.getValue();
-          tf += tripSegment.getSegmentFares();
-        }
-      }
-      // add fares to allFares
-      TransitSystem.addAllFares(tripSegment.getSegmentFares());
-    } // if tripSegment and lastTripSegment can form a complete Trip
+      this.updateFares(tripSegment, 0.0);
+    } // if tripSegment and lastTripSegment can form a continuous Trip
     else if (lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
       for (Map.Entry date : this.trips.entrySet()) {
         if (date.equals(tripSegment.getExitDate())) {
@@ -155,34 +149,12 @@ public class Card {
               this.lastCompleteTrip.add(tripSegment);
               this.lastTripSegment = tripSegment;
               // check whether currentFares + this trip fare > 6
-              if (this.currentFares + tripSegment.getSegmentFares() >= 6) {
+              if (this.currentFares + tripSegment.getSegmentFares() >= 6) {// and the time is within 2 hours
                 double difference = 6 - this.currentFares;
                 this.currentFares = 6;
-                // deduct fares from card balance
-                this.deductBalance(difference);
-                // add fares to totalFares
-                for (Map.Entry month : this.totalFares.entrySet()) {
-                  if (month.equals(tripSegment.getMonth())) {
-                    Double tf = (Double) month.getValue();
-                    tf += difference;
-                  }
-                }
-                // add fares to allFares
-                TransitSystem.addAllFares(difference);
+                  this.updateFares(tripSegment, difference);
               } else {
-                // deduct fares from card balance
-                this.deductBalance(tripSegment.getSegmentFares());
-                // add currentFares
-                this.addCurrentFares(tripSegment.getSegmentFares());
-                // add fares to totalFares
-                for (Map.Entry month : this.totalFares.entrySet()) {
-                  if (month.equals(tripSegment.getMonth())) {
-                    Double tf = (Double) month.getValue();
-                    tf += tripSegment.getSegmentFares();
-                  }
-                }
-                // add fares to allFares
-                TransitSystem.addAllFares(tripSegment.getSegmentFares());
+                  this.updateFares(tripSegment, 0.0);
               }
             }
           }
@@ -198,21 +170,26 @@ public class Card {
           ArrayList<TripSegment> newCompleteTrip = new ArrayList<>();
           newCompleteTrip.add(tripSegment);
           dayTrips.add(newCompleteTrip);
-          // deduct fares from card balance
-          this.deductBalance(tripSegment.getSegmentFares());
-          // add currentFares
-          this.addCurrentFares(tripSegment.getSegmentFares());
-          // add fares to totalFares
-          for (Map.Entry month : this.totalFares.entrySet()) {
-            if (month.equals(tripSegment.getMonth())) {
-              Double tf = (Double) month.getValue();
-              tf += tripSegment.getSegmentFares();
-            }
-          }
-          // add fares to allFares
-          TransitSystem.addAllFares(tripSegment.getSegmentFares());
+            this.updateFares(tripSegment, 0.0);
         }
       }
     }
   }
+    private void updateFares(TripSegment tripSegment, Double fares) {
+        // deduct fares from card balance
+        this.deductBalance(tripSegment.getSegmentFares());
+        // add currentFares
+        if (fares.equals(0.0)) {
+            this.addCurrentFares(tripSegment.getSegmentFares());
+        }
+        // add fares to totalFares
+        for (Map.Entry month : this.totalFares.entrySet()) {
+            if (month.equals(tripSegment.getMonth())) {
+                Double tf = (Double) month.getValue();
+                tf += tripSegment.getSegmentFares();
+            }
+        }
+        // add fares to allFares
+        TransitSystem.addAllFares(tripSegment.getSegmentFares());
+    }
 }

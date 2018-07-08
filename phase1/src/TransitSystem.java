@@ -139,7 +139,7 @@ public class TransitSystem {
           if (enterSpotIndex == exitSpotIndex) {
               return 0;
           }else {
-              return (exitSpotIndex - enterSpotIndex - 1) * 0.5;
+              return (exitSpotIndex - enterSpotIndex) * 0.5;
           }
       }
 

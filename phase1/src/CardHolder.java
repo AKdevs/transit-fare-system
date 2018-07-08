@@ -68,7 +68,7 @@ public class CardHolder extends UserAccount {
   // CardHolder is able to activate a card that is linked to his/her account.
   public void activateCard(Card card) {
     if (this.travelCards.contains(card)) {
-      card.setactivated();
+      card.setActivated();
       System.out.println("Card " + card.getCardNumber() + " has been activated successfully.");
     } else {
       System.out.println(
@@ -79,7 +79,7 @@ public class CardHolder extends UserAccount {
   // CardHolder is able to deactivate a card that is linked to his/her account.
   public void deactivateCard(Card card) {
     if (this.travelCards.contains(card)) {
-      card.setdeactivated();
+      card.setDeactivated();
       System.out.println("Card " + card.getCardNumber() + " has been deactivated.");
     } else {
       System.out.println(

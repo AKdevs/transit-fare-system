@@ -64,7 +64,7 @@ public class EventHandler {
             card.viewBalance();
         }else if (eventTokens[1].equals("cost")) {
             Card card = system.findCard(Integer.parseInt(eventTokens[2]));
-            card.viewAverageCost();
+            card.viewMonthlyCost();
         }
       case "change":
           UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[1]));
