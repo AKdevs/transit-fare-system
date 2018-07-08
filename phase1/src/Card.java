@@ -58,14 +58,6 @@ public class Card {
     return mostRecentTrips;
   }
 
-  void viewMonthlyCost() {
-    Double sumOfFares = 0.0;
-    for (Double fare : this.totalFares) {
-      sumOfFares += fare;
-      System.out.println(sumOfFares / 12);
-    }
-  }
-
   public void setLinked() {
     this.linked = "Linked";
   }
