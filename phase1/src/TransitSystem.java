@@ -128,7 +128,7 @@ public class TransitSystem {
       int enterSpotIndex = 0;
       int exitSpotIndex = 0;
       for (Map.Entry type : transitLines.entrySet()) {
-          if (type.equals("s")) {
+          if (type.equals("S")) {
               ArrayList<TransitLine> subwayLines = (ArrayList<TransitLine>)type.getValue();
               for (TransitLine tl: subwayLines){
                   for (String station: tl.getPoints()) {

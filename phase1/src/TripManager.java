@@ -48,7 +48,7 @@ public class TripManager {
     private void calculateTripSegmentFares(TripSegment ts) {
         if (ts.getEnterTransitType().equals("B")) {
             ts.setSegmentFares(2.0);
-        } else if (ts.getExitTransitType().equals("s")) {
+        } else if (ts.getExitTransitType().equals("S")) {
             ts.setSegmentFares(TransitSystem.calculateSubwayFares(ts));
         }
     }
