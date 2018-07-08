@@ -11,6 +11,7 @@ public class TripManager {
         TripSegment ts = new TripSegment(cardNumber, enterSpot, transitType, enterTime, enterDate);
         currenTripSegments.add(ts);
         addTripSegmentToCard(ts);
+        calculateTripSegmentFares(ts);
     }
 
     private void addTripSegmentToCard(TripSegment ts) {
