@@ -19,11 +19,11 @@ public class EventHandler {
     switch (action) {
       case "entry": // we can also do it in TransitSystem ???
         TripSegment ts =
-            new TripSegment(eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4]);
+            new TripSegment(eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4], eventTokens[5]);
         system.currentTripSegment = ts;
         system.addTripSegmentToCard();
       case "exit":
-        system.currentTripSegment.recordTapOut(eventTokens[2], eventTokens[3], eventTokens[4]);
+        system.currentTripSegment.recordTapOut(eventTokens[2], eventTokens[3], eventTokens[4], eventTokens[5]);
       case "create":
         if (eventTokens[1].equals("account")) {
           system.createUserAccount(eventTokens[2], eventTokens[3]);
@@ -47,6 +47,9 @@ public class EventHandler {
         Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
         ((CardHolder) ua).deLinkCard(cc);
       case "load":
+          Card c = system.findCard(Integer.parseInt(eventTokens[1]));
+          c.addBalance(Double.parseDouble(eventTokens[2]));
+          TransitSystem.addAllFares(Double.parseDouble(eventTokens[2]));
       case "view":
         if (eventTokens[1].equals("report")) {
           TransitSystem.printDailyReport(); // static??
