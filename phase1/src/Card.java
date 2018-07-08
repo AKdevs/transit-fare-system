@@ -40,8 +40,6 @@ public class Card {
 
   void deductBalance(Double fares) {this.balance -= fares;}
 
-  void viewBalance() {System.out.println(this.balance);}
-
   void activate() {
     this.status = "activated";
   }
@@ -49,8 +47,8 @@ public class Card {
     this.status = "deactivated";
   }
 
-  void viewRecentTrips() {
-    System.out.println(this.mostRecentTrips);
+  public ArrayList<ArrayList> getMostRecentTrips() {
+    return mostRecentTrips;
   }
 
   void viewMonthlyCost() {
@@ -71,7 +69,6 @@ public class Card {
     this.linked = "Unlinked";
   }
 
-
   int getCardNumber() {
     return this.cardNumber;
   }
@@ -86,10 +83,6 @@ public class Card {
 
   CardHolder getOwner() {
     return this.owner;
-  }
-
-  void viewOwner() {
-      System.out.println(this.owner);
   }
 
   void setOwner(CardHolder owner) {
