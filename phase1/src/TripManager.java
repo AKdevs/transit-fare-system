@@ -28,7 +28,7 @@ public class TripManager {
         }
         /// account for tap out without tapping in
         calculateDuration(currentTs);
-        calculateTripSegmentFares(this.exitTransitType);
+        calculateTripSegmentFares(currentTs);
     }
 
     private void calculateDuration(TripSegment ts) {
@@ -41,5 +41,14 @@ public class TripManager {
                 Integer.parseInt(ts.getExitTime().substring(0, 2)) * 60
                         + Integer.parseInt(ts.getExitTime().substring(3, 5));
         ts.setDuration(exit-enter);
+    }
+
+
+    private void calculateTripSegmentFares(TripSegment ts) {
+        if (ts.getEnterTransitType().equals("B")) {
+            ts.setSegmentFares(2.0);
+        } else if (ts.getExitTransitType().equals("s")) {
+            ts.setSegmentFares(TransitSystem.calculateSubwayFares(ts));
+        }
     }
 }

@@ -18,7 +18,9 @@ public class TripSegment {
     this.enterTransitType = transitType;
     this.enterTime = enterTime;
     this.enterDate = enterDate;
+    /*
     calculateTripSegmentFares(this.enterTransitType);
+    */
   }
 
   public void completeTripSegment(String exitSpot, String transitType, String exitTime, String exitDate) {
@@ -26,10 +28,13 @@ public class TripSegment {
     this.exitTransitType = transitType;
     this.exitTime = exitTime;
     this.exitDate = exitDate;
+    /*
     calculateDuration(this.enterTime, this.exitTime);
     calculateTripSegmentFares(this.exitTransitType);
+    */
   }
 
+  /*
   private void calculateDuration(String enterTime, String exitTime) {
     // int version of enterTime: Hour converted to minutes + minutes
     int enter =
@@ -49,6 +54,7 @@ public class TripSegment {
           this.segmentFares = TransitSystem.calculateSubwayFares(this);
       }
   }
+  */
 
   public int getAssociatedCard() {
         return associatedCard;
@@ -81,6 +87,10 @@ public class TripSegment {
   public String getExitDate() { return this.exitDate;}
 
   public double getSegmentFares() { return this.segmentFares; }
+
+  public void setSegmentFares(double fares) {
+    segmentFares = fares;
+  }
 
   public String getMonth() { return this.enterDate.substring(5, 7);}
 }
