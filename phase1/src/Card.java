@@ -71,7 +71,7 @@ public class Card {
     this.linked = "Unlinked";
   }
 
-  void printCardNumber() {
+  void viewCardNumber() {
     System.out.println(this.cardNumber);
   }
 
@@ -89,7 +89,11 @@ public class Card {
 
   CardHolder getOwner() {
     return this.owner;
-  } // do we print out this?
+  }
+
+  void viewOwner() {
+      System.out.println(this.owner);
+  }
 
   void setOwner(CardHolder owner) {
     this.owner = owner;
@@ -110,10 +114,6 @@ public class Card {
   void deductCurrentFares(double fares) {
     this.currentFares -= fares;
   }
-
-  //void updateCurrentDuration(int duration) {
-  //    this.currentDuration += duration;
-  //}
 
   boolean equals(Card other) {
     return this.cardNumber == other.getCardNumber();

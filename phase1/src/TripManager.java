@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 
 public class TripManager {
-    private ArrayList<TripSegment> currenTripSegments;
+    private ArrayList<TripSegment> currentTripSegments;
 
     TripManager() {
-        currenTripSegments = new ArrayList<>();
+        currentTripSegments = new ArrayList<>();
     }
 
     public void recordTapIn(String cardNumber, String enterSpot, String transitType, String enterTime, String enterDate) {
         TripSegment ts = new TripSegment(cardNumber, enterSpot, transitType, enterTime, enterDate);
-        currenTripSegments.add(ts);
+        currentTripSegments.add(ts);
         addTripSegmentToCard(ts);
         calculateTripSegmentFares(ts);
     }
@@ -21,7 +21,7 @@ public class TripManager {
 
     public void recordTapOut(String cardNumber, String exitSpot, String transitType, String exitTime, String exitDate) {
         TripSegment currentTs = null;
-        for (TripSegment ts: currenTripSegments) {
+        for (TripSegment ts: currentTripSegments) {
             if (ts.getAssociatedCard() == Integer.parseInt(cardNumber)) {
                 currentTs = ts;
                 ts.completeTripSegment(exitSpot, transitType, exitTime, exitDate);
@@ -48,7 +48,7 @@ public class TripManager {
     private void calculateTripSegmentFares(TripSegment ts) {
         if (ts.getEnterTransitType().equals("B")) {
             ts.setSegmentFares(2.0);
-        } else if (ts.getExitTransitType().equals("s")) {
+        } else if (ts.getExitTransitType().equals("S")) {
             ts.setSegmentFares(TransitSystem.calculateSubwayFares(ts));
         }
     }
