@@ -70,6 +70,10 @@ public class TripSegment {
 
   public int getDuration() { return this.duration; }
 
+  public void setDuration(int duration) {
+    this.duration = duration;
+  }
+
   public String getEnterSpot() { return this.enterSpot; }
 
   public String getEnterDate() { return this.enterDate;}
