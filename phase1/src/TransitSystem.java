@@ -143,7 +143,9 @@ public class TransitSystem {
           }
           if (enterSpotIndex == exitSpotIndex) {
               return 0;
-          }else {
+          }else if (currentTripSegment.getDuration() <= 180 && (exitSpotIndex - enterSpotIndex) * 0.5 > 6){
+              return 6;
+          } else {
               return (exitSpotIndex - enterSpotIndex) * 0.5;
           }
       }
