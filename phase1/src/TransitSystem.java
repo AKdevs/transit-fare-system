@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public class TransitSystem {
 
@@ -10,7 +11,7 @@ public class TransitSystem {
   private ArrayList<UserAccount> userAccounts;
   // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
-  // kep for transitlines is transit type. value for transitlines is the arraylist of transitline
+  // key for transitlines is transit type. value for transitlines is the arraylist of transitline
   private static HashMap<String, ArrayList<TransitLine>> transitLines;
 
   protected TripSegment currentTripSegment;
@@ -118,12 +119,27 @@ public class TransitSystem {
     return this.cards;
   }
 
-  void calculateTripSegementFares(TripSegment currentTripSegment) {
-    if (currentTripSegment.getEnterTransitType().equals("B")) {
-      // deduct 2 dollars on card's balance
-      // currentFare in Card increment by 2
-    }
-  }
+  static double calculateSubwayFares(TripSegment currentTripSegment) {
+      int enterSpotIndex = 0;
+      int exitSpotIndex = 0;
+      for (Map.Entry type : transitLines.entrySet()) {
+          if (type.equals("s")) {
+              ArrayList<TransitLine> subwayLines = (ArrayList<TransitLine>)type.getValue();
+              for (TransitLine tl: subwayLines){
+                  for (String station: tl.getPoints()) {
+                      if (station.equals(currentTripSegment.getEnterSpot())) {
+                          enterSpotIndex = tl.getPoints().indexOf(station);
+                      }else if (station.equals(currentTripSegment.getExitSpot())){
+                          exitSpotIndex = tl.getPoints().indexOf(station);
+                      }
+                  }
+                  }
+              }
+          }
+          return (exitSpotIndex - enterSpotIndex - 1) * 0.5;
+      }
+
+
 
   static void printDailyReport() {
     System.out.println(allFares);

@@ -8,8 +8,8 @@ public class Card {
   private int balance;
   private CardHolder owner;
   private String status;
-  private int currentFare;
-  private HashMap<Integer, ArrayList<ArrayList<TripSegment>>> trips;
+  private int currentFares;
+  private HashMap<String, ArrayList<ArrayList<TripSegment>>> trips;// key is date
   private ArrayList<ArrayList> mostRecentTrips; // [completeTrio1, completeTrip2, completeTrip3]
   private HashMap<Integer, Double> totalFares; // key-value pair, past 12 months
   private int currentTime;
@@ -23,16 +23,16 @@ public class Card {
     this.balance = 19;
     this.status = "deactivated";
     this.trips = new HashMap<>(); // only keeps track of 3 most recent trips
-    this.currentFare = 0;
+    this.currentFares = 0;
     this.totalFares = new HashMap<>();
     this.currentTime = 0;
   }
 
-  private void addBalance(int value) {
+  void addBalance(int value) {
     this.balance += value;
   }
 
-  private void deductBalance(int value) {
+  void deductBalance(int value) {
     this.balance -= value;
   }
 
@@ -82,12 +82,16 @@ public class Card {
     return this.status;
   }
 
-  int getCurrentFare() {
-    return this.currentFare;
+  int getCurrentFares() {
+    return this.currentFares;
   }
 
-  private void setCurrentFare(int fare) {
-    this.currentFare = fare;
+  void addCurrentFares(int fares) {
+      this.currentFares += fares;
+  }
+
+  void deductCurrentFares(int fares) {
+      this.currentFares -= fares;
   }
 
   void updateTime(int time) {}
@@ -96,7 +100,6 @@ public class Card {
     return this.cardNumber == other.getCardNumber();
   }
 
-  void addTripSegment(TripSegment ts) {}
 
   boolean isEntryAllowed() {
     if ((this.balance > 0) && (this.status.equals("activated"))) {
@@ -107,4 +110,6 @@ public class Card {
       return false;
     }
   }
+
+  void addTripSegment(TripSegment tripSegment) {}
 }

@@ -7,21 +7,27 @@ public class TripSegment {
   private String exitTransitType;
   private String enterTime;
   private String exitTime;
+  private String enterDate;
+  private String exitDate;
   private int duration;
+  private double segmentFares = 0.0;
 
-  public TripSegment(String cardNumber, String enterSpot, String transitType, String enterTime) {
+  public TripSegment(String cardNumber, String enterSpot, String transitType, String enterTime, String enterDate) {
     this.associatedCard = Integer.parseInt(cardNumber);
     this.enterSpot = enterSpot;
     this.enterTransitType = transitType;
     this.enterTime = enterTime;
+    this.enterDate = enterDate;
+    calculateTripSegmentFares(this.enterTransitType);
   }
 
-  public void recordTapOut(String exitSpot, String transitType, String exitTime) {
+  public void recordTapOut(String exitSpot, String transitType, String exitTime, String exitDate) {
     this.exitSpot = exitSpot;
     this.exitTransitType = transitType;
     this.exitTime = exitTime;
+    this.exitDate = exitDate;
     calculateDuration(this.enterTime, this.exitTime);
-    // add TripSegment to trips in Card (Find card first)
+    calculateTripSegmentFares(this.exitTransitType);
   }
 
   private void calculateDuration(String enterTime, String exitTime) {
@@ -36,19 +42,22 @@ public class TripSegment {
     this.duration = exit - enter;
   }
 
+  private void calculateTripSegmentFares(String transitType) {
+      if (this.enterTransitType.equals("B")) {
+          this.segmentFares = 2.0;
+      }else if (this.exitTransitType.equals("s")) {
+          this.segmentFares = TransitSystem.calculateSubwayFares(this);
+      }
+  }
+
+
     public int getAssociatedCard() {
         return associatedCard;
     }
 
-    public String getEnterSpot() {
+    public String getEnterSpot() { return this.enterSpot; }
 
-    return this.enterSpot;
-  }
-
-  public String getExitSpot() {
-
-    return this.exitSpot;
-  }
+  public String getExitSpot() { return this.exitSpot; }
 
   public String getEnterTransitType() {
     return this.enterTransitType;
@@ -58,20 +67,10 @@ public class TripSegment {
     return this.exitTransitType;
   }
 
-  // public String getTransitType() {}
 
-  public String getEnterTime() {
+  public String getEnterTime() { return this.enterTime; }
 
-    return this.enterTime;
-  }
+  public String getExitTime() { return this.exitTime; }
 
-  public String getExitTime() {
-
-    return this.exitTime;
-  }
-
-  public int getDuration() {
-
-    return this.duration;
-  }
+  public int getDuration() { return this.duration; }
 }
