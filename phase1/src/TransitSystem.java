@@ -21,6 +21,14 @@ public class TransitSystem {
   //Bus fare is $2.0 per trip
   private static double busFare = 2.0;
 
+  String currentMonth;
+
+  String currentDate;
+
+  String getCurrentMonth(){ return this.currentMonth;}
+
+  String getCurrentDate() { return this.currentDate;}
+
   protected TripSegment currentTripSegment;
 
   static HashMap<String, Double> allFares; //key is date, value is all the fares

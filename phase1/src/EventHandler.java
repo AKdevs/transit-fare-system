@@ -54,7 +54,7 @@ public class EventHandler {
       case "load":
           Card c = system.findCard(Integer.parseInt(eventTokens[1]));
           c.addBalance(Double.parseDouble(eventTokens[2]));
-          TransitSystem.addAllFares(Double.parseDouble(eventTokens[2]));
+          TransitSystem.addAllFares(eventTokens[3], Double.parseDouble(eventTokens[2]));
       case "view":
         if (eventTokens[1].equals("report")) {
           TransitSystem.printDailyReport(); // static??

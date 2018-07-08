@@ -12,7 +12,7 @@ public class Card {
   private double currentFares;
   private HashMap<String, ArrayList<ArrayList<TripSegment>>> trips; // key is date
   private ArrayList<ArrayList> mostRecentTrips; // [completeTrio1, completeTrip2, completeTrip3]
-  private HashMap<String, Double> totalFares; // key-value pair, past 12 months
+  private ArrayList<Double> totalFares;
   //private int currentDuration;
   private int startEnterTime;
   private TripSegment lastTripSegment;
@@ -54,11 +54,9 @@ public class Card {
   }
 
   void viewMonthlyCost() {
-    // view the average fares of the past 12 months
-    // use iterator?
     Double sumOfFares = 0.0;
-    for (Map.Entry m : this.totalFares.entrySet()) {
-      sumOfFares += (Double) m.getValue();
+    for (Double fare: this.totalFares) {
+      sumOfFares += fare;
       System.out.println(sumOfFares / 12);
     }
   }
