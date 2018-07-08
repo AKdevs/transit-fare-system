@@ -157,24 +157,12 @@ public class Card {
           ArrayList<TripSegment> newCompleteTrip = new ArrayList<>();
           newCompleteTrip.add(tripSegment);
           dayTrips.add(newCompleteTrip);
-            // deduct fares from card balance
-            this.deductBalance(tripSegment.getSegmentFares());
-            // add currentFares
-            this.addCurrentFares(tripSegment.getSegmentFares());
-            // add fares to totalFares
-            for (Map.Entry month : this.totalFares.entrySet()) {
-                if (month.equals(tripSegment.getMonth())) {
-                    Double tf = (Double) month.getValue();
-                    tf += tripSegment.getSegmentFares();
-                }
-            }
-            // add fares to allFares
-            TransitSystem.addAllFares(tripSegment.getSegmentFares());
+            this.updateFares(tripSegment, 0.0);
         }
       }
     }
   }
-  
+
   private void updateFares(TripSegment tripSegment, Double fares) {
       // deduct fares from card balance
       this.deductBalance(tripSegment.getSegmentFares());
