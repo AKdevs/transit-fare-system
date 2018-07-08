@@ -7,6 +7,12 @@ public class EventHandler {
   private TransitSystem system;
   private Scanner eventsBuffer;
 
+  public static void main(String[] args) throws Exception {
+      TransitSystem mainSystem = new TransitSystem();
+      EventHandler mainHandler = new EventHandler(mainSystem);
+      mainHandler.play();
+  }
+
   EventHandler(TransitSystem system) throws Exception {
     this.system = system;
     this.eventsBuffer = new Scanner(new File("events.txt"));
