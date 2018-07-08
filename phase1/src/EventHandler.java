@@ -53,7 +53,23 @@ public class EventHandler {
       case "view":
         if (eventTokens[1].equals("report")) {
           TransitSystem.printDailyReport(); // static??
+        }else if (eventTokens[1].equals("info")) {
+            UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+            user.viewInfo();
+        }else if (eventTokens[1].equals("trips")) {
+            Card card = system.findCard(Integer.parseInt(eventTokens[2]));
+            card.viewRecentTrips();
+        }else if (eventTokens[1].equals("balance")) {
+            Card card = system.findCard(Integer.parseInt(eventTokens[2]));
+            card.viewBalance();
+        }else if (eventTokens[1].equals("cost")) {
+            Card card = system.findCard(Integer.parseInt(eventTokens[2]));
+            card.viewAverageCost();
         }
+      case "change":
+          UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+          user.changeName(eventTokens[2]);
+      //case "remove":
     }
   }
 }

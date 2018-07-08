@@ -51,7 +51,7 @@ public class TransitSystem {
   }
   */
 
-  UserAccount findUserAccount(long accountNumber) {
+  UserAccount findUserAccount(int accountNumber) {
     for (UserAccount ua : userAccounts) {
       if (ua.getAccountNum() == accountNumber) {
         return ua;

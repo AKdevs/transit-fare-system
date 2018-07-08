@@ -47,7 +47,7 @@ public class Card {
     System.out.println(this.mostRecentTrips);
   }
 
-  void viewAverageFares() {
+  void viewAverageCost() {
     // view the average fares of the past 12 months
     // use iterator?
     Double sumOfFares = 0.0;
@@ -57,7 +57,7 @@ public class Card {
     }
   }
 
-  void printCardNumber() {
+  void viewCardNumber() {
     System.out.println(this.cardNumber);
   }
 
@@ -65,7 +65,7 @@ public class Card {
     return this.cardNumber;
   }
 
-  void getBalance() {
+  void viewBalance() {
     System.out.println(this.balance);
   }
 
