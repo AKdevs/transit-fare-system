@@ -136,7 +136,11 @@ public class TransitSystem {
                   }
               }
           }
-          return (exitSpotIndex - enterSpotIndex - 1) * 0.5;
+          if (enterSpotIndex == exitSpotIndex) {
+              return 0;
+          }else {
+              return (exitSpotIndex - enterSpotIndex - 1) * 0.5;
+          }
       }
 
 
