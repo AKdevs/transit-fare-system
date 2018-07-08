@@ -13,7 +13,8 @@ public class Card {
   private HashMap<String, ArrayList<ArrayList<TripSegment>>> trips; // key is date
   private ArrayList<ArrayList> mostRecentTrips; // [completeTrio1, completeTrip2, completeTrip3]
   private HashMap<String, Double> totalFares; // key-value pair, past 12 months
-  private int currentDuration;
+  //private int currentDuration;
+  private int startEnterTime;
   private TripSegment lastTripSegment;
   private ArrayList<TripSegment> lastCompleteTrip;
   private String linked;
@@ -29,7 +30,7 @@ public class Card {
     this.trips = new HashMap<>(); // only keeps track of 3 most recent trips
     this.currentFares = 0;
     this.totalFares = new HashMap<>();
-    this.currentDuration = 0;
+    //this.currentDuration = 0;
     this.linked = "unlinked";
   }
 
@@ -70,7 +71,7 @@ public class Card {
     this.linked = "Unlinked";
   }
 
-  void printCardNumber() {
+  void viewCardNumber() {
     System.out.println(this.cardNumber);
   }
 
@@ -88,7 +89,11 @@ public class Card {
 
   CardHolder getOwner() {
     return this.owner;
-  } // do we print out this?
+  }
+
+  void viewOwner() {
+      System.out.println(this.owner);
+  }
 
   void setOwner(CardHolder owner) {
     this.owner = owner;
@@ -110,10 +115,6 @@ public class Card {
     this.currentFares -= fares;
   }
 
-  void updateCurrentDuration(int duration) {
-      this.currentDuration += duration;
-  }
-
   boolean equals(Card other) {
     return this.cardNumber == other.getCardNumber();
   }
@@ -129,18 +130,18 @@ public class Card {
   }
 
   void addTripSegment(TripSegment tripSegment) {
-    this.updateCurrentDuration(tripSegment.getDuration());
     // if tripSegment is the first TripSegment to be added to trips
     if (this.lastTripSegment == null) {
-      String date = tripSegment.getEnterDate();
-      ArrayList<TripSegment> firstCompleteTrip = new ArrayList<>();
-      firstCompleteTrip.add(tripSegment);
-      ArrayList<ArrayList<TripSegment>> firstDayTrips = new ArrayList<>();
-      firstDayTrips.add(firstCompleteTrip);
-      this.trips.put(date, firstDayTrips);
-      this.lastTripSegment = tripSegment;
-      this.lastCompleteTrip = firstCompleteTrip;
-      this.updateFares(tripSegment, 0.0);
+        this.startEnterTime = Integer.parseInt(tripSegment.getEnterTime());
+        String date = tripSegment.getEnterDate();
+        ArrayList<TripSegment> firstCompleteTrip = new ArrayList<>();
+        firstCompleteTrip.add(tripSegment);
+        ArrayList<ArrayList<TripSegment>> firstDayTrips = new ArrayList<>();
+        firstDayTrips.add(firstCompleteTrip);
+        this.trips.put(date, firstDayTrips);
+        this.lastTripSegment = tripSegment;
+        this.lastCompleteTrip = firstCompleteTrip;
+        this.updateFares(tripSegment, 0.0);
     // if tripSegment is the start of a new complete trip
     }else if (!lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
         for (Map.Entry date : this.trips.entrySet()) {
@@ -153,11 +154,12 @@ public class Card {
                 this.updateFares(tripSegment, 0.0);
                 this.lastTripSegment = tripSegment;
                 this.lastCompleteTrip = newCompleteTrip;
+                this.startEnterTime = Integer.parseInt(tripSegment.getEnterTime());
             }
         }
   // if tripSegment and lastTripSegment can form a continuous Trip
     } else if (lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
-        if (this.currentDuration < 120) {
+        if (Integer.parseInt(tripSegment.getEnterTime()) - this.startEnterTime < 120) {
             for (Map.Entry date : this.trips.entrySet()) {
                 if (date.equals(tripSegment.getExitDate())) {
                     ArrayList<ArrayList<TripSegment>> dayTrips =
@@ -191,6 +193,7 @@ public class Card {
                     this.updateFares(tripSegment, 0.0);
                     this.lastTripSegment = tripSegment;
                     this.lastCompleteTrip = newCompleteTrip;
+                    this.startEnterTime = Integer.parseInt(tripSegment.getEnterTime());
                 }
             }
 

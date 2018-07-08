@@ -15,11 +15,17 @@ public class TransitSystem {
   // key for transitlines is transit type. value for transitlines is the arraylist of transitline
   private static HashMap<String, ArrayList<TransitLine>> transitLines;
 
+  //Subway fare is $0.5 per station travelled
+  private static double subwayFare = 0.5;
+
+  //Bus fare is $2.0 per trip
+  private static double busFare = 2.0;
+
   protected TripSegment currentTripSegment;
 
-  static double allFares; // print out key-value pair?
+  static HashMap<String, Double> allFares; //key is date, value is all the fares
 
-  static int numberOfStation; // print out
+  static HashMap<String, Integer> numberOfStations;
 
   static Card findCard(int cardNumber) {
     for (Card c : cards) {
@@ -108,20 +114,27 @@ public class TransitSystem {
     }
   }
 
-  static void addAllFares(double fares) {}
+  static void addAllFares(String date, double fares) {
+      for (Map.Entry d : allFares.entrySet()) {
+          if (d.equals(date)) {
+              Double f = (Double) d.getValue();
+              f += fares;
+          }
+      }
+  }
 
-  static void deductAllFares(double fares) {}
+  static void addNumberOfStation(String date, int n) {
+      for (Map.Entry d : numberOfStations.entrySet()) {
+          if (d.equals(date)) {
+              Integer stationNum = (Integer) d.getValue();
+              stationNum += n;
+          }
+      }
+  }
 
-  // int getAllFares() {return this.allFares;}
-
-  // int getNumberOfStation() {return this.getNumberOfStation();}
-
-  void addNumberOfStation(int newStation) {}
-
-  void deductNumberOfStation(int newStation) {}
 
   ArrayList getCards() {
-    return this.cards;
+    return cards;
   }
 
   static double calculateSubwayFares(TripSegment currentTripSegment) {
@@ -144,8 +157,10 @@ public class TransitSystem {
           if (enterSpotIndex == exitSpotIndex) {
               return 0;
           }else if (currentTripSegment.getDuration() <= 180 && (exitSpotIndex - enterSpotIndex) * 0.5 > 6){
+              addNumberOfStation(currentTripSegment.getEnterDate(), exitSpotIndex - enterSpotIndex + 1);
               return 6;
           } else {
+              addNumberOfStation(currentTripSegment.getEnterDate(), exitSpotIndex - enterSpotIndex + 1);
               return (exitSpotIndex - enterSpotIndex) * 0.5;
           }
       }
@@ -154,6 +169,6 @@ public class TransitSystem {
 
   static void printDailyReport() {
     System.out.println(allFares);
-    System.out.println(numberOfStation);
-  } // static????
+    System.out.println(numberOfStations);
+  }
 }
