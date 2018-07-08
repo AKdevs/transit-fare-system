@@ -28,6 +28,10 @@ public class TransitLine {
     return this.type;
   }
 
+  public String getId() {
+    return this.id;
+  }
+
   public void changeName(String oldName, String newName) {
     if (!points.isEmpty()) {
       for (int i = 0; i < points.size(); i++) {
