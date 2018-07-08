@@ -5,7 +5,8 @@ import java.util.Map;
 
 public class TransitSystem {
 
-  private ArrayList<Card> cards;
+  static private ArrayList<Card> cards;
+  private TripManager tripManager = new TripManager();
   // [Card(123), Card(24), Card(678), .....]
 
   private ArrayList<UserAccount> userAccounts;
@@ -20,7 +21,7 @@ public class TransitSystem {
 
   static int numberOfStation; // print out
 
-  Card findCard(int cardNumber) {
+  static Card findCard(int cardNumber) {
     for (Card c : cards) {
       if (c.getCardNumber() == cardNumber) {
         return c;
@@ -50,6 +51,10 @@ public class TransitSystem {
     }
   }
   */
+
+  public TripManager getTripManager() {
+    return tripManager;
+  }
 
   UserAccount findUserAccount(int accountNumber) {
     for (UserAccount ua : userAccounts) {

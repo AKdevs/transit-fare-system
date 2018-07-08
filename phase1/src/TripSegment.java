@@ -21,7 +21,7 @@ public class TripSegment {
     calculateTripSegmentFares(this.enterTransitType);
   }
 
-  public void recordTapOut(String exitSpot, String transitType, String exitTime, String exitDate) {
+  public void completeTripSegment(String exitSpot, String transitType, String exitTime, String exitDate) {
     this.exitSpot = exitSpot;
     this.exitTransitType = transitType;
     this.exitTime = exitTime;
@@ -49,7 +49,6 @@ public class TripSegment {
           this.segmentFares = TransitSystem.calculateSubwayFares(this);
       }
   }
-
 
   public int getAssociatedCard() {
         return associatedCard;

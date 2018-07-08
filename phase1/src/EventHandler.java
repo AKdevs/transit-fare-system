@@ -18,12 +18,11 @@ public class EventHandler {
     String action = eventTokens[0];
     switch (action) {
       case "entry": // we can also do it in TransitSystem ???
-        TripSegment ts =
-            new TripSegment(eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4], eventTokens[5]);
-        system.currentTripSegment = ts;
-        system.addTripSegmentToCard();
+        system.getTripManager().recordTapIn(
+                eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4], eventTokens[5]);
       case "exit":
-        system.currentTripSegment.recordTapOut(eventTokens[2], eventTokens[3], eventTokens[4], eventTokens[5]);
+        system.getTripManager().recordTapOut(
+                eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4], eventTokens[5]);
       case "create":
         if (eventTokens[1].equals("account")) {
           system.createUserAccount(eventTokens[2], eventTokens[3]);
