@@ -51,11 +51,9 @@ public class TripSegment {
   }
 
 
-    public int getAssociatedCard() {
+  public int getAssociatedCard() {
         return associatedCard;
     }
-
-    public String getEnterSpot() { return this.enterSpot; }
 
   public String getExitSpot() { return this.exitSpot; }
 
@@ -67,10 +65,19 @@ public class TripSegment {
     return this.exitTransitType;
   }
 
-
   public String getEnterTime() { return this.enterTime; }
 
   public String getExitTime() { return this.exitTime; }
 
   public int getDuration() { return this.duration; }
+
+  public String getEnterSpot() { return this.enterSpot; }
+
+  public String getEnterDate() { return this.enterDate;}
+
+  public String getExitDate() { return this.exitDate;}
+
+  public double getSegmentFares() { return this.segmentFares; }
+
+  public String getMonth() { return this.enterDate.substring(5, 7);}
 }

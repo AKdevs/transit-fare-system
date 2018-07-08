@@ -5,14 +5,16 @@ import java.util.Map;
 public class Card {
   private int cardNumber;
   private static int nextCardNumber = 30000001;
-  private int balance;
+  private double balance;
   private CardHolder owner;
   private String status;
-  private int currentFares;
+  private double currentFares;
   private HashMap<String, ArrayList<ArrayList<TripSegment>>> trips;// key is date
   private ArrayList<ArrayList> mostRecentTrips; // [completeTrio1, completeTrip2, completeTrip3]
-  private HashMap<Integer, Double> totalFares; // key-value pair, past 12 months
+  private HashMap<String, Double> totalFares; // key-value pair, past 12 months
   private int currentTime;
+  private TripSegment lastTripSegment;
+  private ArrayList<TripSegment> lastCompleteTrip;
 
   // registered = linked, different from "activate"
 
@@ -28,11 +30,11 @@ public class Card {
     this.currentTime = 0;
   }
 
-  void addBalance(int value) {
+  void addBalance(double value) {
     this.balance += value;
   }
 
-  void deductBalance(int value) {
+  void deductBalance(double value) {
     this.balance -= value;
   }
 
@@ -41,8 +43,8 @@ public class Card {
   }
 
   void viewRecentTrips() {
-    System.out.println(this.trips);
-  } // only print 3 most recent trips
+    System.out.println(this.mostRecentTrips);
+  }
 
   void viewAverageFares() {
     // view the average fares of the past 12 months
@@ -66,40 +68,25 @@ public class Card {
     System.out.println(this.balance);
   }
 
-  HashMap<Integer, Double> getTotalFares() {
+  HashMap<String, Double> getTotalFares() {
     return this.totalFares;
   }
 
-  CardHolder getOwner() {
-    return this.owner;
-  } // do we print out this?
+  CardHolder getOwner() { return this.owner; } // do we print out this?
 
-  void setOwner(CardHolder owner) {
-    this.owner = owner;
-  }
+  void setOwner(CardHolder owner) { this.owner = owner; }
 
-  String getStatus() {
-    return this.status;
-  }
+  String getStatus() { return this.status; }
 
-  int getCurrentFares() {
-    return this.currentFares;
-  }
+  double getCurrentFares() { return this.currentFares; }
 
-  void addCurrentFares(int fares) {
-      this.currentFares += fares;
-  }
+  void addCurrentFares(double fares) { this.currentFares += fares; }
 
-  void deductCurrentFares(int fares) {
-      this.currentFares -= fares;
-  }
+  void deductCurrentFares(double fares) { this.currentFares -= fares; }
 
   void updateTime(int time) {}
 
-  boolean equals(Card other) {
-    return this.cardNumber == other.getCardNumber();
-  }
-
+  boolean equals(Card other) { return this.cardNumber == other.getCardNumber(); }
 
   boolean isEntryAllowed() {
     if ((this.balance > 0) && (this.status.equals("activated"))) {
@@ -111,5 +98,31 @@ public class Card {
     }
   }
 
-  void addTripSegment(TripSegment tripSegment) {}
+  void addTripSegment(TripSegment tripSegment) {
+      if (this.lastTripSegment == null) {
+          String date = tripSegment.getEnterDate();
+          ArrayList<TripSegment> firstCompleteTrip = new ArrayList<>();
+          firstCompleteTrip.add(tripSegment);
+          ArrayList<ArrayList<TripSegment>> firstDayTrips = new ArrayList<>();
+          firstDayTrips.add(firstCompleteTrip);
+          this.trips.put(date, firstDayTrips);
+          this.lastTripSegment = tripSegment;
+          this.lastCompleteTrip = firstCompleteTrip;
+          //deduct fares from card balance
+          this.deductBalance(tripSegment.getSegmentFares());
+          //add currentFares
+          this.addCurrentFares(tripSegment.getSegmentFares());
+          //add fares to totalFares
+          for (Map.Entry month : this.totalFares.entrySet()) {
+              if (month.equals(tripSegment.getMonth())) {
+                  Double tf = (Double) month.getValue();
+                  tf += tripSegment.getSegmentFares();
+                  }
+          }
+          //add fares to allFares
+          TransitSystem.addAllFares(tripSegment.getSegmentFares());
+      }// if tripSegment and lastTripSegment can form a complete Trip
+      else if (lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {}
+      // if tripSegment is the start of a new complete trip
+  }
 }

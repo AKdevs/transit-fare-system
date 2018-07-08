@@ -16,7 +16,7 @@ public class TransitSystem {
 
   protected TripSegment currentTripSegment;
 
-  static int allFares; // print out key-value pair?
+  static double allFares; // print out key-value pair?
 
   static int numberOfStation; // print out
 
@@ -103,9 +103,9 @@ public class TransitSystem {
     }
   }
 
-  void addAllFares(int fares) {}
+  static void addAllFares(double fares) {}
 
-  void deductAllFares(int fares) {}
+  static void deductAllFares(double fares) {}
 
   // int getAllFares() {return this.allFares;}
 
