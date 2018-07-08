@@ -30,7 +30,8 @@ public class TripManager {
         /// account for tap out without tapping in
         calculateDuration(currentTs);
         calculateTripSegmentFares(currentTs);
-    }
+        }
+
 
     private void calculateDuration(TripSegment ts) {
         // int version of enterTime: Hour converted to minutes + minutes

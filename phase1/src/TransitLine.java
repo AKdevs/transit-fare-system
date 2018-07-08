@@ -4,10 +4,12 @@ public class TransitLine {
 
   private ArrayList<String> points;
   private String type;
+  private String id;
 
-  public TransitLine(ArrayList<String> points, String type) {
+  public TransitLine(ArrayList<String> points, String type, String id) {
     this.points = points;
     this.type = type;
+    this.id = id;
   }
 
   public void setPoints(ArrayList<String> points) {

@@ -219,6 +219,6 @@ public class Card {
             }
         }
         // add fares to allFares
-        TransitSystem.addAllFares(tripSegment.getSegmentFares());
+        TransitSystem.addAllFares(tripSegment.getEnterDate(), tripSegment.getSegmentFares());
     }
 }
