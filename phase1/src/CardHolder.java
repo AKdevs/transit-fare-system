@@ -24,6 +24,7 @@ public class CardHolder extends UserAccount {
 
   public void deLinkCard(Card card) {
     this.travelCards.remove(card);
+    card.setOwner(null);
     System.out.println("Card " + card.getCardNumber() + " is removed from your account.");
   }
 
