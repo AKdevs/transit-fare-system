@@ -13,8 +13,8 @@ public class TransitSystem {
   // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
   // key for transitlines is transit type. value for transitlines is the arraylist of transitline
-  private static HashMap<String, ArrayList<TransitLine>> transitLines;
-
+  // private static HashMap<String, ArrayList<TransitLine>> transitLines;
+  private static HashMap<String, TransitLine> transitLines;
   //Subway fare is $0.5 per station travelled
   private static double subwayFare = 0.5;
 
@@ -113,6 +113,10 @@ public class TransitSystem {
     findCard(currentCardNumber).addTripSegment(currentTripSegment);
   }
 
+  void addTransitLines(TransitLine newTransitLine) {
+      transitLines.put(newTransitLine.getId(), newTransitLine);
+  }
+  /*
   void addTransitLines(String type, TransitLine newTransitLine) {
     if (transitLines.containsKey(type)) {
       ArrayList<TransitLine> originalline = transitLines.get(type);
@@ -128,6 +132,7 @@ public class TransitSystem {
       transitLines.put(type, newlines);
     }
   }
+  */
 
   static void addAllFares(String date, double fares) {
       for (Map.Entry d : allFares.entrySet()) {
@@ -150,6 +155,10 @@ public class TransitSystem {
 
   ArrayList getCards() {
     return cards;
+  }
+
+  HashMap<String, TransitLine> getTransitLines() {
+      return transitLines;
   }
 
   static double calculateSubwayFares(TripSegment currentTripSegment) {
