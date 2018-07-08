@@ -21,6 +21,12 @@ public class TransitSystem {
   //Bus fare is $2.0 per trip
   private static double busFare = 2.0;
 
+  //Fare is capped at $6.0 for continuous trips travlled within timeForCap
+  private static double fareCap = 6.0;
+
+  //Time allowed to be eligible for capped fare is 120 minutes in our TransitSystem
+  private static int timeForCap = 120;
+
   protected TripSegment currentTripSegment;
 
   static HashMap<String, Double> allFares; //key is date, value is all the fares
