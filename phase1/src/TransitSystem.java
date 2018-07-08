@@ -14,7 +14,7 @@ public class TransitSystem {
 
   // key for transitlines is transit type. value for transitlines is the arraylist of transitline
   // private static HashMap<String, ArrayList<TransitLine>> transitLines;
-  private static HashMap<String, TransitLine> transitLines;
+  private static HashMap<String, TransitLine> transitLines = new HashMap<>();
   //Subway fare is $0.5 per station travelled
   private static double subwayFare = 0.5;
 

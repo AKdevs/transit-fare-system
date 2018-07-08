@@ -51,6 +51,7 @@ public class EventHandler {
         UserAccount ua = system.findUserAccount(Integer.parseInt(eventTokens[1]));
         Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
         ((CardHolder) ua).deLinkCard(cc);
+        /*
       case "load":
           Card c = system.findCard(Integer.parseInt(eventTokens[1]));
           c.addBalance(Double.parseDouble(eventTokens[2]));
@@ -75,6 +76,7 @@ public class EventHandler {
           UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[1]));
           user.changeName(eventTokens[2]);
       //case "remove":
+      */
     }
   }
 }

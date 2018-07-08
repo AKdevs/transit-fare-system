@@ -42,19 +42,16 @@ public class TransitLine {
     }
   }
 
-  public void addPoint(String beforenew, String newpoint, String afternew) {
-    if (beforenew.equals("")) {
-      points.add(0, newpoint);
+  public void addPoint(String pointBefore, String newPoint) {
+    if (pointBefore.equals("")) {
+      points.add(0, newPoint);
     } else {
-      if (afternew.equals("")) {
-        points.add(newpoint);
-      } else {
         for (int i = 0; i < points.size(); i++) {
-          if (points.get(i).equals(beforenew)) {
-            points.add(i + 1, newpoint);
+          if (points.get(i).equals(pointBefore)) {
+            points.add(i + 1, newPoint);
           }
         }
       }
-    }
   }
+
 }
