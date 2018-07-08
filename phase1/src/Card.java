@@ -71,9 +71,6 @@ public class Card {
     this.linked = "Unlinked";
   }
 
-  void viewCardNumber() {
-    System.out.println(this.cardNumber);
-  }
 
   int getCardNumber() {
     return this.cardNumber;
