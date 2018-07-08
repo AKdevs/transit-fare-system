@@ -19,7 +19,7 @@ public class TransitSystem {
   private static double subwayFare = 0.5;
 
   //Bus fare is $2.0 per trip
-  private static doulbe busFare = 2.0;
+  private static double busFare = 2.0;
 
   protected TripSegment currentTripSegment;
 
