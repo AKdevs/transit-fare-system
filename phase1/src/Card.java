@@ -41,10 +41,10 @@ public class Card {
 
   void viewBalance() {System.out.println(this.balance);}
 
-  void setactivated() {
+  void activate() {
     this.status = "activated";
   }
-  void setdeactivated() {
+  void deactivate() {
     this.status = "deactivated";
   }
 
