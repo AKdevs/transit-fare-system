@@ -121,20 +121,23 @@ public class Card {
 
   void addTripSegment(TripSegment tripSegment) {
     // if tripSegment is the first TripSegment to be added to trips
-    if (this.lastTripSegment == null) {
-        int startTime = Integer.parseInt(tripSegment.getEnterTime().substring(0, 2)) * 60 + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
-      this.startEnterTime = startTime;
-      String date = tripSegment.getEnterDate();
-      ArrayList<TripSegment> firstCompleteTrip = new ArrayList<>();
-      firstCompleteTrip.add(tripSegment);
-      ArrayList<ArrayList<TripSegment>> firstDayTrips = new ArrayList<>();
-      firstDayTrips.add(firstCompleteTrip);
-      this.trips.put(date, firstDayTrips);
-      this.lastTripSegment = tripSegment;
-      this.lastCompleteTrip = firstCompleteTrip;
-      this.updateFares(tripSegment, tripSegment.getSegmentFares());
+      String currentDate = tripSegment.getEnterDate();
+          if (!this.trips.containsKey(currentDate)) {
+              int startTime = Integer.parseInt(tripSegment.getEnterTime().substring(0, 2)) * 60 + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
+              this.startEnterTime = startTime;
+              String date = tripSegment.getEnterDate();
+              ArrayList<TripSegment> firstCompleteTrip = new ArrayList<>();
+              firstCompleteTrip.add(tripSegment);
+              ArrayList<ArrayList<TripSegment>> firstDayTrips = new ArrayList<>();
+              firstDayTrips.add(firstCompleteTrip);
+              this.trips.put(date, firstDayTrips);
+              this.lastTripSegment = tripSegment;
+              this.lastCompleteTrip = firstCompleteTrip;
+              this.updateFares(tripSegment, tripSegment.getSegmentFares());
+
+      }
       // if tripSegment is the start of a new complete trip
-    } else if (!lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
+     else if (!lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
       for (Map.Entry<String, ArrayList<ArrayList<TripSegment>>> date : this.trips.entrySet()) {
         if (date.toString().equals(tripSegment.getExitDate())) {
           ArrayList<ArrayList<TripSegment>> dayTrips = date.getValue();
