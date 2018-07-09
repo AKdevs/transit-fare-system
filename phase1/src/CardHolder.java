@@ -51,24 +51,24 @@ public class CardHolder extends UserAccount {
     this.travelCards.add(card);
     card.setOwner(this);
     card.setLinked();
-    System.out.println("Card " + card.getCardNumber() + " is now linked with your account.");
+    System.out.println("Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
   }
 
   public void unlinkCard(Card card) {
     this.travelCards.remove(card);
     card.setOwner(null);
     card.setUnlinked();
-    System.out.println("Card " + card.getCardNumber() + " has been unlinked from your account.");
+    System.out.println("Card " + card.getCardNumber() + " unlinked to CardHolder Account " + this.getAccountNum());
   }
 
   // CardHolder is able to activate a card that is linked to his/her account.
   public void activateCard(Card card) {
     if (this.travelCards.contains(card)) {
       card.activate();
-      System.out.println("Card " + card.getCardNumber() + " has been activated successfully.");
+      System.out.println("Card " + card.getCardNumber() + " activated");
     } else {
       System.out.println(
-          "Action denied. Card" + card.getCardNumber() + " is not linked to your account.");
+          "Action denied. Card" + card.getCardNumber() + " is not linked to your account");
     }
   }
 
@@ -76,10 +76,10 @@ public class CardHolder extends UserAccount {
   public void deactivateCard(Card card) {
     if (this.travelCards.contains(card)) {
       card.deactivate();
-      System.out.println("Card " + card.getCardNumber() + " has been deactivated.");
+      System.out.println("Card " + card.getCardNumber() + " deactivated");
     } else {
       System.out.println(
-          "Action denied. Card" + card.getCardNumber() + " is not linked to your account.");
+          "Action denied. Card" + card.getCardNumber() + " is not linked to your account");
     }
   }
 
@@ -92,7 +92,7 @@ public class CardHolder extends UserAccount {
       System.out.println(
           "Action denied. Card"
               + card.getCardNumber()
-              + " is not activated or linked to your account.");
+              + " is not activated or linked to your account");
     }
   }
 }
