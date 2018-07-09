@@ -62,11 +62,13 @@ public class EventHandler {
             UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
             user.viewInfo();
         }else if (eventTokens[1].equals("trips")) {
-            Card card = system.findCard(Integer.parseInt(eventTokens[2]));
-            card.viewRecentTrips();
+          UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+          Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+          ((CardHolder)user).viewRecentTrips(card);
         }else if (eventTokens[1].equals("balance")) {
-            Card card = system.findCard(Integer.parseInt(eventTokens[2]));
-            card.viewBalance();
+          UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+          Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+          ((CardHolder)user).viewBalance(card);
         }else if (eventTokens[1].equals("cost")) {
             Card card = system.findCard(Integer.parseInt(eventTokens[2]));
             card.viewMonthlyCost();

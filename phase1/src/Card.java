@@ -17,7 +17,7 @@ public class Card {
   private int startEnterTime;
   private TripSegment lastTripSegment;
   private ArrayList<TripSegment> lastCompleteTrip;
-  private String linked;
+  private String linkedness;
 
   // registered = linked, different from "activate"
 
@@ -31,7 +31,7 @@ public class Card {
     this.currentFares = 0;
     this.totalFares = new ArrayList<>();
     // this.currentDuration = 0;
-    this.linked = "unlinked";
+    this.linkedness = "unlinked";
   }
 
   void setBalance(Double balance) {
@@ -59,11 +59,15 @@ public class Card {
   }
 
   public void setLinked() {
-    this.linked = "Linked";
+    this.linkedness = "Linked";
   }
 
   public void setUnlinked() {
-    this.linked = "Unlinked";
+    this.linkedness = "Unlinked";
+  }
+
+  public String getLinkedness() {
+    return linkedness;
   }
 
   int getCardNumber() {

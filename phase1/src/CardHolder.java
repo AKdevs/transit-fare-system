@@ -32,17 +32,12 @@ public class CardHolder extends UserAccount {
     }
   }
 
-  public void viewBalance(int cardnumber){
-    //in eventhandler: try....catch{your card is not linked to your account}
-    for (Card card : travelCards) {
-      if (card.getCardNumber() == cardnumber) {
-        if (card.getStatus().equals("activated")) {
-          System.out.println("Card balance: " + card.getBalance());
-        }
-        else{
-          System.out.println("The card is not activated.");
-        }
-      }
+  public void viewBalance(Card card){
+    if (this.travelCards.contains(card) && card.getStatus().equals("activated")) {
+      System.out.println("Card balance: " + card.getBalance());
+    } else {
+      System.out.println(
+          "Action denied. Card" + card.getCardNumber() + " is not activated or linked to your account.");
     }
   }
 
@@ -91,7 +86,12 @@ public class CardHolder extends UserAccount {
 
   }
 
-  public void viewRecentTrips(){
-
+  public void viewRecentTrips(Card card){
+    if (this.travelCards.contains(card) && card.getStatus().equals("activated")) {
+      System.out.println(card.getMostRecentTrips());
+    } else {
+      System.out.println(
+          "Action denied. Card" + card.getCardNumber() + " is not activated or linked to your account.");
+    }
   }
 }
