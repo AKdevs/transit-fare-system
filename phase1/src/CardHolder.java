@@ -87,7 +87,7 @@ public class CardHolder extends UserAccount {
 
   public void viewRecentTrips(Card card) {
     if (this.travelCards.contains(card) && card.getStatus().equals("activated")) {
-      System.out.println(card.getMostRecentTrips());
+      card.viewMostRecentTrips();
     } else {
       System.out.println(
           "Action denied. Card"
