@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class TransitSystem {
 
-  private static ArrayList<Card> cards;
+  private static ArrayList<Card> cards = new ArrayList<>();
   private TripManager tripManager = new TripManager();
   // [Card(123), Card(24), Card(678), .....]
 
-  private ArrayList<UserAccount> userAccounts;
+  private ArrayList<UserAccount> userAccounts = new ArrayList<>();
   // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
   // key is name of the line, value is the transit line
@@ -102,6 +102,10 @@ public class TransitSystem {
 
   void removeUserAccount(int accountNumber) {
     userAccounts.remove(findUserAccount(accountNumber));
+  }
+
+  ArrayList<UserAccount> getUserAccounts() {
+    return userAccounts;
   }
 
   void addTripSegmentToCard() {
