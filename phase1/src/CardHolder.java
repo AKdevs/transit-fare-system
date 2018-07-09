@@ -95,4 +95,20 @@ public class CardHolder extends UserAccount {
               + " is not activated or linked to your account");
     }
   }
+  @Override // Will include cards linked to the CardHolder
+  public void viewInfo() {
+    System.out.println("Name: " + this.getName());
+    System.out.println("Email: " + this.getEmail());
+    System.out.println("Account Number: " + this.accountNumber);
+    if (this.travelCards.isEmpty()) {
+      System.out.println("Cards linked to your account: None.");
+    } else {
+      System.out.println("Cards linked to your account: ");
+      for (Card card: this.travelCards) {
+        System.out.println("     " + card.getCardNumber());
+      }
+
+    }
+  }
+
 }
