@@ -3,7 +3,7 @@ import java.io.*;
 public class UserAccount {
   private String name;
   private String email;
-  protected long accountNumber;
+  protected int accountNumber;
 
   public UserAccount(String name, String email) {
     this.name = name;
