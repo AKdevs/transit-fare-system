@@ -32,6 +32,7 @@ public class TransitLine {
     return this.id;
   }
 
+  //should the two method under stay in TransitLine Class???
   public void changeName(String oldName, String newName) {
     if (!points.isEmpty()) {
       for (int i = 0; i < points.size(); i++) {

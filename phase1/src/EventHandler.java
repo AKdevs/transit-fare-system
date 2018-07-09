@@ -82,7 +82,11 @@ public class EventHandler {
       case "change":
         UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[1]));
         user.changeName(eventTokens[2]);
-        // case "remove":
+        // case "remove": remove card , remove userAccount
+        // case change points name in TransitLine
+        //case add point to transitline
+        //case add new transitLine
+        //Do we need a static SystemManager???????????
 
 
     }
