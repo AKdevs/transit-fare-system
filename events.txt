@@ -1,11 +1,11 @@
-create | account | CardHolder | James | james@gmail.com
+create | account | CardHolder | James Rodriguez | james@gmail.com
 create | card
-change | 10000001 | David
+change | 10000001 | David Villa
 view | info | 10000001
 link | 10000001 | 30000001
 unlink | 10000001 | 30000001
 link | 10000001 | 30000001
-activate | 10000001 | 30000001 // we need account number to activate a card
+activate | 10000001 | 30000001
 deactivate | 10000001 | 30000001
 activate | 10000001 | 30000001 // we need account number to activate a card
 load | 10000001 | 30000001 | 20 // we need the value the cardHolder load to card 1204 // we also need to add the account number

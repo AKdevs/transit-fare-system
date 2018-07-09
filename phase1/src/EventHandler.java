@@ -10,11 +10,11 @@ public class EventHandler {
   public static void main(String[] args) throws Exception {
     TransitSystem mainSystem = new TransitSystem();
     EventHandler mainHandler = new EventHandler(mainSystem);
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 8; i++) {
       mainHandler.play();
     }
-    System.out.println(mainSystem.getCards());
-    System.out.println(mainSystem.getUserAccounts());
+    //System.out.println(mainSystem.getCards());
+    //System.out.println(mainSystem.getUserAccounts());
   }
 
   EventHandler(TransitSystem system) throws Exception {
@@ -54,25 +54,31 @@ public class EventHandler {
         Card ca = system.findCard(Integer.parseInt(eventTokens[2]));
         CardHolder cha = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
         cha.activateCard(ca);
+        break;
 
       case "deactivate":
         Card cd = system.findCard(Integer.parseInt(eventTokens[2]));
         CardHolder chd = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
         chd.deactivateCard(cd);
-
+        break;
 
       case "link":
         Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
         UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
         ((CardHolder) currentHolder).linkCard(currentCard);
+        break;
+
       case "unlink":
         UserAccount ua = system.findUserAccount(Integer.parseInt(eventTokens[1]));
         Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
-        ((CardHolder) ua).deLinkCard(cc);
+        ((CardHolder) ua).unlinkCard(cc);
+        break;
+
       case "load":
         UserAccount holder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
         Card travelcard = system.findCard(Integer.parseInt(eventTokens[2]));
         ((CardHolder)holder).addbalance(travelcard, Double.parseDouble(eventTokens[3]));
+        break;
 
       case "view":
         if (eventTokens[1].equals("report")) {
@@ -93,6 +99,8 @@ public class EventHandler {
           //Card card = system.findCard(Integer.parseInt(eventTokens[2]));
           //card.viewMonthlyCost();
         }
+        break;
+
       case "change":
         UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[1]));
         user.changeName(eventTokens[2]);
