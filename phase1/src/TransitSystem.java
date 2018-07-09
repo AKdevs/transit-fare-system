@@ -64,7 +64,7 @@ public class TransitSystem {
   void createCard() {
     Card newCard = new Card();
     addCard(newCard);
-    System.out.println("Card " + newCard.getCardNumber() + " created.");
+    System.out.println("Card " + newCard.getCardNumber() + " created");
   }
 
   void removeCard(int cardNumber) {
@@ -95,13 +95,13 @@ public class TransitSystem {
   void createCardHolderAccount(String name, String email) {
     CardHolder newAccount = new CardHolder(name, email);
     addUserAccount(newAccount);
-    System.out.println("CardHolder Account " + newAccount.getAccountNum() + " created.");
+    System.out.println("CardHolder Account " + newAccount.getAccountNum() + " created");
   }
 
   void createAdminAccount(String name, String email) {
     AdminUser newAccount = new AdminUser(name, email);
     addUserAccount(newAccount);
-      System.out.println("AdminUser Account " + newAccount.getAccountNum() + " created.");
+      System.out.println("AdminUser Account " + newAccount.getAccountNum() + " created");
   }
 
   void addUserAccount(UserAccount newUser) {
