@@ -42,7 +42,7 @@ public class EventHandler {
       case "deactivate":
           Card cd = system.findCard(Integer.parseInt(eventTokens[2]));
           CardHolder chd = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
-          chd.activateCard(cd);
+          chd.deactivateCard(cd);
       case "link":
         Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
         UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
@@ -57,7 +57,8 @@ public class EventHandler {
           TransitSystem.addAllFares(eventTokens[3], Double.parseDouble(eventTokens[2]));
       case "view":
         if (eventTokens[1].equals("report")) {
-          TransitSystem.printDailyReport(); // static??
+          String date = eventTokens[2];
+          AdminUser.getDailyReport(date); // static??
         }else if (eventTokens[1].equals("info")) {
             UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
             user.viewInfo();

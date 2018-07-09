@@ -33,4 +33,5 @@ exit | 30000002 | Finch | S | 11:49 | 2018-02-12
 entry | 30000002 | Union | B | 11:52 | 2018-02-12
 view | trips | 30000002
 view | cost | 10000002
-view | report
+view | report | 2018-02-11
+view | report | 2018-02-12

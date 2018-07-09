@@ -25,9 +25,17 @@ public class TransitSystem {
 
   String currentDate;
 
-  String getCurrentMonth(){ return this.currentMonth;}
+  String getCurrentMonth() {
+    return this.currentMonth;
+  }
 
-  String getCurrentDate() { return this.currentDate;}
+  String getCurrentDate() {
+    return this.currentDate;
+  }
+
+  public static HashMap<String, Double> getAllFares() {
+    return allFares;
+  }
 
   //Fare is capped at $6.0 for continuous trips travlled within timeForCap
   private static double fareCap = 6.0;
@@ -86,6 +94,15 @@ public class TransitSystem {
     return null;
   }
 
+
+  static Double getDailyFares(String date){
+    return allFares.get(date);
+  }
+
+  static int getDailyStation(String date){
+    return numberOfStations.get(date);
+  }
+
   void createUserAccount(String name, String email) {
     UserAccount newAccount = new UserAccount(name, email);
     addUserAccount(newAccount);
@@ -114,7 +131,7 @@ public class TransitSystem {
   }
 
   void addTransitLines(TransitLine newTransitLine) {
-      transitLines.put(newTransitLine.getId(), newTransitLine);
+    transitLines.put(newTransitLine.getId(), newTransitLine);
   }
   /*
   void addTransitLines(String type, TransitLine newTransitLine) {
@@ -135,21 +152,21 @@ public class TransitSystem {
   */
 
   static void addAllFares(String date, double fares) {
-      for (Map.Entry d : allFares.entrySet()) {
-          if (d.equals(date)) {
-              Double f = (Double) d.getValue();
-              f += fares;
-          }
+    for (Map.Entry d : allFares.entrySet()) {
+      if (d.equals(date)) {
+        Double f = (Double) d.getValue();
+        f += fares;
       }
+    }
   }
 
   static void addNumberOfStation(String date, int n) {
-      for (Map.Entry d : numberOfStations.entrySet()) {
-          if (d.equals(date)) {
-              Integer stationNum = (Integer) d.getValue();
-              stationNum += n;
-          }
+    for (Map.Entry d : numberOfStations.entrySet()) {
+      if (d.equals(date)) {
+        Integer stationNum = (Integer) d.getValue();
+        stationNum += n;
       }
+    }
   }
 
 
@@ -158,41 +175,37 @@ public class TransitSystem {
   }
 
   HashMap<String, TransitLine> getTransitLines() {
-      return transitLines;
+    return transitLines;
   }
 
   static double calculateSubwayFares(TripSegment currentTripSegment) {
-      int enterSpotIndex = 0;
-      int exitSpotIndex = 0;
-      for (Map.Entry type : transitLines.entrySet()) {
-          if (type.equals("S")) {
-              ArrayList<TransitLine> subwayLines = (ArrayList<TransitLine>)type.getValue();
-              for (TransitLine tl: subwayLines){
-                  for (String station: tl.getPoints()) {
-                      if (station.equals(currentTripSegment.getEnterSpot())) {
-                          enterSpotIndex = tl.getPoints().indexOf(station);
-                      }else if (station.equals(currentTripSegment.getExitSpot())){
-                          exitSpotIndex = tl.getPoints().indexOf(station);
-                      }
-                  }
-                  }
-              }
+    int enterSpotIndex = 0;
+    int exitSpotIndex = 0;
+    for (Map.Entry type : transitLines.entrySet()) {
+      if (type.equals("S")) {
+        ArrayList<TransitLine> subwayLines = (ArrayList<TransitLine>) type.getValue();
+        for (TransitLine tl : subwayLines) {
+          for (String station : tl.getPoints()) {
+            if (station.equals(currentTripSegment.getEnterSpot())) {
+              enterSpotIndex = tl.getPoints().indexOf(station);
+            } else if (station.equals(currentTripSegment.getExitSpot())) {
+              exitSpotIndex = tl.getPoints().indexOf(station);
+            }
           }
-          if (enterSpotIndex == exitSpotIndex) {
-              return 0;
-          }else if (currentTripSegment.getDuration() <= 180 && (exitSpotIndex - enterSpotIndex) * 0.5 > 6){
-              addNumberOfStation(currentTripSegment.getEnterDate(), exitSpotIndex - enterSpotIndex + 1);
-              return 6;
-          } else {
-              addNumberOfStation(currentTripSegment.getEnterDate(), exitSpotIndex - enterSpotIndex + 1);
-              return (exitSpotIndex - enterSpotIndex) * 0.5;
-          }
+        }
       }
-
-
-
-  static void printDailyReport() {
-    System.out.println(allFares);
-    System.out.println(numberOfStations);
+    }
+    if (enterSpotIndex == exitSpotIndex) {
+      return 0;
+    } else if (currentTripSegment.getDuration() <= 180
+        && (exitSpotIndex - enterSpotIndex) * 0.5 > 6) {
+      addNumberOfStation(currentTripSegment.getEnterDate(), exitSpotIndex - enterSpotIndex + 1);
+      return 6;
+    } else {
+      addNumberOfStation(currentTripSegment.getEnterDate(), exitSpotIndex - enterSpotIndex + 1);
+      return (exitSpotIndex - enterSpotIndex) * 0.5;
+    }
   }
+
 }
+
