@@ -10,7 +10,7 @@ public class EventHandler {
   public static void main(String[] args) throws Exception {
     TransitSystem mainSystem = new TransitSystem();
     EventHandler mainHandler = new EventHandler(mainSystem);
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 8; i++) {
       mainHandler.play();
     }
     //System.out.println(mainSystem.getCards());
@@ -71,7 +71,7 @@ public class EventHandler {
       case "unlink":
         UserAccount ua = system.findUserAccount(Integer.parseInt(eventTokens[1]));
         Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
-        ((CardHolder) ua).deLinkCard(cc);
+        ((CardHolder) ua).unlinkCard(cc);
         break;
 
       case "load":
