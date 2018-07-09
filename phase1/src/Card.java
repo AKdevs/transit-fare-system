@@ -53,9 +53,6 @@ public class Card {
     this.status = "deactivated";
   }
 
-  public ArrayList<ArrayList<TripSegment>> getMostRecentTrips() {
-    return mostRecentTrips;
-  }
 
   public void setLinked() {
     this.linkedness = "Linked";
@@ -118,7 +115,16 @@ public class Card {
 
   }
 
-  void viewMostRecentTrips(){}
+  void viewMostRecentTrips(){
+      ArrayList<TripSegment> last = this.mostRecentTrips.get(this.mostRecentTrips.size() -1);
+      ArrayList<TripSegment> secondLast = this.mostRecentTrips.get(this.mostRecentTrips.size() - 2);
+      ArrayList<TripSegment> thirdLast = this.mostRecentTrips.get(this.mostRecentTrips.size() - 3);
+      ArrayList<ArrayList<TripSegment>> result = new ArrayList<ArrayList<TripSegment>>();
+      result.add(last);
+      result.add(secondLast);
+      result.add(thirdLast);
+      System.out.println(result);
+  }
 
   boolean isEntryAllowed() {
     if ((this.balance > 0) && (this.status.equals("activated"))) {
@@ -144,7 +150,7 @@ public class Card {
       this.trips.put(date, firstDayTrips);
       this.lastTripSegment = tripSegment;
       this.lastCompleteTrip = firstCompleteTrip;
-      this.mostRecentTrips.add(firstCompleteTrip);
+      this.mostRecentTrips.add(this.lastCompleteTrip);
       this.updateFares(tripSegment, tripSegment.getSegmentFares());
 
     }
@@ -159,6 +165,7 @@ public class Card {
           this.updateFares(tripSegment, tripSegment.getSegmentFares());
           this.lastTripSegment = tripSegment;
           this.lastCompleteTrip = newCompleteTrip;
+          this.mostRecentTrips.add(this.lastCompleteTrip);
           int startTime = Integer.parseInt(tripSegment.getEnterTime().substring(0, 2)) * 60 + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
           this.startEnterTime = startTime;
         }
@@ -197,6 +204,7 @@ public class Card {
             this.updateFares(tripSegment, tripSegment.getSegmentFares());
             this.lastTripSegment = tripSegment;
             this.lastCompleteTrip = newCompleteTrip;
+            this.mostRecentTrips.add(this.lastCompleteTrip);
             int startTime = Integer.parseInt(tripSegment.getEnterTime().substring(0, 2)) * 60 + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
             this.startEnterTime = startTime;
           }
