@@ -58,7 +58,7 @@ public class CardHolder extends UserAccount {
     this.travelCards.remove(card);
     card.setOwner(null);
     card.setUnlinked();
-    System.out.println("Card " + card.getCardNumber() + " is removed from your account.");
+    System.out.println("Card " + card.getCardNumber() + " has been unlinked from your account.");
   }
 
   // CardHolder is able to activate a card that is linked to his/her account.

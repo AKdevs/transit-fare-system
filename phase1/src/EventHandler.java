@@ -10,7 +10,7 @@ public class EventHandler {
   public static void main(String[] args) throws Exception {
     TransitSystem mainSystem = new TransitSystem();
     EventHandler mainHandler = new EventHandler(mainSystem);
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
       mainHandler.play();
     }
     //System.out.println(mainSystem.getCards());
