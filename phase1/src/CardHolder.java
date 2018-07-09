@@ -13,7 +13,7 @@ public class CardHolder extends UserAccount {
     this.travelCards = new ArrayList<>();
   }
 
-  public void addbalance(int cardnumber, Double amount) {
+  public void addbalance(Card card, double amount) {
     // cardholder can only addbalance in card which is linked to their account
     // the initial status of a card is set to "activated",  which means people can use a card right
     // after they buy it, they can use the balance stored in the
@@ -21,17 +21,17 @@ public class CardHolder extends UserAccount {
     // card linked to their account
     // a new card cannot do anything except for enter and exit the stations
     // in eventhandler: try....catch{your card is not linked to your account}
-    for (Card card : travelCards) {
-      if (card.getCardNumber() == cardnumber) {
-        if (card.getStatus().equals("activated")) {
-          double balance = card.getBalance() + amount;
-          card.setBalance(balance);
-        } else {
-          System.out.println("The card is not activated.");
-        }
-      }
+    if (this.travelCards.contains(card) && card.getStatus().equals("activated")) {
+      double balance = card.getBalance() + amount;
+      card.setBalance(balance);
+    } else {
+      System.out.println(
+          "Action denied. Card"
+              + card.getCardNumber()
+              + " is not activated or linked to your account.");
     }
   }
+
 
   public void viewBalance(Card card) {
     if (this.travelCards.contains(card) && card.getStatus().equals("activated")) {
