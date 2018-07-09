@@ -51,7 +51,7 @@ public class CardHolder extends UserAccount {
     this.travelCards.add(card);
     card.setOwner(this);
     card.setLinked();
-    System.out.println("Card " + card.getCardNumber() + " is now linked with your account.");
+    System.out.println("Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
   }
 
   public void deLinkCard(Card card) {
