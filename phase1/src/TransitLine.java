@@ -46,12 +46,11 @@ public class TransitLine {
     if (pointBefore.equals("")) {
       points.add(0, newPoint);
     } else {
-        for (int i = 0; i < points.size(); i++) {
-          if (points.get(i).equals(pointBefore)) {
-            points.add(i + 1, newPoint);
-          }
+      for (int i = 0; i < points.size(); i++) {
+        if (points.get(i).equals(pointBefore)) {
+          points.add(i + 1, newPoint);
         }
       }
+    }
   }
-
 }

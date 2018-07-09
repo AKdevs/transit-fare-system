@@ -12,7 +12,8 @@ public class TripSegment {
   private int duration;
   private double segmentFares = 0.0;
 
-  public TripSegment(String cardNumber, String enterSpot, String transitType, String enterTime, String enterDate) {
+  public TripSegment(
+      String cardNumber, String enterSpot, String transitType, String enterTime, String enterDate) {
     this.associatedCard = Integer.parseInt(cardNumber);
     this.enterSpot = enterSpot;
     this.enterTransitType = transitType;
@@ -23,7 +24,8 @@ public class TripSegment {
     */
   }
 
-  public void completeTripSegment(String exitSpot, String transitType, String exitTime, String exitDate) {
+  public void completeTripSegment(
+      String exitSpot, String transitType, String exitTime, String exitDate) {
     this.exitSpot = exitSpot;
     this.exitTransitType = transitType;
     this.exitTime = exitTime;
@@ -57,10 +59,12 @@ public class TripSegment {
   */
 
   public int getAssociatedCard() {
-        return associatedCard;
-    }
+    return associatedCard;
+  }
 
-  public String getExitSpot() { return this.exitSpot; }
+  public String getExitSpot() {
+    return this.exitSpot;
+  }
 
   public String getEnterTransitType() {
     return this.enterTransitType;
@@ -70,27 +74,43 @@ public class TripSegment {
     return this.exitTransitType;
   }
 
-  public String getEnterTime() { return this.enterTime; }
+  public String getEnterTime() {
+    return this.enterTime;
+  }
 
-  public String getExitTime() { return this.exitTime; }
+  public String getExitTime() {
+    return this.exitTime;
+  }
 
-  public int getDuration() { return this.duration; }
+  public int getDuration() {
+    return this.duration;
+  }
 
   public void setDuration(int duration) {
     this.duration = duration;
   }
 
-  public String getEnterSpot() { return this.enterSpot; }
+  public String getEnterSpot() {
+    return this.enterSpot;
+  }
 
-  public String getEnterDate() { return this.enterDate;}
+  public String getEnterDate() {
+    return this.enterDate;
+  }
 
-  public String getExitDate() { return this.exitDate;}
+  public String getExitDate() {
+    return this.exitDate;
+  }
 
-  public double getSegmentFares() { return this.segmentFares; }
+  public double getSegmentFares() {
+    return this.segmentFares;
+  }
 
   public void setSegmentFares(double fares) {
     segmentFares = fares;
   }
 
-  public String getMonth() { return this.enterDate.substring(5, 7);}
+  public String getMonth() {
+    return this.enterDate.substring(5, 7);
+  }
 }

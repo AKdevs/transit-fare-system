@@ -5,20 +5,19 @@ import java.util.Map;
 
 public class TransitSystem {
 
-  static private ArrayList<Card> cards;
+  private static ArrayList<Card> cards;
   private TripManager tripManager = new TripManager();
   // [Card(123), Card(24), Card(678), .....]
 
   private ArrayList<UserAccount> userAccounts;
   // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
-  // key for transitlines is transit type. value for transitlines is the arraylist of transitline
-  // private static HashMap<String, ArrayList<TransitLine>> transitLines;
+  // key is name of the line, value is the transit line
   private static HashMap<String, TransitLine> transitLines = new HashMap<>();
-  //Subway fare is $0.5 per station travelled
+  // Subway fare is $0.5 per station travelled
   private static double subwayFare = 0.5;
 
-  //Bus fare is $2.0 per trip
+  // Bus fare is $2.0 per trip
   private static double busFare = 2.0;
 
   String currentMonth;
@@ -37,16 +36,15 @@ public class TransitSystem {
     return allFares;
   }
 
-  //Fare is capped at $6.0 for continuous trips travlled within timeForCap
+  // Fare is capped at $6.0 for continuous trips travlled within timeForCap
   private static double fareCap = 6.0;
 
-  //Time allowed to be eligible for capped fare is 120 minutes in our TransitSystem
+  // Time allowed to be eligible for capped fare is 120 minutes in our TransitSystem
   private static int timeForCap = 120;
-
 
   protected TripSegment currentTripSegment;
 
-  static HashMap<String, Double> allFares; //key is date, value is all the fares
+  static HashMap<String, Double> allFares; // key is date, value is all the fares
 
   static HashMap<String, Integer> numberOfStations;
 
@@ -94,12 +92,11 @@ public class TransitSystem {
     return null;
   }
 
-
-  static Double getDailyFares(String date){
+  static Double getDailyFares(String date) {
     return allFares.get(date);
   }
 
-  static int getDailyStation(String date){
+  static int getDailyStation(String date) {
     return numberOfStations.get(date);
   }
 
@@ -169,7 +166,6 @@ public class TransitSystem {
     }
   }
 
-
   ArrayList getCards() {
     return cards;
   }
@@ -206,6 +202,4 @@ public class TransitSystem {
       return (exitSpotIndex - enterSpotIndex) * 0.5;
     }
   }
-
 }
-
