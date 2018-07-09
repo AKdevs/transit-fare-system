@@ -49,6 +49,12 @@ public class TransitSystemTest {
         lines.get("line1").addPoint("F", "H");
     }
 
+    @Test
+    public void testAccountCreation() {
+        t.createCardHolderAccount("David Villa", "villa@gmail.com");
+        CardHolder newUser = (CardHolder) t.findUserAccount(10000001);
+    }
+
 
 
 

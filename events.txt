@@ -1,4 +1,4 @@
-create | account | CardHolder | James | james@gmail.com
+create | account | CardHolder | James Rodriguez | james@gmail.com
 create | card
 change | 10000001 | David
 view | info | 10000001
