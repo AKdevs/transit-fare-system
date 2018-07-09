@@ -69,15 +69,6 @@ public class TransitSystem {
   void removeCard(int cardNumber) {
     cards.remove(findCard(cardNumber));
   }
-  /*
-  void removeCard(Card card) {
-    for (Card c : cards) {
-      if (c.equals(card)) {
-        cards.remove(c);
-      }
-    }
-  }
-  */
 
   public TripManager getTripManager() {
     return tripManager;
@@ -113,15 +104,6 @@ public class TransitSystem {
     userAccounts.remove(findUserAccount(accountNumber));
   }
 
-  /*
-  void removeUserAccount(UserAccount user) {
-    for (UserAccount u : userAccounts) {
-      if (u.equals(user)) {
-        userAccounts.remove(u);
-      }
-    }
-  }
-  */
   void addTripSegmentToCard() {
     int currentCardNumber = currentTripSegment.getAssociatedCard();
     findCard(currentCardNumber).addTripSegment(currentTripSegment);

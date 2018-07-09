@@ -10,7 +10,11 @@ public class EventHandler {
   public static void main(String[] args) throws Exception {
     TransitSystem mainSystem = new TransitSystem();
     EventHandler mainHandler = new EventHandler(mainSystem);
-    mainHandler.play();
+    for (int i = 0; i < 2; i++) {
+      mainHandler.play();
+    }
+    // System.out.println(mainSystem.getCards());
+
   }
 
   EventHandler(TransitSystem system) throws Exception {
@@ -20,8 +24,8 @@ public class EventHandler {
 
   void play() {
     String currentEvent = eventsBuffer.nextLine();
-    String[] eventTokens = currentEvent.split("|");
-    String action = eventTokens[0];
+    String[] eventTokens = currentEvent.split(" \\| ");
+    String action = eventTokens[1];
     switch (action) {
       case "entry": // we can also do it in TransitSystem ???
         system
@@ -39,14 +43,17 @@ public class EventHandler {
         } else if (eventTokens[1].equals("card")) {
           system.createCard();
         }
+
       case "activate":
         Card ca = system.findCard(Integer.parseInt(eventTokens[2]));
         CardHolder cha = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
         cha.activateCard(ca);
+
       case "deactivate":
         Card cd = system.findCard(Integer.parseInt(eventTokens[2]));
         CardHolder chd = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
         chd.deactivateCard(cd);
+
       case "link":
         Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
         UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
