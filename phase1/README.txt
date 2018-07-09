@@ -49,8 +49,10 @@ Each line of ‘events.txt’ contains one single event. A specific format, “a
 	*Time is in 24-hour standard format
 
 	UserAccount Creation
-	Format: eventType1 | eventType2 | name | e-mail
-	Example: “create | account | James | james@gmail.com”
+	Format: eventType1 | eventType2 | accountType | name | e-mail
+	Example: “create | account | CardHolder | James | james@gmail.com”
+	Example: “create | account | AdminUser | Tom | tom@gmail.com”
+
 
 	Card creation/registration/purchase
 	Format: eventType1 | eventType2
