@@ -3,7 +3,7 @@ import java.io.*;
 public class UserAccount {
   private String name;
   private String email;
-  protected long accountNumber;
+  protected int accountNumber;
 
   public UserAccount(String name, String email) {
     this.name = name;
@@ -22,9 +22,9 @@ public class UserAccount {
     return this.accountNumber;
   }
 
-  public String changeName(String newName) {
+  public void changeName(String newName) {
     this.name = newName;
-    return "Name has been changed to " + this.name + " successfully.";
+    System.out.println("Name has been changed to " + this.name + " successfully.");
   }
 
   /* Functionality handled by Card for phase 1

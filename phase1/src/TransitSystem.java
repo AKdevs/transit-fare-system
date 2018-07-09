@@ -91,8 +91,13 @@ public class TransitSystem {
     return numberOfStations.get(date);
   }
 
-  void createUserAccount(String name, String email) {
-    UserAccount newAccount = new UserAccount(name, email);
+  void createCardHolderAccount(String name, String email) {
+    CardHolder newAccount = new CardHolder(name, email);
+    addUserAccount(newAccount);
+  }
+
+  void createAdminAccount(String name, String email) {
+    AdminUser newAccount = new AdminUser(name, email);
     addUserAccount(newAccount);
   }
 

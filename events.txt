@@ -1,4 +1,4 @@
-create | account | James | james@gmail.com
+create | account | CardHolder | James | james@gmail.com
 create | card
 change | 10000001 | David
 view | info | 10000001
@@ -17,7 +17,7 @@ view | trips | 10000001 | 30000001 // we need account number to view recent trip
 view | cost | 10000001
 remove | card | 30000001 //what does remove card do??
 remove | account | 10000001
-create | account | Alex | alex@gmail.com
+create | account | CardHolder | Alex | alex@gmail.com
 create | card
 link | 10000002 | 30000002
 activate | 10000002 | 30000002
