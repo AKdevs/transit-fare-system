@@ -24,7 +24,7 @@ public class UserAccount {
 
   public void changeName(String newName) {
     this.name = newName;
-    System.out.println("Name has been changed to " + this.name + " successfully.");
+    System.out.println("Account " + this.getAccountNum() + " name changed to " + this.name);
   }
 
   /* Functionality handled by Card for phase 1
