@@ -17,7 +17,7 @@ public class Card {
   private int startEnterTime;
   private TripSegment lastTripSegment;
   private ArrayList<TripSegment> lastCompleteTrip;
-  private String linkedness;
+  //private String linkedness;
 
 
   public Card() {
@@ -99,9 +99,8 @@ public class Card {
     return this.cardNumber;
   }
 
-
-  ArrayList<Double> getTotalFares() {
-    return this.totalFares;
+  void  viewTotalFares() {
+    System.out.println(this.totalFares);
   }
 
   CardHolder getOwner() {
@@ -130,11 +129,15 @@ public class Card {
 
   void viewMonthlyCost() {
     if (active) {
-      Double result = 0.0;
-      for (Double fares : this.totalFares) {
-        result += fares;
-      }
-      System.out.println(result / 12);
+        if (this.totalFares.isEmpty()){
+            System.out.println("0.0");
+        }else {
+            Double result = 0.0;
+            for (Double fares : this.totalFares) {
+                result += fares;
+            }
+            System.out.println(result / 12);
+        }
     }else {
         System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }

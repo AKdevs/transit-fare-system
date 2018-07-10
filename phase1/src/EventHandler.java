@@ -10,7 +10,7 @@ public class EventHandler {
   public static void main(String[] args) throws Exception {
     TransitSystem mainSystem = new TransitSystem();
     EventHandler mainHandler = new EventHandler(mainSystem);
-    for (int i = 0; i < 19; i++) {
+    for (int i = 0; i < 39; i++) {
       mainHandler.play();
     }
     //System.out.println(mainSystem.getCards());
@@ -97,7 +97,6 @@ public class EventHandler {
           card.viewBalance();
         } else if (eventTokens[1].equals("cost")) {
           Card card = system.findCard(Integer.parseInt(eventTokens[2]));
-          System.out.println(card);
           card.viewMonthlyCost();
         }
         break;
