@@ -171,18 +171,18 @@ public class TransitSystem {
   static double calculateSubwayFares(TripSegment currentTripSegment) {
     int enterSpotIndex = 0;
     int exitSpotIndex = 0;
-    for (Map.Entry type : transitLines.entrySet()) {
-      if (type.equals("S")) {
-        ArrayList<TransitLine> subwayLines = (ArrayList<TransitLine>) type.getValue();
-        for (TransitLine tl : subwayLines) {
-          for (String station : tl.getPoints()) {
-            if (station.equals(currentTripSegment.getEnterSpot())) {
-              enterSpotIndex = tl.getPoints().indexOf(station);
-            } else if (station.equals(currentTripSegment.getExitSpot())) {
-              exitSpotIndex = tl.getPoints().indexOf(station);
+    for (Map.Entry lineName : transitLines.entrySet()) {
+        TransitLine line = (TransitLine) lineName.getValue();
+      if (line.getType().equals("S")) {
+          ArrayList<String> points = line.getPoints();
+          for (String p : points) {
+            if (p.equals(currentTripSegment.getEnterSpot())) {
+              enterSpotIndex = points.indexOf(p);
+            } else if (p.equals(currentTripSegment.getExitSpot())) {
+              exitSpotIndex = points.indexOf(p);
             }
           }
-        }
+
       }
     }
     if (enterSpotIndex == exitSpotIndex) {
