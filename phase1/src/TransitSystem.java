@@ -88,7 +88,7 @@ public class TransitSystem {
     return allFares.get(date);
   }
 
-  static int getDailyStation(String date) {
+  static Integer getDailyStation(String date) {
     return numberOfStations.get(date);
   }
 
