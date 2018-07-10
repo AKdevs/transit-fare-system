@@ -13,7 +13,7 @@ public class CardHolder extends UserAccount {
     this.travelCards = new ArrayList<>();
   }
 
-  public void addbalance(Card card, double amount) {
+  /*public void addbalance(Card card, double amount) {
     // cardholder can only addbalance in card which is linked to their account
     // the initial status of a card is set to "activated",  which means people can use a card right
     // after they buy it, they can use the balance stored in the
@@ -30,10 +30,10 @@ public class CardHolder extends UserAccount {
               + card.getCardNumber()
               + " is not activated or linked to your account.");
     }
-  }
+  } */
 
 
-  public void viewBalance(Card card) {
+  /*public void viewBalance(Card card) {
     if (this.travelCards.contains(card) && card.getStatus().equals("activated")) {
       System.out.println("Card balance: " + card.getBalance());
     } else {
@@ -42,7 +42,7 @@ public class CardHolder extends UserAccount {
               + card.getCardNumber()
               + " is not activated or linked to your account.");
     }
-  }
+  }*/
 
   public void linkCard(Card card) {
     // if the card is not created in the system, return error message
@@ -83,9 +83,9 @@ public class CardHolder extends UserAccount {
     }
   }
 
-  public void getMonthlyCost(Integer month) {}
+  //public void getMonthlyCost(Integer month) {}
 
-  public void viewRecentTrips(Card card) {
+  /*public void viewRecentTrips(Card card) {
     if (this.travelCards.contains(card) && card.getStatus().equals("activated")) {
       card.viewMostRecentTrips();
     } else {
@@ -94,7 +94,7 @@ public class CardHolder extends UserAccount {
               + card.getCardNumber()
               + " is not activated or linked to your account");
     }
-  }
+  }*/
   @Override // Will include cards linked to the CardHolder
   public void viewInfo() {
     System.out.println("Name: " + this.getName());

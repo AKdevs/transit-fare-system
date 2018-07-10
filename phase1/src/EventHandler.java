@@ -76,8 +76,8 @@ public class EventHandler {
 
       case "load":
         UserAccount holder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
-        Card travelcard = system.findCard(Integer.parseInt(eventTokens[2]));
-        ((CardHolder)holder).addbalance(travelcard, Double.parseDouble(eventTokens[3]));
+        Card travelCard = system.findCard(Integer.parseInt(eventTokens[2]));
+        travelCard.addBalance(Double.parseDouble(eventTokens[3]));
         break;
 
       case "view":
@@ -90,14 +90,14 @@ public class EventHandler {
         } else if (eventTokens[1].equals("trips")) {
           UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
           Card card = system.findCard(Integer.parseInt(eventTokens[3]));
-          ((CardHolder) user).viewRecentTrips(card);
+          card.viewMostRecentTrips();
         } else if (eventTokens[1].equals("balance")) {
           UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
           Card card = system.findCard(Integer.parseInt(eventTokens[3]));
-          ((CardHolder) user).viewBalance(card);
-        //} else if (eventTokens[1].equals("cost")) {
-          //Card card = system.findCard(Integer.parseInt(eventTokens[2]));
-          //card.viewMonthlyCost();
+          card.viewBalance();
+        } else if (eventTokens[1].equals("cost")) {
+          Card card = system.findCard(Integer.parseInt(eventTokens[2]));
+          card.viewMonthlyCost();
         }
         break;
 
