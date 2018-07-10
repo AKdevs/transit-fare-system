@@ -43,6 +43,14 @@ public class TransitSystem {
     return this.currentDate;
   }
 
+  void setCurrentMonth(String month) {
+      this.currentMonth = month;
+  }
+
+  void setCurrentDate(String date) {
+      this.currentDate = date;
+  }
+
   public static HashMap<String, Double> getAllFares() {
     return allFares;
   }
@@ -58,6 +66,22 @@ public class TransitSystem {
   static HashMap<String, Double> allFares = new HashMap<>(); // key is date, value is all the fares
 
   static HashMap<String, Integer> numberOfStations = new HashMap<>();
+
+  // operatingStatus of TransitSystem, value can be on or off
+  private String operatingStatus = "off";
+
+  String getOperatingStatus() {
+      return this.operatingStatus;
+  }
+
+  void powerOnSystem() {
+      this.operatingStatus = "on";
+  }
+
+  void powerOffSystem() {
+      this.operatingStatus = "off";
+      System.out.println("The TransitSystem has been powered off.");
+  }
 
   static Card findCard(int cardNumber) {
     for (Card c : cards) {

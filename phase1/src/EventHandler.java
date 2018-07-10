@@ -4,118 +4,138 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class EventHandler {
-  private TransitSystem system;
-  private Scanner eventsBuffer;
+    private TransitSystem system;
+    private Scanner eventsBuffer;
 
-  public static void main(String[] args) throws Exception {
-    TransitSystem mainSystem = new TransitSystem();
-    EventHandler mainHandler = new EventHandler(mainSystem);
-    for (int i = 0; i < 24; i++) {
-      mainHandler.play();
+    public static void main(String[] args) throws Exception {
+        TransitSystem mainSystem = new TransitSystem();
+        EventHandler mainHandler = new EventHandler(mainSystem);
+        for (int i = 0; i < 15; i++) {
+            mainHandler.play();
+        }
+        //System.out.println(mainSystem.getCards());
+        //System.out.println(mainSystem.getUserAccounts());
     }
-    //System.out.println(mainSystem.getCards());
-    //System.out.println(mainSystem.getUserAccounts());
-  }
 
-  EventHandler(TransitSystem system) throws Exception {
-    this.system = system;
-    this.eventsBuffer = new Scanner(new File("phase1/events.txt"));
-  }
-
-  void play() {
-    String currentEvent = eventsBuffer.nextLine();
-    String[] eventTokens = currentEvent.split(" \\| ");
-    String action = eventTokens[0].trim();
-    switch (action) {
-      case "entry":
-        system
-            .getTripManager()
-            .recordTapIn(
-                eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4], eventTokens[5]);
-        break;
-      case "exit":
-        system
-            .getTripManager()
-            .recordTapOut(
-                eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4], eventTokens[5]);
-        break;
-      case "create":
-        if ((eventTokens[1].equals("account"))&&(eventTokens[2].equals("CardHolder"))) {
-          system.createCardHolderAccount(eventTokens[3], eventTokens[4]);
-        }
-        else if((eventTokens[1].equals("account"))&&(eventTokens[2].equals("AdminUser"))) {
-          system.createAdminAccount(eventTokens[3], eventTokens[4]);
-        }
-        else if (eventTokens[1].equals("card")) {
-          system.createCard();
-        }
-        break;
-
-      case "activate":
-        Card ca = system.findCard(Integer.parseInt(eventTokens[2]));
-        CardHolder cha = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
-        cha.activateCard(ca);
-        break;
-
-      case "deactivate":
-        Card cd = system.findCard(Integer.parseInt(eventTokens[2]));
-        CardHolder chd = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
-        chd.deactivateCard(cd);
-        break;
-
-      case "link":
-        Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
-        UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
-        ((CardHolder) currentHolder).linkCard(currentCard);
-        break;
-
-      case "unlink":
-        UserAccount ua = system.findUserAccount(Integer.parseInt(eventTokens[1]));
-        Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
-        ((CardHolder) ua).unlinkCard(cc);
-        break;
-
-      case "load":
-        UserAccount holder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
-        Card travelCard = system.findCard(Integer.parseInt(eventTokens[2]));
-        travelCard.addBalance(Double.parseDouble(eventTokens[3]));
-        break;
-
-      case "view":
-        if (eventTokens[1].equals("report")) {
-          String date = eventTokens[2];
-          AdminUser.getDailyReport(date);
-        } else if (eventTokens[1].equals("info")) {
-          UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
-          user.viewInfo();
-        } else if (eventTokens[1].equals("trips")) {
-          UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
-          Card card = system.findCard(Integer.parseInt(eventTokens[3]));
-          card.viewMostRecentTrips();
-        } else if (eventTokens[1].equals("balance")) {
-          UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
-          Card card = system.findCard(Integer.parseInt(eventTokens[3]));
-          card.viewBalance();
-        } else if (eventTokens[1].equals("cost")) {
-          Card card = system.findCard(Integer.parseInt(eventTokens[2]));
-          card.viewMonthlyCost();
-        }else if (eventTokens[1].equals("allTrips")) {
-            UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
-            Card card = system.findCard(Integer.parseInt(eventTokens[3]));
-            card.viewAllTrips();
-        }
-        break;
-
-      case "change":
-        UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[1]));
-        user.changeName(eventTokens[2]);
-        // case "remove": remove card , remove userAccount
-        // case change points name in TransitLine
-        //case add point to transitline
-        //case add new transitLine
-        //Do we need a static SystemManager???????????
-
-
+    EventHandler(TransitSystem system) throws Exception {
+        this.system = system;
+        this.eventsBuffer = new Scanner(new File("phase1/events.txt"));
     }
-  }
+
+    void play() {
+        String currentEvent = eventsBuffer.nextLine();
+        String[] eventTokens = currentEvent.split(" \\| ");
+        String action = eventTokens[0].trim();
+        if (system.getOperatingStatus().equals("on")) {
+            switch (action) {
+                case "entry":
+                    system
+                            .getTripManager()
+                            .recordTapIn(
+                                    eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4], eventTokens[5]);
+                    break;
+                case "exit":
+                    system
+                            .getTripManager()
+                            .recordTapOut(
+                                    eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4], eventTokens[5]);
+                    break;
+                case "create":
+                    if ((eventTokens[1].equals("account")) && (eventTokens[2].equals("CardHolder"))) {
+                        system.createCardHolderAccount(eventTokens[3], eventTokens[4]);
+                    } else if ((eventTokens[1].equals("account")) && (eventTokens[2].equals("AdminUser"))) {
+                        system.createAdminAccount(eventTokens[3], eventTokens[4]);
+                    } else if (eventTokens[1].equals("card")) {
+                        system.createCard();
+                    }
+                    break;
+
+                case "activate":
+                    Card ca = system.findCard(Integer.parseInt(eventTokens[2]));
+                    CardHolder cha = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
+                    cha.activateCard(ca);
+                    break;
+
+                case "deactivate":
+                    Card cd = system.findCard(Integer.parseInt(eventTokens[2]));
+                    CardHolder chd = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
+                    chd.deactivateCard(cd);
+                    break;
+
+                case "link":
+                    Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
+                    UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+                    ((CardHolder) currentHolder).linkCard(currentCard);
+                    break;
+
+                case "unlink":
+                    UserAccount ua = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+                    Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
+                    ((CardHolder) ua).unlinkCard(cc);
+                    break;
+
+                case "load":
+                    UserAccount holder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+                    Card travelCard = system.findCard(Integer.parseInt(eventTokens[2]));
+                    travelCard.addBalance(Double.parseDouble(eventTokens[3]));
+                    break;
+
+                case "view":
+                    if (eventTokens[1].equals("report")) {
+                        String date = eventTokens[2];
+                        AdminUser.getDailyReport(date);
+                    } else if (eventTokens[1].equals("info")) {
+                        UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+                        user.viewInfo();
+                    } else if (eventTokens[1].equals("trips")) {
+                        UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+                        Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+                        card.viewMostRecentTrips();
+                    } else if (eventTokens[1].equals("balance")) {
+                        UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+                        Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+                        card.viewBalance();
+                    } else if (eventTokens[1].equals("cost")) {
+                        Card card = system.findCard(Integer.parseInt(eventTokens[2]));
+                        card.viewMonthlyCost();
+                    } else if (eventTokens[1].equals("allTrips")) {
+                        UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+                        Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+                        card.viewAllTrips();
+                    }
+                    break;
+
+                case "change":
+                    UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+                    user.changeName(eventTokens[2]);
+                    // case "remove": remove card , remove userAccount
+                    // case change points name in TransitLine
+                    //case add point to transitline
+                    //case add new transitLine
+                    //Do we need a static SystemManager???????????
+                    break;
+
+                case "power":
+                    if (eventTokens[1].equals("off")) {
+                        system.powerOffSystem();
+                    }
+                    break;
+
+            }
+        }
+        else {
+            if ((action.equals("power")) && (eventTokens[1].equals("on"))) {
+                system.powerOnSystem();
+                String month = eventTokens[3].substring(5,7);
+                String date = eventTokens[3].substring(8);
+                system.setCurrentMonth(month);
+                system.setCurrentDate(date);
+                System.out.println("The TransitSystem is powered on, " + eventTokens[3] + ".");
+            }
+            else {
+                System.out.println("Transit is closed for the day. Please come back during our operating hours.");
+            }
+
+        }
+    }
 }
