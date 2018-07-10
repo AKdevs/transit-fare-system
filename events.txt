@@ -7,8 +7,8 @@ unlink | 10000001 | 30000001
 link | 10000001 | 30000001
 activate | 10000001 | 30000001
 deactivate | 10000001 | 30000001
-activate | 10000001 | 30000001 // we need account number to activate a card
-load | 10000001 | 30000001 | 20 // we need the value the cardHolder load to card 1204 // we also need to add the account number
+activate | 10000001 | 30000001
+load | 10000001 | 30000001 | 20
 view | balance | 10000001 | 30000001
 entry | 30000001 | Bloor | S | 10:49 | 2018-02-11
 exit | 30000001 | Bloor | S | 10:56 | 2018-02-11
