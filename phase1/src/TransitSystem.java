@@ -44,9 +44,9 @@ public class TransitSystem {
 
   protected TripSegment currentTripSegment;
 
-  static HashMap<String, Double> allFares; // key is date, value is all the fares
+  static HashMap<String, Double> allFares = new HashMap<>(); // key is date, value is all the fares
 
-  static HashMap<String, Integer> numberOfStations;
+  static HashMap<String, Integer> numberOfStations = new HashMap<>();
 
   static Card findCard(int cardNumber) {
     for (Card c : cards) {
@@ -143,14 +143,16 @@ public class TransitSystem {
   */
 
   static void addAllFares(String date, double fares) {
-    for (Map.Entry d : allFares.entrySet()) {
-      if (d.equals(date)) {
-        Double f = (Double) d.getValue();
-        f += fares;
-      }else{
+      if (allFares.isEmpty()){
           allFares.put(date, fares);
+      }else{
+          for (Map.Entry d : allFares.entrySet()) {
+              if (d.equals(date)) {
+                  Double f = (Double) d.getValue();
+                  f += fares;
+              }
+          }
       }
-    }
   }
 
   static void addNumberOfStation(String date, int n) {
