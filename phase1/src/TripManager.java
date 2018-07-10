@@ -5,6 +5,7 @@ public class TripManager {
 
   TripManager() {
     currentTripSegments = new ArrayList<>();
+
   }
 
 
