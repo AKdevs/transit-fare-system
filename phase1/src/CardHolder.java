@@ -46,12 +46,16 @@ public class CardHolder extends UserAccount {
 
   public void linkCard(Card card) {
     // if the card is not created in the system, return error message
-
-    // link a valid card
-    this.travelCards.add(card);
-    card.setOwner(this);
-    card.setLinked();
-    System.out.println("Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
+    if (!(card.getOwner() == null)) {
+      //If card is currently linked to another CardHolder, it cannot be linked to this CardHolder.
+      System.out.println("Action denied. This card is currently linked to another account.");
+    } else {
+      // link a valid card
+      this.travelCards.add(card);
+      card.setOwner(this);
+      card.setLinked();
+      System.out.println("Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
+    }
   }
 
   public void unlinkCard(Card card) {
