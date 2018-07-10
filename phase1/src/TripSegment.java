@@ -19,6 +19,10 @@ public class TripSegment {
     this.enterTransitType = transitType;
     this.enterTime = enterTime;
     this.enterDate = enterDate;
+    this.exitSpot = "unknown";
+    this.exitTransitType = "unknown";
+    this.exitTime = "unknown";
+    this.exitDate = "unknown";
     /*
     calculateTripSegmentFares(this.enterTransitType);
     */
@@ -107,7 +111,7 @@ public class TripSegment {
   }
 
   public void setSegmentFares(double fares) {
-    segmentFares = fares;
+    this.segmentFares = fares;
   }
 
   public String getMonth() {

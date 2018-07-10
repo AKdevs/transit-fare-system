@@ -50,6 +50,8 @@ public class Card {
   void addBalance(Double fares) {
     if (active) {
       this.balance += fares;
+    }else {
+        System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
   }
 
@@ -63,7 +65,7 @@ public class Card {
 
   void viewBalance(){
     if (active) {
-      System.out.println("Card" + this.getCardNumber() + "balance: " + this.balance);
+      System.out.println("Card " + this.getCardNumber() + " balance: $" + this.balance);
       }else {
         System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
@@ -246,11 +248,15 @@ public class Card {
     this.deductBalance(fares);
     // add currentFares
     this.addCurrentFares(fares);
-    // add fares to totalFares
-    Double monthFares = this.totalFares.get(this.totalFares.size() - 1);
-    monthFares += fares;
+    // add fares to totalFare
+      if (this.totalFares.isEmpty()) {
+          this.totalFares.add(fares);
+    } else {
+      Double monthFares = this.totalFares.get(this.totalFares.size() - 1);
+      monthFares += fares;
+    }
     // add fares to allFares
-    TransitSystem.addAllFares(tripSegment.getExitDate(), fares);
+    TransitSystem.addAllFares(tripSegment.getEnterDate(), fares);
   }
 }
 
