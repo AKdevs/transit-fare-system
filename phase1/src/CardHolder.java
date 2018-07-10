@@ -53,7 +53,7 @@ public class CardHolder extends UserAccount {
       // link a valid card
       this.travelCards.add(card);
       card.setOwner(this);
-      card.setLinked();
+      card.linkAccount();
       System.out.println("Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
     }
   }
@@ -61,7 +61,7 @@ public class CardHolder extends UserAccount {
   public void unlinkCard(Card card) {
     this.travelCards.remove(card);
     card.setOwner(null);
-    card.setUnlinked();
+    card.unlinkAccount();
     System.out.println("Card " + card.getCardNumber() + " unlinked to CardHolder Account " + this.getAccountNum());
   }
 

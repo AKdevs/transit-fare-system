@@ -8,7 +8,8 @@ public class Card {
   private static int nextCardNumber = 30000001;
   private double balance;
   private CardHolder owner;
-  private String status;
+  private boolean linked;
+  private boolean active;
   private double currentFares;
   private HashMap<String, ArrayList<ArrayList<TripSegment>>> trips;
   private ArrayList<ArrayList<TripSegment>> mostRecentTrips; // keep track of all completeTrips, but only print out the last three when user view it
@@ -24,17 +25,19 @@ public class Card {
     nextCardNumber += 1;
     this.owner = null;
     this.balance = 19;
-    this.status = "activated";
+    this.linked = false;
+    this.active = true;
+    // this.status = "activated";
     this.trips = new HashMap<>();
     this.mostRecentTrips = new ArrayList<>();
     this.currentFares = 0;
     this.totalFares = new ArrayList<>();// an ArrayList of length 12
     // this.currentDuration = 0;
-    this.linkedness = "unlinked";
+    // this.linkedness = "unlinked";
   }
 
   void setBalance(Double balance) {
-    if (this.status.equals("activated")) {
+    if (active) {
       this.balance = balance;
     }else {
         System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
@@ -45,48 +48,51 @@ public class Card {
     }
 
   void addBalance(Double fares) {
-    if (this.status.equals("activated")) {
+    if (active) {
       this.balance += fares;
     }else {
-        System.out.println("Action denied: Card " + this.getCardNumber() + " is deactivated");
+        System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
   }
 
   void deductBalance(Double fares) {
-    if (this.status.equals("activated")) {
+    if (active) {
       this.balance -= fares;
     }else {
-        System.out.println("Action denied: Card " + this.getCardNumber() + " is deactivated");
+        System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
   }
 
   void viewBalance(){
-    if (this.status.equals("activated")) {
-      System.out.println("Card " + this.getCardNumber() + " balance: " + this.balance);
+    if (active) {
+      System.out.println("Card" + this.getCardNumber() + "balance: " + this.balance);
       }else {
-        System.out.println("Action denied: Card " + this.getCardNumber() + " is deactivated");
+        System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
   }
 
   void activate() {
-    this.status = "activated";
+    this.active = true;
   }
 
   void deactivate() {
-    this.status = "deactivated";
+    this.active = false;
   }
 
-
-  public void setLinked() {
-    this.linkedness = "Linked";
+  public void linkAccount() {
+    this.linked = true;
   }
 
-  public void setUnlinked() {
-    this.linkedness = "Unlinked";
+  public void unlinkAccount() {
+    this.linked = false;
   }
 
-  public String getLinkedness() {
-    return linkedness;
+  public boolean isLinked() {
+    return linked;
+  }
+
+  public boolean isActive() {
+    return active;
   }
 
   int getCardNumber() {
@@ -106,10 +112,6 @@ public class Card {
     this.owner = owner;
   }
 
-  String getStatus() {
-    return this.status;
-  }
-
   double getCurrentFares() {
     return this.currentFares;
   }
@@ -127,7 +129,7 @@ public class Card {
   }
 
   void viewMonthlyCost() {
-    if (this.status.equals("activated")) {
+    if (active) {
       Double result = 0.0;
       for (Double fares : this.totalFares) {
         result += fares;
@@ -140,7 +142,7 @@ public class Card {
   }
 
   void viewMostRecentTrips(){
-    if (this.status.equals("activated")) {
+    if (active) {
       ArrayList<TripSegment> last = this.mostRecentTrips.get(this.mostRecentTrips.size() - 1);
       ArrayList<TripSegment> secondLast = this.mostRecentTrips.get(this.mostRecentTrips.size() - 2);
       ArrayList<TripSegment> thirdLast = this.mostRecentTrips.get(this.mostRecentTrips.size() - 3);
@@ -155,7 +157,7 @@ public class Card {
   }
 
   boolean isEntryAllowed() {
-    if ((this.balance > 0) && (this.status.equals("activated"))) {
+    if ((this.balance > 0) && (active)) {
       System.out.println("Accepted");
       return true;
     } else {
