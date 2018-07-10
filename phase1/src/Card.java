@@ -143,14 +143,24 @@ public class Card {
 
   void viewMostRecentTrips(){
     if (active) {
-      ArrayList<TripSegment> last = this.mostRecentTrips.get(this.mostRecentTrips.size() - 1);
-      ArrayList<TripSegment> secondLast = this.mostRecentTrips.get(this.mostRecentTrips.size() - 2);
-      ArrayList<TripSegment> thirdLast = this.mostRecentTrips.get(this.mostRecentTrips.size() - 3);
-      ArrayList<ArrayList<TripSegment>> result = new ArrayList<ArrayList<TripSegment>>();
-      result.add(last);
-      result.add(secondLast);
-      result.add(thirdLast);
-      System.out.println(result);
+      if (this.mostRecentTrips.size() >= 3) {
+        ArrayList<TripSegment> last = this.mostRecentTrips.get(this.mostRecentTrips.size() - 1);
+        ArrayList<TripSegment> secondLast =
+            this.mostRecentTrips.get(this.mostRecentTrips.size() - 2);
+        ArrayList<TripSegment> thirdLast =
+            this.mostRecentTrips.get(this.mostRecentTrips.size() - 3);
+        ArrayList<ArrayList<TripSegment>> result = new ArrayList<ArrayList<TripSegment>>();
+        result.add(thirdLast);
+        result.add(secondLast);
+        result.add(last);
+        System.out.println(result);
+      }else{
+          ArrayList<ArrayList<TripSegment>> result = new ArrayList<ArrayList<TripSegment>>();
+          for (ArrayList<TripSegment> completeTrip: this.mostRecentTrips){
+              result.add(completeTrip);
+          }
+          System.out.println(result);
+      }
       }else {
         System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
@@ -202,7 +212,8 @@ public class Card {
       }
       // if tripSegment and lastTripSegment can form a continuous Trip
     } else if (lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
-      if (Integer.parseInt(tripSegment.getEnterTime()) - this.startEnterTime < 120) {
+        int segmentStartTime = Integer.parseInt(tripSegment.getEnterTime().substring(0, 2)) * 60 + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
+      if (segmentStartTime - this.startEnterTime < 120) {
         for (Map.Entry<String, ArrayList<ArrayList<TripSegment>>> date : this.trips.entrySet()) {
           if (date.toString().equals(tripSegment.getExitDate())) {
             ArrayList<ArrayList<TripSegment>> dayTrips = date.getValue();
