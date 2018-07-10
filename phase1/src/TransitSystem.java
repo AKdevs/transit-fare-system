@@ -83,6 +83,19 @@ public class TransitSystem {
       System.out.println("The TransitSystem has been powered off.");
   }
 
+
+  String getCurrentMonth() {
+        return this.currentMonth;
+    }
+
+    String getCurrentDate() {
+        return this.currentDate;
+    }
+
+  public static HashMap<String, Double> getAllFares() {
+        return allFares;
+    }
+
   static Card findCard(int cardNumber) {
     for (Card c : cards) {
       if (c.getCardNumber() == cardNumber) {
@@ -159,43 +172,32 @@ public class TransitSystem {
   void addTransitLines(TransitLine newTransitLine) {
     transitLines.put(newTransitLine.getId(), newTransitLine);
   }
-  /*
-  void addTransitLines(String type, TransitLine newTransitLine) {
-    if (transitLines.containsKey(type)) {
-      ArrayList<TransitLine> originalline = transitLines.get(type);
-
-      // https://blog.csdn.net/mustbehard/article/details/17310043
-      Iterator<TransitLine> iter = originalline.iterator();
-      ArrayList<TransitLine> newlines = new ArrayList<>();
-      while (iter.hasNext()) {
-        TransitLine lines = iter.next();
-        newlines.add(lines);
-      }
-      newlines.add(newTransitLine);
-      transitLines.put(type, newlines);
-    }
-  }
-  */
 
   static void addAllFares(String date, double fares) {
       if (allFares.isEmpty()){
           allFares.put(date, fares);
       }else{
-          for (Map.Entry d : allFares.entrySet()) {
+          for (String d : allFares.keySet()) {
               if (d.equals(date)) {
-                  Double f = (Double) d.getValue();
+                  Double f = allFares.get(d);
                   f += fares;
+                  allFares.put(d, f);
               }
           }
       }
   }
 
   static void addNumberOfStation(String date, int n) {
-    for (Map.Entry d : numberOfStations.entrySet()) {
-      if (d.equals(date)) {
-        Integer stationNum = (Integer) d.getValue();
-        stationNum += n;
+    if (numberOfStations.containsKey(date)) {
+      for (String d : numberOfStations.keySet()) {
+        if (d.equals(date)) {
+          Integer stationNum = numberOfStations.get(d);
+          stationNum += n;
+          numberOfStations.put(d, stationNum);
+        }
       }
+    }else {
+        numberOfStations.put(date, n);
     }
   }
 

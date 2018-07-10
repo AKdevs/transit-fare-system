@@ -13,7 +13,8 @@ public class Card {
   private double currentFares;
   private HashMap<String, ArrayList<ArrayList<TripSegment>>> trips;
   private ArrayList<ArrayList<TripSegment>> mostRecentTrips; // keep track of all completeTrips, but only print out the last three when user view it
-  private ArrayList<Double> totalFares;
+  //private ArrayList<Double> totalFares;
+  private double totalFares;
   private int startEnterTime;
   private TripSegment lastTripSegment;
   private ArrayList<TripSegment> lastCompleteTrip;
@@ -30,8 +31,8 @@ public class Card {
     // this.status = "activated";
     this.trips = new HashMap<>();
     this.mostRecentTrips = new ArrayList<>();
-    this.currentFares = 0;
-    this.totalFares = new ArrayList<>();// an ArrayList of length 12
+    this.currentFares = 0.0;
+    this.totalFares = 0.0;
     // this.currentDuration = 0;
     // this.linkedness = "unlinked";
   }
@@ -131,7 +132,9 @@ public class Card {
     return this.cardNumber == other.getCardNumber();
   }
 
-  void viewMonthlyCost() {
+  double getTotalFares() {return this.totalFares;}
+
+  /*void viewMonthlyCost() {
     if (active) {
         if (this.totalFares.isEmpty()){
             System.out.println("0.0");
@@ -146,7 +149,7 @@ public class Card {
         System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
 
-  }
+  }*/
 
   void viewMostRecentTrips(){
     if (active) {
@@ -266,12 +269,13 @@ public class Card {
     // add currentFares
     this.addCurrentFares(fares);
     // add fares to totalFare
-      if (this.totalFares.isEmpty()) {
+      this.totalFares += fares;
+      /*if (this.totalFares.isEmpty()) {
           this.totalFares.add(fares);
     } else {
       Double monthFares = this.totalFares.get(this.totalFares.size() - 1);
       monthFares += fares;
-    }
+    }*/
     // add fares to allFares
     TransitSystem.addAllFares(tripSegment.getEnterDate(), fares);
   }

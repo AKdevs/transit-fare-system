@@ -7,20 +7,20 @@ public class EventHandler {
     private TransitSystem system;
     private Scanner eventsBuffer;
 
-    public static void main(String[] args) throws Exception {
-        TransitSystem mainSystem = new TransitSystem();
-        EventHandler mainHandler = new EventHandler(mainSystem);
-        for (int i = 0; i < 15; i++) {
-            mainHandler.play();
-        }
-        //System.out.println(mainSystem.getCards());
-        //System.out.println(mainSystem.getUserAccounts());
+  public static void main(String[] args) throws Exception {
+    TransitSystem mainSystem = new TransitSystem();
+    EventHandler mainHandler = new EventHandler(mainSystem);
+    for (int i = 0; i < 24; i++) {
+      mainHandler.play();
     }
+    //System.out.println(mainSystem.getCards());
+    //System.out.println(mainSystem.getUserAccounts());
+  }
 
-    EventHandler(TransitSystem system) throws Exception {
-        this.system = system;
-        this.eventsBuffer = new Scanner(new File("phase1/events.txt"));
-    }
+  EventHandler(TransitSystem system) throws Exception {
+    this.system = system;
+    this.eventsBuffer = new Scanner(new File("phase1/events.txt"));
+  }
 
     void play() {
         String currentEvent = eventsBuffer.nextLine();
@@ -50,60 +50,60 @@ public class EventHandler {
                     }
                     break;
 
-                case "activate":
-                    Card ca = system.findCard(Integer.parseInt(eventTokens[2]));
-                    CardHolder cha = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
-                    cha.activateCard(ca);
-                    break;
+      case "activate":
+        Card ca = system.findCard(Integer.parseInt(eventTokens[2]));
+        CardHolder cha = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
+        cha.activateCard(ca);
+        break;
 
-                case "deactivate":
-                    Card cd = system.findCard(Integer.parseInt(eventTokens[2]));
-                    CardHolder chd = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
-                    chd.deactivateCard(cd);
-                    break;
+      case "deactivate":
+        Card cd = system.findCard(Integer.parseInt(eventTokens[2]));
+        CardHolder chd = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
+        chd.deactivateCard(cd);
+        break;
 
-                case "link":
-                    Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
-                    UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
-                    ((CardHolder) currentHolder).linkCard(currentCard);
-                    break;
+      case "link":
+        Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
+        UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+        ((CardHolder) currentHolder).linkCard(currentCard);
+        break;
 
-                case "unlink":
-                    UserAccount ua = system.findUserAccount(Integer.parseInt(eventTokens[1]));
-                    Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
-                    ((CardHolder) ua).unlinkCard(cc);
-                    break;
+      case "unlink":
+        UserAccount ua = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+        Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
+        ((CardHolder) ua).unlinkCard(cc);
+        break;
 
-                case "load":
-                    UserAccount holder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
-                    Card travelCard = system.findCard(Integer.parseInt(eventTokens[2]));
-                    travelCard.addBalance(Double.parseDouble(eventTokens[3]));
-                    break;
+      case "load":
+        UserAccount holder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+        Card travelCard = system.findCard(Integer.parseInt(eventTokens[2]));
+        travelCard.addBalance(Double.parseDouble(eventTokens[3]));
+        break;
 
-                case "view":
-                    if (eventTokens[1].equals("report")) {
-                        String date = eventTokens[2];
-                        AdminUser.getDailyReport(date);
-                    } else if (eventTokens[1].equals("info")) {
-                        UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
-                        user.viewInfo();
-                    } else if (eventTokens[1].equals("trips")) {
-                        UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
-                        Card card = system.findCard(Integer.parseInt(eventTokens[3]));
-                        card.viewMostRecentTrips();
-                    } else if (eventTokens[1].equals("balance")) {
-                        UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
-                        Card card = system.findCard(Integer.parseInt(eventTokens[3]));
-                        card.viewBalance();
-                    } else if (eventTokens[1].equals("cost")) {
-                        Card card = system.findCard(Integer.parseInt(eventTokens[2]));
-                        card.viewMonthlyCost();
-                    } else if (eventTokens[1].equals("allTrips")) {
-                        UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
-                        Card card = system.findCard(Integer.parseInt(eventTokens[3]));
-                        card.viewAllTrips();
-                    }
-                    break;
+      case "view":
+        if (eventTokens[1].equals("report")) {
+          String date = eventTokens[2];
+          AdminUser.getDailyReport(date);
+        } else if (eventTokens[1].equals("info")) {
+          UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+          user.viewInfo();
+        } else if (eventTokens[1].equals("trips")) {
+          UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+          Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+          card.viewMostRecentTrips();
+        } else if (eventTokens[1].equals("balance")) {
+          UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+          Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+          card.viewBalance();
+        } else if (eventTokens[1].equals("cost")) {
+          Card card = system.findCard(Integer.parseInt(eventTokens[2]));
+          card.viewMonthlyCost();
+        }else if (eventTokens[1].equals("allTrips")) {
+            UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+            Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+            card.viewAllTrips();
+        }
+        break;
 
                 case "change":
                     UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[1]));
