@@ -11,7 +11,7 @@ public class TransitSystem {
   // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
 
-  private static ArrayList<String> line1Stations = new ArrayList<>(Arrays.asList("Finch", "North York Centre", "Sheppard-Yonge", "king", "Bay", "Bloor" ));
+  private static ArrayList<String> line1Stations = new ArrayList<>(Arrays.asList("Finch", "North York Centre", "Sheppard-Yonge", "King", "Bay", "Bloor" ));
 
   private static ArrayList<String> route1Stops = new ArrayList<>(Arrays.asList("Dufferin", "Bathurst", "Sheppard-Yonge", "Bayview", "Leslie"));
 

@@ -15,7 +15,11 @@ entry | 30000001 | Dufferin | B | 10:58 | 2018-02-11
 exit | 30000001 | Bathurst | B | 11:01 | 2018-02-11
 entry | 30000001 | Bayview | B | 11:09 | 2018-02-11
 exit | 30000001 | Leslie | B | 11:12 | 2018-02-11
-entry | 30000001 | King | S | 10:49 | 2018-02-11
+entry | 30000001 | Finch | S | 11:15 | 2018-02-11
+exit | 30000001 | Bay | S | 11:17 | 2018-02-11
+view | balance | 10000001 | 30000001
+view | cost | 30000001
+view | report | 2018-02-11
 create | account | CardHolder | Tim Smith | tim@gmail.com
 create | account | AdminUser | Admin1 | admin1@transit.com
 create | card
