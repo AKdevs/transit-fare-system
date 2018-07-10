@@ -11,6 +11,51 @@ deactivate | 10000001 | 30000001
 activate | 10000001 | 30000001
 load | 10000001 | 30000001 | 20
 view | balance | 10000001 | 30000001
+create | account | CardHolder | Tim Smith | tim@gmail.com
+create | account | AdminUser | Admin1 | admin1@transit.com
+create | card
+create | card
+link | 10000002 | 30000002
+link | 10000002 | 30000003
+view | info | 10000002
+create | account | CardHolder | Jason Longman | jason@gmail.com
+create | account | CardHolder | Jane Kee | jane@gmail.com
+create | card
+create | card
+create | card
+create | card
+link | 10000003 | 30000004
+link | 10000003 | 30000005
+link | 10000003 | 30000006
+link | 10000003 | 30000007
+view | info | 10000003
+view | info | 10000004
+link | 10000004 | 30000006
+unlink | 10000003 | 30000006
+link | 10000004 | 30000006
+unlink | 10000003 | 30000007
+link | 10000004 | 30000007
+view | info | 10000004
+create | account | CardHolder | Jack Ashman | jack@gmail.com
+create | card
+create | card
+create | card
+link | 10000005 | 30000008
+link | 10000005 | 30000009
+link | 10000005 | 30000010
+create | account | AdminUser | Admin2 | admin2@transit.com
+create | account | CardHolder | Helen Wood | helen@gmail.com
+create | card
+create | card
+link | 10000006 | 30000011
+link | 10000006 | 30000012
+create | account | CardHolder | Beth Robinson | beth@gmail.com
+create | card
+create | card
+link | 10000007 | 30000013
+link | 10000007 | 30000014
+create | account | CardHolder | David Wagonda | david@gmail.com
+create | account | CardHolder | Ken Washington | ken@gmail.com
 entry | 30000001 | Bloor | S | 10:49 | 2018-02-11
 exit | 30000001 | Bloor | S | 10:56 | 2018-02-11
 entry | 30000001 | Bloor | B | 10:58 | 2018-02-11
@@ -19,12 +64,9 @@ view | cost | 30000001
 remove | card | 30000001
 remove | account | 10000001
 create | account | CardHolder | Alex | alex@gmail.com
-create | card
-link | 10000002 | 30000002
 activate | 10000002 | 30000002
-view | info | 10000002
 load | 10000002 | 30000002 | 10
-load | 10000002 | 30000002 | 30
+load | 10000002 | 30000002 | 20
 view | balance | 10000002 | 30000002
 entry | 30000002 | Bloor | S | 10:49 | 2018-02-11
 exit | 30000002 | Union | S | 11:15 | 2018-02-11
