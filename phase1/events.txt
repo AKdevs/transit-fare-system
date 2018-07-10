@@ -1,0 +1,38 @@
+create | account | CardHolder | James Rodriguez | james@gmail.com
+create | card
+change | 10000001 | David Villa
+view | info | 10000001
+link | 10000001 | 30000001
+unlink | 10000001 | 30000001
+link | 10000001 | 30000001
+view | info | 10000001
+activate | 10000001 | 30000001
+deactivate | 10000001 | 30000001
+activate | 10000001 | 30000001
+load | 10000001 | 30000001 | 20
+view | balance | 10000001 | 30000001
+entry | 30000001 | Bloor | S | 10:49 | 2018-02-11
+exit | 30000001 | Bloor | S | 10:56 | 2018-02-11
+entry | 30000001 | Bloor | B | 10:58 | 2018-02-11
+view | trips | 10000001 | 30000001
+view | cost | 10000001
+remove | card | 30000001 //what does remove card do??
+remove | account | 10000001
+create | account | CardHolder | Alex | alex@gmail.com
+create | card
+link | 10000002 | 30000002
+activate | 10000002 | 30000002
+view | info | 10000002
+load | 10000002 | 30000002 | 10
+load | 10000002 | 30000002 | 30
+view | balance | 10000002 | 30000002
+entry | 30000002 | Bloor | S | 10:49 | 2018-02-11
+exit | 30000002 | Union | S | 11:15 | 2018-02-11
+entry | 30000002 | Union | B | 10:58 | 2018-02-11
+entry | 30000002 | Queen | S | 10:49 | 2018-02-12
+exit | 30000002 | Finch | S | 11:49 | 2018-02-12
+entry | 30000002 | Union | B | 11:52 | 2018-02-12
+view | trips | 30000002
+view | cost | 10000002
+view | report | 2018-02-11
+view | report | 2018-02-12
