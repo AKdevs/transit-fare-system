@@ -6,11 +6,12 @@ public class TransitSystem {
   private static ArrayList<Card> cards = new ArrayList<>();
 
   private TripManager tripManager = new TripManager();
+  static private TransitManager transitManager = new TransitManager();
 
   private ArrayList<UserAccount> userAccounts = new ArrayList<>();
   // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
-
+  /*
   private static ArrayList<String> line1Stations = new ArrayList<>(Arrays.asList("Finch", "North York Centre", "Sheppard-Yonge", "King", "Bay", "Bloor" ));
 
   private static ArrayList<String> route1Stops = new ArrayList<>(Arrays.asList("Dufferin", "Bathurst", "Sheppard-Yonge", "Bayview", "Leslie"));
@@ -24,7 +25,7 @@ public class TransitSystem {
         put("Line1", Line1);
         put("Route1", Route1);
     }};
-
+  */
   // Subway fare is $0.5 per station travelled
   private static double subwayFare = 0.5;
 
@@ -87,6 +88,10 @@ public class TransitSystem {
     return this.tripManager;
   }
 
+  public TransitManager getTransitManager() {
+    return this.transitManager;
+  }
+
   UserAccount findUserAccount(int accountNumber) {
     for (UserAccount ua : userAccounts) {
       if (ua.getAccountNum() == accountNumber) {
@@ -133,9 +138,11 @@ public class TransitSystem {
     findCard(currentCardNumber).addTripSegment(currentTripSegment);
   }
 
+  /*
   void addTransitLines(TransitLine newTransitLine) {
     transitLines.put(newTransitLine.getId(), newTransitLine);
   }
+  */
 
   static void addAllFares(String date, double fares) {
       if (allFares.isEmpty()){
@@ -169,13 +176,16 @@ public class TransitSystem {
     return cards;
   }
 
+  /*
   HashMap<String, TransitLine> getTransitLines() {
     return transitLines;
   }
+  */
 
   static double calculateSubwayFares(TripSegment currentTripSegment) {
     int enterSpotIndex = 0;
     int exitSpotIndex = 0;
+    HashMap<String, TransitLine> transitLines = transitManager.getTransitLines();
     for (String lineName : transitLines.keySet()) {
         TransitLine line = transitLines.get(lineName);
         if (line.getType().equals("S")) {

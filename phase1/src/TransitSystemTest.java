@@ -32,15 +32,16 @@ public class TransitSystemTest {
         TransitLine subwayLine = new TransitLine(subwayPoints, "S", "line1");
         TransitLine busLineA1 = new TransitLine(busPointsA1, "B", "A1");
         TransitLine busLineA2 = new TransitLine(busPointsA2, "B", "A2");
-        t.addTransitLines(subwayLine);
-        t.addTransitLines(busLineA1);
-        t.addTransitLines(busLineA2);
+        // t.addTransitLines(subwayLine);
+         //t.addTransitLines(busLineA1);
+         //t.addTransitLines(busLineA2);
 
     }
 
+    /*
     @Test
     public void testTransitLines() {
-        HashMap<String, TransitLine> lines = t.getTransitLines();
+         HashMap<String, TransitLine> lines = t.getTransitLines();
         lines.get("line1").addPoint("", "G");
         ArrayList<String> testList = new ArrayList<>();
         testList.add("G"); testList.add("A"); testList.add("B"); testList.add("C");
@@ -54,6 +55,7 @@ public class TransitSystemTest {
         t.createCardHolderAccount("David Villa", "villa@gmail.com");
         CardHolder newUser = (CardHolder) t.findUserAccount(10000001);
     }
+    */
 
 
 
