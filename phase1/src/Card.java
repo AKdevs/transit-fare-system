@@ -65,7 +65,7 @@ public class Card {
 
   void viewBalance(){
     if (active) {
-      System.out.println("Card" + this.getCardNumber() + "balance: " + this.balance);
+      System.out.println("Card " + this.getCardNumber() + " balance: $" + this.balance);
       }else {
         System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
