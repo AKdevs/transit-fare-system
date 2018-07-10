@@ -53,4 +53,6 @@ public class TripManager {
       ts.setSegmentFares(TransitSystem.calculateSubwayFares(ts));
     }
   }
+
+
 }

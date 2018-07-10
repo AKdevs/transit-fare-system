@@ -117,4 +117,17 @@ public class TripSegment {
   public String getMonth() {
     return this.enterDate.substring(5, 7);
   }
+
+  public String toString() {
+    StringBuilder s = new StringBuilder(
+            "Date: " + enterDate + "\n"
+
+
+    );
+
+
+
+
+    return s.toString();
+  }
 }
