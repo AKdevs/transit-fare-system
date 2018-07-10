@@ -11,11 +11,16 @@ deactivate | 10000001 | 30000001
 activate | 10000001 | 30000001
 load | 10000001 | 30000001 | 20
 view | balance | 10000001 | 30000001
-entry | 30000001 | Bloor | S | 10:49 | 2018-02-11
+entry | 30000001 | Dufferin | B | 10:58 | 2018-02-11
+exit | 30000001 | Bathurst | B | 11:01 | 2018-02-11
+entry | 30000001 | Bayview | B | 11:09 | 2018-02-11
+exit | 30000001 | Leslie | B | 11:12 | 2018-02-11
+entry | 30000001 | King | S | 10:49 | 2018-02-11
 exit | 30000001 | Bloor | S | 10:56 | 2018-02-11
-entry | 30000001 | Bloor | B | 10:58 | 2018-02-11
-view | trips | 10000001 | 30000001
+view | balance | 10000001 | 30000001
+view | allTrips | 10000001 | 30000001
 view | cost | 30000001
+view | report | 2018-02-11
 remove | card | 30000001
 remove | account | 10000001
 create | account | CardHolder | Alex | alex@gmail.com
