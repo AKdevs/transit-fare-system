@@ -9,6 +9,8 @@ public class Card {
   private double balance;
   private CardHolder owner;
   private String status;
+  private boolean linked;
+  private boolean active;
   private double currentFares;
   private HashMap<String, ArrayList<ArrayList<TripSegment>>> trips;
   private ArrayList<ArrayList<TripSegment>> mostRecentTrips; // keep track of all completeTrips, but only print out the last three when user view it
@@ -24,13 +26,15 @@ public class Card {
     nextCardNumber += 1;
     this.owner = null;
     this.balance = 19;
-    this.status = "activated";
+    this.linked = false;
+    this.active = true;
+    // this.status = "activated";
     this.trips = new HashMap<>();
     this.mostRecentTrips = new ArrayList<>();
     this.currentFares = 0;
     this.totalFares = new ArrayList<>();// an ArrayList of length 12
     // this.currentDuration = 0;
-    this.linkedness = "unlinked";
+    // this.linkedness = "unlinked";
   }
 
   void setBalance(Double balance) {
@@ -38,7 +42,9 @@ public class Card {
   }
 
   void addBalance(Double fares) {
-    this.balance += fares;
+    if (active) {
+      this.balance += fares;
+    }
   }
 
   void deductBalance(Double fares) {
@@ -46,24 +52,27 @@ public class Card {
   }
 
   void activate() {
-    this.status = "activated";
+    this.active = true;
   }
 
   void deactivate() {
-    this.status = "deactivated";
+    this.active = false;
   }
 
-
-  public void setLinked() {
-    this.linkedness = "Linked";
+  public void linkAccount() {
+    this.linked = true;
   }
 
-  public void setUnlinked() {
-    this.linkedness = "Unlinked";
+  public void unlinkAccount() {
+    this.linked = false;
   }
 
-  public String getLinkedness() {
-    return linkedness;
+  public boolean isLinked() {
+    return linked;
+  }
+
+  public boolean isActive() {
+    return active;
   }
 
   int getCardNumber() {
@@ -84,10 +93,6 @@ public class Card {
 
   void setOwner(CardHolder owner) {
     this.owner = owner;
-  }
-
-  String getStatus() {
-    return this.status;
   }
 
   double getCurrentFares() {

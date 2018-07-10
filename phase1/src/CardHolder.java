@@ -21,7 +21,7 @@ public class CardHolder extends UserAccount {
     // card linked to their account
     // a new card cannot do anything except for enter and exit the stations
     // in eventhandler: try....catch{your card is not linked to your account}
-    if (this.travelCards.contains(card) && card.getStatus().equals("activated")) {
+    if (this.travelCards.contains(card) && card.isActive()) {
       double balance = card.getBalance() + amount;
       card.setBalance(balance);
     } else {
@@ -34,7 +34,7 @@ public class CardHolder extends UserAccount {
 
 
   public void viewBalance(Card card) {
-    if (this.travelCards.contains(card) && card.getStatus().equals("activated")) {
+    if (this.travelCards.contains(card) && card.isActive()) {
       System.out.println("Card balance: " + card.getBalance());
     } else {
       System.out.println(
@@ -50,14 +50,14 @@ public class CardHolder extends UserAccount {
     // link a valid card
     this.travelCards.add(card);
     card.setOwner(this);
-    card.setLinked();
+    card.linkAccount();
     System.out.println("Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
   }
 
   public void unlinkCard(Card card) {
     this.travelCards.remove(card);
     card.setOwner(null);
-    card.setUnlinked();
+    card.unlinkAccount();
     System.out.println("Card " + card.getCardNumber() + " unlinked to CardHolder Account " + this.getAccountNum());
   }
 
@@ -65,7 +65,7 @@ public class CardHolder extends UserAccount {
   public void activateCard(Card card) {
     if (this.travelCards.contains(card)) {
       card.activate();
-      System.out.println("Card " + card.getCardNumber() + " activated");
+      System.out.println("Card " + card.getCardNumber() + "has been activated");
     } else {
       System.out.println(
           "Action denied. Card" + card.getCardNumber() + " is not linked to your account");
@@ -76,7 +76,7 @@ public class CardHolder extends UserAccount {
   public void deactivateCard(Card card) {
     if (this.travelCards.contains(card)) {
       card.deactivate();
-      System.out.println("Card " + card.getCardNumber() + " deactivated");
+      System.out.println("Card " + card.getCardNumber() + " has been deactivated");
     } else {
       System.out.println(
           "Action denied. Card" + card.getCardNumber() + " is not linked to your account");
@@ -86,7 +86,7 @@ public class CardHolder extends UserAccount {
   public void getMonthlyCost(Integer month) {}
 
   public void viewRecentTrips(Card card) {
-    if (this.travelCards.contains(card) && card.getStatus().equals("activated")) {
+    if (this.travelCards.contains(card) && card.isActive()) {
       card.viewMostRecentTrips();
     } else {
       System.out.println(
