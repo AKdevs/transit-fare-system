@@ -34,15 +34,38 @@ public class Card {
   }
 
   void setBalance(Double balance) {
-    this.balance = balance;
+    if (this.status.equals("activated")) {
+      this.balance = balance;
+    }else {
+        System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
+    }
   }
+  public double getBalance() {
+        return balance;
+    }
 
   void addBalance(Double fares) {
-    this.balance += fares;
+    if (this.status.equals("activated")) {
+      this.balance += fares;
+    }else {
+        System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
+    }
   }
 
   void deductBalance(Double fares) {
-    this.balance -= fares;
+    if (this.status.equals("activated")) {
+      this.balance -= fares;
+    }else {
+        System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
+    }
+  }
+
+  void viewBalance(){
+    if (this.status.equals("activated")) {
+      System.out.println("Card" + this.getCardNumber() + "balance: " + this.balance);
+      }else {
+        System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
+    }
   }
 
   void activate() {
@@ -70,9 +93,6 @@ public class Card {
     return this.cardNumber;
   }
 
-  public double getBalance() {
-    return balance;
-  }
 
   ArrayList<Double> getTotalFares() {
     return this.totalFares;
@@ -107,16 +127,21 @@ public class Card {
   }
 
   void viewMonthlyCost() {
-    Double result = 0.0;
-    for (Double fares: this.totalFares) {
-      result += fares;
+    if (this.status.equals("activated")) {
+      Double result = 0.0;
+      for (Double fares : this.totalFares) {
+        result += fares;
+      }
+      System.out.println(result / 12);
+    }else {
+        System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
-    System.out.println(result / 12);
 
   }
 
   void viewMostRecentTrips(){
-      ArrayList<TripSegment> last = this.mostRecentTrips.get(this.mostRecentTrips.size() -1);
+    if (this.status.equals("activated")) {
+      ArrayList<TripSegment> last = this.mostRecentTrips.get(this.mostRecentTrips.size() - 1);
       ArrayList<TripSegment> secondLast = this.mostRecentTrips.get(this.mostRecentTrips.size() - 2);
       ArrayList<TripSegment> thirdLast = this.mostRecentTrips.get(this.mostRecentTrips.size() - 3);
       ArrayList<ArrayList<TripSegment>> result = new ArrayList<ArrayList<TripSegment>>();
@@ -124,6 +149,9 @@ public class Card {
       result.add(secondLast);
       result.add(thirdLast);
       System.out.println(result);
+      }else {
+        System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
+    }
   }
 
   boolean isEntryAllowed() {
