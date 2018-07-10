@@ -147,6 +147,8 @@ public class TransitSystem {
       if (d.equals(date)) {
         Double f = (Double) d.getValue();
         f += fares;
+      }else{
+          allFares.put(date, fares);
       }
     }
   }
