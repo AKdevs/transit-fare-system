@@ -97,12 +97,8 @@ public class EventHandler {
           Card card = system.findCard(Integer.parseInt(eventTokens[3]));
           card.viewBalance();
         } else if (eventTokens[1].equals("cost")) {
-          Card card = system.findCard(Integer.parseInt(eventTokens[2]));
-          card.viewMonthlyCost();
-        }else if (eventTokens[1].equals("allTrips")) {
-            UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
-            Card card = system.findCard(Integer.parseInt(eventTokens[3]));
-            card.viewAllTrips();
+            CardHolder user = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[2]));
+          user.viewMonthlyCost();
         }
         break;
 

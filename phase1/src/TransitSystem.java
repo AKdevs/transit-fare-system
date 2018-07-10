@@ -35,18 +35,6 @@ public class TransitSystem {
 
   String currentDate;
 
-  String getCurrentMonth() {
-    return this.currentMonth;
-  }
-
-  String getCurrentDate() {
-    return this.currentDate;
-  }
-
-  public static HashMap<String, Double> getAllFares() {
-    return allFares;
-  }
-
   // Fare is capped at $6.0 for continuous trips travlled within timeForCap
   private static double fareCap = 6.0;
 
@@ -58,6 +46,19 @@ public class TransitSystem {
   static HashMap<String, Double> allFares = new HashMap<>(); // key is date, value is all the fares
 
   static HashMap<String, Integer> numberOfStations = new HashMap<>();
+
+
+  String getCurrentMonth() {
+        return this.currentMonth;
+    }
+
+    String getCurrentDate() {
+        return this.currentDate;
+    }
+
+  public static HashMap<String, Double> getAllFares() {
+        return allFares;
+    }
 
   static Card findCard(int cardNumber) {
     for (Card c : cards) {
@@ -135,25 +136,32 @@ public class TransitSystem {
   void addTransitLines(TransitLine newTransitLine) {
     transitLines.put(newTransitLine.getId(), newTransitLine);
   }
+
   static void addAllFares(String date, double fares) {
       if (allFares.isEmpty()){
           allFares.put(date, fares);
       }else{
-          for (Map.Entry d : allFares.entrySet()) {
+          for (String d : allFares.keySet()) {
               if (d.equals(date)) {
-                  Double f = (Double) d.getValue();
+                  Double f = allFares.get(d);
                   f += fares;
+                  allFares.put(d, f);
               }
           }
       }
   }
 
   static void addNumberOfStation(String date, int n) {
-    for (Map.Entry d : numberOfStations.entrySet()) {
-      if (d.equals(date)) {
-        Integer stationNum = (Integer) d.getValue();
-        stationNum += n;
+    if (numberOfStations.containsKey(date)) {
+      for (String d : numberOfStations.keySet()) {
+        if (d.equals(date)) {
+          Integer stationNum = numberOfStations.get(d);
+          stationNum += n;
+          numberOfStations.put(d, stationNum);
+        }
       }
+    }else {
+        numberOfStations.put(date, n);
     }
   }
 

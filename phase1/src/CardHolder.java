@@ -32,7 +32,6 @@ public class CardHolder extends UserAccount {
     }
   } */
 
-
   /*public void viewBalance(Card card) {
     if (this.travelCards.contains(card) && card.getStatus().equals("activated")) {
       System.out.println("Card balance: " + card.getBalance());
@@ -47,14 +46,15 @@ public class CardHolder extends UserAccount {
   public void linkCard(Card card) {
     // if the card is not created in the system, return error message
     if (!(card.getOwner() == null)) {
-      //If card is currently linked to another CardHolder, it cannot be linked to this CardHolder.
+      // If card is currently linked to another CardHolder, it cannot be linked to this CardHolder.
       System.out.println("Action denied. This card is currently linked to another account.");
     } else {
       // link a valid card
       this.travelCards.add(card);
       card.setOwner(this);
       card.linkAccount();
-      System.out.println("Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
+      System.out.println(
+          "Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
     }
   }
 
@@ -62,7 +62,8 @@ public class CardHolder extends UserAccount {
     this.travelCards.remove(card);
     card.setOwner(null);
     card.unlinkAccount();
-    System.out.println("Card " + card.getCardNumber() + " unlinked to CardHolder Account " + this.getAccountNum());
+    System.out.println(
+        "Card " + card.getCardNumber() + " unlinked to CardHolder Account " + this.getAccountNum());
   }
 
   // CardHolder is able to activate a card that is linked to his/her account.
@@ -87,7 +88,7 @@ public class CardHolder extends UserAccount {
     }
   }
 
-  //public void getMonthlyCost(Integer month) {}
+  // public void getMonthlyCost(Integer month) {}
 
   /*public void viewRecentTrips(Card card) {
     if (this.travelCards.contains(card) && card.getStatus().equals("activated")) {
@@ -108,11 +109,17 @@ public class CardHolder extends UserAccount {
       System.out.println("Cards linked to your account: None.");
     } else {
       System.out.println("Cards linked to your account: ");
-      for (Card card: this.travelCards) {
+      for (Card card : this.travelCards) {
         System.out.println("     Card " + card.getCardNumber());
       }
-
     }
   }
 
-}
+  void viewMonthlyCost() {
+    double result = 0.0;
+    for (Card c : travelCards) {
+      result += c.getTotalFares();
+    }
+    System.out.println(result / travelCards.size());
+  }
+    }
