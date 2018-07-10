@@ -8,7 +8,6 @@ public class Card {
   private static int nextCardNumber = 30000001;
   private double balance;
   private CardHolder owner;
-  private String status;
   private boolean linked;
   private boolean active;
   private double currentFares;
@@ -38,7 +37,7 @@ public class Card {
   }
 
   void setBalance(Double balance) {
-    if (this.status.equals("activated")) {
+    if (active) {
       this.balance = balance;
     }else {
         System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
@@ -55,7 +54,7 @@ public class Card {
   }
 
   void deductBalance(Double fares) {
-    if (this.status.equals("activated")) {
+    if (active) {
       this.balance -= fares;
     }else {
         System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
@@ -63,7 +62,7 @@ public class Card {
   }
 
   void viewBalance(){
-    if (this.status.equals("activated")) {
+    if (active) {
       System.out.println("Card" + this.getCardNumber() + "balance: " + this.balance);
       }else {
         System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
@@ -141,7 +140,7 @@ public class Card {
   }
 
   void viewMostRecentTrips(){
-    if (this.status.equals("activated")) {
+    if (active) {
       ArrayList<TripSegment> last = this.mostRecentTrips.get(this.mostRecentTrips.size() - 1);
       ArrayList<TripSegment> secondLast = this.mostRecentTrips.get(this.mostRecentTrips.size() - 2);
       ArrayList<TripSegment> thirdLast = this.mostRecentTrips.get(this.mostRecentTrips.size() - 3);
@@ -156,7 +155,7 @@ public class Card {
   }
 
   boolean isEntryAllowed() {
-    if ((this.balance > 0) && (this.status.equals("activated"))) {
+    if ((this.balance > 0) && (active)) {
       System.out.println("Accepted");
       return true;
     } else {
