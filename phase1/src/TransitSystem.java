@@ -1,19 +1,30 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.sql.SQLOutput;
+import java.util.*;
 
 public class TransitSystem {
 
   private static ArrayList<Card> cards = new ArrayList<>();
+
   private TripManager tripManager = new TripManager();
-  // [Card(123), Card(24), Card(678), .....]
 
   private ArrayList<UserAccount> userAccounts = new ArrayList<>();
   // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
-  // key is name of the line, value is the transit line
-  private static HashMap<String, TransitLine> transitLines = new HashMap<>();
+
+  private static ArrayList<String> line1Stations = new ArrayList<>(Arrays.asList("Finch", "North York Centre", "Sheppard-Yonge", "King", "Bay", "Bloor" ));
+
+  private static ArrayList<String> route1Stops = new ArrayList<>(Arrays.asList("Dufferin", "Bathurst", "Sheppard-Yonge", "Bayview", "Leslie"));
+
+  private static TransitLine Line1 = new TransitLine(line1Stations, "S", "Line1");
+
+  private static TransitLine Route1 = new TransitLine(route1Stops, "B", "Route1");
+
+    // key is name of the line, value is the transit line
+    private static HashMap<String, TransitLine> transitLines = new HashMap<>(){{
+        put("Line1", Line1);
+        put("Route1", Route1);
+    }};
+
   // Subway fare is $0.5 per station travelled
   private static double subwayFare = 0.5;
 
@@ -72,7 +83,7 @@ public class TransitSystem {
   }
 
   public TripManager getTripManager() {
-    return tripManager;
+    return this.tripManager;
   }
 
   UserAccount findUserAccount(int accountNumber) {
@@ -157,29 +168,29 @@ public class TransitSystem {
   static double calculateSubwayFares(TripSegment currentTripSegment) {
     int enterSpotIndex = 0;
     int exitSpotIndex = 0;
-    for (Map.Entry lineName : transitLines.entrySet()) {
-        TransitLine line = (TransitLine) lineName.getValue();
-      if (line.getType().equals("S")) {
-          ArrayList<String> points = line.getPoints();
-          for (String p : points) {
-            if (p.equals(currentTripSegment.getEnterSpot())) {
-              enterSpotIndex = points.indexOf(p);
-            } else if (p.equals(currentTripSegment.getExitSpot())) {
-              exitSpotIndex = points.indexOf(p);
+    for (String lineName : transitLines.keySet()) {
+        TransitLine line = transitLines.get(lineName);
+        if (line.getType().equals("S")) {
+            ArrayList<String> points = line.getPoints();
+            for (String p : points) {
+                if (p.equals(currentTripSegment.getEnterSpot())) {
+                    enterSpotIndex = points.indexOf(p);
+                } else if (p.equals(currentTripSegment.getExitSpot())) {
+                    exitSpotIndex = points.indexOf(p);
+                }
             }
-          }
 
-      }
+        }
     }
     if (enterSpotIndex == exitSpotIndex) {
-      return 0;
+        return 0;
     } else if (currentTripSegment.getDuration() <= 180
-        && (exitSpotIndex - enterSpotIndex) * 0.5 > 6) {
-      addNumberOfStation(currentTripSegment.getEnterDate(), exitSpotIndex - enterSpotIndex + 1);
+        && (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5 > 6) {
+      addNumberOfStation(currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
       return 6;
     } else {
-      addNumberOfStation(currentTripSegment.getEnterDate(), exitSpotIndex - enterSpotIndex + 1);
-      return (exitSpotIndex - enterSpotIndex) * 0.5;
+      addNumberOfStation(currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
+      return (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5;
     }
   }
 }

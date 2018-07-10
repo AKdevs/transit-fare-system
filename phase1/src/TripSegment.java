@@ -1,6 +1,6 @@
 public class TripSegment {
 
-  private int associatedCard; // associated card number
+  private int associatedCard;
   private String enterSpot;
   private String exitSpot;
   private String enterTransitType;
@@ -63,7 +63,7 @@ public class TripSegment {
   */
 
   public int getAssociatedCard() {
-    return associatedCard;
+    return this.associatedCard;
   }
 
   public String getExitSpot() {
@@ -114,20 +114,4 @@ public class TripSegment {
     this.segmentFares = fares;
   }
 
-  public String getMonth() {
-    return this.enterDate.substring(5, 7);
-  }
-
-  public String toString() {
-    StringBuilder s = new StringBuilder(
-            "Date: " + enterDate + "\n"
-
-
-    );
-
-
-
-
-    return s.toString();
-  }
 }

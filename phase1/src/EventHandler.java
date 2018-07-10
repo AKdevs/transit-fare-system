@@ -10,7 +10,7 @@ public class EventHandler {
   public static void main(String[] args) throws Exception {
     TransitSystem mainSystem = new TransitSystem();
     EventHandler mainHandler = new EventHandler(mainSystem);
-    for (int i = 0; i < 39; i++) {
+    for (int i = 0; i < 24; i++) {
       mainHandler.play();
     }
     //System.out.println(mainSystem.getCards());
@@ -27,11 +27,12 @@ public class EventHandler {
     String[] eventTokens = currentEvent.split(" \\| ");
     String action = eventTokens[0].trim();
     switch (action) {
-      case "entry": // we can also do it in TransitSystem ???
+      case "entry":
         system
             .getTripManager()
             .recordTapIn(
                 eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4], eventTokens[5]);
+        break;
       case "exit":
         system
             .getTripManager()
@@ -83,7 +84,7 @@ public class EventHandler {
       case "view":
         if (eventTokens[1].equals("report")) {
           String date = eventTokens[2];
-          AdminUser.getDailyReport(date); // static??
+          AdminUser.getDailyReport(date);
         } else if (eventTokens[1].equals("info")) {
           UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
           user.viewInfo();
@@ -98,6 +99,10 @@ public class EventHandler {
         } else if (eventTokens[1].equals("cost")) {
           Card card = system.findCard(Integer.parseInt(eventTokens[2]));
           card.viewMonthlyCost();
+        }else if (eventTokens[1].equals("allTrips")) {
+            UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+            Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+            card.viewAllTrips();
         }
         break;
 

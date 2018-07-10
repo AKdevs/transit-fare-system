@@ -7,12 +7,15 @@ public class TripManager {
     currentTripSegments = new ArrayList<>();
   }
 
+
   public void recordTapIn(
       String cardNumber, String enterSpot, String transitType, String enterTime, String enterDate) {
     TripSegment ts = new TripSegment(cardNumber, enterSpot, transitType, enterTime, enterDate);
-    currentTripSegments.add(ts);
-    addTripSegmentToCard(ts);
-    calculateTripSegmentFares(ts);
+    this.currentTripSegments.add(ts);
+    if (ts.getEnterTransitType().equals("B")){
+        calculateTripSegmentFares(ts);
+    }
+      addTripSegmentToCard(ts);
   }
 
   private void addTripSegmentToCard(TripSegment ts) {
@@ -22,16 +25,21 @@ public class TripManager {
 
   public void recordTapOut(
       String cardNumber, String exitSpot, String transitType, String exitTime, String exitDate) {
-    TripSegment currentTs = null;
-    for (TripSegment ts : currentTripSegments) {
-      if (ts.getAssociatedCard() == Integer.parseInt(cardNumber)) {
-        currentTs = ts;
+    //TripSegment currentTs = new TripSegment("0", "default", "default", "default", "default");
+    for (TripSegment ts : this.currentTripSegments) {
+      if (ts.getAssociatedCard() == Integer.parseInt(cardNumber) && ts.getExitSpot().equals("unknown")) {
+        // currentTs = ts;
         ts.completeTripSegment(exitSpot, transitType, exitTime, exitDate);
+        calculateDuration(ts);
+        calculateTripSegmentFares(ts);
+        if (ts.getEnterTransitType().equals("S")) {
+            int currentCardNumber = ts.getAssociatedCard();
+            TransitSystem.findCard(currentCardNumber).updateFares(ts, ts.getSegmentFares());
+        }
       }
     }
-    /// account for tap out without tapping in
-    calculateDuration(currentTs);
-    calculateTripSegmentFares(currentTs);
+    /// account for tap out without tapping inr
+
   }
 
   private void calculateDuration(TripSegment ts) {
