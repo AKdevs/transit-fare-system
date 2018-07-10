@@ -124,24 +124,6 @@ public class TransitSystem {
   void addTransitLines(TransitLine newTransitLine) {
     transitLines.put(newTransitLine.getId(), newTransitLine);
   }
-  /*
-  void addTransitLines(String type, TransitLine newTransitLine) {
-    if (transitLines.containsKey(type)) {
-      ArrayList<TransitLine> originalline = transitLines.get(type);
-
-      // https://blog.csdn.net/mustbehard/article/details/17310043
-      Iterator<TransitLine> iter = originalline.iterator();
-      ArrayList<TransitLine> newlines = new ArrayList<>();
-      while (iter.hasNext()) {
-        TransitLine lines = iter.next();
-        newlines.add(lines);
-      }
-      newlines.add(newTransitLine);
-      transitLines.put(type, newlines);
-    }
-  }
-  */
-
   static void addAllFares(String date, double fares) {
       if (allFares.isEmpty()){
           allFares.put(date, fares);

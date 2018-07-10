@@ -97,6 +97,7 @@ public class EventHandler {
           card.viewBalance();
         } else if (eventTokens[1].equals("cost")) {
           Card card = system.findCard(Integer.parseInt(eventTokens[2]));
+          System.out.println(card);
           card.viewMonthlyCost();
         }
         break;
