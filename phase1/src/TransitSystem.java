@@ -35,26 +35,6 @@ public class TransitSystem {
 
   String currentDate;
 
-  String getCurrentMonth() {
-    return this.currentMonth;
-  }
-
-  String getCurrentDate() {
-    return this.currentDate;
-  }
-
-  void setCurrentMonth(String month) {
-      this.currentMonth = month;
-  }
-
-  void setCurrentDate(String date) {
-      this.currentDate = date;
-  }
-
-  public static HashMap<String, Double> getAllFares() {
-    return allFares;
-  }
-
   // Fare is capped at $6.0 for continuous trips travlled within timeForCap
   private static double fareCap = 6.0;
 
@@ -92,7 +72,16 @@ public class TransitSystem {
         return this.currentDate;
     }
 
-  public static HashMap<String, Double> getAllFares() {
+    void setCurrentMonth(String month) {
+        this.currentMonth = month;
+    }
+
+    void setCurrentDate(String date) {
+        this.currentDate = date;
+    }
+
+
+    public static HashMap<String, Double> getAllFares() {
         return allFares;
     }
 
