@@ -96,6 +96,10 @@ public class TripManager extends TransitSystem {
       }
   }
 
+    /**
+     * Calculates the duration of the trip segment in minutes.
+     * @param ts trip segment
+     */
   private void calculateDuration(TripSegment ts) {
     // int version of enterTime: Hour converted to minutes + minutes
     int enter =
@@ -116,6 +120,12 @@ public class TripManager extends TransitSystem {
     }
   }
 
+    /**
+     * Calculates the amount of fare accumulated for subway travel
+     * for TripSegment currentTripSegment
+     * @param currentTripSegment the ongoing trip segment
+     * @return amount of money of subway fare
+     */
   double calculateSubwayFares(TripSegment currentTripSegment) {
     int enterSpotIndex = 0;
     int exitSpotIndex = 0;
@@ -147,6 +157,11 @@ public class TripManager extends TransitSystem {
     }
   }
 
+    /**
+     * Calculates the number of bus stops reached in TripSegment ts.
+     * @param ts trip segment
+     * @return the number of stops reached in this trip segment.
+     */
   int calculateStopsReachedByBus(TripSegment ts){
       int enterSpotIndex = 0;
       int exitSpotIndex = 0;
