@@ -46,10 +46,7 @@ public class TripManager extends TransitSystem {
       }
   }
 
-    /**
-     * Adds trip segment to associated card.
-     * @param ts TripSegment to be added to associated card.
-     */
+    /** @param ts TripSegment to be added to associated card. */
   private void addTripSegmentToCard(TripSegment ts) {
     String currentCardNumber = ts.getAssociatedCard();
     findCard(currentCardNumber).addTripSegment(ts);
