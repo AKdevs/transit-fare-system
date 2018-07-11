@@ -14,47 +14,27 @@ public class TransitLine {
     this.id = id;
   }
 
-  /**
-   * Sets the locations and order of the stops/station in this transit line.
-   *
-   * @param points ArrayList of String for locations of stops/stations
-   */
+  /** @param points ArrayList of String for locations of stops/stations */
   public void setPoints(ArrayList<String> points) {
     this.points = points;
   }
 
-  /**
-   * Returns the list of stops/stations.
-   *
-   * @return list of stops/stations.
-   */
+  /** @return list of stops/stations. */
   public ArrayList<String> getPoints() {
     return this.points;
   }
 
-  /**
-   * Sets the type of transport ("B" - bus, "S" - subway) of this transit line
-   *
-   * @param type of transit line
-   */
+  /** @param type of transit line ("B" - bus, "S" - subvway) */
   public void setType(String type) {
     this.type = type;
   }
 
-  /**
-   * Returns the type of the transit line.
-   *
-   * @return type of transit line
-   */
+  /** @return type of transit line */
   public String getType() {
     return this.type;
   }
 
-  /**
-   * Returns the ID of the transit line.
-   *
-   * @return id of transit line
-   */
+  /** @return id of transit line */
   String getId() {
     return this.id;
   }

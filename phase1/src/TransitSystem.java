@@ -34,10 +34,7 @@ public class TransitSystem {
   /** Operating status of system, either "on" or "off"   */
   private String operatingStatus = "off";
 
-  /**
-   * Return the operating status of the system, either "on" or "off"
-   * @return operating status of the system.
-   */
+  /**  @return operating status of the system, either "on" or "off".*/
   String getOperatingStatus() {
     return this.operatingStatus;
   }
@@ -53,41 +50,27 @@ public class TransitSystem {
     System.out.println("The TransitSystem has been powered off.");
   }
 
-  /** Returns current month in MM format
-   * @return current month
-   */
+  /**  @return current month in MM format */
   String getCurrentMonth() {
     return this.currentMonth;
   }
 
-  /**
-   * Returns current date in YY-MM-DD format
-   * @return current date
-   */
+  /** @return current date in YY-MM-DD format */
   String getCurrentDate() {
     return this.currentDate;
   }
 
-  /**
-   * Sets current month.
-   * @param month month to be stored
-   */
+  /** @param month month to be stored */
   void setCurrentMonth(String month) {
     this.currentMonth = month;
   }
 
-  /**
-   * Sets current date.
-   * @param date date to be stored.
-   */
+  /** @param date date to be stored. */
   void setCurrentDate(String date) {
     this.currentDate = date;
   }
 
-  /**
-   * Returns total amount of fares accumulated in system, by date
-   * @return amount of fares in system.
-   */
+  /** @return amount of fares in system, stored by date. */
   public static HashMap<String, Double> getAllFares() {
     return allFares;
   }
@@ -144,10 +127,7 @@ public class TransitSystem {
     return null;
   }
 
-  /**
-   * Returns a list of user accounts.
-   * @return list of user accounts.
-   */
+  /** @return list of user accounts. */
   ArrayList<UserAccount> getUserAccounts() {
     return userAccounts;
   }
