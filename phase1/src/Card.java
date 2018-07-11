@@ -4,22 +4,34 @@ import java.util.HashMap;
 import java.util.Map;
 /** Card is used to tap in and tap out when enter and exit a stop or station. */
 public class Card {
+  /** Stores number assigned to this card   */
   private String cardNumber;
+  /** Keeps track of the next card number to be assigned.  */
   private static int nextCardNumber = 30000001;
+  /** Keeps track of the balance in this card   */
   private double balance;
+  /** Stores owner of this card   */
   private CardHolder owner;
+  /** Stores whether the card is linked to an owner   */
   private boolean linked;
+  /** Stores current status of card (activated/deactivated)  */
   private boolean active;
+  /** Tracks the fare of an ongoing trip   */
   private double currentFares;
+  /** Stores complete trips by date   */
   private HashMap<String, ArrayList<ArrayList<TripSegment>>> trips;
+  /** Keeps track of all trips   */
   private ArrayList<ArrayList<TripSegment>>
-      mostRecentTrips; // keep track of all completeTrips, but only print out the last three when
-  // user view it
-  // private ArrayList<Double> totalFares;
+      mostRecentTrips;
+  /** Keeps track of total fares accumulated on this card   */
   private double totalFares;
+  /** Stores the entry time of a trip segment in minutes   */
   private int startEnterTime;
+  /** Keeps a track of the last completed trip segment on this card  */
   private TripSegment lastTripSegment;
+  /** Keeps a track of the last completed trip on this card */
   private ArrayList<TripSegment> lastCompleteTrip;
+  /** Keeps a track of the ongoing trip segment (not yet complete)    */
   private TripSegment ongoingTripSegment;
 
   /** Constructs a card. */
@@ -50,6 +62,7 @@ public class Card {
     }
   }
 
+  /** @return balance on this card   */
   public double getBalance() {
     return balance;
   }
@@ -57,7 +70,7 @@ public class Card {
   /**
    * Adds balance to the card.
    *
-   * @param fares the amount of fares that are going to be added to the card
+   * @param fares the amount of fares to be added to the card
    */
   void addBalance(Double fares) {
     if (active) {
@@ -78,7 +91,7 @@ public class Card {
   /**
    * Deducts balance from the card.
    *
-   * @param fares the amount of fares that are going to be deducted from the card
+   * @param fares the amount of fares to be deducted from the card
    */
   void deductBalance(Double fares) {
     if (active) {
@@ -132,39 +145,27 @@ public class Card {
     return active;
   }
 
-  /**
-   * Returns the card number
-   *
-   * @return the card number
-   */
+  /** @return the card number */
   String getCardNumber() {
     return this.cardNumber;
   }
 
+  /** Prints out the total fares accumulated on this card   */
   void viewTotalFares() {
     System.out.println(this.totalFares);
   }
-  /**
-   * Returns the owner of the card.
-   *
-   * @return the owner of the card
-   */
+
+  /** @return the owner of the card */
   CardHolder getOwner() {
     return this.owner;
   }
-  /**
-   * Sets the owner of the card.
-   *
-   * @param owner a card holder who will be assigned as the owner of the card
-   */
+
+  /** @param owner a card holder who will be assigned as the owner of the card */
   void setOwner(CardHolder owner) {
     this.owner = owner;
   }
 
-  /**
-   * Returns the amount of fare accumulated.
-   * @return amount of fare.
-   */
+  /** @return amount of fare of an ongoing trip. */
   double getCurrentFares() {
     return this.currentFares;
   }
@@ -172,28 +173,35 @@ public class Card {
   /**
    * Add fare amount to running total of fares.
    *
-   * @param fares the amount of money.
+   * @param fares amount of money
    */
   void addCurrentFares(double fares) {
     this.currentFares += fares;
   }
 
+  /**
+   *  Deduct fares from running total of fares.
+   * @param fares amount of money
+   */
   void deductCurrentFares(double fares) {
     this.currentFares -= fares;
   }
+
 
     void setCurrentFares(double fares) {
         this.currentFares = fares;
     }
 
-  boolean equals(Card other) {
+    /**
+     * Returns true iff other is equal to this card.
+     * @param other card to be compared with for equality
+     * @return true iff other is equal to this card.
+     */
+    boolean equals(Card other) {
     return this.cardNumber == other.getCardNumber();
   }
-  /**
-   * ???????????????????????
-   *
-   * @return
-   */
+
+  /** @return total amount of fare accumualted on this card */
   double getTotalFares() {
     return this.totalFares;
   }

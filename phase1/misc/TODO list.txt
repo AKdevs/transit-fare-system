@@ -61,6 +61,5 @@
  TransitSystem [x]
  TripManager [x]
  TripSegment [x]
- UserAccount [] - methods completed, fields not completed
-
+ UserAccount [x]
  
