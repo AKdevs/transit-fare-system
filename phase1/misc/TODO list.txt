@@ -55,11 +55,11 @@
  AdminUser [x]
  Card []
  CardHolder []
- EventHandler []
+ EventHandler [x]
  TransitLine [x]
  TransitManager [x]
  TransitSystem []
- TripManager []
+ TripManager [x]
  TripSegment [x]
  UserAccount [] - methods completed, fields not completed
 
