@@ -152,6 +152,6 @@ public class CardHolder extends UserAccount {
     for (Card c : travelCards) {
       result += c.getTotalFares();
     }
-    System.out.println(result / travelCards.size());
+    System.out.println("Account " + accountNumber + " cost for the month: " + result / travelCards.size());
   }
 }

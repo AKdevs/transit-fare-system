@@ -3,7 +3,7 @@ import java.util.*;
 
 public class TransitSystem {
   private static ArrayList<Card> cards = new ArrayList<>();
-  protected HashMap<String, TransitLine> transitLines = new HashMap<>();
+  protected static HashMap<String, TransitLine> transitLines = new HashMap<>();
   private static ArrayList<UserAccount> userAccounts = new ArrayList<>();
   // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 

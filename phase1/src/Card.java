@@ -70,6 +70,8 @@ public class Card {
   void addBalance(Double fares) {
     if (active) {
       this.balance += fares;
+      System.out.println("Sucessfully added $" + fares + " to card " + cardNumber + "." +
+      " The balance is now " + this.balance);
     } else {
       System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }

@@ -14,7 +14,7 @@ public class EventHandler {
     TransitSystem mainSystem = new TransitSystem();
 
     EventHandler mainHandler = new EventHandler(mainSystem);
-    for (int i = 0; i < 80; i++) {
+    while (mainHandler.eventsBuffer.hasNextLine()) {
       mainHandler.play();
     }
   }
@@ -52,116 +52,59 @@ public class EventHandler {
           break;
 
         case "activate":
-          try {
-            Card ca = system.findCard(Integer.parseInt(eventTokens[2]));
-            CardHolder cha = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
-            cha.activateCard(ca);
-            break;
-          } catch (Exception e) {
-            System.out.println("Invalid account or card number.");
-          }
+          Card ca = system.findCard(Integer.parseInt(eventTokens[2]));
+          CardHolder cha = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
+          cha.activateCard(ca);
+          break;
 
         case "deactivate":
-          try {
-            Card cd = system.findCard(Integer.parseInt(eventTokens[2]));
-            CardHolder chd = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
-            chd.deactivateCard(cd);
-            break;
-
-          } catch (Exception e) {
-            System.out.println("Invalid account or card number.");
-          }
+          Card cd = system.findCard(Integer.parseInt(eventTokens[2]));
+          CardHolder chd = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
+          chd.deactivateCard(cd);
+          break;
 
         case "link":
-          try {
-            Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
-            UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
-            ((CardHolder) currentHolder).linkCard(currentCard);
-            break;
-
-          } catch (Exception e) {
-            System.out.println("Invalid account or card number.");
-          }
+          Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
+          UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+          ((CardHolder) currentHolder).linkCard(currentCard);
+          break;
 
         case "unlink":
-          try {
-            UserAccount ua = system.findUserAccount(Integer.parseInt(eventTokens[1]));
-            Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
-            ((CardHolder) ua).unlinkCard(cc);
-            break;
-
-          } catch (Exception e) {
-            System.out.println("Invalid account or card number.");
-          }
+          UserAccount ua = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+          Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
+          ((CardHolder) ua).unlinkCard(cc);
+          break;
 
         case "load":
-          try {
-            Card travelCard = system.findCard(Integer.parseInt(eventTokens[2]));
-            travelCard.addBalance(Double.parseDouble(eventTokens[3]));
-            break;
-
-          } catch (Exception e) {
-            System.out.println("Invalid account or card number.");
-          }
+          Card travelCard = system.findCard(Integer.parseInt(eventTokens[2]));
+          travelCard.addBalance(Double.parseDouble(eventTokens[3]));
+          break;
 
         case "view":
           if (eventTokens[1].equals("report")) {
             String date = eventTokens[2];
             AdminUser.getDailyReport(date);
           } else if (eventTokens[1].equals("info")) {
-            try {
-              UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
-              user.viewInfo();
-            } catch (Exception e) {
-              System.out.println("Invalid account number.");
-            }
+            UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+            user.viewInfo();
           } else if (eventTokens[1].equals("trips")) {
-            try {
-              Card card = system.findCard(Integer.parseInt(eventTokens[3]));
-              card.viewMostRecentTrips();
-            } catch (Exception e) {
-              System.out.println("Invalid account or card number.");
-            }
+            Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+            card.viewMostRecentTrips();
           } else if (eventTokens[1].equals("balance")) {
-            try {
-              Card card = system.findCard(Integer.parseInt(eventTokens[3]));
-              card.viewBalance();
-            } catch (Exception e) {
-              System.out.println("Invalid account or card number.");
-            }
+            Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+            card.viewBalance();
           } else if (eventTokens[1].equals("cost")) {
-            try {
-              UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
-              ((CardHolder) user).viewMonthlyCost();
-
-            } catch (Exception e) {
-              System.out.println("Invalid card number.");
-            }
-
+            UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+            ((CardHolder) user).viewMonthlyCost();
           } else if (eventTokens[1].equals("allTrips")) {
-            try {
-              Card card = system.findCard(Integer.parseInt(eventTokens[3]));
-              card.viewAllTrips();
-            } catch (Exception e) {
-              System.out.println("Invalid account or card number.");
-            }
+            Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+            card.viewAllTrips();
           }
           break;
 
         case "change":
-          try {
-            UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[1]));
-            user.changeName(eventTokens[2]);
-
-          } catch (Exception e) {
-            System.out.println("Invalid account number.");
-          }
-
-          // case "remove": remove card , remove userAccount
-          // case change points name in TransitLine
-          // case add point to transitline
-          // case add new transitLine
-          // Do we need a static SystemManager???????????
+          UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+          user.changeName(eventTokens[2]);
           break;
 
         case "power":

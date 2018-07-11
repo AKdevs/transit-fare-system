@@ -19,7 +19,7 @@ exit | 30000001 | Leslie | B | 11:12 | 2018-02-11
 entry | 30000001 | Finch | S | 11:15 | 2018-02-11
 exit | 30000001 | Bay | S | 11:17 | 2018-02-11
 view | balance | 10000001 | 30000001
-view | cost | 30000001
+view | cost | 10000001
 view | report | 2018-02-11
 create | account | CardHolder | Tim Smith | tim@gmail.com
 create | account | AdminUser | Admin1 | admin1@transit.com
@@ -70,7 +70,7 @@ entry | 30000001 | Bloor | S | 10:49 | 2018-02-11
 exit | 30000001 | Bloor | S | 10:56 | 2018-02-11
 view | balance | 10000001 | 30000001
 view | allTrips | 10000001 | 30000001
-view | cost | 30000001
+view | cost | 10000001
 view | report | 2018-02-11
 remove | card | 30000001
 remove | account | 10000001
@@ -86,6 +86,6 @@ entry | 30000002 | Queen | S | 10:49 | 2018-02-12
 exit | 30000002 | Finch | S | 11:49 | 2018-02-12
 entry | 30000002 | Union | B | 11:52 | 2018-02-12
 view | trips | 10000002 | 30000002
-view | cost | 30000002
+view | cost | 10000002
 view | report | 2018-02-11
 view | report | 2018-02-12
