@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class TripManager extends TransitSystem {
-  //private ArrayList<TripSegment> currentTripSegments = new ArrayList<>();
 
   public void recordTapIn(
       String cardNumber, String enterSpot, String transitType, String enterTime, String enterDate) {
