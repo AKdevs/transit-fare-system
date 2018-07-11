@@ -6,7 +6,7 @@ public class AdminUser extends UserAccount {
 
   public AdminUser(String name, String email) {
     super(name, email);
-    this.accountNumber = nextAccountNum;
+    this.accountNumber = Integer.toString(nextAccountNum);
     nextAccountNum += 1;
   }
 

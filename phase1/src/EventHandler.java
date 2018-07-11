@@ -52,58 +52,72 @@ public class EventHandler {
           break;
 
         case "activate":
-          Card ca = system.findCard(Integer.parseInt(eventTokens[2]));
-          CardHolder cha = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
+          Card ca = system.findCard(eventTokens[2]);
+          CardHolder cha = (CardHolder) system.findUserAccount(eventTokens[1]);
           cha.activateCard(ca);
           break;
 
         case "deactivate":
-          Card cd = system.findCard(Integer.parseInt(eventTokens[2]));
-          CardHolder chd = (CardHolder) system.findUserAccount(Integer.parseInt(eventTokens[1]));
+          Card cd = system.findCard(eventTokens[2]);
+          CardHolder chd = (CardHolder) system.findUserAccount(eventTokens[1]);
           chd.deactivateCard(cd);
           break;
 
         case "link":
-          Card currentCard = system.findCard(Integer.parseInt(eventTokens[2]));
-          UserAccount currentHolder = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+          Card currentCard = system.findCard(eventTokens[2]);
+          UserAccount currentHolder = system.findUserAccount(eventTokens[1]);
           ((CardHolder) currentHolder).linkCard(currentCard);
           break;
 
         case "unlink":
-          UserAccount ua = system.findUserAccount(Integer.parseInt(eventTokens[1]));
-          Card cc = system.findCard(Integer.parseInt(eventTokens[2]));
+          UserAccount ua = system.findUserAccount(eventTokens[1]);
+          Card cc = system.findCard(eventTokens[2]);
           ((CardHolder) ua).unlinkCard(cc);
           break;
 
         case "load":
-          Card travelCard = system.findCard(Integer.parseInt(eventTokens[2]));
-          travelCard.addBalance(Double.parseDouble(eventTokens[3]));
+          String cardNumber = eventTokens[2];
+          Card travelCard = system.findCard(cardNumber);
+          if (travelCard != null) {
+            travelCard.addBalance(Double.parseDouble(eventTokens[3]));
+          } else {
+            System.out.println("Request failed. This card does not exist");
+          }
           break;
 
         case "view":
           if (eventTokens[1].equals("report")) {
             String date = eventTokens[2];
             AdminUser.getDailyReport(date);
-          } else if (eventTokens[1].equals("info")) {
-            UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+            break;
+          }
+          String accountNumber = eventTokens[2];
+          if (!userExists(accountNumber)) {
+            System.out.println(
+                "Request unsuccessful. Account " + accountNumber + " does not exist.");
+            break;
+          }
+
+          if (eventTokens[1].equals("info")) {
+            UserAccount user = system.findUserAccount(eventTokens[2]);
             user.viewInfo();
           } else if (eventTokens[1].equals("trips")) {
-            Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+            Card card = system.findCard(eventTokens[3]);
             card.viewMostRecentTrips();
           } else if (eventTokens[1].equals("balance")) {
-            Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+            Card card = system.findCard(eventTokens[3]);
             card.viewBalance();
           } else if (eventTokens[1].equals("cost")) {
-            UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[2]));
+            UserAccount user = system.findUserAccount(eventTokens[2]);
             ((CardHolder) user).viewMonthlyCost();
           } else if (eventTokens[1].equals("allTrips")) {
-            Card card = system.findCard(Integer.parseInt(eventTokens[3]));
+            Card card = system.findCard(eventTokens[3]);
             card.viewAllTrips();
           }
           break;
 
         case "change":
-          UserAccount user = system.findUserAccount(Integer.parseInt(eventTokens[1]));
+          UserAccount user = system.findUserAccount(eventTokens[1]);
           user.changeName(eventTokens[2]);
           break;
 
@@ -126,5 +140,19 @@ public class EventHandler {
             "Transit is closed for the day. Please come back during our operating hours.");
       }
     }
+  }
+
+  private boolean userExists(String accountNumber) {
+    if (system.findUserAccount(accountNumber) == null) {
+      return false;
+    }
+    return true;
+  }
+
+  private boolean cardExists(String cardNumber) {
+    if (system.findCard(cardNumber) == null) {
+      return false;
+    }
+    return true;
   }
 }

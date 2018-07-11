@@ -13,7 +13,7 @@ public class CardHolder extends UserAccount {
 
   public CardHolder(String name, String email) {
     super(name, email);
-    this.accountNumber = nextAccountNum;
+    this.accountNumber = Integer.toString(nextAccountNum);
     nextAccountNum += 1;
     this.travelCards = new ArrayList<>();
   }
@@ -152,6 +152,7 @@ public class CardHolder extends UserAccount {
     for (Card c : travelCards) {
       result += c.getTotalFares();
     }
-    System.out.println("Account " + accountNumber + " cost for the month: " + result / travelCards.size());
+    System.out.println(
+        "Account " + accountNumber + " cost for the month: " + result / travelCards.size());
   }
 }

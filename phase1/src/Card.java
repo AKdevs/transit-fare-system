@@ -2,11 +2,9 @@ import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-/**
- * Card is used to tap in and tap out when enter and exit a stop or station.
- */
+/** Card is used to tap in and tap out when enter and exit a stop or station. */
 public class Card {
-  private int cardNumber;
+  private String cardNumber;
   private static int nextCardNumber = 30000001;
   private double balance;
   private CardHolder owner;
@@ -24,11 +22,9 @@ public class Card {
   private ArrayList<TripSegment> lastCompleteTrip;
   // private String linkedness;
 
-  /**
-   * Constructs a card.
-   */
+  /** Constructs a card. */
   public Card() {
-    this.cardNumber = nextCardNumber;
+    this.cardNumber = Integer.toString(nextCardNumber);
     nextCardNumber += 1;
     this.owner = null;
     this.balance = 19;
@@ -41,13 +37,10 @@ public class Card {
     // this.currentDuration = 0;
   }
 
-  /**
-   * prints out all trips traveled and recorded by the card.
-   */
+  /** prints out all trips traveled and recorded by the card. */
   void viewAllTrips() {
     System.out.println(this.trips);
   }
-
 
   void setBalance(Double balance) {
     if (active) {
@@ -62,24 +55,28 @@ public class Card {
   }
 
   /**
-   *
-   *Adds balance to the card.
+   * Adds balance to the card.
    *
    * @param fares the amount of fares that are going to be added to the card
    */
   void addBalance(Double fares) {
     if (active) {
       this.balance += fares;
-      System.out.println("Sucessfully added $" + fares + " to card " + cardNumber + "." +
-      " The balance is now " + this.balance);
+      System.out.println(
+          "Sucessfully added $"
+              + fares
+              + " to card "
+              + cardNumber
+              + "."
+              + " The balance is now "
+              + this.balance);
     } else {
       System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
   }
 
   /**
-   *
-   *Deducts balance from the card.
+   * Deducts balance from the card.
    *
    * @param fares the amount of fares that are going to be deducted from the card
    */
@@ -91,9 +88,7 @@ public class Card {
     }
   }
 
-  /**
-   * Prints out the balance of the card.
-   */
+  /** Prints out the balance of the card. */
   void viewBalance() {
     if (active) {
       System.out.println("Card " + this.getCardNumber() + " balance: $" + this.balance);
@@ -102,29 +97,21 @@ public class Card {
     }
   }
 
-  /**
-   * Activates the card.
-   */
+  /** Activates the card. */
   void activate() {
     this.active = true;
   }
 
-  /**
-   * Deactivates the card.
-   */
+  /** Deactivates the card. */
   void deactivate() {
     this.active = false;
   }
 
-  /**
-   * Sets the status of the card linking to a account to be true.
-   */
+  /** Sets the status of the card linking to a account to be true. */
   public void linkAccount() {
     this.linked = true;
   }
-  /**
-   * Sets the status of the card linking to a account to be false.
-   */
+  /** Sets the status of the card linking to a account to be false. */
   public void unlinkAccount() {
     this.linked = false;
   }
@@ -137,12 +124,11 @@ public class Card {
     return active;
   }
   /**
-   *
-   *Returns the card number
+   * Returns the card number
    *
    * @return the card number
    */
-  int getCardNumber() {
+  String getCardNumber() {
     return this.cardNumber;
   }
 
@@ -150,8 +136,7 @@ public class Card {
     System.out.println(this.totalFares);
   }
   /**
-   *
-   *Returns the owner of the card.
+   * Returns the owner of the card.
    *
    * @return the owner of the card
    */
@@ -159,10 +144,9 @@ public class Card {
     return this.owner;
   }
   /**
+   * Sets the owner of the card.
    *
-   *Sets the owner of the card.
-   *
-   * @param owner  a card holder who will be assigned as the owner of the card
+   * @param owner a card holder who will be assigned as the owner of the card
    */
   void setOwner(CardHolder owner) {
     this.owner = owner;
@@ -172,10 +156,9 @@ public class Card {
     return this.currentFares;
   }
   /**
+   * ???????????????????????????
    *
-   *???????????????????????????
-   *
-   * @param fares  the amount of money which we want to add in current fares.
+   * @param fares the amount of money which we want to add in current fares.
    */
   void addCurrentFares(double fares) {
     this.currentFares += fares;
@@ -189,8 +172,7 @@ public class Card {
     return this.cardNumber == other.getCardNumber();
   }
   /**
-   *
-   *???????????????????????
+   * ???????????????????????
    *
    * @return
    */
@@ -214,9 +196,7 @@ public class Card {
     }
 
   }*/
-  /**
-   * Prints out the three most recent trips which are stored in the card.
-   */
+  /** Prints out the three most recent trips which are stored in the card. */
   void viewMostRecentTrips() {
     if (active) {
       if (this.mostRecentTrips.size() >= 3) {
@@ -254,6 +234,7 @@ public class Card {
 
   /**
    * ?????????????????????????????????
+   *
    * @param tripSegment
    */
   void addTripSegment(TripSegment tripSegment) {
@@ -343,10 +324,10 @@ public class Card {
 
   /**
    * Updates all stored fares by the change of the amount of fares
+   *
    * @param tripSegment the target trip segment
    * @param fares the amount of fares that need to be updated
    */
-
   void updateFares(TripSegment tripSegment, Double fares) {
     // deduct fares from card balance
     this.deductBalance(fares);

@@ -4,7 +4,7 @@ import java.io.*;
 public class UserAccount {
   private String name;
   private String email;
-  protected int accountNumber;
+  protected String accountNumber;
 
   public UserAccount(String name, String email) {
     this.name = name;
@@ -22,7 +22,7 @@ public class UserAccount {
   }
 
   /** @return account number of UserAccount */
-  public int getAccountNum() {
+  public String getAccountNum() {
     return this.accountNumber;
   }
 

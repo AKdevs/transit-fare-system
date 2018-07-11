@@ -61,9 +61,9 @@ public class TransitSystem {
     return allFares;
   }
 
-  public Card findCard(int cardNumber) {
+  public Card findCard(String cardNumber) {
     for (Card c : this.cards) {
-      if (c.getCardNumber() == cardNumber) {
+      if (c.getCardNumber().equals(cardNumber)) {
         return c;
       }
     }
@@ -80,13 +80,13 @@ public class TransitSystem {
     System.out.println("Card " + newCard.getCardNumber() + " created");
   }
 
-  void removeCard(int cardNumber) {
+  void removeCard(String cardNumber) {
     cards.remove(findCard(cardNumber));
   }
 
-  UserAccount findUserAccount(int accountNumber) {
+  UserAccount findUserAccount(String accountNumber) {
     for (UserAccount ua : userAccounts) {
-      if (ua.getAccountNum() == accountNumber) {
+      if (ua.getAccountNum().equals(accountNumber)) {
         return ua;
       }
     }

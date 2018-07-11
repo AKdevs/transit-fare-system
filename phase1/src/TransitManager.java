@@ -2,21 +2,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-/**
- * Manage the transit system.
- */
+/** Manage the transit system. */
 public class TransitManager extends TransitSystem {
 
-  /**
-   * Constructs a transit system manager.
-   */
+  /** Constructs a transit system manager. */
   TransitManager() {
     defaultSetup();
   }
 
-  /**
-   * Sets up transit lines in transit system.
-   */
+  /** Sets up transit lines in transit system. */
   private void defaultSetup() {
     ArrayList<String> line1Stations =
         new ArrayList<>(
@@ -32,6 +26,7 @@ public class TransitManager extends TransitSystem {
 
   /**
    * Creates a new transit line in the transit system.
+   *
    * @param points stations or stops in the new transit line
    * @param type type of the new transit line
    * @return the new transit line
@@ -42,6 +37,7 @@ public class TransitManager extends TransitSystem {
 
   /**
    * Adds the new transit line to the transit system
+   *
    * @param name id of the new transit line
    * @param line new transit line
    */

@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 
-/**
- * Manage all accounts which are stored in TransitSystem.
- */
+/** Manage all accounts which are stored in TransitSystem. */
 public class AccountManager extends TransitSystem {
 
   /**
@@ -30,15 +28,15 @@ public class AccountManager extends TransitSystem {
   }
 
   /**
-   *
    * Add a user account.
+   *
    * @param newUser a new user with account
    */
   void addUserAccount(UserAccount newUser) {
     getUserAccounts().add(newUser);
   }
 
-  void removeUserAccount(int accountNumber) {
+  void removeUserAccount(String accountNumber) {
     getUserAccounts().remove(findUserAccount(accountNumber));
   }
 }

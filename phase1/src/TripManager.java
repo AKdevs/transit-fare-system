@@ -14,7 +14,7 @@ public class TripManager extends TransitSystem {
   }
 
   private void addTripSegmentToCard(TripSegment ts) {
-    int currentCardNumber = ts.getAssociatedCard();
+    String currentCardNumber = ts.getAssociatedCard();
     findCard(currentCardNumber).addTripSegment(ts);
   }
 
@@ -22,14 +22,13 @@ public class TripManager extends TransitSystem {
       String cardNumber, String exitSpot, String transitType, String exitTime, String exitDate) {
     // TripSegment currentTs = new TripSegment("0", "default", "default", "default", "default");
     for (TripSegment ts : this.currentTripSegments) {
-      if (ts.getAssociatedCard() == Integer.parseInt(cardNumber)
-          && ts.getExitSpot().equals("unknown")) {
+      if (ts.getAssociatedCard().equals(cardNumber) && ts.getExitSpot().equals("unknown")) {
         // currentTs = ts;
         ts.completeTripSegment(exitSpot, transitType, exitTime, exitDate);
         calculateDuration(ts);
         calculateTripSegmentFares(ts);
         if (ts.getEnterTransitType().equals("S")) {
-          int currentCardNumber = ts.getAssociatedCard();
+          String currentCardNumber = ts.getAssociatedCard();
           findCard(currentCardNumber).updateFares(ts, ts.getSegmentFares());
         }
       }
