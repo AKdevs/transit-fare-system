@@ -1,9 +1,18 @@
 import java.util.ArrayList;
 
 public class TripManager extends TransitSystem {
-  /** Stores any trip segment   */
+  /** Stores any ongoing trip segments   */
   private ArrayList<TripSegment> currentTripSegments = new ArrayList<>();
 
+    /**
+     * Records the card number, spot of entry, type of transit, time of entry
+     * and date of entry of a card tap in and beginning a new trip segment.
+     * @param cardNumber card number of associated card
+     * @param enterSpot stop/station of entry
+     * @param transitType type of transit (bus/subway)
+     * @param enterTime time of entry HH:MM
+     * @param enterDate date of entry YY-MM-DD
+     */
   public void recordTapIn(
       String cardNumber, String enterSpot, String transitType, String enterTime, String enterDate) {
     TripSegment ts = new TripSegment(cardNumber, enterSpot, transitType, enterTime, enterDate);
@@ -14,11 +23,24 @@ public class TripManager extends TransitSystem {
     addTripSegmentToCard(ts);
   }
 
+    /**
+     * Adds trip segment to associated card.
+     * @param ts TripSegment to be added to associated card.
+     */
   private void addTripSegmentToCard(TripSegment ts) {
     String currentCardNumber = ts.getAssociatedCard();
     findCard(currentCardNumber).addTripSegment(ts);
   }
 
+    /**
+     * Records the card number, spot of exit, type of transit, time of exit
+     * and date of exit of a card tap out and ends the ongoing trip segment.
+     * @param cardNumber card number of associated card
+     * @param exitSpot stop/station of exit
+     * @param transitType type of transit (bus/subway)
+     * @param exitTime time of exit HH:MM
+     * @param exitDate date of exit YY-MM-DD
+     */
   public void recordTapOut(
       String cardNumber, String exitSpot, String transitType, String exitTime, String exitDate) {
     for (TripSegment ts : this.currentTripSegments) {
