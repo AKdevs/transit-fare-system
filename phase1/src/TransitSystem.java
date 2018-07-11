@@ -3,30 +3,12 @@ import java.util.*;
 
 public class TransitSystem {
 
-  private static ArrayList<Card> cards = new ArrayList<>();
+  static private ArrayList<Card> cards = new ArrayList<>();
   protected HashMap<String, TransitLine> transitLines = new HashMap<>();
   private ArrayList<UserAccount> userAccounts = new ArrayList<>();
   // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
-  /*
-  private static ArrayList<String> line1Stations = new ArrayList<>(Arrays.asList("Finch", "North York Centre", "Sheppard-Yonge", "King", "Bay", "Bloor" ));
-
-  private static ArrayList<String> route1Stops = new ArrayList<>(Arrays.asList("Dufferin", "Bathurst", "Sheppard-Yonge", "Bayview", "Leslie"));
-
-  private static TransitLine Line1 = new TransitLine(line1Stations, "S", "Line1");
-
-  private static TransitLine Route1 = new TransitLine(route1Stops, "B", "Route1");
-
-    // key is name of the line, value is the transit line
-    private static HashMap<String, TransitLine> transitLines = new HashMap<>(){{
-        put("Line1", Line1);
-        put("Route1", Route1);
-    }};
-  */
-  // Subway fare is $0.5 per station travelled
   private static double subwayFare = 0.5;
-
-  // Bus fare is $2.0 per trip
   private static double busFare = 2.0;
 
   String currentMonth;
@@ -81,8 +63,8 @@ public class TransitSystem {
     return allFares;
   }
 
-  static Card findCard(int cardNumber) {
-    for (Card c : cards) {
+  public Card findCard(int cardNumber) {
+    for (Card c : this.cards) {
       if (c.getCardNumber() == cardNumber) {
         return c;
       }
@@ -103,16 +85,6 @@ public class TransitSystem {
   void removeCard(int cardNumber) {
     cards.remove(findCard(cardNumber));
   }
-
-  /*
-  public TripManager getTripManager() {
-    return this.tripManager;
-  }
-
-  public TransitManager getTransitManager() {
-    return this.transitManager;
-  }
-  */
 
   UserAccount findUserAccount(int accountNumber) {
     for (UserAccount ua : userAccounts) {
@@ -159,12 +131,6 @@ public class TransitSystem {
     int currentCardNumber = currentTripSegment.getAssociatedCard();
     findCard(currentCardNumber).addTripSegment(currentTripSegment);
   }
-
-  /*
-  void addTransitLines(TransitLine newTransitLine) {
-    transitLines.put(newTransitLine.getId(), newTransitLine);
-  }
-  */
 
   static void addAllFares(String date, double fares) {
     if (allFares.isEmpty()) {

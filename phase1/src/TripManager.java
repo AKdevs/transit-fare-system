@@ -1,11 +1,7 @@
 import java.util.ArrayList;
 
-public class TripManager extends TransitSystem{
-    private ArrayList<TripSegment> currentTripSegments;
-
-    TripManager() {
-        currentTripSegments = new ArrayList<>();
-    }
+public class TripManager extends TransitSystem {
+    private ArrayList<TripSegment> currentTripSegments = new ArrayList<>();
 
     public void recordTapIn(
             String cardNumber, String enterSpot, String transitType, String enterTime, String enterDate) {
@@ -19,7 +15,7 @@ public class TripManager extends TransitSystem{
 
     private void addTripSegmentToCard(TripSegment ts) {
         int currentCardNumber = ts.getAssociatedCard();
-        TransitSystem.findCard(currentCardNumber).addTripSegment(ts);
+        findCard(currentCardNumber).addTripSegment(ts);
     }
 
     public void recordTapOut(
@@ -34,7 +30,7 @@ public class TripManager extends TransitSystem{
                 calculateTripSegmentFares(ts);
                 if (ts.getEnterTransitType().equals("S")) {
                     int currentCardNumber = ts.getAssociatedCard();
-                    TransitSystem.findCard(currentCardNumber).updateFares(ts, ts.getSegmentFares());
+                    findCard(currentCardNumber).updateFares(ts, ts.getSegmentFares());
                 }
             }
         }
