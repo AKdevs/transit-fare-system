@@ -34,13 +34,11 @@ public class Card {
     this.balance = 19;
     this.linked = false;
     this.active = true;
-    // this.status = "activated";
     this.trips = new HashMap<>();
     this.mostRecentTrips = new ArrayList<>();
     this.currentFares = 0.0;
     this.totalFares = 0.0;
     // this.currentDuration = 0;
-    // this.linkedness = "unlinked";
   }
 
   /**

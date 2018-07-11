@@ -14,11 +14,9 @@ public class EventHandler {
     TransitSystem mainSystem = new TransitSystem();
 
     EventHandler mainHandler = new EventHandler(mainSystem);
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 80; i++) {
       mainHandler.play();
     }
-    // System.out.println(mainSystem.getCards());
-    // System.out.println(mainSystem.getUserAccounts());
   }
 
   EventHandler(TransitSystem system) throws Exception {
