@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class TripManager {
+public class TripManager extends TransitSystem{
     private ArrayList<TripSegment> currentTripSegments;
 
     TripManager() {
@@ -58,7 +58,37 @@ public class TripManager {
         if (ts.getEnterTransitType().equals("B")) {
             ts.setSegmentFares(2.0);
         } else if (ts.getExitTransitType().equals("S")) {
-            ts.setSegmentFares(TransitSystem.calculateSubwayFares(ts));
+            ts.setSegmentFares(calculateSubwayFares(ts));
+        }
+    }
+
+    double calculateSubwayFares(TripSegment currentTripSegment) {
+        int enterSpotIndex = 0;
+        int exitSpotIndex = 0;
+        for (String lineName : transitLines.keySet()) {
+            TransitLine line = transitLines.get(lineName);
+            if (line.getType().equals("S")) {
+                ArrayList<String> points = line.getPoints();
+                for (String p : points) {
+                    if (p.equals(currentTripSegment.getEnterSpot())) {
+                        enterSpotIndex = points.indexOf(p);
+                    } else if (p.equals(currentTripSegment.getExitSpot())) {
+                        exitSpotIndex = points.indexOf(p);
+                    }
+                }
+            }
+        }
+        if (enterSpotIndex == exitSpotIndex) {
+            return 0;
+        } else if (currentTripSegment.getDuration() <= 180
+                && (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5 > 6) {
+            addNumberOfStation(
+                    currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
+            return 6;
+        } else {
+            addNumberOfStation(
+                    currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
+            return (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5;
         }
     }
 }

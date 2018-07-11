@@ -2,16 +2,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class TransitManager {
-  private HashMap<String, TransitLine> transitLines;
-
+public class TransitManager extends TransitSystem {
   TransitManager() {
-    transitLines = new HashMap<>();
     defaultSetup();
-  }
-
-  public HashMap<String, TransitLine> getTransitLines() {
-    return transitLines;
   }
 
   private void defaultSetup() {

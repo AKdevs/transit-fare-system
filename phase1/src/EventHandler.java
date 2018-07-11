@@ -5,12 +5,15 @@ import java.util.Scanner;
 
 public class EventHandler {
     private TransitSystem system;
+    private TripManager tripManager;
+    private TransitManager transitManager;
     private Scanner eventsBuffer;
 
     public static void main(String[] args) throws Exception {
         TransitSystem mainSystem = new TransitSystem();
+
         EventHandler mainHandler = new EventHandler(mainSystem);
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 50; i++) {
             mainHandler.play();
         }
         // System.out.println(mainSystem.getCards());
@@ -20,6 +23,8 @@ public class EventHandler {
     EventHandler(TransitSystem system) throws Exception {
         this.system = system;
         this.eventsBuffer = new Scanner(new File("phase1/events.txt"));
+        this.tripManager = new TripManager();
+        this.transitManager = new TransitManager();
     }
 
     void play() {
@@ -29,15 +34,11 @@ public class EventHandler {
         if (system.getOperatingStatus().equals("on")) {
             switch (action) {
                 case "entry":
-                    system
-                            .getTripManager()
-                            .recordTapIn(
+                    tripManager.recordTapIn(
                                     eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4], eventTokens[5]);
                     break;
                 case "exit":
-                    system
-                            .getTripManager()
-                            .recordTapOut(
+                    tripManager.recordTapOut(
                                     eventTokens[1], eventTokens[2], eventTokens[3], eventTokens[4], eventTokens[5]);
                     break;
                 case "create":

@@ -4,10 +4,7 @@ import java.util.*;
 public class TransitSystem {
 
   private static ArrayList<Card> cards = new ArrayList<>();
-
-  private TripManager tripManager = new TripManager();
-  private static TransitManager transitManager = new TransitManager();
-
+  protected HashMap<String, TransitLine> transitLines = new HashMap<>();
   private ArrayList<UserAccount> userAccounts = new ArrayList<>();
   // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
@@ -107,6 +104,7 @@ public class TransitSystem {
     cards.remove(findCard(cardNumber));
   }
 
+  /*
   public TripManager getTripManager() {
     return this.tripManager;
   }
@@ -114,6 +112,7 @@ public class TransitSystem {
   public TransitManager getTransitManager() {
     return this.transitManager;
   }
+  */
 
   UserAccount findUserAccount(int accountNumber) {
     for (UserAccount ua : userAccounts) {
@@ -204,11 +203,10 @@ public class TransitSystem {
     return transitLines;
   }
   */
-
+  /*
   static double calculateSubwayFares(TripSegment currentTripSegment) {
     int enterSpotIndex = 0;
     int exitSpotIndex = 0;
-    HashMap<String, TransitLine> transitLines = transitManager.getTransitLines();
     for (String lineName : transitLines.keySet()) {
       TransitLine line = transitLines.get(lineName);
       if (line.getType().equals("S")) {
@@ -235,4 +233,5 @@ public class TransitSystem {
       return (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5;
     }
   }
+  */
 }
