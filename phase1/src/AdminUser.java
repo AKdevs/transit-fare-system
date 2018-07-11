@@ -19,7 +19,7 @@ public class AdminUser extends UserAccount {
   /**
    * Prints out total amount of fare collected for date and total number of
    * bus stops/subway stations reached by passengers on that date.
-   * @param date
+   * @param date the date which AdminUser would like to view the report for
    */
   public static void getDailyReport(String date) {
     System.out.println(TransitSystem.getDailyFares(date));
