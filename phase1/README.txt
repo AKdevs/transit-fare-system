@@ -31,10 +31,9 @@ Setup
 
 For Phase 1, no installation is required for the program. The program will execute a list of events defined in ‘events.txt’. This file should be placed in the same folder as the class codes - ~/src/
 
-	EventHandler(TransitSystem system) throws Exception {
-		this.system = system;
-		this.eventsBuffer = new Scanner(new File("events.txt"));
-	}
+    EventHandler(TransitSystem system) throws Exception {
+        this.system = system;
+        this.eventsBuffer = new Scanner(new File("phase1/events.txt"));
 
 Each line of ‘events.txt’ contains one single event. A specific format, “action|field1|field2|...|fieldn”, is to be used when drafting an event. The keyword and convention for each type of supported event is as following:
 
@@ -46,7 +45,8 @@ Each line of ‘events.txt’ contains one single event. A specific format, “a
 	Exit from a bus / subway station
 	Format: eventType | cardNumber | name of station/stop | transportationType | time | date
 	Example: “exit | 1204 | Bloor |  B | 10:49:11 | 2018-02-11” 
-	*Time is in 24-hour standard format
+	    *Time is in 24-hour standard format
+	    *A passenger cannot stay in the transit system over night. He/She has to enter and exit the system on the same day.
 
 	UserAccount Creation
 	Format: eventType1 | eventType2 | accountType | name | e-mail
@@ -126,19 +126,14 @@ How to Run
 
 The main method of this program is defined in ‘EventHandler.java’. You could run ‘EventHandler.java’ in IntelliJ IDEA.
 
-	public class EventHandler {
-		private TransitSystem system;
-		private Scanner eventsBuffer;
+    public static void main(String[] args) throws Exception {
+        TransitSystem mainSystem = new TransitSystem();
 
-		public static void main(String[] args) throws Exception {
-		TransitSystem mainSystem = new TransitSystem();
-		EventHandler mainHandler = new EventHandler(mainSystem);
-		for (int i = 0; i < 3; i++) {
-			mainHandler.play();
-		}
-		System.out.println(mainSystem.getCards());
-		System.out.println(mainSystem.getUserAccounts());
-		}
+        EventHandler mainHandler = new EventHandler(mainSystem);
+        while (mainHandler.eventsBuffer.hasNextLine()) {
+          mainHandler.play();
+        }
+      }
 
 
 Built With
