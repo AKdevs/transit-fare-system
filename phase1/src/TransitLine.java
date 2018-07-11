@@ -8,7 +8,7 @@ public class TransitLine {
   /** Identifier   */
   private String id;
 
-  public TransitLine(ArrayList<String> points, String type, String id) {
+  TransitLine(ArrayList<String> points, String type, String id) {
     this.points = points;
     this.type = type;
     this.id = id;
@@ -55,7 +55,7 @@ public class TransitLine {
    *
    * @return id of transit line
    */
-  public String getId() {
+  String getId() {
     return this.id;
   }
 
@@ -65,7 +65,7 @@ public class TransitLine {
    * @param oldName the name to be changed.
    * @param newName the new name.
    */
-  public void changePointName(String oldName, String newName) {
+  void changePointName(String oldName, String newName) {
     if (!points.isEmpty()) {
       for (int i = 0; i < points.size(); i++) {
         if (points.get(i).equals(oldName)) {
@@ -78,8 +78,8 @@ public class TransitLine {
   /**
    * Adds a station/stop called newPoint after pointBefore. If
    * pointBefore is "", then adds newPoint to the front.
-   * @param pointBefore
-   * @param newPoint
+   * @param pointBefore The station/stop before the point to be added.
+   * @param newPoint The station/stop to be added.
    */
   public void addPoint(String pointBefore, String newPoint) {
     if (pointBefore.equals("")) {

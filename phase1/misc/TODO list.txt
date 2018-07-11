@@ -56,7 +56,7 @@
  Card []
  CardHolder []
  EventHandler []
- TransitLine []
+ TransitLine [x]
  TransitManager [x]
  TransitSystem []
  TripManager []
