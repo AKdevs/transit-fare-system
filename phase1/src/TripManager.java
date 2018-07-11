@@ -23,6 +23,7 @@ public class TripManager extends TransitSystem {
     for (TripSegment ts : this.currentTripSegments) {
       if (ts.getAssociatedCard().equals(cardNumber) && ts.getExitSpot().equals("unknown")) {
         ts.completeTripSegment(exitSpot, transitType, exitTime, exitDate);
+        TransitSystem.addNumberOfStation(ts.getEnterDate(), calculateStopsReachedByBus(ts));
         calculateDuration(ts);
         calculateTripSegmentFares(ts);
         if (ts.getEnterTransitType().equals("S")) {
@@ -83,5 +84,27 @@ public class TripManager extends TransitSystem {
           currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
       return (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5;
     }
+  }
+
+  int calculateStopsReachedByBus(TripSegment ts){
+      int enterSpotIndex = 0;
+      int exitSpotIndex = 0;
+      if (ts.getEnterTransitType().equals("B")) {
+          for (String lineName : transitLines.keySet()) {
+              TransitLine line = transitLines.get(lineName);
+              if (line.getType().equals("B")) {
+                  ArrayList<String> points = line.getPoints();
+                  for (String p : points) {
+                      if (p.equals(ts.getEnterSpot())) {
+                          enterSpotIndex = points.indexOf(p);
+                      } else if (p.equals(ts.getExitSpot())) {
+                          exitSpotIndex = points.indexOf(p);
+                      }
+                  }
+              }
+          }
+          return Math.abs(exitSpotIndex - enterSpotIndex) + 1;
+      }
+      return 0;
   }
 }
