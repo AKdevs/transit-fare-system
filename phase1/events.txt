@@ -83,6 +83,13 @@ view | balance | 10000002 | 30000002
 entry | 30000002 | Bloor | S | 10:49 | 2018-02-11
 exit | 30000002 | Union | S | 11:15 | 2018-02-11
 entry | 30000002 | Union | B | 10:58 | 2018-02-11
+power | off | TransitSystem | 2018-02-11
+power | on | TransitSystem | 2018-02-12
+entry | 30000006 | Harlem | B | 08:49 | 2018-02-12
+exit | 30000006 | Union | B | 09:29 | 2018-02-12
+load | 10000004 | 30000006 | 20
+entry | 30000006 | Union | S | 09:39 | 2018-02-12
+exit | 30000006 | Rosedale | S | 09:57 | 2018-02-12
 entry | 30000002 | Queen | S | 10:49 | 2018-02-12
 exit | 30000002 | Finch | S | 11:49 | 2018-02-12
 entry | 30000002 | Union | B | 11:52 | 2018-02-12
