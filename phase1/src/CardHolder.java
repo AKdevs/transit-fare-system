@@ -57,7 +57,7 @@ public class CardHolder extends UserAccount {
    * Prints out a message to inform the CardHolder whether the card
    * is linked to his/her account successfully.
    *
-   * @param card
+   * @param card the Card that CardHolder would like to link
    */
   public void linkCard(Card card) {
     if (!(card.getOwner() == null)) {
@@ -77,7 +77,7 @@ public class CardHolder extends UserAccount {
    * Unlinks Card from CardHolder's account.
    * Prints out a message to confirm the action is completed.
    *
-   * @param card
+   * @param card the Card that CardHolder would like to unlink
    */
   public void unlinkCard(Card card) {
     this.travelCards.remove(card);
@@ -91,7 +91,7 @@ public class CardHolder extends UserAccount {
    * Activates a Card that is linked to this CardHolder.
    * Prints out a message to inform the CardHolder whether it is successful.
    *
-   * @param card
+   * @param card the Card that CardHolder would like to activate
    */
   public void activateCard(Card card) {
     // CardHolder is able to activate a card that is linked to his/her account.
@@ -108,7 +108,7 @@ public class CardHolder extends UserAccount {
    * Deactivates a Card that is linked to this CardHolder.
    * Prints out a message to inform the CardHolder whether it is successful.
    *
-   * @param card
+   * @param card the Card that CardHolder would like to deactivate
    */
   public void deactivateCard(Card card) {
     // CardHolder is able to deactivate a card that is linked to his/her account.
