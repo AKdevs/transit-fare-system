@@ -232,6 +232,10 @@ public class Card {
     }
   }
 
+    /**
+     * Returns true iff card balance is positive and card is active.
+     * @return true iff card balance is positive and card is active.
+     */
   boolean isEntryAllowed() {
     if ((this.balance > 0) && (active)) {
       System.out.println("Accepted");
@@ -243,9 +247,9 @@ public class Card {
   }
 
   /**
-   * ?????????????????????????????????
+   * Adds trip segment tripSegment to this card.
    *
-   * @param tripSegment
+   * @param tripSegment trip segment to be added to card.
    */
   void addTripSegment(TripSegment tripSegment) {
     // if tripSegment is the first TripSegment to be added to trips
@@ -350,14 +354,17 @@ public class Card {
     TransitSystem.addAllFares(tripSegment.getEnterDate(), fares);
   }
 
+    /** @return ongoing trip segment */
   TripSegment getOngoingTripSegment() {
       return this.ongoingTripSegment;
   }
 
+    /** @param ts ongoing trip segment */
   void setOngoingTripSegment(TripSegment ts) {
       this.ongoingTripSegment = ts;
   }
 
+    /** @return last completed trip segment   */
     public TripSegment getLastTripSegment() {
         return lastTripSegment;
     }

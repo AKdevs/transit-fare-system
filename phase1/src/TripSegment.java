@@ -121,8 +121,7 @@ public class TripSegment {
     this.segmentFares = fares;
   }
 
-  /** @return a string representation of the trip segment.
-   */
+  /** @return a string representation of the trip segment. */
   @Override
   public String toString() {
     String entryType;
@@ -162,10 +161,14 @@ public class TripSegment {
     return s.toString();
   }
 
+  /** Returns true iff subway trip is continuous
+   * @return true iff subway trip is continous
+   */
   boolean getContiSub() {
       return this.contiSub;
   }
 
+  /** @param b status of whether subway trip is continuous   */
   void setContiSub(boolean b) {
       this.contiSub = b;
   }
