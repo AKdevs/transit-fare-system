@@ -14,7 +14,7 @@ public class TransitManager extends TransitSystem {
   private void defaultSetup() {
     ArrayList<String> line1Stations =
         new ArrayList<>(
-            Arrays.asList("Finch", "North York Centre", "Sheppard-Yonge", "King", "Bay", "Bloor"));
+            Arrays.asList("Finch", "North York Centre", "Sheppard-Yonge", "York Mills", "Lawrence", "Eglinton", "Davisville","St Clair", "Summerhill", "Rosedale", "Bloor-Yonge", "Wellesley", "College", "Dundas", "Queen", "King", "Union", "St Andrew", "Osgoode", "St Patrick"));
     ArrayList<String> route1Stops =
         new ArrayList<>(
             Arrays.asList("Dufferin", "Bathurst", "Sheppard-Yonge", "Bayview", "Leslie"));

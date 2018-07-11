@@ -5,7 +5,6 @@ public class TransitSystem {
   private static ArrayList<Card> cards = new ArrayList<>();
   protected static HashMap<String, TransitLine> transitLines = new HashMap<>();
   private static ArrayList<UserAccount> userAccounts = new ArrayList<>();
-  // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
   private static double subwayFare = 0.5;
   private static double busFare = 2.0;
