@@ -113,4 +113,28 @@ public class TripSegment {
   public void setSegmentFares(double fares) {
     this.segmentFares = fares;
   }
+
+  @Override
+  public String toString() {
+    String entryType;
+    String exitType;
+    if (enterTransitType.equals("B")) {
+      entryType = "bus";
+    } else {
+      entryType = "subway";
+    }
+
+    if (exitTransitType.equals("B")) {
+      exitType = "bus";
+    } else {
+      exitType = "subway";
+    }
+
+    StringBuilder s = new StringBuilder(
+            "Date: " + this.enterDate + " - " +
+            "Entered " + entryType + " at " + enterSpot + " at " +  enterTime + "." +
+            " Exited " + exitType + " at " + exitSpot + " at " +  exitTime + "." + "\n"
+    );
+    return s.toString();
+  }
 }
