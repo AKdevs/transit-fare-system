@@ -113,5 +113,4 @@ public class TripSegment {
   public void setSegmentFares(double fares) {
     this.segmentFares = fares;
   }
-
 }

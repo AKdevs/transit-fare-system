@@ -1,9 +1,18 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ *
+ * CardHolder is a person who owns and uses a Card, ie a passenger who travels in the TransitSystem.
+ * The person is able to link Cards to his/her account and view his/her travel history.
+ *
+ */
+
+
 public class CardHolder extends UserAccount {
 
   private ArrayList<Card> travelCards;
+  /* Account Number for CardHolder starts at 10000001 to distinguish with other account/card numbers.*/
   private static int nextAccountNum = 10000001;
 
   public CardHolder(String name, String email) {
@@ -43,13 +52,19 @@ public class CardHolder extends UserAccount {
     }
   }*/
 
+  /**
+   * Links Card to CardHolder's account.
+   * Prints out a message to inform the CardHolder whether the card
+   * is linked to his/her account successfully.
+   *
+   * @param card
+   */
   public void linkCard(Card card) {
-    // if the card is not created in the system, return error message
     if (!(card.getOwner() == null)) {
       // If card is currently linked to another CardHolder, it cannot be linked to this CardHolder.
       System.out.println("Action denied. This card is currently linked to another account.");
     } else {
-      // link a valid card
+      // link a valid card to this CardHolder
       this.travelCards.add(card);
       card.setOwner(this);
       card.linkAccount();
@@ -58,6 +73,12 @@ public class CardHolder extends UserAccount {
     }
   }
 
+  /**
+   * Unlinks Card from CardHolder's account.
+   * Prints out a message to confirm the action is completed.
+   *
+   * @param card
+   */
   public void unlinkCard(Card card) {
     this.travelCards.remove(card);
     card.setOwner(null);
@@ -66,8 +87,14 @@ public class CardHolder extends UserAccount {
         "Card " + card.getCardNumber() + " unlinked to CardHolder Account " + this.getAccountNum());
   }
 
-  // CardHolder is able to activate a card that is linked to his/her account.
+  /**
+   * Activates a Card that is linked to this CardHolder.
+   * Prints out a message to inform the CardHolder whether it is successful.
+   *
+   * @param card
+   */
   public void activateCard(Card card) {
+    // CardHolder is able to activate a card that is linked to his/her account.
     if (this.travelCards.contains(card)) {
       card.activate();
       System.out.println("Card " + card.getCardNumber() + " activated");
@@ -77,8 +104,14 @@ public class CardHolder extends UserAccount {
     }
   }
 
-  // CardHolder is able to deactivate a card that is linked to his/her account.
+  /**
+   * Deactivates a Card that is linked to this CardHolder.
+   * Prints out a message to inform the CardHolder whether it is successful.
+   *
+   * @param card
+   */
   public void deactivateCard(Card card) {
+    // CardHolder is able to deactivate a card that is linked to his/her account.
     if (this.travelCards.contains(card)) {
       card.deactivate();
       System.out.println("Card " + card.getCardNumber() + " deactivated");
@@ -100,7 +133,12 @@ public class CardHolder extends UserAccount {
               + " is not activated or linked to your account");
     }
   }*/
-  @Override // Will include cards linked to the CardHolder
+
+  /**
+   * Prints out information about the CardHolder and Card(s) linked to his/her account.
+   */
+  @Override
+  // Will include cards linked to the CardHolder
   public void viewInfo() {
     System.out.println("Name: " + this.getName());
     System.out.println("Email: " + this.getEmail());
@@ -115,6 +153,9 @@ public class CardHolder extends UserAccount {
     }
   }
 
+  /**
+   * Prints out the average monthly cost of all Cards this CardHolder has.
+   */
   void viewMonthlyCost() {
     double result = 0.0;
     for (Card c : travelCards) {
@@ -122,4 +163,4 @@ public class CardHolder extends UserAccount {
     }
     System.out.println(result / travelCards.size());
   }
-    }
+}

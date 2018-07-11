@@ -6,11 +6,12 @@ public class TransitSystem {
   private static ArrayList<Card> cards = new ArrayList<>();
 
   private TripManager tripManager = new TripManager();
+  private static TransitManager transitManager = new TransitManager();
 
   private ArrayList<UserAccount> userAccounts = new ArrayList<>();
   // [CardHolder(1),AdminUser(026), CardHolder(3), .....]
 
-
+  /*
   private static ArrayList<String> line1Stations = new ArrayList<>(Arrays.asList("Finch", "North York Centre", "Sheppard-Yonge", "King", "Bay", "Bloor" ));
 
   private static ArrayList<String> route1Stops = new ArrayList<>(Arrays.asList("Dufferin", "Bathurst", "Sheppard-Yonge", "Bayview", "Leslie"));
@@ -24,7 +25,7 @@ public class TransitSystem {
         put("Line1", Line1);
         put("Route1", Route1);
     }};
-
+  */
   // Subway fare is $0.5 per station travelled
   private static double subwayFare = 0.5;
 
@@ -47,18 +48,41 @@ public class TransitSystem {
 
   static HashMap<String, Integer> numberOfStations = new HashMap<>();
 
+  // operatingStatus of TransitSystem, value can be on or off
+  private String operatingStatus = "off";
+
+  String getOperatingStatus() {
+    return this.operatingStatus;
+  }
+
+  void powerOnSystem() {
+    this.operatingStatus = "on";
+  }
+
+  void powerOffSystem() {
+    this.operatingStatus = "off";
+    System.out.println("The TransitSystem has been powered off.");
+  }
 
   String getCurrentMonth() {
-        return this.currentMonth;
-    }
+    return this.currentMonth;
+  }
 
-    String getCurrentDate() {
-        return this.currentDate;
-    }
+  String getCurrentDate() {
+    return this.currentDate;
+  }
+
+  void setCurrentMonth(String month) {
+    this.currentMonth = month;
+  }
+
+  void setCurrentDate(String date) {
+    this.currentDate = date;
+  }
 
   public static HashMap<String, Double> getAllFares() {
-        return allFares;
-    }
+    return allFares;
+  }
 
   static Card findCard(int cardNumber) {
     for (Card c : cards) {
@@ -87,6 +111,10 @@ public class TransitSystem {
     return this.tripManager;
   }
 
+  public TransitManager getTransitManager() {
+    return this.transitManager;
+  }
+
   UserAccount findUserAccount(int accountNumber) {
     for (UserAccount ua : userAccounts) {
       if (ua.getAccountNum() == accountNumber) {
@@ -113,7 +141,7 @@ public class TransitSystem {
   void createAdminAccount(String name, String email) {
     AdminUser newAccount = new AdminUser(name, email);
     addUserAccount(newAccount);
-      System.out.println("AdminUser Account " + newAccount.getAccountNum() + " created");
+    System.out.println("AdminUser Account " + newAccount.getAccountNum() + " created");
   }
 
   void addUserAccount(UserAccount newUser) {
@@ -133,22 +161,24 @@ public class TransitSystem {
     findCard(currentCardNumber).addTripSegment(currentTripSegment);
   }
 
+  /*
   void addTransitLines(TransitLine newTransitLine) {
     transitLines.put(newTransitLine.getId(), newTransitLine);
   }
+  */
 
   static void addAllFares(String date, double fares) {
-      if (allFares.isEmpty()){
-          allFares.put(date, fares);
-      }else{
-          for (String d : allFares.keySet()) {
-              if (d.equals(date)) {
-                  Double f = allFares.get(d);
-                  f += fares;
-                  allFares.put(d, f);
-              }
-          }
+    if (allFares.isEmpty()) {
+      allFares.put(date, fares);
+    } else {
+      for (String d : allFares.keySet()) {
+        if (d.equals(date)) {
+          Double f = allFares.get(d);
+          f += fares;
+          allFares.put(d, f);
+        }
       }
+    }
   }
 
   static void addNumberOfStation(String date, int n) {
@@ -160,8 +190,8 @@ public class TransitSystem {
           numberOfStations.put(d, stationNum);
         }
       }
-    }else {
-        numberOfStations.put(date, n);
+    } else {
+      numberOfStations.put(date, n);
     }
   }
 
@@ -169,35 +199,39 @@ public class TransitSystem {
     return cards;
   }
 
+  /*
   HashMap<String, TransitLine> getTransitLines() {
     return transitLines;
   }
+  */
 
   static double calculateSubwayFares(TripSegment currentTripSegment) {
     int enterSpotIndex = 0;
     int exitSpotIndex = 0;
+    HashMap<String, TransitLine> transitLines = transitManager.getTransitLines();
     for (String lineName : transitLines.keySet()) {
-        TransitLine line = transitLines.get(lineName);
-        if (line.getType().equals("S")) {
-            ArrayList<String> points = line.getPoints();
-            for (String p : points) {
-                if (p.equals(currentTripSegment.getEnterSpot())) {
-                    enterSpotIndex = points.indexOf(p);
-                } else if (p.equals(currentTripSegment.getExitSpot())) {
-                    exitSpotIndex = points.indexOf(p);
-                }
-            }
-
+      TransitLine line = transitLines.get(lineName);
+      if (line.getType().equals("S")) {
+        ArrayList<String> points = line.getPoints();
+        for (String p : points) {
+          if (p.equals(currentTripSegment.getEnterSpot())) {
+            enterSpotIndex = points.indexOf(p);
+          } else if (p.equals(currentTripSegment.getExitSpot())) {
+            exitSpotIndex = points.indexOf(p);
+          }
         }
+      }
     }
     if (enterSpotIndex == exitSpotIndex) {
-        return 0;
+      return 0;
     } else if (currentTripSegment.getDuration() <= 180
         && (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5 > 6) {
-      addNumberOfStation(currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
+      addNumberOfStation(
+          currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
       return 6;
     } else {
-      addNumberOfStation(currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
+      addNumberOfStation(
+          currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
       return (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5;
     }
   }

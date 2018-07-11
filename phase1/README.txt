@@ -113,6 +113,14 @@ Each line of ‘events.txt’ contains one single event. A specific format, “a
 	Format: eventType1 | eventType2
 	Example: “view | report”
 
+	Power on TransitSystem
+	Format:  eventType1 | eventType2 |  eventType3 | date
+	Example: "power | on | TransitSystem | 2018-02-11"
+
+	Power off TransitSystem
+	Format:  eventType1 | eventType2 |  eventType3 | date
+    Example: "power | off | TransitSystem | 2018-02-11"
+
 
 How to Run
 
