@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 
 public class TransitLine {
-
+  /** Specifies the stops/stations on the transit line, in order   */
   private ArrayList<String> points;
+  /** Specifies the type of transit line. "B" - bus, "S" - subway   */
   private String type;
+  /** Identifier   */
   private String id;
 
   public TransitLine(ArrayList<String> points, String type, String id) {
@@ -57,8 +59,13 @@ public class TransitLine {
     return this.id;
   }
 
-  // should the two method under stay in TransitLine Class???
-  public void changeName(String oldName, String newName) {
+  /**
+   * Change name of a station/stop in the transit line from oldName
+   * to newName.
+   * @param oldName the name to be changed.
+   * @param newName the new name.
+   */
+  public void changePointName(String oldName, String newName) {
     if (!points.isEmpty()) {
       for (int i = 0; i < points.size(); i++) {
         if (points.get(i).equals(oldName)) {
@@ -68,6 +75,12 @@ public class TransitLine {
     }
   }
 
+  /**
+   * Adds a station/stop called newPoint after pointBefore. If
+   * pointBefore is "", then adds newPoint to the front.
+   * @param pointBefore
+   * @param newPoint
+   */
   public void addPoint(String pointBefore, String newPoint) {
     if (pointBefore.equals("")) {
       points.add(0, newPoint);
