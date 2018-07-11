@@ -7,6 +7,7 @@ public class TransitManager {
 
   TransitManager() {
     transitLines = new HashMap<>();
+    defaultSetup();
   }
 
   public HashMap<String, TransitLine> getTransitLines() {
