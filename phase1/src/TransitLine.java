@@ -39,10 +39,20 @@ public class TransitLine {
     this.type = type;
   }
 
+  /**
+   * Returns the type of the transit line.
+   *
+   * @return type of transit line
+   */
   public String getType() {
     return this.type;
   }
 
+  /**
+   * Returns the ID of the transit line.
+   *
+   * @return id of transit line
+   */
   public String getId() {
     return this.id;
   }
