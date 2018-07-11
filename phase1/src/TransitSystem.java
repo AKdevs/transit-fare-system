@@ -105,18 +105,20 @@ public class TransitSystem {
   }
 
   static void addAllFares(String date, double fares) {
-    if (allFares.isEmpty()) {
-      allFares.put(date, fares);
-    } else {
-      for (String d : allFares.keySet()) {
-        if (d.equals(date)) {
-          Double f = allFares.get(d);
-          f += fares;
-          allFares.put(d, f);
-        }
+      if (allFares.containsKey(date)) {
+          for (String d : allFares.keySet()) {
+              if (d.equals(date)) {
+                  Double f = allFares.get(d);
+                  f += fares;
+                  allFares.put(d, f);
+              }
+          }
+      }else {
+          allFares.put(date, fares);
+
       }
-    }
   }
+
 
   static void addNumberOfStation(String date, int n) {
     if (numberOfStations.containsKey(date)) {

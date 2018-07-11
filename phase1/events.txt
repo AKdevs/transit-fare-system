@@ -1,7 +1,9 @@
 power | on | TransitSystem | 2018-02-11
 create | account | CardHolder | James Rodriguez | james@gmail.com
 create | card
+power | off | TransitSystem | 2018-02-11
 change | 10000001 | David Villa
+power | on | TransitSystem | 2018-02-11
 view | info | 10000001
 link | 10000001 | 30000001
 unlink | 10000001 | 30000001
@@ -15,12 +17,15 @@ load | 10000001 | 30000001 | 20
 view | balance | 10000001 | 30000001
 entry | 30000001 | Dufferin | B | 10:58 | 2018-02-11
 exit | 30000001 | Bathurst | B | 11:01 | 2018-02-11
-entry | 30000001 | Bayview | B | 11:09 | 2018-02-11
-exit | 30000001 | Leslie | B | 11:12 | 2018-02-11
-entry | 30000001 | Finch | S | 11:15 | 2018-02-11
-exit | 30000001 | Bay | S | 11:17 | 2018-02-11
+entry | 30000001 | Osgoode | S | 11:15 | 2018-02-11
+exit | 30000001 | Sheppard-Yonge | S | 12:11 | 2018-02-11
+entry | 30000001 | Sheppard-Yonge | B | 12:12 | 2018-02-11
+exit | 30000001 | Bayview | B | 12:13 | 2018-02-11
+entry | 30000001 | Bayview | B | 12:14 | 2018-02-11
+exit | 30000001 | Leslie  | B | 12:15 | 2018-02-11
 view | balance | 10000001 | 30000001
 view | cost | 10000001
+view | allTrips | 10000001 | 30000001
 view | report | 2018-02-11
 create | account | CardHolder | Tim Smith | tim@gmail.com
 create | account | AdminUser | Admin1 | admin1@transit.com
@@ -67,11 +72,25 @@ link | 10000007 | 30000013
 link | 10000007 | 30000014
 create | account | CardHolder | David Wagonda | david@gmail.com
 create | account | CardHolder | Ken Washington | ken@gmail.com
-entry | 30000001 | Bloor | S | 10:49 | 2018-02-11
-exit | 30000001 | Bloor | S | 10:56 | 2018-02-11
+view | info | 10000002
+entry | 30000002 | College | S | 12:14 | 2018-02-11
+entry | 30000001 | Union | S | 12:15 | 2018-02-11
+exit | 30000002 | Finch | S | 12:40 | 2018-02-11
+entry | 30000003 | Union | B | 12:41 | 2018-02-11
+exit | 30000001 | North York Centre | S | 15:17 | 2018-02-11
+exit | 30000003 | Sheppard-Yonge | B | 15:18 | 2018-02-11
+exit | 30000003 | Summerhill | S | 15:27 | 2018-02-12
+entry | 30000004 | Don Mills | B | 12:41 | 2018-02-12
+exit | 30000004 | Dufferin | B | 15:27 | 2018-02-12
 view | balance | 10000001 | 30000001
+view | balance | 10000002 | 30000002
+view | balance | 10000003 | 30000003
+view | balance | 10000003 | 30000004
 view | allTrips | 10000001 | 30000001
+view | allTrips | 10000002 | 30000002
 view | cost | 10000001
+view | cost | 10000002
+view | cost | 10000003
 view | report | 2018-02-11
 remove | card | 30000001
 remove | account | 10000001
@@ -80,12 +99,6 @@ activate | 10000002 | 30000002
 load | 10000002 | 30000002 | 10
 load | 10000002 | 30000002 | 20
 view | balance | 10000002 | 30000002
-entry | 30000002 | Bloor | S | 10:49 | 2018-02-11
-exit | 30000002 | Union | S | 11:15 | 2018-02-11
-entry | 30000002 | Union | B | 10:58 | 2018-02-11
-entry | 30000002 | Queen | S | 10:49 | 2018-02-12
-exit | 30000002 | Finch | S | 11:49 | 2018-02-12
-entry | 30000002 | Union | B | 11:52 | 2018-02-12
 view | trips | 10000002 | 30000002
 view | cost | 10000002
 view | report | 2018-02-11

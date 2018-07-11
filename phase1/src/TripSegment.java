@@ -21,6 +21,8 @@ public class TripSegment {
   private int duration;
   /** Accumulates the total fare of the segment  */
   private double segmentFares = 0.0;
+  /** stores whether TripSegment is a continued subway TripSegment */
+  private boolean contiSub;
 
   public TripSegment(
       String cardNumber, String enterSpot, String transitType, String enterTime, String enterDate) {
@@ -33,9 +35,7 @@ public class TripSegment {
     this.exitTransitType = "unknown";
     this.exitTime = "unknown";
     this.exitDate = "unknown";
-    /*
-    calculateTripSegmentFares(this.enterTransitType);
-    */
+    this.contiSub = false;
   }
 
   /**
@@ -52,33 +52,8 @@ public class TripSegment {
     this.exitTransitType = transitType;
     this.exitTime = exitTime;
     this.exitDate = exitDate;
-    /*
-    calculateDuration(this.enterTime, this.exitTime);
-    calculateTripSegmentFares(this.exitTransitType);
-    */
   }
 
-  /*
-  private void calculateDuration(String enterTime, String exitTime) {
-    // int version of enterTime: Hour converted to minutes + minutes
-    int enter =
-        Integer.parseInt(this.enterTime.substring(0, 2)) * 60
-            + Integer.parseInt(this.enterTime.substring(3, 5));
-    // int version of exitTime: Hour converted to minutes + minutes
-    int exit =
-        Integer.parseInt(this.exitTime.substring(0, 2)) * 60
-            + Integer.parseInt(this.exitTime.substring(3, 5));
-    this.duration = exit - enter;
-  }
-
-  private void calculateTripSegmentFares(String transitType) {
-      if (this.enterTransitType.equals("B")) {
-          this.segmentFares = 2.0;
-      }else if (this.exitTransitType.equals("s")) {
-          this.segmentFares = TransitSystem.calculateSubwayFares(this);
-      }
-  }
-  */
 
   /**
    * Returns card number of associated card
@@ -225,5 +200,13 @@ public class TripSegment {
                 + "."
                 + "\n");
     return s.toString();
+  }
+
+  boolean getContiSub() {
+      return this.contiSub;
+  }
+
+  void setContiSub(boolean b) {
+      this.contiSub = b;
   }
 }

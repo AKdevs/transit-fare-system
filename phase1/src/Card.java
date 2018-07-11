@@ -182,6 +182,10 @@ public class Card {
     this.currentFares -= fares;
   }
 
+    void setCurrentFares(double fares) {
+        this.currentFares = fares;
+    }
+
   boolean equals(Card other) {
     return this.cardNumber == other.getCardNumber();
   }
@@ -194,22 +198,6 @@ public class Card {
     return this.totalFares;
   }
 
-  /*void viewMonthlyCost() {
-    if (active) {
-        if (this.totalFares.isEmpty()){
-            System.out.println("0.0");
-        }else {
-            Double result = 0.0;
-            for (Double fares : this.totalFares) {
-                result += fares;
-            }
-            System.out.println(result / 12);
-        }
-    }else {
-        System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
-    }
-
-  }*/
   /** Prints out the three most recent trips which are stored in the card. */
   void viewMostRecentTrips() {
     if (active) {
@@ -267,13 +255,12 @@ public class Card {
       ArrayList<ArrayList<TripSegment>> firstDayTrips = new ArrayList<>();
       firstDayTrips.add(this.lastCompleteTrip);
       this.trips.put(date, firstDayTrips);
-      //this.lastTripSegment = tripSegment;
-      //this.lastCompleteTrip = firstCompleteTrip;
       this.mostRecentTrips.add(this.lastCompleteTrip);
       this.updateFares(tripSegment, tripSegment.getSegmentFares());
     }
     // if tripSegment is the start of a new complete trip
     else if (!lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
+        this.setCurrentFares(0.0);
       for (String date : this.trips.keySet()) {
         if (date.equals(tripSegment.getEnterDate())) {
           ArrayList<ArrayList<TripSegment>> dayTrips = this.trips.get(date);
@@ -283,8 +270,6 @@ public class Card {
           this.lastCompleteTrip = newCompleteTrip;
           dayTrips.add(this.lastCompleteTrip);
           this.updateFares(tripSegment, tripSegment.getSegmentFares());
-          //this.lastTripSegment = tripSegment;
-          //this.lastCompleteTrip = newCompleteTrip;
           this.mostRecentTrips.add(this.lastCompleteTrip);
           int startTime =
               Integer.parseInt(tripSegment.getEnterTime().substring(0, 2)) * 60
@@ -299,28 +284,25 @@ public class Card {
               + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
       // within 2 hours
       if (segmentStartTime - this.startEnterTime < 120) {
-        for (String date : this.trips.keySet()) {
-          if (date.equals(tripSegment.getEnterDate())) {
-            ArrayList<ArrayList<TripSegment>> dayTrips = this.trips.get(date);
-            for (ArrayList<TripSegment> ct : dayTrips) {
-              if (ct.equals(this.lastCompleteTrip)) {
-                  this.lastTripSegment = tripSegment;
-                  ct.add(this.lastTripSegment);
-                  this.lastCompleteTrip.add(tripSegment);
-                  // currentFares + this trip fare > 6 and within 2 hours
-                  if (this.currentFares + tripSegment.getSegmentFares() >= 6) { // tap in time limit
-                      double difference = 6 - this.currentFares;
-                      this.currentFares = 6;
-                      this.updateFares(tripSegment, difference);
-                  // currentFares + this trip fare > 6 and within 2 hours
-                } else if (this.currentFares + tripSegment.getSegmentFares() < 6) {
-                  this.updateFares(tripSegment, tripSegment.getSegmentFares());
-                }
-              }
-            }
+          if (tripSegment.getEnterTransitType().equals("S")){
+              tripSegment.setContiSub(true);
           }
-        }// more than 2 hours
+          this.lastTripSegment = tripSegment;
+          this.lastCompleteTrip.add(this.lastTripSegment);
+          // currentFares + this trip fare > 6 and within 2 hours
+          if (this.currentFares + tripSegment.getSegmentFares() >= 6) { // tap in time limit
+              double difference = 6 - this.currentFares;
+              this.setCurrentFares(6);
+              this.updateFares(tripSegment, difference);
+          // currentFares + this trip fare > 6 and within 2 hours
+          } else if (this.currentFares + tripSegment.getSegmentFares() < 6) {
+              this.updateFares(tripSegment, tripSegment.getSegmentFares());
+          }
+      }
+
+      // more than 2 hours
       } else {
+        this.setCurrentFares(0.0);
         for (String date : this.trips.keySet()) {
           if (date.equals(tripSegment.getEnterDate())) {
             ArrayList<ArrayList<TripSegment>> dayTrips = this.trips.get(date);
@@ -341,7 +323,7 @@ public class Card {
         }
       }
     }
-  }
+  //}
 
   /**
    * Updates all stored fares by the change of the amount of fares
