@@ -37,7 +37,7 @@ public class Card {
     // this.currentDuration = 0;
   }
 
-  /** prints out all trips traveled and recorded by the card. */
+  /** Prints out all trips traveled and recorded by the card. */
   void viewAllTrips() {
     System.out.println(this.trips);
   }
@@ -116,13 +116,22 @@ public class Card {
     this.linked = false;
   }
 
+  /**
+   * Return true iff this card is linked to an account.
+   * @return whether the account is linked to an account.
+   */
   public boolean isLinked() {
     return linked;
   }
 
+  /**
+   * Return true iff this card has been activated.
+   * @return status of activation.
+   */
   public boolean isActive() {
     return active;
   }
+
   /**
    * Returns the card number
    *
@@ -152,13 +161,18 @@ public class Card {
     this.owner = owner;
   }
 
+  /**
+   * Returns the amount of fare accumulated.
+   * @return amount of fare.
+   */
   double getCurrentFares() {
     return this.currentFares;
   }
+
   /**
-   * ???????????????????????????
+   * Add fare amount to running total of fares.
    *
-   * @param fares the amount of money which we want to add in current fares.
+   * @param fares the amount of money.
    */
   void addCurrentFares(double fares) {
     this.currentFares += fares;

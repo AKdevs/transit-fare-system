@@ -49,7 +49,7 @@ public class UserAccount {
   }
 
   /**
-   * Examines if other is equal to this UserAccount
+   * Returns true iff other is equal to this UserAccount
    *
    * @param other the UserAccount to be compared with
    * @return true if the account number of other is equal to that of this UserAccount
