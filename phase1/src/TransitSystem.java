@@ -2,64 +2,101 @@ import java.sql.SQLOutput;
 import java.util.*;
 
 public class TransitSystem {
+  /** Keeps a track of all cards in the system.   */
   private static ArrayList<Card> cards = new ArrayList<>();
+  /** Keeps a track of transit lines in the system by name   */
   protected static HashMap<String, TransitLine> transitLines = new HashMap<>();
+  /** Keeps a track of all user accounts in the system   */
   private static ArrayList<UserAccount> userAccounts = new ArrayList<>();
 
+  /** Stores the system-wide subway fare   */
   protected static final double subwayFare = 0.5;
+  /** Stores the system-wide bus fare   */
   protected static final double busFare = 2.0;
 
-  String currentMonth;
-  String currentDate;
+  /** Stores system current month   */
+  private String currentMonth;
+  /** Stores system current date   */
+  private String currentDate;
 
-  // Fare is capped at $6.0 for continuous trips travlled within timeForCap
+  /** Maximum amount of money that can be charged for trips within maximumDuration   */
   protected static final double fareCap = 6.0;
 
-  // Time allowed to be eligible for capped fare is 120 minutes in our TransitSystem
+  /** Maximum amount of time where the fareCap is applicable.    */
   protected static final int maximumDuration = 120;
 
-  protected TripSegment currentTripSegment;
+  /** Stores the total amount of accumulated fares in the system by date   */
+  static HashMap<String, Double> allFares = new HashMap<>();
 
-  static HashMap<String, Double> allFares = new HashMap<>(); // key is date, value is all the fares
-
+  /** Stores the number of stations reached in the entire system by date   */
   static HashMap<String, Integer> numberOfStations = new HashMap<>();
 
-  // operatingStatus of TransitSystem, value can be on or off
+  /** Operating status of system, either "on" or "off"   */
   private String operatingStatus = "off";
 
+  /**
+   * Return the operating status of the system, either "on" or "off"
+   * @return operating status of the system.
+   */
   String getOperatingStatus() {
     return this.operatingStatus;
   }
 
+  /** Power on the system.   */
   void powerOnSystem() {
     this.operatingStatus = "on";
   }
 
+  /** Power off the system.   */
   void powerOffSystem() {
     this.operatingStatus = "off";
     System.out.println("The TransitSystem has been powered off.");
   }
 
+  /** Returns current month in MM format
+   * @return current month
+   */
   String getCurrentMonth() {
     return this.currentMonth;
   }
 
+  /**
+   * Returns current date in YY-MM-DD format
+   * @return current date
+   */
   String getCurrentDate() {
     return this.currentDate;
   }
 
+  /**
+   * Sets current month.
+   * @param month month to be stored
+   */
   void setCurrentMonth(String month) {
     this.currentMonth = month;
   }
 
+  /**
+   * Sets current date.
+   * @param date date to be stored.
+   */
   void setCurrentDate(String date) {
     this.currentDate = date;
   }
 
+  /**
+   * Returns total amount of fares accumulated in system, by date
+   * @return amount of fares in system.
+   */
   public static HashMap<String, Double> getAllFares() {
     return allFares;
   }
 
+  /**
+   * Finds and returns the card denoted by cardNumber, or null if not found.
+   * @param cardNumber number of card to be found
+   * @return card denoted by CardNumber, or null if not found.
+   */
   public Card findCard(String cardNumber) {
     for (Card c : this.cards) {
       if (c.getCardNumber().equals(cardNumber)) {
@@ -69,20 +106,35 @@ public class TransitSystem {
     return null;
   }
 
-  void addCard(Card newCard) {
+  /**
+   * Adds newCard to list of existing cards.
+   * @param newCard new card to be added.
+   */
+  private void addCard(Card newCard) {
     cards.add(newCard);
   }
 
+  /** Creates new card, card number is assigned automatically. */
   void createCard() {
     Card newCard = new Card();
     addCard(newCard);
     System.out.println("Card " + newCard.getCardNumber() + " created");
   }
 
+  /**
+   * Removes card and all information associated with it.
+   * @param cardNumber number of card to be removed.
+   */
   void removeCard(String cardNumber) {
     cards.remove(findCard(cardNumber));
   }
 
+  /**
+   * Finds and returns user account for given accountNumber, null
+   * if not found.
+   * @param accountNumber number of account to be found.
+   * @return user account for given accountNumber, null if not found.
+   */
   UserAccount findUserAccount(String accountNumber) {
     for (UserAccount ua : userAccounts) {
       if (ua.getAccountNum().equals(accountNumber)) {
@@ -92,18 +144,39 @@ public class TransitSystem {
     return null;
   }
 
+  /**
+   * Returns a list of user accounts.
+   * @return list of user accounts.
+   */
   ArrayList<UserAccount> getUserAccounts() {
     return userAccounts;
   }
 
+  /**
+   * Returns the amount of total fare accumulated
+   * in the day.
+   * @param date date for which fare is to be returned.
+   * @return the amount of fare accumulated on date.
+   */
   static Double getDailyFares(String date) {
     return allFares.get(date);
   }
 
+  /**
+   * Return the number of stations reached on date.
+   * @param date date for which number of stations is to be returned.
+   * @return the number of stations reached on date.
+   */
   static Integer getDailyStation(String date) {
     return numberOfStations.get(date);
   }
 
+  /**
+   * Add amount of fares accumulated on date
+   * to total list of fares (which is stored by date)
+   * @param date date on which fares were accumulated.
+   * @param fares fares accumulated on date.
+   */
   static void addAllFares(String date, double fares) {
     if (allFares.isEmpty()) {
       allFares.put(date, fares);
@@ -118,6 +191,12 @@ public class TransitSystem {
     }
   }
 
+  /**
+   * Add number of stations reached on date
+   * to total list of stations reached (which is stored by date)
+   * @param date date for which number of stations reached is to be added.
+   * @param n number of stations reached on date.
+   */
   static void addNumberOfStation(String date, int n) {
     if (numberOfStations.containsKey(date)) {
       for (String d : numberOfStations.keySet()) {

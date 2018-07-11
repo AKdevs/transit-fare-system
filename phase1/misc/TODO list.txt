@@ -58,7 +58,7 @@
  EventHandler [x]
  TransitLine [x]
  TransitManager [x]
- TransitSystem []
+ TransitSystem [x]
  TripManager [x]
  TripSegment [x]
  UserAccount [] - methods completed, fields not completed
