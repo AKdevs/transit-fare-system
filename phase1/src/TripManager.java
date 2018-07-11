@@ -20,10 +20,8 @@ public class TripManager extends TransitSystem {
 
   public void recordTapOut(
       String cardNumber, String exitSpot, String transitType, String exitTime, String exitDate) {
-    // TripSegment currentTs = new TripSegment("0", "default", "default", "default", "default");
     for (TripSegment ts : this.currentTripSegments) {
       if (ts.getAssociatedCard().equals(cardNumber) && ts.getExitSpot().equals("unknown")) {
-        // currentTs = ts;
         ts.completeTripSegment(exitSpot, transitType, exitTime, exitDate);
         calculateDuration(ts);
         calculateTripSegmentFares(ts);

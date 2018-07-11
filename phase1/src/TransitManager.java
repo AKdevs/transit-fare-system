@@ -18,8 +18,8 @@ public class TransitManager extends TransitSystem {
     ArrayList<String> route1Stops =
         new ArrayList<>(
             Arrays.asList("Dufferin", "Bathurst", "Sheppard-Yonge", "Bayview", "Leslie"));
-    TransitLine line1 = createTransitLine(line1Stations, "S");
-    TransitLine route1 = createTransitLine(route1Stops, "B");
+    TransitLine line1 = createTransitLine(line1Stations, "S", "line1");
+    TransitLine route1 = createTransitLine(route1Stops, "B", "route1");
     addTransitLine(line1.getId(), line1);
     addTransitLine(route1.getId(), route1);
   }
@@ -31,8 +31,8 @@ public class TransitManager extends TransitSystem {
    * @param type type of the new transit line
    * @return the new transit line
    */
-  public TransitLine createTransitLine(ArrayList<String> points, String type) {
-    return new TransitLine(points, type, "line1");
+  public TransitLine createTransitLine(ArrayList<String> points, String type, String id) {
+    return new TransitLine(points, type, id);
   }
 
   /**
