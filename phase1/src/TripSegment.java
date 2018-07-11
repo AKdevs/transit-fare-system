@@ -55,113 +55,73 @@ public class TripSegment {
   }
 
 
-  /**
-   * Returns card number of associated card
-   * @return Card number of associated card
-   */
+  /** @return Card number of associated card */
   public String getAssociatedCard() {
     return this.associatedCard;
   }
 
-  /**
-   * Returns stop/station of exit
-   * @return stop/station of exit
-   */
+  /** @return stop/station of exit */
   public String getExitSpot() {
     return this.exitSpot;
   }
 
-  /**
-   * Returns type of transport of entry (bus/subway)
-   * @return type of transport of entry (bus/subway)
-   */
+  /** @return type of transport of entry (bus/subway) */
   public String getEnterTransitType() {
     return this.enterTransitType;
   }
 
-  /**
-   * Returns type of transport of exit (bus/subway)
-   * @return type of transport of exit (bus/subway)
-   */
+  /** @return type of transport of exit (bus/subway) */
   public String getExitTransitType() {
     return this.exitTransitType;
   }
 
-  /**
-   * Returns time of entry in HH:MM
-   * @return Returns time of entry
+  /** @return Returns time of entry in HH:MM format
    */
   public String getEnterTime() {
     return this.enterTime;
   }
 
-  /**
-   * Returns time of exit in HH:MM
-   * @return Returns time of exit
-   */
+  /** @return Returns time of exit in HH:MM format */
   public String getExitTime() {
     return this.exitTime;
   }
 
-  /**
-   * Returns duration of trip segment in minutes.
-   * @return duration of trip segment.
-   */
+  /** @return duration of trip segment. */
   public int getDuration() {
     return this.duration;
   }
 
-  /**
-   * Stores the duration of the trip segment in minutes.
-   * @param duration of the trip segment.
-   */
+  /** @param duration of the trip segment. */
   public void setDuration(int duration) {
     this.duration = duration;
   }
 
-  /**
-   * Return stop/station of entry.
-   * @return stop/station of entry.
-   */
+  /** @return stop/station of entry. */
   public String getEnterSpot() {
     return this.enterSpot;
   }
 
-  /**
-   * Return date of entry in YY-MM-DD format.
-   * @return date of entry.
-   */
+  /** @return date of entry in YY-MM-DD format. */
   public String getEnterDate() {
     return this.enterDate;
   }
 
-  /**
-   * Return date of exit in YY-MM-DD format.
-   * @return date of exit.
-   */
+  /** @return date of exit. */
   public String getExitDate() {
     return this.exitDate;
   }
 
-  /**
-   * Return accumulated fare total for this segment.
-   * @return total fare for this segment.
-   */
+  /** @return total fare for this segment. */
   public double getSegmentFares() {
     return this.segmentFares;
   }
 
-  /**
-   * Set the fare total for this trip segment.
-   * @param fares amount of money accumualated for this segment.
-   */
+  /** @param fares amount of money accumulated for this segment. */
   public void setSegmentFares(double fares) {
     this.segmentFares = fares;
   }
 
-  /**
-   * Returns a string representation of the trip segment.
-   * @return a string representation of the trip segment.
+  /** @return a string representation of the trip segment.
    */
   @Override
   public String toString() {

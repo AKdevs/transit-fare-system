@@ -2,8 +2,11 @@ import java.io.*;
 
 /** Class UserAccount is used to define users of the system. */
 public class UserAccount {
+  /** Stores name of this user account   */
   private String name;
+  /** Stores e-mail of this user account   */
   private String email;
+  /** Stores account number of this user account   */
   protected String accountNumber;
 
   public UserAccount(String name, String email) {
@@ -27,7 +30,7 @@ public class UserAccount {
   }
 
   /**
-   * Changes name of UserAccount to newName Prints out a message to confirm this change.
+   * Changes name of this account to newName. Prints out a message to confirm this change.
    *
    * @param newName the new name to be used
    */

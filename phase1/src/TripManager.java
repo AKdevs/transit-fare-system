@@ -32,7 +32,7 @@ public class TripManager extends TransitSystem {
           // complete the trip segment( without exit) with "illegal", use enterTime as exitTime, use enterDate as exitDate
           associatedCard.getLastTripSegment().completeTripSegment("illegal", "illegal", enterTime, enterDate);
           //for subway, charge $6 for the illegal trip; for bus, except for the $2 fare, charge $6 as penalty
-          associatedCard.updateFares(associatedCard.getLastTripSegment(), 6.0);
+          associatedCard.updateFares(associatedCard.getLastTripSegment(), fareCap);
           // add the new tripSegment as usual
           TripSegment ts = new TripSegment(cardNumber, enterSpot, transitType, enterTime, enterDate);
           //the ongoing TripSegment right now is ts
@@ -45,10 +45,7 @@ public class TripManager extends TransitSystem {
       }
   }
 
-    /**
-     * Adds trip segment to associated card.
-     * @param ts TripSegment to be added to associated card.
-     */
+    /** @param ts TripSegment to be added to associated card. */
   private void addTripSegmentToCard(TripSegment ts) {
     String currentCardNumber = ts.getAssociatedCard();
     findCard(currentCardNumber).addTripSegment(ts);
@@ -91,10 +88,14 @@ public class TripManager extends TransitSystem {
           // add ts to card
           addTripSegmentToCard(ts);
           // charge the cardHolder the cap $6 for both bus and subway
-          associatedCard.updateFares(associatedCard.getLastTripSegment(), 6.0);
+          associatedCard.updateFares(associatedCard.getLastTripSegment(), fareCap);
       }
   }
 
+    /**
+     * Calculates the duration of the trip segment in minutes.
+     * @param ts trip segment
+     */
   private void calculateDuration(TripSegment ts) {
     // int version of enterTime: Hour converted to minutes + minutes
     int enter =
@@ -109,12 +110,18 @@ public class TripManager extends TransitSystem {
 
   private void calculateTripSegmentFares(TripSegment ts) {
     if (ts.getEnterTransitType().equals("B")) {
-      ts.setSegmentFares(2.0);
+      ts.setSegmentFares(busFare);
     } else if (ts.getExitTransitType().equals("S")) {
       ts.setSegmentFares(calculateSubwayFares(ts));
     }
   }
 
+    /**
+     * Calculates the amount of fare accumulated for subway travel
+     * for TripSegment currentTripSegment
+     * @param currentTripSegment the ongoing trip segment
+     * @return amount of money of subway fare
+     */
   double calculateSubwayFares(TripSegment currentTripSegment) {
     int enterSpotIndex = 0;
     int exitSpotIndex = 0;
@@ -135,17 +142,22 @@ public class TripManager extends TransitSystem {
     if (enterSpotIndex == exitSpotIndex) {
       return 0;
     } else if (currentTripSegment.getDuration() <= 180
-        && (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5 > 6) {
+        && (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5 > fareCap) {
       addNumberOfStation(
           currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
-      return 6;
+      return fareCap;
     } else {
       addNumberOfStation(
           currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
-      return (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5;
+      return (Math.abs(exitSpotIndex - enterSpotIndex)) * subwayFare;
     }
   }
 
+    /**
+     * Calculates the number of bus stops reached in TripSegment ts.
+     * @param ts trip segment
+     * @return the number of stops reached in this trip segment.
+     */
   int calculateStopsReachedByBus(TripSegment ts){
       int enterSpotIndex = 0;
       int exitSpotIndex = 0;

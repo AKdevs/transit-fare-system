@@ -46,7 +46,8 @@ Each line of ‘events.txt’ contains one single event. A specific format, “a
 	Exit from a bus / subway station
 	Format: eventType | cardNumber | name of station/stop | transportationType | time | date
 	Example: “exit | 1204 | Bloor |  B | 10:49:11 | 2018-02-11” 
-	*Time is in 24-hour standard format
+	    *Time is in 24-hour standard format
+	    *A passenger cannot stay in the transit system over night. He/She has to enter and exit the system on the same day.
 
 	UserAccount Creation
 	Format: eventType1 | eventType2 | accountType | name | e-mail
