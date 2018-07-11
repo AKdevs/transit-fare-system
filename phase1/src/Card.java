@@ -25,7 +25,7 @@ public class Card {
   // private String linkedness;
 
   /**
-   * Construct a card.
+   * Constructs a card.
    */
   public Card() {
     this.cardNumber = nextCardNumber;
@@ -44,7 +44,7 @@ public class Card {
   }
 
   /**
-   * View all trips traveled and recorded by the card.
+   * prints out all trips traveled and recorded by the card.
    */
   void viewAllTrips() {
     System.out.println(this.trips);
@@ -65,7 +65,7 @@ public class Card {
 
   /**
    *
-   *Add balance to the card.
+   *Adds balance to the card.
    *
    * @param fares the amount of fares that are going to be added to the card
    */
@@ -79,7 +79,7 @@ public class Card {
 
   /**
    *
-   *Deduct balance from the card.
+   *Deducts balance from the card.
    *
    * @param fares the amount of fares that are going to be deducted from the card
    */
@@ -92,7 +92,7 @@ public class Card {
   }
 
   /**
-   * Print out the balance of the card.
+   * Prints out the balance of the card.
    */
   void viewBalance() {
     if (active) {
@@ -103,27 +103,27 @@ public class Card {
   }
 
   /**
-   * Activate the card.
+   * Activates the card.
    */
   void activate() {
     this.active = true;
   }
 
   /**
-   * Deactivate the card.
+   * Deactivates the card.
    */
   void deactivate() {
     this.active = false;
   }
 
   /**
-   * Set the status of the card linking to a account to be true.
+   * Sets the status of the card linking to a account to be true.
    */
   public void linkAccount() {
     this.linked = true;
   }
   /**
-   * Set the status of the card linking to a account to be false.
+   * Sets the status of the card linking to a account to be false.
    */
   public void unlinkAccount() {
     this.linked = false;
@@ -138,7 +138,7 @@ public class Card {
   }
   /**
    *
-   *Get the card number
+   *Returns the card number
    *
    * @return the card number
    */
@@ -151,7 +151,7 @@ public class Card {
   }
   /**
    *
-   *Get the owner of the card.
+   *Returns the owner of the card.
    *
    * @return the owner of the card
    */
@@ -160,7 +160,7 @@ public class Card {
   }
   /**
    *
-   *Set the owner of the card.
+   *Sets the owner of the card.
    *
    * @param owner  a card holder who will be assigned as the owner of the card
    */
@@ -215,7 +215,7 @@ public class Card {
 
   }*/
   /**
-   * View the three most recent trips which are stored in the card.
+   * Prints out the three most recent trips which are stored in the card.
    */
   void viewMostRecentTrips() {
     if (active) {
@@ -342,7 +342,7 @@ public class Card {
   }
 
   /**
-   * Update all stored fares by the change of the amount of fares
+   * Updates all stored fares by the change of the amount of fares
    * @param tripSegment the target trip segment
    * @param fares the amount of fares that need to be updated
    */
