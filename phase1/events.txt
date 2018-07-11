@@ -73,15 +73,12 @@ link | 10000007 | 30000014
 create | account | CardHolder | David Wagonda | david@gmail.com
 create | account | CardHolder | Ken Washington | ken@gmail.com
 view | info | 10000002
-entry | 30000002 | College | S | 12:14 | 2018-02-11
-entry | 30000001 | Union | S | 12:15 | 2018-02-11
+entry | 30000002 | College | S | 12:18 | 2018-02-11
+entry | 30000001 | Union | S | 12:19 | 2018-02-11
 exit | 30000002 | Finch | S | 12:40 | 2018-02-11
 entry | 30000003 | Union | B | 12:41 | 2018-02-11
 exit | 30000001 | North York Centre | S | 15:17 | 2018-02-11
 exit | 30000003 | Sheppard-Yonge | B | 15:18 | 2018-02-11
-exit | 30000003 | Summerhill | S | 15:27 | 2018-02-12
-entry | 30000004 | Don Mills | B | 12:41 | 2018-02-12
-exit | 30000004 | Dufferin | B | 15:27 | 2018-02-12
 view | balance | 10000001 | 30000001
 view | balance | 10000002 | 30000002
 view | balance | 10000003 | 30000003
@@ -99,12 +96,23 @@ activate | 10000002 | 30000002
 load | 10000002 | 30000002 | 10
 load | 10000002 | 30000002 | 20
 view | balance | 10000002 | 30000002
-entry | 30000002 | Bloor | S | 10:49 | 2018-02-11
-exit | 30000002 | Union | S | 11:15 | 2018-02-11
-entry | 30000002 | Union | B | 10:58 | 2018-02-11
+entry | 30000002 | Bloor | S | 15:49 | 2018-02-11
+exit | 30000002 | Union | S | 16:15 | 2018-02-11
+entry | 30000002 | Union | B | 16:58 | 2018-02-11
+exit | 30000002 | Broadway | B | 17:18 | 2018-02-11
+power | off | TransitSystem | 2018-02-11
+power | on | TransitSystem | 2018-02-12
+entry | 30000006 | Harlem | B | 08:49 | 2018-02-12
+exit | 30000006 | Union | B | 09:29 | 2018-02-12
+load | 10000004 | 30000006 | 20
+entry | 30000006 | Union | S | 09:39 | 2018-02-12
+exit | 30000006 | Rosedale | S | 09:57 | 2018-02-12
 entry | 30000002 | Queen | S | 10:49 | 2018-02-12
 exit | 30000002 | Finch | S | 11:49 | 2018-02-12
 entry | 30000002 | Union | B | 11:52 | 2018-02-12
+entry | 30000004 | Don Mills | B | 12:41 | 2018-02-12
+exit | 30000004 | Dufferin | B | 15:27 | 2018-02-12
+exit | 30000003 | Summerhill | S | 15:35 | 2018-02-12
 view | trips | 10000002 | 30000002
 view | cost | 10000002
 view | report | 2018-02-11
