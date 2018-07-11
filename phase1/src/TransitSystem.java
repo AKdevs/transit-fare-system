@@ -6,17 +6,17 @@ public class TransitSystem {
   protected static HashMap<String, TransitLine> transitLines = new HashMap<>();
   private static ArrayList<UserAccount> userAccounts = new ArrayList<>();
 
-  private static double subwayFare = 0.5;
-  private static double busFare = 2.0;
+  protected static final double subwayFare = 0.5;
+  protected static final double busFare = 2.0;
 
   String currentMonth;
   String currentDate;
 
   // Fare is capped at $6.0 for continuous trips travlled within timeForCap
-  private static double fareCap = 6.0;
+  protected static final double fareCap = 6.0;
 
   // Time allowed to be eligible for capped fare is 120 minutes in our TransitSystem
-  private static int timeForCap = 120;
+  protected static final int maximumDuration = 120;
 
   protected TripSegment currentTripSegment;
 

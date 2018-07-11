@@ -33,7 +33,7 @@ public class TripManager extends TransitSystem {
           // complete the trip segment( without exit) with "illegal", use enterTime as exitTime, use enterDate as exitDate
           associatedCard.getLastTripSegment().completeTripSegment("illegal", "illegal", enterTime, enterDate);
           //for subway, charge $6 for the illegal trip; for bus, except for the $2 fare, charge $6 as penalty
-          associatedCard.updateFares(associatedCard.getLastTripSegment(), 6.0);
+          associatedCard.updateFares(associatedCard.getLastTripSegment(), fareCap);
           // add the new tripSegment as usual
           TripSegment ts = new TripSegment(cardNumber, enterSpot, transitType, enterTime, enterDate);
           //the ongoing TripSegment right now is ts
@@ -92,7 +92,7 @@ public class TripManager extends TransitSystem {
           // add ts to card
           addTripSegmentToCard(ts);
           // charge the cardHolder the cap $6 for both bus and subway
-          associatedCard.updateFares(associatedCard.getLastTripSegment(), 6.0);
+          associatedCard.updateFares(associatedCard.getLastTripSegment(), fareCap);
       }
   }
 
@@ -114,7 +114,7 @@ public class TripManager extends TransitSystem {
 
   private void calculateTripSegmentFares(TripSegment ts) {
     if (ts.getEnterTransitType().equals("B")) {
-      ts.setSegmentFares(2.0);
+      ts.setSegmentFares(busFare);
     } else if (ts.getExitTransitType().equals("S")) {
       ts.setSegmentFares(calculateSubwayFares(ts));
     }
@@ -146,14 +146,14 @@ public class TripManager extends TransitSystem {
     if (enterSpotIndex == exitSpotIndex) {
       return 0;
     } else if (currentTripSegment.getDuration() <= 180
-        && (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5 > 6) {
+        && (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5 > fareCap) {
       addNumberOfStation(
           currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
-      return 6;
+      return fareCap;
     } else {
       addNumberOfStation(
           currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
-      return (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5;
+      return (Math.abs(exitSpotIndex - enterSpotIndex)) * subwayFare;
     }
   }
 
