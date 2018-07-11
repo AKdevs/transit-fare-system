@@ -14,7 +14,7 @@ public class Card {
   private HashMap<String, ArrayList<ArrayList<TripSegment>>> trips;
   private ArrayList<ArrayList<TripSegment>>
       mostRecentTrips; // keep track of all completeTrips, but only print out the last three when
-                       // user view it
+  // user view it
   // private ArrayList<Double> totalFares;
   private double totalFares;
   private int startEnterTime;

@@ -2,13 +2,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- *
  * CardHolder is a person who owns and uses a Card, ie a passenger who travels in the TransitSystem.
  * The person is able to link Cards to his/her account and view his/her travel history.
- *
  */
-
-
 public class CardHolder extends UserAccount {
 
   private ArrayList<Card> travelCards;
@@ -53,9 +49,8 @@ public class CardHolder extends UserAccount {
   }*/
 
   /**
-   * Links Card to CardHolder's account.
-   * Prints out a message to inform the CardHolder whether the card
-   * is linked to his/her account successfully.
+   * Links Card to CardHolder's account. Prints out a message to inform the CardHolder whether the
+   * card is linked to his/her account successfully.
    *
    * @param card the Card that CardHolder would like to link
    */
@@ -74,8 +69,8 @@ public class CardHolder extends UserAccount {
   }
 
   /**
-   * Unlinks Card from CardHolder's account.
-   * Prints out a message to confirm the action is completed.
+   * Unlinks Card from CardHolder's account. Prints out a message to confirm the action is
+   * completed.
    *
    * @param card the Card that CardHolder would like to unlink
    */
@@ -88,8 +83,8 @@ public class CardHolder extends UserAccount {
   }
 
   /**
-   * Activates a Card that is linked to this CardHolder.
-   * Prints out a message to inform the CardHolder whether it is successful.
+   * Activates a Card that is linked to this CardHolder. Prints out a message to inform the
+   * CardHolder whether it is successful.
    *
    * @param card the Card that CardHolder would like to activate
    */
@@ -105,8 +100,8 @@ public class CardHolder extends UserAccount {
   }
 
   /**
-   * Deactivates a Card that is linked to this CardHolder.
-   * Prints out a message to inform the CardHolder whether it is successful.
+   * Deactivates a Card that is linked to this CardHolder. Prints out a message to inform the
+   * CardHolder whether it is successful.
    *
    * @param card the Card that CardHolder would like to deactivate
    */
@@ -134,9 +129,7 @@ public class CardHolder extends UserAccount {
     }
   }*/
 
-  /**
-   * Prints out information about the CardHolder and Card(s) linked to his/her account.
-   */
+  /** Prints out information about the CardHolder and Card(s) linked to his/her account. */
   @Override
   // Will include cards linked to the CardHolder
   public void viewInfo() {
@@ -153,9 +146,7 @@ public class CardHolder extends UserAccount {
     }
   }
 
-  /**
-   * Prints out the average monthly cost of all Cards this CardHolder has.
-   */
+  /** Prints out the average monthly cost of all Cards this CardHolder has. */
   void viewMonthlyCost() {
     double result = 0.0;
     for (Card c : travelCards) {

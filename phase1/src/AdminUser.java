@@ -1,10 +1,4 @@
-/**
- *
- * AdminUser is used by employee of the Transit System, who can get report to do cost analysis.
- *
- */
-
-
+/** AdminUser is used by employee of the Transit System, who can get report to do cost analysis. */
 public class AdminUser extends UserAccount {
 
   private static int nextAccountNum = 20000001;
@@ -17,8 +11,9 @@ public class AdminUser extends UserAccount {
   }
 
   /**
-   * Prints out total amount of fare collected for date and total number of
-   * bus stops/subway stations reached by passengers on that date.
+   * Prints out total amount of fare collected for date and total number of bus stops/subway
+   * stations reached by passengers on that date.
+   *
    * @param date the date which AdminUser would like to view the report for
    */
   public static void getDailyReport(String date) {

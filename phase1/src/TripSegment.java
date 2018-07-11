@@ -130,11 +130,26 @@ public class TripSegment {
       exitType = "subway";
     }
 
-    StringBuilder s = new StringBuilder(
-            "Date: " + this.enterDate + " - " +
-            "Entered " + entryType + " at " + enterSpot + " at " +  enterTime + "." +
-            " Exited " + exitType + " at " + exitSpot + " at " +  exitTime + "." + "\n"
-    );
+    StringBuilder s =
+        new StringBuilder(
+            "Date: "
+                + this.enterDate
+                + " - "
+                + "Entered "
+                + entryType
+                + " at "
+                + enterSpot
+                + " at "
+                + enterTime
+                + "."
+                + " Exited "
+                + exitType
+                + " at "
+                + exitSpot
+                + " at "
+                + exitTime
+                + "."
+                + "\n");
     return s.toString();
   }
 }
