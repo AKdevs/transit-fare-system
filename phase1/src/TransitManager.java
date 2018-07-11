@@ -17,11 +17,21 @@ public class TransitManager extends TransitSystem {
             Arrays.asList("Finch", "North York Centre", "Sheppard-Yonge", "York Mills", "Lawrence", "Eglinton", "Davisville","St Clair", "Summerhill", "Rosedale", "Bloor-Yonge", "Wellesley", "College", "Dundas", "Queen", "King", "Union", "St Andrew", "Osgoode", "St Patrick"));
     ArrayList<String> route1Stops =
         new ArrayList<>(
-            Arrays.asList("Dufferin", "Bathurst", "Sheppard-Yonge", "Bayview", "Leslie"));
+            Arrays.asList("Dufferin", "Bathurst", "Sheppard-Yonge", "Bayview", "Bessarion", "Leslie", "Don Mills", "Warden", "Victoria Park"));
+    ArrayList<String> route3Stops =
+            new ArrayList<>(
+                    Arrays.asList("Harlem", "Central Park", "Braodway", "Times Square", "Chambers", "Park Place", "Fulton Street", "Union", "Wall Street", "Clark Street", "Atlantic Avenue"));
+    ArrayList<String> route5Stops =
+            new ArrayList<>(
+                    Arrays.asList("Morris Park", "Burke Avenue", "Freeman Street", "Warden", "Simpson Street", "Jackson Street", "Franklin Street", "Sterling Road", "Beverly Road", "Newark Road", "Dennis Road", "Spring Street"));
     TransitLine line1 = createTransitLine(line1Stations, "S", "line1");
     TransitLine route1 = createTransitLine(route1Stops, "B", "route1");
+    TransitLine route3 = createTransitLine(route3Stops, "B", "route3");
+    TransitLine route5 = createTransitLine(route5Stops, "B", "route5");
     addTransitLine(line1.getId(), line1);
     addTransitLine(route1.getId(), route1);
+    addTransitLine(route3.getId(), route3);
+    addTransitLine(route5.getId(), route5);
   }
 
   /**
