@@ -49,10 +49,10 @@ public class CardHolder extends UserAccount {
   }*/
 
   /**
-   * Links Card to CardHolder's account. Prints out a message to inform the CardHolder whether the
+   * Links card to this account. Prints out a message to inform the CardHolder whether the
    * card is linked to his/her account successfully.
    *
-   * @param card the Card that CardHolder would like to link
+   * @param card the card that is to be linked
    */
   public void linkCard(Card card) {
     if (!(card.getOwner() == null)) {
@@ -69,10 +69,10 @@ public class CardHolder extends UserAccount {
   }
 
   /**
-   * Unlinks Card from CardHolder's account. Prints out a message to confirm the action is
+   * Unlinks card from this account. Prints out a message to confirm the action is
    * completed.
    *
-   * @param card the Card that CardHolder would like to unlink
+   * @param card the card that is to be unlinked
    */
   public void unlinkCard(Card card) {
     this.travelCards.remove(card);
@@ -83,10 +83,10 @@ public class CardHolder extends UserAccount {
   }
 
   /**
-   * Activates a Card that is linked to this CardHolder. Prints out a message to inform the
-   * CardHolder whether it is successful.
+   * Activates card that is linked to this account. Prints out a message to inform the
+   * the user whether it is successful.
    *
-   * @param card the Card that CardHolder would like to activate
+   * @param card the card that is to be activated
    */
   public void activateCard(Card card) {
     // CardHolder is able to activate a card that is linked to his/her account.
@@ -100,8 +100,8 @@ public class CardHolder extends UserAccount {
   }
 
   /**
-   * Deactivates a Card that is linked to this CardHolder. Prints out a message to inform the
-   * CardHolder whether it is successful.
+   * Deactivates a card that is linked to this account. Prints out a message to inform the
+   * user whether it is successful.
    *
    * @param card the Card that CardHolder would like to deactivate
    */
@@ -129,7 +129,7 @@ public class CardHolder extends UserAccount {
     }
   }*/
 
-  /** Prints out information about the CardHolder and Card(s) linked to his/her account. */
+  /** Prints out information about the account and card(s) linked to his/her account. */
   @Override
   // Will include cards linked to the CardHolder
   public void viewInfo() {
@@ -146,7 +146,7 @@ public class CardHolder extends UserAccount {
     }
   }
 
-  /** Prints out the average monthly cost of all Cards this CardHolder has. */
+  /** Prints out the average monthly cost of all cards this account has. */
   void viewMonthlyCost() {
     double result = 0.0;
     for (Card c : travelCards) {

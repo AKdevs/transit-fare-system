@@ -54,7 +54,7 @@
  AccountManager [x]
  AdminUser [x]
  Card []
- CardHolder []
+ CardHolder [x]
  EventHandler [x]
  TransitLine [x]
  TransitManager [x]
