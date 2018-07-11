@@ -122,4 +122,4 @@ public class CardHolder extends UserAccount {
     }
     System.out.println(result / travelCards.size());
   }
-    }
+}

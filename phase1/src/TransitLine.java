@@ -13,10 +13,9 @@ public class TransitLine {
   }
 
   /**
-   * Sets the locations and order of the stops/station
-   * in this transit line.
-   * @param points ArrayList of String for
-   *               locations of stops/stations
+   * Sets the locations and order of the stops/station in this transit line.
+   *
+   * @param points ArrayList of String for locations of stops/stations
    */
   public void setPoints(ArrayList<String> points) {
     this.points = points;
@@ -24,6 +23,7 @@ public class TransitLine {
 
   /**
    * Returns the list of stops/stations.
+   *
    * @return list of stops/stations.
    */
   public ArrayList<String> getPoints() {
@@ -31,8 +31,8 @@ public class TransitLine {
   }
 
   /**
-   * Sets the type of transport ("B" - bus, "S" - subway)
-   * of this transit line
+   * Sets the type of transport ("B" - bus, "S" - subway) of this transit line
+   *
    * @param type of transit line
    */
   public void setType(String type) {
@@ -47,7 +47,7 @@ public class TransitLine {
     return this.id;
   }
 
-  //should the two method under stay in TransitLine Class???
+  // should the two method under stay in TransitLine Class???
   public void changeName(String oldName, String newName) {
     if (!points.isEmpty()) {
       for (int i = 0; i < points.size(); i++) {
