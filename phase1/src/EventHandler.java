@@ -145,7 +145,7 @@ public class EventHandler {
           break;
 
         case "change":
-          if (!userExists(eventTokens[2])) {
+          if (!userExists(eventTokens[1])) {
             System.out.println("Name change failed. Account does not exist");
             break;
           }
