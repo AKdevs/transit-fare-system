@@ -52,11 +52,13 @@ Each line of ‘events.txt’ contains one single event. A specific format, “a
 	Format: eventType1 | eventType2 | accountType | name | e-mail
 	Example: “create | account | CardHolder | James | james@gmail.com”
 	Example: “create | account | AdminUser | Tom | tom@gmail.com”
-
+	    *Account number for CardHolder starts with 1, eg. 10000003
+	    *Account number for AdminUser starts with 2, eg. 20000001
 
 	Card creation/registration/purchase
 	Format: eventType1 | eventType2
 	Example: “create | card”
+	    *Card number starts with 3, eg. 30000002
 		*Card is not linked to any user upon creation
 
 	Activate Card

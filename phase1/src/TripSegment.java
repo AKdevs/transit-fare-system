@@ -24,7 +24,7 @@ public class TripSegment {
   /** stores whether TripSegment is a continued subway TripSegment */
   private boolean contiSub;
 
-  public TripSegment(
+  TripSegment(
       String cardNumber, String enterSpot, String transitType, String enterTime, String enterDate) {
     this.associatedCard = cardNumber;
     this.enterSpot = enterSpot;
@@ -46,7 +46,7 @@ public class TripSegment {
    * @param exitTime Time of exit
    * @param exitDate Date of exit
    */
-  public void completeTripSegment(
+  void completeTripSegment(
       String exitSpot, String transitType, String exitTime, String exitDate) {
     this.exitSpot = exitSpot;
     this.exitTransitType = transitType;
@@ -56,73 +56,72 @@ public class TripSegment {
 
 
   /** @return Card number of associated card */
-  public String getAssociatedCard() {
+  String getAssociatedCard() {
     return this.associatedCard;
   }
 
   /** @return stop/station of exit */
-  public String getExitSpot() {
+  String getExitSpot() {
     return this.exitSpot;
   }
 
   /** @return type of transport of entry (bus/subway) */
-  public String getEnterTransitType() {
+  String getEnterTransitType() {
     return this.enterTransitType;
   }
 
   /** @return type of transport of exit (bus/subway) */
-  public String getExitTransitType() {
+  String getExitTransitType() {
     return this.exitTransitType;
   }
 
   /** @return Returns time of entry in HH:MM format
    */
-  public String getEnterTime() {
+  String getEnterTime() {
     return this.enterTime;
   }
 
   /** @return Returns time of exit in HH:MM format */
-  public String getExitTime() {
+  String getExitTime() {
     return this.exitTime;
   }
 
   /** @return duration of trip segment. */
-  public int getDuration() {
+  int getDuration() {
     return this.duration;
   }
 
   /** @param duration of the trip segment. */
-  public void setDuration(int duration) {
+  void setDuration(int duration) {
     this.duration = duration;
   }
 
   /** @return stop/station of entry. */
-  public String getEnterSpot() {
+  String getEnterSpot() {
     return this.enterSpot;
   }
 
   /** @return date of entry in YY-MM-DD format. */
-  public String getEnterDate() {
+  String getEnterDate() {
     return this.enterDate;
   }
 
   /** @return date of exit. */
-  public String getExitDate() {
+  String getExitDate() {
     return this.exitDate;
   }
 
   /** @return total fare for this segment. */
-  public double getSegmentFares() {
+  double getSegmentFares() {
     return this.segmentFares;
   }
 
   /** @param fares amount of money accumulated for this segment. */
-  public void setSegmentFares(double fares) {
+  void setSegmentFares(double fares) {
     this.segmentFares = fares;
   }
 
-  /** @return a string representation of the trip segment.
-   */
+  /** @return a string representation of the trip segment. */
   @Override
   public String toString() {
     String entryType;
@@ -162,10 +161,14 @@ public class TripSegment {
     return s.toString();
   }
 
+  /** Returns true iff subway trip is continuous
+   * @return true iff subway trip is continous
+   */
   boolean getContiSub() {
       return this.contiSub;
   }
 
+  /** @param b status of whether subway trip is continuous   */
   void setContiSub(boolean b) {
       this.contiSub = b;
   }

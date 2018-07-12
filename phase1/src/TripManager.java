@@ -1,18 +1,17 @@
 import java.util.ArrayList;
 
-public class TripManager extends TransitSystem {
+class TripManager extends TransitSystem {
 
-  /**
-   * Records the card number, spot of entry, type of transit, time of entry and date of entry of a
-   * card tap in and beginning a new trip segment.
-   *
-   * @param cardNumber card number of associated card
-   * @param enterSpot stop/station of entry
-   * @param transitType type of transit (bus/subway)
-   * @param enterTime time of entry HH:MM
-   * @param enterDate date of entry YY-MM-DD
-   */
-  public void recordTapIn(
+    /**
+     * Records the card number, spot of entry, type of transit, time of entry
+     * and date of entry of a card tap in and beginning a new trip segment.
+     * @param cardNumber card number of associated card
+     * @param enterSpot stop/station of entry
+     * @param transitType type of transit (bus/subway)
+     * @param enterTime time of entry HH:MM
+     * @param enterDate date of entry YY-MM-DD
+     */
+  void recordTapIn(
       String cardNumber, String enterSpot, String transitType, String enterTime, String enterDate) {
     // Find the associated card
     Card associatedCard = findCard(cardNumber);
@@ -70,7 +69,7 @@ public class TripManager extends TransitSystem {
      * @param exitTime time of exit HH:MM
      * @param exitDate date of exit YY-MM-DD
      */
-  public void recordTapOut(
+  void recordTapOut(
       String cardNumber, String exitSpot, String transitType, String exitTime, String exitDate) {
       //Find the associated card
       Card associatedCard = findCard(cardNumber);
@@ -132,7 +131,7 @@ public class TripManager extends TransitSystem {
      * @param currentTripSegment the ongoing trip segment
      * @return amount of money of subway fare
      */
-  double calculateSubwayFares(TripSegment currentTripSegment) {
+  private double calculateSubwayFares(TripSegment currentTripSegment) {
     int enterSpotIndex = 0;
     int exitSpotIndex = 0;
     for (String lineName : transitLines.keySet()) {
@@ -168,7 +167,7 @@ public class TripManager extends TransitSystem {
      * @param ts trip segment
      * @return the number of stops reached in this trip segment.
      */
-  int calculateStopsReachedByBus(TripSegment ts){
+  private int calculateStopsReachedByBus(TripSegment ts){
       int enterSpotIndex = 0;
       int exitSpotIndex = 0;
       if (ts.getEnterTransitType().equals("B")) {

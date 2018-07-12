@@ -53,7 +53,7 @@
  JAVADOC Progress ([x] means completed)
  AccountManager [x]
  AdminUser [x]
- Card []
+ Card [x]
  CardHolder [x]
  EventHandler [x]
  TransitLine [x]
@@ -61,6 +61,5 @@
  TransitSystem [x]
  TripManager [x]
  TripSegment [x]
- UserAccount [] - methods completed, fields not completed
-
+ UserAccount [x]
  

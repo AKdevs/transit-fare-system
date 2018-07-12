@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class TransitLine {
+class TransitLine {
   /** Specifies the stops/stations on the transit line, in order   */
   private ArrayList<String> points;
   /** Specifies the type of transit line. "B" - bus, "S" - subway   */
@@ -15,22 +15,22 @@ public class TransitLine {
   }
 
   /** @param points ArrayList of String for locations of stops/stations */
-  public void setPoints(ArrayList<String> points) {
+  void setPoints(ArrayList<String> points) {
     this.points = points;
   }
 
   /** @return list of stops/stations. */
-  public ArrayList<String> getPoints() {
+  ArrayList<String> getPoints() {
     return this.points;
   }
 
   /** @param type of transit line ("B" - bus, "S" - subvway) */
-  public void setType(String type) {
+  void setType(String type) {
     this.type = type;
   }
 
   /** @return type of transit line */
-  public String getType() {
+  String getType() {
     return this.type;
   }
 
@@ -61,7 +61,7 @@ public class TransitLine {
    * @param pointBefore The station/stop before the point to be added.
    * @param newPoint The station/stop to be added.
    */
-  public void addPoint(String pointBefore, String newPoint) {
+  void addPoint(String pointBefore, String newPoint) {
     if (pointBefore.equals("")) {
       points.add(0, newPoint);
     } else {
