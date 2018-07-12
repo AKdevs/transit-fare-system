@@ -17,10 +17,9 @@ public class CardHolder extends UserAccount {
     this.travelCards = new ArrayList<>();
   }
 
-
   /**
-   * Links card to this account. Prints out a message to inform the CardHolder whether the
-   * card is linked to his/her account successfully.
+   * Links card to this account. Prints out a message to inform the CardHolder whether the card is
+   * linked to his/her account successfully.
    *
    * @param card the card that is to be linked
    */
@@ -39,8 +38,7 @@ public class CardHolder extends UserAccount {
   }
 
   /**
-   * Unlinks card from this account. Prints out a message to confirm the action is
-   * completed.
+   * Unlinks card from this account. Prints out a message to confirm the action is completed.
    *
    * @param card the card that is to be unlinked
    */
@@ -53,8 +51,8 @@ public class CardHolder extends UserAccount {
   }
 
   /**
-   * Activates card that is linked to this account. Prints out a message to inform the
-   * the user whether it is successful.
+   * Activates card that is linked to this account. Prints out a message to inform the the user
+   * whether it is successful.
    *
    * @param card the card that is to be activated
    */
@@ -70,8 +68,8 @@ public class CardHolder extends UserAccount {
   }
 
   /**
-   * Deactivates a card that is linked to this account. Prints out a message to inform the
-   * user whether it is successful.
+   * Deactivates a card that is linked to this account. Prints out a message to inform the user
+   * whether it is successful.
    *
    * @param card the Card that CardHolder would like to deactivate
    */
@@ -85,8 +83,6 @@ public class CardHolder extends UserAccount {
           "Action denied. Card" + card.getCardNumber() + " is not linked to your account");
     }
   }
-
-
 
   /** Prints out information about the account and card(s) linked to his/her account. */
   @Override
@@ -115,5 +111,3 @@ public class CardHolder extends UserAccount {
         "Account " + accountNumber + " cost for the month: " + result / travelCards.size());
   }
 }
-
-

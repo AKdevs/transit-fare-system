@@ -1,10 +1,10 @@
 /** Class UserAccount is used to define users of the system. */
 public class UserAccount {
-  /** Stores name of this user account   */
+  /** Stores name of this user account */
   private String name;
-  /** Stores e-mail of this user account   */
+  /** Stores e-mail of this user account */
   private String email;
-  /** Stores account number of this user account   */
+  /** Stores account number of this user account */
   protected String accountNumber;
 
   UserAccount(String name, String email) {

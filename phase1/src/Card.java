@@ -3,34 +3,33 @@ import java.util.HashMap;
 
 /** Card is used to tap in and tap out when enter and exit a stop or station. */
 class Card {
-  /** Stores number assigned to this card   */
+  /** Stores number assigned to this card */
   private String cardNumber;
-  /** Keeps track of the next card number to be assigned.  */
+  /** Keeps track of the next card number to be assigned. */
   private static int nextCardNumber = 30000001;
-  /** Keeps track of the balance in this card   */
+  /** Keeps track of the balance in this card */
   private double balance;
-  /** Stores owner of this card   */
+  /** Stores owner of this card */
   private CardHolder owner;
-  /** Stores whether the card is linked to an owner   */
+  /** Stores whether the card is linked to an owner */
   private boolean linked;
-  /** Stores current status of card (activated/deactivated)  */
+  /** Stores current status of card (activated/deactivated) */
   private boolean active;
-  /** Tracks the fare of an ongoing trip   */
+  /** Tracks the fare of an ongoing trip */
   private double currentFares;
-  /** Stores complete trips by date   */
+  /** Stores complete trips by date */
   private HashMap<String, ArrayList<ArrayList<TripSegment>>> trips;
-  /** Keeps track of all trips   */
-  private ArrayList<ArrayList<TripSegment>>
-      mostRecentTrips;
-  /** Keeps track of total fares accumulated on this card   */
+  /** Keeps track of all trips */
+  private ArrayList<ArrayList<TripSegment>> mostRecentTrips;
+  /** Keeps track of total fares accumulated on this card */
   private double totalFares;
-  /** Stores the entry time of a trip segment in minutes   */
+  /** Stores the entry time of a trip segment in minutes */
   private int startEnterTime;
-  /** Keeps a track of the last completed trip segment on this card  */
+  /** Keeps a track of the last completed trip segment on this card */
   private TripSegment lastTripSegment;
   /** Keeps a track of the last completed trip on this card */
   private ArrayList<TripSegment> lastCompleteTrip;
-  /** Keeps a track of the ongoing trip segment (not yet complete)    */
+  /** Keeps a track of the ongoing trip segment (not yet complete) */
   private TripSegment ongoingTripSegment;
 
   /** Constructs a card. */
@@ -61,7 +60,7 @@ class Card {
     }
   }
 
-  /** @return balance on this card   */
+  /** @return balance on this card */
   double getBalance() {
     return balance;
   }
@@ -130,6 +129,7 @@ class Card {
 
   /**
    * Return true iff this card is linked to an account.
+   *
    * @return whether the account is linked to an account.
    */
   boolean isLinked() {
@@ -138,6 +138,7 @@ class Card {
 
   /**
    * Return true iff this card has been activated.
+   *
    * @return status of activation.
    */
   boolean isActive() {
@@ -149,7 +150,7 @@ class Card {
     return this.cardNumber;
   }
 
-  /** Prints out the total fares accumulated on this card   */
+  /** Prints out the total fares accumulated on this card */
   void viewTotalFares() {
     System.out.println(this.totalFares);
   }
@@ -179,24 +180,25 @@ class Card {
   }
 
   /**
-   *  Deduct fares from running total of fares.
+   * Deduct fares from running total of fares.
+   *
    * @param fares amount of money
    */
   void deductCurrentFares(double fares) {
     this.currentFares -= fares;
   }
 
-
   private void setCurrentFares(double fares) {
-        this.currentFares = fares;
-    }
+    this.currentFares = fares;
+  }
 
-    /**
-     * Returns true iff other is equal to this card.
-     * @param other card to be compared with for equality
-     * @return true iff other is equal to this card.
-     */
-    boolean equals(Card other) {
+  /**
+   * Returns true iff other is equal to this card.
+   *
+   * @param other card to be compared with for equality
+   * @return true iff other is equal to this card.
+   */
+  boolean equals(Card other) {
     return this.cardNumber.equals(other.getCardNumber());
   }
 
@@ -208,7 +210,7 @@ class Card {
   /** Prints out the three most recent trips which are stored in the card. */
   void viewMostRecentTrips() {
     if (active) {
-        // there are more than 3 recent complete trips
+      // there are more than 3 recent complete trips
       if (this.mostRecentTrips.size() >= 3) {
         ArrayList<TripSegment> last = this.mostRecentTrips.get(this.mostRecentTrips.size() - 1);
         ArrayList<TripSegment> secondLast =
@@ -233,10 +235,11 @@ class Card {
     }
   }
 
-    /**
-     * Returns true iff card balance is positive and card is active.
-     * @return true iff card balance is positive and card is active.
-     */
+  /**
+   * Returns true iff card balance is positive and card is active.
+   *
+   * @return true iff card balance is positive and card is active.
+   */
   boolean isEntryAllowed() {
     if ((this.balance > 0) && (active)) {
       System.out.println("Accepted");
@@ -273,7 +276,7 @@ class Card {
     }
     // if tripSegment is the start of a new complete trip
     else if (!lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
-        this.setCurrentFares(0.0);
+      this.setCurrentFares(0.0);
       for (String date : this.trips.keySet()) {
         if (date.equals(tripSegment.getEnterDate())) {
           ArrayList<ArrayList<TripSegment>> dayTrips = this.trips.get(date);
@@ -297,46 +300,46 @@ class Card {
               + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
       // within 2 hours
       if (segmentStartTime - this.startEnterTime < 120) {
-          if (tripSegment.getEnterTransitType().equals("S")){
-              tripSegment.setContiSub(true);
-          }
-          this.lastTripSegment = tripSegment;
-          this.lastCompleteTrip.add(this.lastTripSegment);
+        if (tripSegment.getEnterTransitType().equals("S")) {
+          tripSegment.setContiSub(true);
+        }
+        this.lastTripSegment = tripSegment;
+        this.lastCompleteTrip.add(this.lastTripSegment);
+        // currentFares + this trip fare > 6 and within 2 hours
+        if (this.currentFares + tripSegment.getSegmentFares() >= 6) { // tap in time limit
+          double difference = 6 - this.currentFares;
+          this.setCurrentFares(6);
+          this.updateFares(tripSegment, difference);
           // currentFares + this trip fare > 6 and within 2 hours
-          if (this.currentFares + tripSegment.getSegmentFares() >= 6) { // tap in time limit
-              double difference = 6 - this.currentFares;
-              this.setCurrentFares(6);
-              this.updateFares(tripSegment, difference);
-          // currentFares + this trip fare > 6 and within 2 hours
-          } else if (this.currentFares + tripSegment.getSegmentFares() < 6) {
-              this.updateFares(tripSegment, tripSegment.getSegmentFares());
-          }
+        } else if (this.currentFares + tripSegment.getSegmentFares() < 6) {
+          this.updateFares(tripSegment, tripSegment.getSegmentFares());
+        }
       }
 
       // more than 2 hours
-      } else {
-        this.setCurrentFares(0.0);
-        for (String date : this.trips.keySet()) {
-          if (date.equals(tripSegment.getEnterDate())) {
-            ArrayList<ArrayList<TripSegment>> dayTrips = this.trips.get(date);
-            ArrayList<TripSegment> newCompleteTrip = new ArrayList<>();
-              this.lastTripSegment = tripSegment;
-            newCompleteTrip.add(this.lastTripSegment);
-              this.lastCompleteTrip = newCompleteTrip;
-            dayTrips.add(this.lastCompleteTrip);
-            this.updateFares(tripSegment, Math.min(tripSegment.getSegmentFares(), 6.0));
-            //this.lastTripSegment = tripSegment;
-            //this.lastCompleteTrip = newCompleteTrip;
-            this.mostRecentTrips.add(this.lastCompleteTrip);
-            int startTime =
-                Integer.parseInt(tripSegment.getEnterTime().substring(0, 2)) * 60
-                    + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
-            this.startEnterTime = startTime;
-          }
+    } else {
+      this.setCurrentFares(0.0);
+      for (String date : this.trips.keySet()) {
+        if (date.equals(tripSegment.getEnterDate())) {
+          ArrayList<ArrayList<TripSegment>> dayTrips = this.trips.get(date);
+          ArrayList<TripSegment> newCompleteTrip = new ArrayList<>();
+          this.lastTripSegment = tripSegment;
+          newCompleteTrip.add(this.lastTripSegment);
+          this.lastCompleteTrip = newCompleteTrip;
+          dayTrips.add(this.lastCompleteTrip);
+          this.updateFares(tripSegment, Math.min(tripSegment.getSegmentFares(), 6.0));
+          // this.lastTripSegment = tripSegment;
+          // this.lastCompleteTrip = newCompleteTrip;
+          this.mostRecentTrips.add(this.lastCompleteTrip);
+          int startTime =
+              Integer.parseInt(tripSegment.getEnterTime().substring(0, 2)) * 60
+                  + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
+          this.startEnterTime = startTime;
         }
       }
     }
-  //}
+  }
+  // }
 
   /**
    * Updates all stored fares by the change of the amount of fares
@@ -355,18 +358,18 @@ class Card {
     TransitSystem.addAllFares(tripSegment.getEnterDate(), fares);
   }
 
-    /** @return ongoing trip segment */
+  /** @return ongoing trip segment */
   TripSegment getOngoingTripSegment() {
-      return this.ongoingTripSegment;
+    return this.ongoingTripSegment;
   }
 
-    /** @param ts ongoing trip segment */
+  /** @param ts ongoing trip segment */
   void setOngoingTripSegment(TripSegment ts) {
-      this.ongoingTripSegment = ts;
+    this.ongoingTripSegment = ts;
   }
 
-    /** @return last completed trip segment   */
-    TripSegment getLastTripSegment() {
-        return lastTripSegment;
-    }
+  /** @return last completed trip segment */
+  TripSegment getLastTripSegment() {
+    return lastTripSegment;
+  }
 }

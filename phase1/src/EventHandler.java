@@ -2,13 +2,13 @@ import java.io.File;
 import java.util.Scanner;
 
 public class EventHandler {
-  /** Stores the transit system   */
+  /** Stores the transit system */
   private TransitSystem system;
-  /** Stores the trip manager   */
+  /** Stores the trip manager */
   private TripManager tripManager;
-  /** Stores the transit manager   */
+  /** Stores the transit manager */
   private TransitManager transitManager;
-  /** Stores the account manager   */
+  /** Stores the account manager */
   private AccountManager accountManager;
   /** Stores the file that events are read from */
   private Scanner eventsBuffer;
@@ -30,7 +30,7 @@ public class EventHandler {
     this.accountManager = new AccountManager();
   }
 
-  /** Reads events from file and performs the corresponding actions.  */
+  /** Reads events from file and performs the corresponding actions. */
   private void play() {
     String currentEvent = eventsBuffer.nextLine();
     String[] eventTokens = currentEvent.split(" \\| ");
@@ -176,6 +176,7 @@ public class EventHandler {
 
   /**
    * Returns true if the user account exists for the accountNumber.
+   *
    * @param accountNumber account number.
    * @return true if user account exists for accountNumber.
    */
@@ -188,6 +189,7 @@ public class EventHandler {
 
   /**
    * Returns true if card exists for the cardNumber.
+   *
    * @param cardNumber card number
    * @return true if a card exists for cardNumber.
    */

@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
 class TransitLine {
-  /** Specifies the stops/stations on the transit line, in order   */
+  /** Specifies the stops/stations on the transit line, in order */
   private ArrayList<String> points;
-  /** Specifies the type of transit line. "B" - bus, "S" - subway   */
+  /** Specifies the type of transit line. "B" - bus, "S" - subway */
   private String type;
-  /** Identifier   */
+  /** Identifier */
   private String id;
 
   TransitLine(ArrayList<String> points, String type, String id) {
@@ -40,8 +40,8 @@ class TransitLine {
   }
 
   /**
-   * Change name of a station/stop in the transit line from oldName
-   * to newName.
+   * Change name of a station/stop in the transit line from oldName to newName.
+   *
    * @param oldName the name to be changed.
    * @param newName the new name.
    */
@@ -56,8 +56,9 @@ class TransitLine {
   }
 
   /**
-   * Adds a station/stop called newPoint after pointBefore. If
-   * pointBefore is "", then adds newPoint to the front.
+   * Adds a station/stop called newPoint after pointBefore. If pointBefore is "", then adds newPoint
+   * to the front.
+   *
    * @param pointBefore The station/stop before the point to be added.
    * @param newPoint The station/stop to be added.
    */

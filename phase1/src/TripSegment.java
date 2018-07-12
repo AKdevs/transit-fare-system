@@ -1,25 +1,25 @@
 public class TripSegment {
-  /** Stores the card number of card associated with this trip segment.   */
+  /** Stores the card number of card associated with this trip segment. */
   private String associatedCard;
-  /** Stores the location (stop/station) of entry  */
+  /** Stores the location (stop/station) of entry */
   private String enterSpot;
   /** Stores the location (stop/station) of exit */
   private String exitSpot;
-  /** Stores the type (bus/subway) of entry  */
+  /** Stores the type (bus/subway) of entry */
   private String enterTransitType;
-  /** Stores the location (bus/subway) of exit  */
+  /** Stores the location (bus/subway) of exit */
   private String exitTransitType;
-  /** Stores the time of entry  */
+  /** Stores the time of entry */
   private String enterTime;
-  /** Stores the time of exit  */
+  /** Stores the time of exit */
   private String exitTime;
-  /** Stores the date of entry  */
+  /** Stores the date of entry */
   private String enterDate;
-  /** Stores the date of exit  */
+  /** Stores the date of exit */
   private String exitDate;
-  /** Stores the duration of the trip (minutes)   */
+  /** Stores the duration of the trip (minutes) */
   private int duration;
-  /** Accumulates the total fare of the segment  */
+  /** Accumulates the total fare of the segment */
   private double segmentFares = 0.0;
   /** stores whether TripSegment is a continued subway TripSegment */
   private boolean contiSub;
@@ -39,21 +39,19 @@ public class TripSegment {
   }
 
   /**
-   * Updates the exit information of the trip segment, thereby
-   * completing it.
+   * Updates the exit information of the trip segment, thereby completing it.
+   *
    * @param exitSpot Station/stop of exit
    * @param transitType Type of transport (bus or subway)
    * @param exitTime Time of exit
    * @param exitDate Date of exit
    */
-  void completeTripSegment(
-      String exitSpot, String transitType, String exitTime, String exitDate) {
+  void completeTripSegment(String exitSpot, String transitType, String exitTime, String exitDate) {
     this.exitSpot = exitSpot;
     this.exitTransitType = transitType;
     this.exitTime = exitTime;
     this.exitDate = exitDate;
   }
-
 
   /** @return Card number of associated card */
   String getAssociatedCard() {
@@ -75,8 +73,7 @@ public class TripSegment {
     return this.exitTransitType;
   }
 
-  /** @return Returns time of entry in HH:MM format
-   */
+  /** @return Returns time of entry in HH:MM format */
   String getEnterTime() {
     return this.enterTime;
   }
@@ -161,15 +158,17 @@ public class TripSegment {
     return s.toString();
   }
 
-  /** Returns true iff subway trip is continuous
+  /**
+   * Returns true iff subway trip is continuous
+   *
    * @return true iff subway trip is continous
    */
   boolean getContiSub() {
-      return this.contiSub;
+    return this.contiSub;
   }
 
-  /** @param b status of whether subway trip is continuous   */
+  /** @param b status of whether subway trip is continuous */
   void setContiSub(boolean b) {
-      this.contiSub = b;
+    this.contiSub = b;
   }
 }
