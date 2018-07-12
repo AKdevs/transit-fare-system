@@ -201,12 +201,14 @@ public class Card {
   /** Prints out the three most recent trips which are stored in the card. */
   void viewMostRecentTrips() {
     if (active) {
+        // there are more than 3 recent complete trips
       if (this.mostRecentTrips.size() >= 3) {
         ArrayList<TripSegment> last = this.mostRecentTrips.get(this.mostRecentTrips.size() - 1);
         ArrayList<TripSegment> secondLast =
             this.mostRecentTrips.get(this.mostRecentTrips.size() - 2);
         ArrayList<TripSegment> thirdLast =
             this.mostRecentTrips.get(this.mostRecentTrips.size() - 3);
+        // make a ArrayList of the last (most recent) 3 trips
         ArrayList<ArrayList<TripSegment>> result = new ArrayList<ArrayList<TripSegment>>();
         result.add(thirdLast);
         result.add(secondLast);
@@ -256,7 +258,7 @@ public class Card {
       firstDayTrips.add(this.lastCompleteTrip);
       this.trips.put(date, firstDayTrips);
       this.mostRecentTrips.add(this.lastCompleteTrip);
-      this.updateFares(tripSegment, tripSegment.getSegmentFares());
+      this.updateFares(tripSegment, Math.min(tripSegment.getSegmentFares(), 6.0));
     }
     // if tripSegment is the start of a new complete trip
     else if (!lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
@@ -269,7 +271,7 @@ public class Card {
           newCompleteTrip.add(this.lastTripSegment);
           this.lastCompleteTrip = newCompleteTrip;
           dayTrips.add(this.lastCompleteTrip);
-          this.updateFares(tripSegment, tripSegment.getSegmentFares());
+          this.updateFares(tripSegment, Math.min(tripSegment.getSegmentFares(), 6.0));
           this.mostRecentTrips.add(this.lastCompleteTrip);
           int startTime =
               Integer.parseInt(tripSegment.getEnterTime().substring(0, 2)) * 60
@@ -311,7 +313,7 @@ public class Card {
             newCompleteTrip.add(this.lastTripSegment);
               this.lastCompleteTrip = newCompleteTrip;
             dayTrips.add(this.lastCompleteTrip);
-            this.updateFares(tripSegment, tripSegment.getSegmentFares());
+            this.updateFares(tripSegment, Math.min(tripSegment.getSegmentFares(), 6.0));
             //this.lastTripSegment = tripSegment;
             //this.lastCompleteTrip = newCompleteTrip;
             this.mostRecentTrips.add(this.lastCompleteTrip);

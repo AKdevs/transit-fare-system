@@ -16,7 +16,7 @@ public class AdminUser extends UserAccount {
    *
    * @param date the date which AdminUser would like to view the report for
    */
-  public static void getDailyReport(String date) {
+  static void getDailyReport(String date) {
     System.out.println("All fares received by transit system on " + date + ": " + TransitSystem.getDailyFares(date));
     System.out.println("Number of stations reached by travellers on " + date + ": " + TransitSystem.getDailyStation(date));
   }
