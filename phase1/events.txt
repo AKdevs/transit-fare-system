@@ -34,6 +34,7 @@ exit | 30000001 | Leslie  | B | 12:15 | 2018-02-11
 view | balance | 10000001 | 30000001
 view | cost | 10000001
 view | allTrips | 10000001 | 30000001
+view | trips | 10000001 | 30000001
 view | report | 2018-02-11
 create | account | CardHolder | Tim Smith | tim@gmail.com
 create | account | AdminUser | Admin1 | admin1@transit.com
