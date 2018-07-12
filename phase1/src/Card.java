@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 /** Card is used to tap in and tap out when enter and exit a stop or station. */
-public class Card {
+class Card {
   /** Stores number assigned to this card   */
   private String cardNumber;
   /** Keeps track of the next card number to be assigned.  */
@@ -175,7 +175,7 @@ public class Card {
    *
    * @param fares amount of money
    */
-  void addCurrentFares(double fares) {
+  private void addCurrentFares(double fares) {
     this.currentFares += fares;
   }
 
@@ -188,7 +188,7 @@ public class Card {
   }
 
 
-    void setCurrentFares(double fares) {
+    private void setCurrentFares(double fares) {
         this.currentFares = fares;
     }
 
