@@ -35,7 +35,7 @@ public class Card {
   private TripSegment ongoingTripSegment;
 
   /** Constructs a card. */
-  public Card() {
+  Card() {
     this.cardNumber = Integer.toString(nextCardNumber);
     nextCardNumber += 1;
     this.owner = null;
@@ -93,7 +93,7 @@ public class Card {
    *
    * @param fares the amount of fares to be deducted from the card
    */
-  void deductBalance(Double fares) {
+  private void deductBalance(Double fares) {
     if (active) {
       this.balance -= fares;
     } else {
@@ -121,11 +121,11 @@ public class Card {
   }
 
   /** Sets the status of the card linking to a account to be true. */
-  public void linkAccount() {
+  void linkAccount() {
     this.linked = true;
   }
   /** Sets the status of the card linking to a account to be false. */
-  public void unlinkAccount() {
+  void unlinkAccount() {
     this.linked = false;
   }
 
@@ -133,7 +133,7 @@ public class Card {
    * Return true iff this card is linked to an account.
    * @return whether the account is linked to an account.
    */
-  public boolean isLinked() {
+  boolean isLinked() {
     return linked;
   }
 
@@ -141,7 +141,7 @@ public class Card {
    * Return true iff this card has been activated.
    * @return status of activation.
    */
-  public boolean isActive() {
+  boolean isActive() {
     return active;
   }
 
@@ -365,7 +365,7 @@ public class Card {
   }
 
     /** @return last completed trip segment   */
-    public TripSegment getLastTripSegment() {
+    TripSegment getLastTripSegment() {
         return lastTripSegment;
     }
 }
