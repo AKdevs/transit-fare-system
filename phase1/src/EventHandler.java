@@ -181,10 +181,7 @@ public class EventHandler {
    * @return true if user account exists for accountNumber.
    */
   private boolean userExists(String accountNumber) {
-    if (system.findUserAccount(accountNumber) == null) {
-      return false;
-    }
-    return true;
+    return !(system.findUserAccount(accountNumber) == null);
   }
 
   /**
@@ -194,9 +191,6 @@ public class EventHandler {
    * @return true if a card exists for cardNumber.
    */
   private boolean cardExists(String cardNumber) {
-    if (system.findCard(cardNumber) == null) {
-      return false;
-    }
-    return true;
+    return !(system.findCard(cardNumber) == null);
   }
 }
