@@ -35,7 +35,7 @@ public class Card {
   private TripSegment ongoingTripSegment;
 
   /** Constructs a card. */
-  public Card() {
+  Card() {
     this.cardNumber = Integer.toString(nextCardNumber);
     nextCardNumber += 1;
     this.owner = null;
@@ -93,7 +93,7 @@ public class Card {
    *
    * @param fares the amount of fares to be deducted from the card
    */
-  void deductBalance(Double fares) {
+  private void deductBalance(Double fares) {
     if (active) {
       this.balance -= fares;
     } else {
@@ -121,11 +121,11 @@ public class Card {
   }
 
   /** Sets the status of the card linking to a account to be true. */
-  public void linkAccount() {
+  void linkAccount() {
     this.linked = true;
   }
   /** Sets the status of the card linking to a account to be false. */
-  public void unlinkAccount() {
+  void unlinkAccount() {
     this.linked = false;
   }
 
@@ -133,7 +133,7 @@ public class Card {
    * Return true iff this card is linked to an account.
    * @return whether the account is linked to an account.
    */
-  public boolean isLinked() {
+  boolean isLinked() {
     return linked;
   }
 
@@ -141,7 +141,7 @@ public class Card {
    * Return true iff this card has been activated.
    * @return status of activation.
    */
-  public boolean isActive() {
+  boolean isActive() {
     return active;
   }
 
@@ -232,6 +232,10 @@ public class Card {
     }
   }
 
+    /**
+     * Returns true iff card balance is positive and card is active.
+     * @return true iff card balance is positive and card is active.
+     */
   boolean isEntryAllowed() {
     if ((this.balance > 0) && (active)) {
       System.out.println("Accepted");
@@ -243,9 +247,9 @@ public class Card {
   }
 
   /**
-   * ?????????????????????????????????
+   * Adds trip segment tripSegment to this card.
    *
-   * @param tripSegment
+   * @param tripSegment trip segment to be added to card.
    */
   void addTripSegment(TripSegment tripSegment) {
     // if tripSegment is the first TripSegment to be added to trips
@@ -350,15 +354,18 @@ public class Card {
     TransitSystem.addAllFares(tripSegment.getEnterDate(), fares);
   }
 
+    /** @return ongoing trip segment */
   TripSegment getOngoingTripSegment() {
       return this.ongoingTripSegment;
   }
 
+    /** @param ts ongoing trip segment */
   void setOngoingTripSegment(TripSegment ts) {
       this.ongoingTripSegment = ts;
   }
 
-    public TripSegment getLastTripSegment() {
+    /** @return last completed trip segment   */
+    TripSegment getLastTripSegment() {
         return lastTripSegment;
     }
 }

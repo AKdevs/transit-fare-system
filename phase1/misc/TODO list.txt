@@ -53,7 +53,7 @@
  JAVADOC Progress ([x] means completed)
  AccountManager [x]
  AdminUser [x]
- Card []
+ Card [x]
  CardHolder [x]
  EventHandler [x]
  TransitLine [x]

@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-
 /** Manage all accounts which are stored in TransitSystem. */
-public class AccountManager extends TransitSystem {
+class AccountManager extends TransitSystem {
 
   /**
    * Creates an account for card holder.
@@ -32,11 +30,7 @@ public class AccountManager extends TransitSystem {
    *
    * @param newUser a new user with account
    */
-  void addUserAccount(UserAccount newUser) {
+  private void addUserAccount(UserAccount newUser) {
     getUserAccounts().add(newUser);
-  }
-
-  void removeUserAccount(String accountNumber) {
-    getUserAccounts().remove(findUserAccount(accountNumber));
   }
 }

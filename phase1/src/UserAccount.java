@@ -1,5 +1,3 @@
-import java.io.*;
-
 /** Class UserAccount is used to define users of the system. */
 public class UserAccount {
   /** Stores name of this user account   */
@@ -9,23 +7,23 @@ public class UserAccount {
   /** Stores account number of this user account   */
   protected String accountNumber;
 
-  public UserAccount(String name, String email) {
+  UserAccount(String name, String email) {
     this.name = name;
     this.email = email;
   }
 
   /** @return name of UserAccount */
-  public String getName() {
+  String getName() {
     return this.name;
   }
 
   /** @return email of UserAccount */
-  public String getEmail() {
+  String getEmail() {
     return this.email;
   }
 
   /** @return account number of UserAccount */
-  public String getAccountNum() {
+  String getAccountNum() {
     return this.accountNumber;
   }
 
@@ -34,7 +32,7 @@ public class UserAccount {
    *
    * @param newName the new name to be used
    */
-  public void changeName(String newName) {
+  void changeName(String newName) {
     this.name = newName;
     System.out.println("Account " + this.getAccountNum() + " name changed to " + this.name);
   }

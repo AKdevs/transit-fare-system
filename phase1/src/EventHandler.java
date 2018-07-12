@@ -1,6 +1,4 @@
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class EventHandler {
@@ -33,7 +31,7 @@ public class EventHandler {
   }
 
   /** Reads events from file and performs the corresponding actions.  */
-  void play() {
+  private void play() {
     String currentEvent = eventsBuffer.nextLine();
     String[] eventTokens = currentEvent.split(" \\| ");
     String action = eventTokens[0].trim();
@@ -153,7 +151,7 @@ public class EventHandler {
    * @param accountNumber account number.
    * @return true if user account exists for accountNumber.
    */
-  boolean userExists(String accountNumber) {
+  private boolean userExists(String accountNumber) {
     if (system.findUserAccount(accountNumber) == null) {
       return false;
     }
@@ -165,7 +163,7 @@ public class EventHandler {
    * @param cardNumber card number
    * @return true if a card exists for cardNumber.
    */
-  boolean cardExists(String cardNumber) {
+  private boolean cardExists(String cardNumber) {
     if (system.findCard(cardNumber) == null) {
       return false;
     }
