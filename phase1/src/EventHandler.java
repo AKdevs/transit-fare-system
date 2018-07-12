@@ -61,6 +61,10 @@ public class EventHandler {
             System.out.println("Activation failed. Card does not exist");
             break;
           }
+          if (!userExists(eventTokens[1])) {
+            System.out.println("Activation failed. User does not exist");
+            break;
+          }
           CardHolder cha = (CardHolder) system.findUserAccount(eventTokens[1]);
           cha.activateCard(ca);
           break;
@@ -69,6 +73,10 @@ public class EventHandler {
           Card cd = system.findCard(eventTokens[2]);
           if (cd == null) {
             System.out.println("Deactivation failed. Card does not exist");
+            break;
+          }
+          if (!userExists(eventTokens[1])) {
+            System.out.println("Dectivation failed. User does not exist");
             break;
           }
           CardHolder chd = (CardHolder) system.findUserAccount(eventTokens[1]);
