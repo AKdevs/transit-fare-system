@@ -1,7 +1,6 @@
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+
 /** Card is used to tap in and tap out when enter and exit a stop or station. */
 class Card {
   /** Stores number assigned to this card   */
@@ -63,7 +62,7 @@ class Card {
   }
 
   /** @return balance on this card   */
-  public double getBalance() {
+  double getBalance() {
     return balance;
   }
 
@@ -188,7 +187,7 @@ class Card {
   }
 
 
-    private void setCurrentFares(double fares) {
+  private void setCurrentFares(double fares) {
         this.currentFares = fares;
     }
 
@@ -198,7 +197,7 @@ class Card {
      * @return true iff other is equal to this card.
      */
     boolean equals(Card other) {
-    return this.cardNumber == other.getCardNumber();
+    return this.cardNumber.equals(other.getCardNumber());
   }
 
   /** @return total amount of fare accumualted on this card */
