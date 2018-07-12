@@ -13,36 +13,45 @@ class TripManager extends TransitSystem {
      */
   void recordTapIn(
       String cardNumber, String enterSpot, String transitType, String enterTime, String enterDate) {
-      //Find the associated card
-      Card associatedCard = findCard(cardNumber);
+    // Find the associated card
+    Card associatedCard = findCard(cardNumber);
+    // If the associated card's balance is negative, the system won't allow entry
+    if (associatedCard.getBalance() < 0) {
+      System.out.println("Declined: Card is out of funds, please load money.");
+    } else {
       // Find the ongoing/current TripSegment
       TripSegment ongoing = associatedCard.getOngoingTripSegment();
       // normal entry
       if (ongoing == null || !ongoing.getExitSpot().equals("unknown")) {
-          TripSegment ts = new TripSegment(cardNumber, enterSpot, transitType, enterTime, enterDate);
-          //the ongoing TripSegment right now is ts
-          associatedCard.setOngoingTripSegment(ts);
-          if (ts.getEnterTransitType().equals("B")) {
-              calculateTripSegmentFares(ts);
-          }
-          addTripSegmentToCard(ts);
+        TripSegment ts = new TripSegment(cardNumber, enterSpot, transitType, enterTime, enterDate);
+        // the ongoing TripSegment right now is ts
+        associatedCard.setOngoingTripSegment(ts);
+        if (ts.getEnterTransitType().equals("B")) {
+          calculateTripSegmentFares(ts);
+        }
+        addTripSegmentToCard(ts);
 
-      } else if (ongoing.getExitSpot().equals("unknown")) { //illegal entry
-          System.out.println("Declined: Illegal entry");
-          // complete the trip segment( without exit) with "illegal", use enterTime as exitTime, use enterDate as exitDate
-          associatedCard.getLastTripSegment().completeTripSegment("illegal", "illegal", enterTime, enterDate);
-          //for subway, charge $6 for the illegal trip; for bus, except for the $2 fare, charge $6 as penalty
-          associatedCard.updateFares(associatedCard.getLastTripSegment(), fareCap);
-          // add the new tripSegment as usual
-          TripSegment ts = new TripSegment(cardNumber, enterSpot, transitType, enterTime, enterDate);
-          //the ongoing TripSegment right now is ts
-          associatedCard.setOngoingTripSegment(ts);
-          //this.currentTripSegments.add(ts);
-          if (ts.getEnterTransitType().equals("B")) {
-              calculateTripSegmentFares(ts);
-          }
-          addTripSegmentToCard(ts);
+      } else if (ongoing.getExitSpot().equals("unknown")) { // illegal entry
+        System.out.println("Declined: Illegal entry");
+        // complete the trip segment( without exit) with "illegal", use enterTime as exitTime, use
+        // enterDate as exitDate
+        associatedCard
+            .getLastTripSegment()
+            .completeTripSegment("illegal", "illegal", enterTime, enterDate);
+        // for subway, charge $6 for the illegal trip; for bus, except for the $2 fare, charge $6 as
+        // penalty
+        associatedCard.updateFares(associatedCard.getLastTripSegment(), fareCap);
+        // add the new tripSegment as usual
+        TripSegment ts = new TripSegment(cardNumber, enterSpot, transitType, enterTime, enterDate);
+        // the ongoing TripSegment right now is ts
+        associatedCard.setOngoingTripSegment(ts);
+        // this.currentTripSegments.add(ts);
+        if (ts.getEnterTransitType().equals("B")) {
+          calculateTripSegmentFares(ts);
+        }
+        addTripSegmentToCard(ts);
       }
+    }
   }
 
     /** @param ts TripSegment to be added to associated card. */
@@ -75,7 +84,7 @@ class TripManager extends TransitSystem {
           calculateTripSegmentFares(ts);
           if (ts.getEnterTransitType().equals("S") && !ts.getContiSub()) {
               String currentCardNumber = ts.getAssociatedCard();
-              findCard(currentCardNumber).updateFares(ts, ts.getSegmentFares());
+              findCard(currentCardNumber).updateFares(ts, Math.min(ts.getSegmentFares(), 6.0));
           }
       }else {// illegal tap out
           System.out.println("Declined: Illegal exit.");
@@ -141,12 +150,12 @@ class TripManager extends TransitSystem {
     }
     if (enterSpotIndex == exitSpotIndex) {
       return 0;
-    } else if (currentTripSegment.getDuration() <= 180
+    } /*else if (currentTripSegment.getDuration() <= 180
         && (Math.abs(exitSpotIndex - enterSpotIndex)) * 0.5 > fareCap) {
       addNumberOfStation(
           currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
       return fareCap;
-    } else {
+    } */else {
       addNumberOfStation(
           currentTripSegment.getEnterDate(), Math.abs(exitSpotIndex - enterSpotIndex) + 1);
       return (Math.abs(exitSpotIndex - enterSpotIndex)) * subwayFare;

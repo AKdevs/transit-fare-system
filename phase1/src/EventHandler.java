@@ -57,23 +57,47 @@ public class EventHandler {
 
         case "activate":
           Card ca = system.findCard(eventTokens[2]);
+          if (ca == null) {
+            System.out.println("Activation failed. Card does not exist");
+            break;
+          }
+          if (!userExists(eventTokens[1])) {
+            System.out.println("Activation failed. User does not exist");
+            break;
+          }
           CardHolder cha = (CardHolder) system.findUserAccount(eventTokens[1]);
           cha.activateCard(ca);
           break;
 
         case "deactivate":
           Card cd = system.findCard(eventTokens[2]);
+          if (cd == null) {
+            System.out.println("Deactivation failed. Card does not exist");
+            break;
+          }
+          if (!userExists(eventTokens[1])) {
+            System.out.println("Dectivation failed. User does not exist");
+            break;
+          }
           CardHolder chd = (CardHolder) system.findUserAccount(eventTokens[1]);
           chd.deactivateCard(cd);
           break;
 
         case "link":
+          if (!userExists(eventTokens[1]) | !cardExists(eventTokens[2])) {
+            System.out.println("Action failed. Account or card does not exist");
+            break;
+          }
           Card currentCard = system.findCard(eventTokens[2]);
           UserAccount currentHolder = system.findUserAccount(eventTokens[1]);
           ((CardHolder) currentHolder).linkCard(currentCard);
           break;
 
         case "unlink":
+          if (!userExists(eventTokens[1]) | !cardExists(eventTokens[2])) {
+            System.out.println("Action failed. Account or card does not exist");
+            break;
+          }
           UserAccount ua = system.findUserAccount(eventTokens[1]);
           Card cc = system.findCard(eventTokens[2]);
           ((CardHolder) ua).unlinkCard(cc);
@@ -121,8 +145,12 @@ public class EventHandler {
           break;
 
         case "change":
-          UserAccount user = system.findUserAccount(eventTokens[1]);
-          user.changeName(eventTokens[2]);
+          if (!userExists(eventTokens[2])) {
+            System.out.println("Name change failed. Account does not exist");
+            break;
+          }
+          UserAccount useracc = system.findUserAccount(eventTokens[1]);
+          useracc.changeName(eventTokens[2]);
           break;
 
         case "power":
