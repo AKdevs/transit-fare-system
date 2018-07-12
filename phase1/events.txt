@@ -10,11 +10,9 @@ view | info | 10000001
 view | info | 49837hf38
 activate | 10000001 | 30000001
 deactivate | 10000001 | 30000001
-activate | 10000001 | 3000000121e12e12
-deactivate | 10000001 | 300004232001
-activate | 100e2100001 | 30000001
-deactivate | 10000e21001 | 30000001
+activate | 10000001 | 30000001
 load | 10000001 | 30000001 | 20
+view | balance | 10000001 | 30000001
 entry | 30000001 | Dufferin | B | 10:58 | 2018-02-11
 exit | 30000001 | Bathurst | B | 11:01 | 2018-02-11
 view | balance | 10000001 | 30000001
@@ -23,8 +21,10 @@ exit | 30000001 | St Patrick | S | 09:02 | 2018-02-11
 view | balance | 10000001 | 30000001
 entry | 30000001 | Osgoode | S | 09:02 | 2018-02-11
 exit | 30000001 | Finch | S | 10:02 | 2018-02-11
+view | balance | 10000001 | 30000001
 entry | 30000001 | Dufferin | B | 10:58 | 2018-02-11
 exit | 30000001 | Bathurst | B | 11:01 | 2018-02-11
+view | balance | 10000001 | 30000001
 entry | 30000001 | Osgoode | S | 11:15 | 2018-02-11
 exit | 30000001 | Sheppard-Yonge | S | 12:11 | 2018-02-11
 entry | 30000001 | Sheppard-Yonge | B | 12:12 | 2018-02-11
