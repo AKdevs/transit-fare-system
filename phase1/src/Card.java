@@ -223,8 +223,10 @@ class Card {
         result.add(secondLast);
         result.add(last);
         System.out.println(result);
+      // there are less than 3 recent trips
       } else {
         ArrayList<ArrayList<TripSegment>> result = new ArrayList<ArrayList<TripSegment>>();
+        // print out all the trips in mostRecentTrips
         for (ArrayList<TripSegment> completeTrip : this.mostRecentTrips) {
           result.add(completeTrip);
         }
@@ -235,11 +237,10 @@ class Card {
     }
   }
 
-  /**
-   * Returns true iff card balance is positive and card is active.
-   *
-   * @return true iff card balance is positive and card is active.
-   */
+    /**
+     * Returns true iff card balance is positive and card is active.
+     * @return true iff card balance is positive and card is active.
+     */
   boolean isEntryAllowed() {
     if ((this.balance > 0) && (active)) {
       System.out.println("Accepted");
@@ -256,18 +257,24 @@ class Card {
    * @param tripSegment trip segment to be added to card.
    */
   void addTripSegment(TripSegment tripSegment) {
-    // if tripSegment is the first TripSegment to be added to trips
+    // if tripSegment is the first TripSegment to be added to trips on that date
     String currentDate = tripSegment.getEnterDate();
+    // if currentDate is a new date
     if (!this.trips.containsKey(currentDate)) {
+        //get the start time of this trip segment
       int startTime =
           Integer.parseInt(tripSegment.getEnterTime().substring(0, 2)) * 60
               + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
       this.startEnterTime = startTime;
       String date = tripSegment.getEnterDate();
+      // tripSegment is the most recent TripSegment
       this.lastTripSegment = tripSegment;
+      //create an empty complete trip, add the first tripSegment inside
       ArrayList<TripSegment> firstCompleteTrip = new ArrayList<>();
       firstCompleteTrip.add(this.lastTripSegment);
       this.lastCompleteTrip = firstCompleteTrip;
+      //create an empty list of all complete trips completed by the cardHolder on currentDate
+      //add the first complete trip inside
       ArrayList<ArrayList<TripSegment>> firstDayTrips = new ArrayList<>();
       firstDayTrips.add(this.lastCompleteTrip);
       this.trips.put(date, firstDayTrips);
@@ -276,17 +283,24 @@ class Card {
     }
     // if tripSegment is the start of a new complete trip
     else if (!lastTripSegment.getExitSpot().equals(tripSegment.getEnterSpot())) {
-      this.setCurrentFares(0.0);
+        //currentFares keeps track of the fares of a continuous trip
+        //this is the start of a new continuous trip, so we set currentFares to 0.0
+        this.setCurrentFares(0.0);
       for (String date : this.trips.keySet()) {
         if (date.equals(tripSegment.getEnterDate())) {
+            //get the Arraylist of all the continuous trips completed on date
           ArrayList<ArrayList<TripSegment>> dayTrips = this.trips.get(date);
           this.lastTripSegment = tripSegment;
+          //create a new continuous trip, add tripSegment inside
           ArrayList<TripSegment> newCompleteTrip = new ArrayList<>();
           newCompleteTrip.add(this.lastTripSegment);
           this.lastCompleteTrip = newCompleteTrip;
+          //add the new continuous trip in the Arraylist of all the continuous trips completed on date
           dayTrips.add(this.lastCompleteTrip);
           this.updateFares(tripSegment, Math.min(tripSegment.getSegmentFares(), 6.0));
           this.mostRecentTrips.add(this.lastCompleteTrip);
+          //update the start time
+          // the start time right now should be the enterTime (tap in time) of tripSegment since is the start of a new continuous trip
           int startTime =
               Integer.parseInt(tripSegment.getEnterTime().substring(0, 2)) * 60
                   + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
@@ -300,46 +314,48 @@ class Card {
               + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
       // within 2 hours
       if (segmentStartTime - this.startEnterTime < 120) {
-        if (tripSegment.getEnterTransitType().equals("S")) {
-          tripSegment.setContiSub(true);
-        }
-        this.lastTripSegment = tripSegment;
-        this.lastCompleteTrip.add(this.lastTripSegment);
-        // currentFares + this trip fare > 6 and within 2 hours
-        if (this.currentFares + tripSegment.getSegmentFares() >= 6) { // tap in time limit
-          double difference = 6 - this.currentFares;
-          this.setCurrentFares(6);
-          this.updateFares(tripSegment, difference);
+          //if tripSegment is a continuous subway TripSegment
+          if (tripSegment.getEnterTransitType().equals("S")){
+              tripSegment.setContiSub(true);
+          }
+          this.lastTripSegment = tripSegment;
+          this.lastCompleteTrip.add(this.lastTripSegment);
           // currentFares + this trip fare > 6 and within 2 hours
-        } else if (this.currentFares + tripSegment.getSegmentFares() < 6) {
-          this.updateFares(tripSegment, tripSegment.getSegmentFares());
-        }
+          if (this.currentFares + tripSegment.getSegmentFares() >= 6) { // tap in time limit
+              double difference = 6 - this.currentFares;
+              this.setCurrentFares(6);
+              this.updateFares(tripSegment, difference);
+          // currentFares + this trip fare > 6 and within 2 hours
+          } else if (this.currentFares + tripSegment.getSegmentFares() < 6) {
+              this.updateFares(tripSegment, tripSegment.getSegmentFares());
+          }
       }
 
       // more than 2 hours
-    } else {
-      this.setCurrentFares(0.0);
-      for (String date : this.trips.keySet()) {
-        if (date.equals(tripSegment.getEnterDate())) {
-          ArrayList<ArrayList<TripSegment>> dayTrips = this.trips.get(date);
-          ArrayList<TripSegment> newCompleteTrip = new ArrayList<>();
-          this.lastTripSegment = tripSegment;
-          newCompleteTrip.add(this.lastTripSegment);
-          this.lastCompleteTrip = newCompleteTrip;
-          dayTrips.add(this.lastCompleteTrip);
-          this.updateFares(tripSegment, Math.min(tripSegment.getSegmentFares(), 6.0));
-          // this.lastTripSegment = tripSegment;
-          // this.lastCompleteTrip = newCompleteTrip;
-          this.mostRecentTrips.add(this.lastCompleteTrip);
-          int startTime =
-              Integer.parseInt(tripSegment.getEnterTime().substring(0, 2)) * 60
-                  + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
-          this.startEnterTime = startTime;
+      } else {
+        //currentFares keeps track of the fares of a continuous trip
+        //this is the start of a new continuous trip, so we set currentFares to 0.0
+        this.setCurrentFares(0.0);
+        //same as above case: 'if tripSegment is the start of a new complete trip'
+        for (String date : this.trips.keySet()) {
+          if (date.equals(tripSegment.getEnterDate())) {
+            ArrayList<ArrayList<TripSegment>> dayTrips = this.trips.get(date);
+            ArrayList<TripSegment> newCompleteTrip = new ArrayList<>();
+              this.lastTripSegment = tripSegment;
+            newCompleteTrip.add(this.lastTripSegment);
+              this.lastCompleteTrip = newCompleteTrip;
+            dayTrips.add(this.lastCompleteTrip);
+            this.updateFares(tripSegment, Math.min(tripSegment.getSegmentFares(), 6.0));
+            this.mostRecentTrips.add(this.lastCompleteTrip);
+            int startTime =
+                Integer.parseInt(tripSegment.getEnterTime().substring(0, 2)) * 60
+                    + Integer.parseInt(tripSegment.getEnterTime().substring(3, 5));
+            this.startEnterTime = startTime;
+          }
         }
       }
     }
-  }
-  // }
+  //}
 
   /**
    * Updates all stored fares by the change of the amount of fares
