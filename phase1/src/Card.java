@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /** Card is used to tap in and tap out when enter and exit a stop or station. */
-public class Card {
+class Card {
   /** Stores number assigned to this card   */
   private String cardNumber;
   /** Keeps track of the next card number to be assigned.  */
