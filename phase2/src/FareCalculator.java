@@ -7,6 +7,7 @@ public class FareCalculator {
   public double calcBusFare() {
     return busFare;
   }
+
   public double calcSubwayFare(int distance){
     fare = distance * stationFare;
     if (fare > 6.0){
