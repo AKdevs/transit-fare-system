@@ -95,6 +95,10 @@ public class TripSegment {
     return this.exitTime;
   }
 
+  public String getContiSpot() {
+    return contiSpot;
+  }
+
   public void setEnterSpot(String enterSpot) {
     this.enterSpot = enterSpot;
   }
@@ -117,6 +121,10 @@ public class TripSegment {
 
   public void setTransitType(String transitType) {
     this.transitType = transitType;
+  }
+
+  public void setContiSpot(String contiSpot) {
+    this.contiSpot = contiSpot;
   }
   }
 

@@ -49,20 +49,21 @@ class TripManager extends TransitSystem {
         if (lastTrip.hasExit()){
             int duration = this.calculateDuration(lastTrip.getEnterTime(), time);
           // if it the enter of a continuous trip
-          if (lastTrip.getExitSpot().equals(spot) && timetracker < 120){
-            lastTrip.setContiEnterS(spot);
-            lastTrip.setTimetracker(timetracker);
-            lastTrip.setContiType(type);
-            lastTrip.setContiEnterTime(time);
+          if (lastTrip.getExitSpot().equals(spot) && duration < 120){
+            lastTrip.setContiSpot(spot);
+            if (type.equals("B")){
+                //update fares
+            }
             lastTrip.setTransitType("continue");
 
-          } else {
+          } else {// if it is a new trip
             TripSegment trip = new TripSegment(spot, time, date, type);
-            trip.setTimetracker(0);
             card.addTrip(trip);
           }
-        } else{
-          System.out.println("Illegal entry");
+        } else{ // illegal entry
+            System.out.println("Declined: Illegal entry");
+            // complete the trip segment( without exit) with "illegal", use enterTime as exitTime, use
+            // enterDate as exitDate
         }
       // if this is the first time the CardHolder travel with this card
       } else {
