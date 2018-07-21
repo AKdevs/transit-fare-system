@@ -4,7 +4,7 @@ class TripManager extends TransitSystem {
 
     // for both subway and bus so we can add the number of stations reached to our daily report
     // and also we can calculate subway fares by using the result of this method
-   int calculateStaionsReched(String enterSpot, String exitSpot) {
+   int calculateStaionsReached(String enterSpot, String exitSpot) {
     int enterIndex = 0;
     int exitIndex = 0;
     for (String lineName : transitLines.keySet()) {
@@ -25,16 +25,30 @@ class TripManager extends TransitSystem {
     }
   }
 
+  private int calculateDuration(String lastStartTime, String currentStartTime) {
+       int last = Integer.parseInt(lastStartTime.substring(0, 2)) * 60
+                      + Integer.parseInt(lastStartTime.substring(3, 5));
+       int current = Integer.parseInt(currentStartTime.substring(0, 2)) * 60
+               + Integer.parseInt(currentStartTime.substring(3, 5));
+       return current - last;
+  }
+
   void recordTapIn(String time,String spot, String cardNumber,String date, String type){
+    // find the associated card
     Card card = TransitSystem.findCard(cardNumber);
+    // if card balance is negative
     if (card.getBalance() < 0) {
       System.out.println("Declined: Card is out of funds, please load money.");
     } else {
+        // if the cardHolder traveled with this card before
       if (!card.getTrips().isEmpty()) {
+        // get the last trip
         ArrayList<TripSegment> allTrips = card.getTrips();
         TripSegment lastTrip = allTrips.get(allTrips.size()-1);
-        int timetracker = TripManager.calculateDuration(lastTrip.getEnterTime(), time);
+        // if it is a legal entry
         if (lastTrip.hasExit()){
+            int duration = this.calculateDuration(lastTrip.getEnterTime(), time);
+          // if it the enter of a continuous trip
           if (lastTrip.getExitSpot().equals(spot) && timetracker < 120){
             lastTrip.setContiEnterS(spot);
             lastTrip.setTimetracker(timetracker);
@@ -50,9 +64,9 @@ class TripManager extends TransitSystem {
         } else{
           System.out.println("Illegal entry");
         }
+      // if this is the first time the CardHolder travel with this card
       } else {
         TripSegment trip = new TripSegment(spot, time, date, type);
-        trip.setTimetracker(0);
         card.addTrip(trip);
       }
     }
