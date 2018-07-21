@@ -64,6 +64,9 @@ class TripManager extends TransitSystem {
             System.out.println("Declined: Illegal entry");
             // complete the trip segment( without exit) with "illegal", use enterTime as exitTime, use
             // enterDate as exitDate
+            lastTrip.setExitSpot("illegal");
+            lastTrip.setExitTime(time);
+            //update fares (penalty)
         }
       // if this is the first time the CardHolder travel with this card
       } else {
