@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 
 class TripManager extends TransitSystem {
-    
 
-  static int calculateDistance(String enterSpot, String exitSpot) {
+   int calculateDistance(String enterSpot, String exitSpot) {
     int enterIndex = 0;
     int exitIndex = 0;
     for (String lineName : transitLines.keySet()) {
@@ -24,7 +23,7 @@ class TripManager extends TransitSystem {
       return distance;
     }
   }
-  public static void recordTapIn(String time,String spot, String cardNumber,String date, String type){
+  public void recordTapIn(String time,String spot, String cardNumber,String date, String type){
     Card card = TransitSystem.findCard(cardNumber);
     if (card.getBalance() < 0) {
       System.out.println("Declined: Card is out of funds, please load money.");
@@ -57,7 +56,7 @@ class TripManager extends TransitSystem {
     }
   }
 
-  public static void recordTapOut(String time,String spot,String cardNumber) {
+  public void recordTapOut(String time,String spot,String cardNumber) {
     FareCalculator calculator = new FareCalculator();
     Card card = TransitSystem.findCard(cardNumber);
     assert card != null;
