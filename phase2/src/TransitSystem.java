@@ -9,18 +9,10 @@ public class TransitSystem {
   /** Keeps a track of all user accounts in the system */
   private static ArrayList<UserAccount> userAccounts = new ArrayList<>();
 
-  /** Stores the system-wide subway fare */
-  protected static final double subwayFare = 0.5;
-  /** Stores the system-wide bus fare */
-  protected static final double busFare = 2.0;
-
   /** Stores system current month */
   private String currentMonth;
   /** Stores system current date */
   private String currentDate;
-
-  /** Maximum amount of money that can be charged for trips within maximumDuration */
-  protected static final double fareCap = 6.0;
 
   /** Maximum amount of time where the fareCap is applicable. */
   protected static final int maximumDuration = 120;
