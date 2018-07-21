@@ -246,6 +246,21 @@ class Card {
   }
 
   /**
+   * Updates all stored fares by the change of the amount of fares
+   *
+   * @param tripSegment the target trip segment
+   * @param fares the amount of fares that need to be updated
+   */
+  void updateFares(TripSegment tripSegment, Double fares) {
+    // deduct fares from card balance
+    this.deductBalance(fares);
+    // add fares to totalFare
+    this.totalFares += fares;
+    // add fares to allFares
+    TransitSystem.addAllFares(tripSegment.getDate(), fares);
+  }
+
+  /**
    * Returns true iff card balance is positive and card is active.
    *
    * @return true iff card balance is positive and card is active.

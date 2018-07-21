@@ -76,6 +76,7 @@ class TripManager extends TransitSystem {
   }
 
   public static void recordTapOut(String time,String spot,String cardNumber) {
+    FareCalculator calculator = new FareCalculator();
     Card card = TransitSystem.findCard(cardNumber);
     assert card != null;
     ArrayList<TripSegment> allTrips = card.getTrips();
@@ -86,19 +87,14 @@ class TripManager extends TransitSystem {
         current.setExitSpot(spot);
         current.setExitTime(time);
         int distance = TripManager.calculateDistance(current.getEnterSpot(),current.getExitSpot());
+        double fare = 0.0;
         if (current.getTransitType().equals("B")) {
-          Double fare = 2.0;
-          current.setFare(fare);
-          current.setFareTracker(fare);
+          fare = calculator.calcBusFare();
         } else if (current.getTransitType().equals("S")) {
-          Double fare = distance * 0.5;
-          if (fare > 6.0) {
-            current.setFare(6.0);
-          } else {
-            current.setFare(fare);
-          }
-          current.setFareTracker(fare);
+          fare = calculator.calcSubwayFare(distance);
         }
+        current.setFare(fare);
+        current.setFareTracker(fare);
         int duration = TripManager.calculateDuration(current.getEnterTime(), current.getExitTime());
         current.setDuration(duration);
         int timetracker = current.getTimetracker() + duration;
@@ -120,45 +116,30 @@ class TripManager extends TransitSystem {
       current.setContiExitTime(time);
       int contiDistance = TripManager.calculateDistance(current.getContiEnterS(),current.getContiExitS());
       if (current.getContiType().equals("B")) {
-        double contiFare = 2.0;
+        double contiFare = calculator.calcBusFare();
         double lastFare = current.getFare();
+        double chargeFare = calculator.calcCoBusFare(lastFare);
         double totalFare = contiFare + lastFare;
-        if(lastFare == 6.0){
-          current.setContiFare(0.0);
-        } else if(lastFare < 6.0 && totalFare > 6.0){
-          double tripFare = 6.0 - lastFare;
-          current.setContiFare(tripFare);
-        } else {
-          double fares = 2.0;
-          current.setContiFare(fares);
-        }
+        current.setContiFare(chargeFare);
         current.setFareTracker(totalFare);
       } else if (current.getContiType().equals("S")) {
+        double contiFare = calculator.calcSubwayFare(contiDistance);
         double lastFare = current.getFare();
-        double fare = contiDistance * 0.5;
-        double totalFare = fare + lastFare;
-        if (lastFare == 6.0) {
-          current.setContiFare(0.0);
-        } else if (totalFare <= 6.0){
-          current.setContiFare(fare);
-        } else if (lastFare < 6.0 && totalFare > 6.0){
-          double money = 6.0 - lastFare;
-          current.setContiFare(money);
-        }
+        double chargeFare = calculator.calcCoSubFare(lastFare, contiDistance);
+        double totalFare = contiFare + lastFare;
+        current.setContiFare(chargeFare);
         current.setFareTracker(totalFare);
-        current.setFare(current.getFare() + current.getContiFare());
-        int contiDuration;
-        contiDuration = TripManager
-            .calculateDuration(current.getContiEnterTime(), current.getContiExitTime());
-        int timetracker = current.getTimetracker() + contiDuration;
-        current.setDuration(timetracker);
-        current.setTimetracker(timetracker);
-        TransitSystem.addAllFares(current.getDate(), current.getContiFare());
-        TransitSystem.addNumberOfStation(current.getDate(), contiDistance);
-        card.deductBalance(current.getContiFare());
-        card.addTotalFares(current.getContiFare());
       }
+      current.setFare(current.getFare() + current.getContiFare());
+      int contiDuration;
+      contiDuration = TripManager
+          .calculateDuration(current.getContiEnterTime(), current.getContiExitTime());
+      int timetracker = current.getTimetracker() + contiDuration;
+      current.setDuration(timetracker);
+      current.setTimetracker(timetracker);
+      TransitSystem.addAllFares(current.getDate(), current.getContiFare());
+      TransitSystem.addNumberOfStation(current.getDate(), contiDistance);
+      card.updateFares(current,current.getContiFare());
     }
   }
-
 }
