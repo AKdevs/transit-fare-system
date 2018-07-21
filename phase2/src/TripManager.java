@@ -1,25 +1,7 @@
 import java.util.ArrayList;
 
 class TripManager extends TransitSystem {
-
-  /**
-   * Calculates the duration of the trip segment in minutes.
-   *
-   * @param startTime of timing
-   * @param endTime of timing
-   */
-  static int calculateDuration(String startTime, String endTime) {
-    // int version of enterTime: Hour converted to minutes + minutes
-    int enter;
-    enter = Integer.parseInt(startTime.substring(0, 2)) * 60
-        + Integer.parseInt(startTime.substring(3, 5));
-    // int version of exitTime: Hour converted to minutes + minutes
-    int exit =
-        Integer.parseInt(endTime.substring(0, 2)) * 60
-            + Integer.parseInt(endTime.substring(3, 5));
-    int duration = exit - enter;
-    return duration;
-  }
+    
 
   static int calculateDistance(String enterSpot, String exitSpot) {
     int enterIndex = 0;
