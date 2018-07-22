@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /** Manage all accounts which are stored in TransitSystem. */
 class AccountManager {
-  private static ArrayList<UserAccount> userAccounts = new ArrayList<>();
+  private ArrayList<UserAccount> userAccounts = new ArrayList<>();
   /**
    * Creates an account for card holder.
    *

@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 class TripManager {
 
-  static void recordTapIn(String time, String spot, String cardNumber, String date, String type) {
+  static void recordTapIn(String time, String spot, Card card, String date, String type) {
     FareCalculator calculator = new FareCalculator();
-    Card card = TransitSystem.findCard(cardNumber);
+    // Card card = TransitSystem.findCard(cardNumber);
     if (card.getBalance() < 0) {
       System.out.println("Declined: Card is out of funds, please load money.");
     } else {
@@ -45,9 +45,9 @@ class TripManager {
     }
   }
 
-  static void recordTapOut(String time, String spot, String cardNumber, String date, String type) {
+  static void recordTapOut(String time, String spot, Card card, String date, String type) {
     FareCalculator calculator = new FareCalculator();
-    Card card = TransitSystem.findCard(cardNumber);
+    // Card card = TransitSystem.findCard(cardNumber);
     ArrayList<TripSegment> allTrips = card.getTrips();
     TripSegment current = allTrips.get(allTrips.size() - 1);
     // if it a illegal exit (didn't tap in for this trip)

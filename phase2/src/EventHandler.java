@@ -30,10 +30,12 @@ public class EventHandler {
     if (system.getOperatingStatus().equals("on")) {
       switch (action) {
         case "entry":
-          TripManager.recordTapIn(eventTokens[4],eventTokens[2],eventTokens[1],eventTokens[5],eventTokens[3]);
+          Card associatedEntryCard = system.getCardManager().findCard(eventTokens[1]);
+          TripManager.recordTapIn(eventTokens[4],eventTokens[2],associatedEntryCard,eventTokens[5],eventTokens[3]);
           break;
         case "exit":
-          TripManager.recordTapOut(eventTokens[4],eventTokens[2],eventTokens[1], eventTokens[5], eventTokens[3]);
+          Card associatedExitCard = system.getCardManager().findCard(eventTokens[1]);
+          TripManager.recordTapOut(eventTokens[4],eventTokens[2],associatedExitCard, eventTokens[5], eventTokens[3]);
           break;
         case "create":
           if ((eventTokens[1].equals("account")) && (eventTokens[2].equals("CardHolder"))) {
@@ -41,12 +43,12 @@ public class EventHandler {
           } else if ((eventTokens[1].equals("account")) && (eventTokens[2].equals("AdminUser"))) {
             system.getAccountManager().createAdminAccount(eventTokens[3], eventTokens[4]);
           } else if (eventTokens[1].equals("card")) {
-            system.createCard();
+            system.getCardManager().createCard();
           }
           break;
 
         case "activate":
-          Card ca = system.findCard(eventTokens[2]);
+          Card ca = system.getCardManager().findCard(eventTokens[2]);
           if (ca == null) {
             System.out.println("Activation failed. Card does not exist");
             break;
@@ -60,7 +62,7 @@ public class EventHandler {
           break;
 
         case "deactivate":
-          Card cd = system.findCard(eventTokens[2]);
+          Card cd = system.getCardManager().findCard(eventTokens[2]);
           if (cd == null) {
             System.out.println("Deactivation failed. Card does not exist");
             break;
@@ -78,7 +80,7 @@ public class EventHandler {
             System.out.println("Action failed. Account or card does not exist");
             break;
           }
-          Card currentCard = system.findCard(eventTokens[2]);
+          Card currentCard = system.getCardManager().findCard(eventTokens[2]);
           UserAccount currentHolder = system.getAccountManager().findUserAccount(eventTokens[1]);
           ((CardHolder) currentHolder).linkCard(currentCard);
           break;
@@ -89,13 +91,13 @@ public class EventHandler {
             break;
           }
           UserAccount ua = system.getAccountManager().findUserAccount(eventTokens[1]);
-          Card cc = system.findCard(eventTokens[2]);
+          Card cc = system.getCardManager().findCard(eventTokens[2]);
           ((CardHolder) ua).unlinkCard(cc);
           break;
 
         case "load":
           String cardNumber = eventTokens[2];
-          Card travelCard = system.findCard(cardNumber);
+          Card travelCard = system.getCardManager().findCard(cardNumber);
           if (travelCard != null) {
             travelCard.addBalance(Double.parseDouble(eventTokens[3]));
           } else {
@@ -120,16 +122,16 @@ public class EventHandler {
             UserAccount user = system.getAccountManager().findUserAccount(eventTokens[2]);
             user.viewInfo();
           } else if (eventTokens[1].equals("trips")) {
-            Card card = system.findCard(eventTokens[3]);
+            Card card = system.getCardManager().findCard(eventTokens[3]);
             card.viewMostRecentTrips();
           } else if (eventTokens[1].equals("balance")) {
-            Card card = system.findCard(eventTokens[3]);
+            Card card = system.getCardManager().findCard(eventTokens[3]);
             card.viewBalance();
           } else if (eventTokens[1].equals("cost")) {
             UserAccount user = system.getAccountManager().findUserAccount(eventTokens[2]);
             ((CardHolder) user).viewMonthlyCost();
           } else if (eventTokens[1].equals("allTrips")) {
-            Card card = system.findCard(eventTokens[3]);
+            Card card = system.getCardManager().findCard(eventTokens[3]);
             card.viewAllTrips();
           }
           break;
@@ -181,6 +183,6 @@ public class EventHandler {
    * @return true if a card exists for cardNumber.
    */
   private boolean cardExists(String cardNumber) {
-    return !(system.findCard(cardNumber) == null);
+    return !(system.getCardManager().findCard(cardNumber) == null);
   }
 }
