@@ -3,17 +3,17 @@ import java.util.HashMap;
 
 public class TransitSystem {
   /** Stores the trip manager */
-  private TripManager tripManager = new TripManager();
+  private TripManager tripManager;
   /** Stores the transit manager */
-  // private TransitManager transitManager = new TransitManager();
+  private TransitManager transitManager;
   /** Stores the account manager */
-  private AccountManager accountManager = new AccountManager();
-  private CardManager cardManager = new CardManager();
+  private AccountManager accountManager;
+  private CardManager cardManager;
 
   /** Keeps a track of all cards in the system. */
   // private static ArrayList<Card> cards = new ArrayList<>();
   /** Keeps a track of transit lines in the system by name */
-  protected static HashMap<String, TransitLine> transitLines = new HashMap<>();
+  // protected static HashMap<String, TransitLine> transitLines = new HashMap<>();
   /** Keeps a track of all user accounts in the system */
   // private static ArrayList<UserAccount> userAccounts = new ArrayList<>();
 
@@ -34,6 +34,14 @@ public class TransitSystem {
   /** Operating status of system, either "on" or "off" */
   private String operatingStatus = "off";
 
+
+  TransitSystem() {
+    tripManager = new TripManager();
+    transitManager = new TransitManager();
+    tripManager.addTransitLines(transitManager.getTransitLines());
+    accountManager = new AccountManager();
+    cardManager = new CardManager();
+  }
 
   TripManager getTripManager() {
     return tripManager;

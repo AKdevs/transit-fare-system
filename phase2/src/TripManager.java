@@ -1,8 +1,14 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 class TripManager {
+  private HashMap<String, TransitLine> transitLines;
 
-  static void recordTapIn(String time, String spot, Card card, String date, String type) {
+  void addTransitLines(HashMap<String, TransitLine> transitLines) {
+    this.transitLines = transitLines;
+  }
+
+  void recordTapIn(String time, String spot, Card card, String date, String type) {
     FareCalculator calculator = new FareCalculator();
     // Card card = TransitSystem.findCard(cardNumber);
     if (card.getBalance() < 0) {
@@ -45,7 +51,7 @@ class TripManager {
     }
   }
 
-  static void recordTapOut(String time, String spot, Card card, String date, String type) {
+  void recordTapOut(String time, String spot, Card card, String date, String type) {
     FareCalculator calculator = new FareCalculator();
     // Card card = TransitSystem.findCard(cardNumber);
     ArrayList<TripSegment> allTrips = card.getTrips();

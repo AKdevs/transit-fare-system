@@ -1,14 +1,14 @@
-public class FareCalculator extends TransitSystem{
-  private double busFare = 2.0;
-  private double stationFare = 0.5;
-  private double cap = 6.0;
+public class FareCalculator {
+  private final double busFare = 2.0;
+  private final double stationFare = 0.5;
+  private final double fareCap = 6.0;
   private double fare;
 
   private double calculateContiBusFare(double currentFares){
-    if(currentFares == cap){
+    if(currentFares == fareCap){
       fare = 0.0;
-    } else if(currentFares < cap && currentFares + busFare > cap){
-      fare = cap - currentFares;
+    } else if(currentFares < fareCap && currentFares + busFare > fareCap){
+      fare = fareCap - currentFares;
     } else {
       fare = busFare;
     }
@@ -17,10 +17,10 @@ public class FareCalculator extends TransitSystem{
 
   private double calculateContiSubFare(double currentFares, int distance){
     double tripFare = distance * stationFare;
-    if(currentFares == cap){
+    if(currentFares == fareCap){
       fare = 0.0;
-    } else if(currentFares < cap && currentFares + tripFare > 6.0){
-      fare = cap - currentFares;
+    } else if(currentFares < fareCap && currentFares + tripFare > fareCap){
+      fare = fareCap - currentFares;
     } else {
       fare = tripFare;
     }
