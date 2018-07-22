@@ -3,13 +3,19 @@ import java.util.HashMap;
 
 class TripManager {
   private HashMap<String, TransitLine> transitLines;
+  private FareCalculator fareCalculator;
+
+  TripManager() {
+    this.fareCalculator = new FareCalculator();
+  }
 
   void addTransitLines(HashMap<String, TransitLine> transitLines) {
     this.transitLines = transitLines;
+    fareCalculator.addTransitLines(transitLines);
   }
 
   void recordTapIn(String time, String spot, Card card, String date, String type) {
-    FareCalculator calculator = new FareCalculator();
+    // FareCalculator calculator = new FareCalculator();
     // Card card = TransitSystem.findCard(cardNumber);
     if (card.getBalance() < 0) {
       System.out.println("Declined: Card is out of funds, please load money.");
@@ -20,22 +26,23 @@ class TripManager {
         TripSegment lastTrip = allTrips.get(allTrips.size() - 1);
         // if it is a legal entry
         if (lastTrip.hasExit()) {
-          int duration = calculator.calculateDuration(lastTrip.getEnterTime(), time);
+          int duration = fareCalculator.calculateDuration(lastTrip.getEnterTime(), time);
           // if it the enter of a continuous trip
-          if (lastTrip.getExitSpot().equals(spot) && duration < 120) {
+          if (lastTrip.getExitSpot().equals(spot)
+              && duration < fareCalculator.getMaximumDuration()) {
             lastTrip.setContiSpot(spot);
             if (type.equals("B")) {
-                lastTrip.setTransitType("continueB");
-                double fares = calculator.calculateTripFares(lastTrip);
-                card.updateBalance(fares);
-                card.updateTotalFares(fares);
-                TransitSystem.updateAllFares(date, fares); // static problem here!!
+              lastTrip.setTransitType("continueB");
+              double fares = fareCalculator.calculateTripFares(lastTrip);
+              card.updateBalance(fares);
+              card.updateTotalFares(fares);
+              TransitSystem.updateAllFares(date, fares); // static problem here!!
             }
             lastTrip.setTransitType("continueS");
           } else { // if it is a new trip
             TripSegment trip = new TripSegment(spot, time, date, type);
             card.addTrip(trip);
-            calculator.calculateTripFares(trip);
+            fareCalculator.calculateTripFares(trip);
           }
         } else { // illegal entry
           System.out.println("Declined: Illegal entry");
@@ -52,7 +59,7 @@ class TripManager {
   }
 
   void recordTapOut(String time, String spot, Card card, String date, String type) {
-    FareCalculator calculator = new FareCalculator();
+    // FareCalculator calculator = new FareCalculator();
     // Card card = TransitSystem.findCard(cardNumber);
     ArrayList<TripSegment> allTrips = card.getTrips();
     TripSegment current = allTrips.get(allTrips.size() - 1);
@@ -70,8 +77,8 @@ class TripManager {
       current.setExitSpot(spot);
       current.setExitTime(time);
       if (!current.getTransitType().equals("B") && !current.getTransitType().equals("continueB"))
-      calculator.calculateTripFares(current);
+        fareCalculator.calculateTripFares(current);
     }
-      current.setTransitType("continuous");
+    current.setTransitType("continuous");
   }
 }

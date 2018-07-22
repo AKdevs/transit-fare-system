@@ -8,22 +8,13 @@ public class TransitSystem {
   private TransitManager transitManager;
   /** Stores the account manager */
   private AccountManager accountManager;
-  private CardManager cardManager;
 
-  /** Keeps a track of all cards in the system. */
-  // private static ArrayList<Card> cards = new ArrayList<>();
-  /** Keeps a track of transit lines in the system by name */
-  // protected static HashMap<String, TransitLine> transitLines = new HashMap<>();
-  /** Keeps a track of all user accounts in the system */
-  // private static ArrayList<UserAccount> userAccounts = new ArrayList<>();
+  private CardManager cardManager;
 
   /** Stores system current month */
   private String currentMonth;
   /** Stores system current date */
   private String currentDate;
-
-  /** Maximum amount of time where the fareCap is applicable. */
-  protected static final int maximumDuration = 120;
 
   /** Stores the total amount of accumulated fares in the system by date */
   static HashMap<String, Double> allFares = new HashMap<>();
@@ -33,7 +24,6 @@ public class TransitSystem {
 
   /** Operating status of system, either "on" or "off" */
   private String operatingStatus = "off";
-
 
   TransitSystem() {
     tripManager = new TripManager();
@@ -70,8 +60,6 @@ public class TransitSystem {
   void powerOnSystem() {
     this.operatingStatus = "on";
   }
-
-
 
   /** Power off the system. */
   void powerOffSystem() {
@@ -164,5 +152,4 @@ public class TransitSystem {
       numberOfStations.put(date, n);
     }
   }
-
 }

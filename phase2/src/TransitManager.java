@@ -111,7 +111,4 @@ class TransitManager {
   private void addTransitLine(String name, TransitLine line) {
     transitLines.put(name, line);
   }
-
-
-
 }

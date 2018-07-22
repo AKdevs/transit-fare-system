@@ -51,7 +51,6 @@ class AccountManager {
    * Add a user account.
    *
    * @param newUser a new user with account
-   *
    */
   private void addUserAccount(UserAccount newUser) {
     getUserAccounts().add(newUser);

@@ -31,11 +31,25 @@ public class EventHandler {
       switch (action) {
         case "entry":
           Card associatedEntryCard = system.getCardManager().findCard(eventTokens[1]);
-          system.getTripManager().recordTapIn(eventTokens[4],eventTokens[2],associatedEntryCard,eventTokens[5],eventTokens[3]);
+          system
+              .getTripManager()
+              .recordTapIn(
+                  eventTokens[4],
+                  eventTokens[2],
+                  associatedEntryCard,
+                  eventTokens[5],
+                  eventTokens[3]);
           break;
         case "exit":
           Card associatedExitCard = system.getCardManager().findCard(eventTokens[1]);
-          system.getTripManager().recordTapOut(eventTokens[4],eventTokens[2],associatedExitCard, eventTokens[5], eventTokens[3]);
+          system
+              .getTripManager()
+              .recordTapOut(
+                  eventTokens[4],
+                  eventTokens[2],
+                  associatedExitCard,
+                  eventTokens[5],
+                  eventTokens[3]);
           break;
         case "create":
           if ((eventTokens[1].equals("account")) && (eventTokens[2].equals("CardHolder"))) {
