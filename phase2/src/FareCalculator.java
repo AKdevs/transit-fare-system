@@ -4,47 +4,44 @@ public class FareCalculator extends TransitSystem{
   private double cap = 6.0;
   private double fare;
 
-  public double calcBusFare() {
-    return busFare;
-  }
-
-  public double calcSubwayFare(int distance){
-    fare = distance * stationFare;
-    if (fare > 6.0){
-      return cap;
-    }else{
-      return fare;
-    }
-  }
-  public double calcCoBusFare(double lastFare){
-    double tripFare = busFare;
-    double totalFare = tripFare + lastFare;
-    if(lastFare == cap){
+  private double calculateContiBusFare(double currentFares){
+    if(currentFares == cap){
       fare = 0.0;
-    } else if(lastFare < 6.0 && totalFare > 6.0){
-      fare = 6.0 - lastFare;
+    } else if(currentFares < cap && currentFares + busFare > cap){
+      fare = cap - currentFares;
     } else {
       fare = busFare;
     }
     return fare;
   }
 
-  public double calcCoSubFare(double lastFare, int distance){
+  private double calculateContiSubFare(double currentFares, int distance){
     double tripFare = distance * stationFare;
-    double totalFare = tripFare + lastFare;
-    if(lastFare == cap){
+    if(currentFares == cap){
       fare = 0.0;
-    } else if(lastFare < 6.0 && totalFare > 6.0){
-      fare = 6.0 - lastFare;
+    } else if(currentFares < cap && currentFares + tripFare > 6.0){
+      fare = cap - currentFares;
     } else {
       fare = tripFare;
     }
     return fare;
   }
 
-  public double calculateTripFares(TripSegment ts) {
+
+    public double calculateTripFares(TripSegment ts) {
+      double result = 0.0;
       if (ts.getTransitType().equals("B")) {
+          result = busFare;
+      }else if(ts.getTransitType().equals("continueB")) {
+          result = calculateContiBusFare(ts.getCurrentFares());
       }
+      else if (ts.getTransitType().equals("S")) {
+          result = stationFare * calculateStaionsReached(ts.getEnterSpot(), ts.getExitSpot());
+      }else if (ts.getTransitType().equals("continueS")){
+          int distance = calculateStaionsReached(ts.getContiSpot(), ts.getExitSpot());
+          calculateContiSubFare(ts.getCurrentFares(), distance);
+      }
+      return result;
   }
 
     // for both subway and bus so we can add the number of stations reached to our daily report

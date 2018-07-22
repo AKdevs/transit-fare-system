@@ -2,29 +2,6 @@ import java.util.ArrayList;
 
 class TripManager extends TransitSystem {
 
-  // for both subway and bus so we can add the number of stations reached to our daily report
-  // and also we can calculate subway fares by using the result of this method
-  int calculateStaionsReached(String enterSpot, String exitSpot) {
-    int enterIndex = 0;
-    int exitIndex = 0;
-    for (String lineName : transitLines.keySet()) {
-      TransitLine line = transitLines.get(lineName);
-      for (int i = 0; i < line.getPoints().size(); i++) {
-        if (line.getPoints().get(i).equals(enterSpot)) {
-          enterIndex = i;
-        }
-        if (line.getPoints().get(i).equals(exitSpot)) {
-          exitIndex = i;
-        }
-      }
-    }
-    if (enterIndex == exitIndex) {
-      return 0;
-    } else {
-      return Math.abs(exitIndex - enterIndex);
-    }
-  }
-
   static void recordTapIn(String time, String spot, String cardNumber, String date, String type) {
     FareCalculator calculator = new FareCalculator();
     Card card = TransitSystem.findCard(cardNumber);
@@ -42,21 +19,20 @@ class TripManager extends TransitSystem {
           if (lastTrip.getExitSpot().equals(spot) && duration < 120) {
             lastTrip.setContiSpot(spot);
             if (type.equals("B")) {
-              double fares = calculator.calcBusFare();
-              card.updateBalance(fares);
-              card.updateTotalFares(fares);
-              TransitSystem.updateAllFares(date, fares); // static problem here!!
-              lastTrip.setTransitType("continueB");
+                lastTrip.setTransitType("continueB");
+                double fares = calculator.calculateTripFares(lastTrip);
+                card.updateBalance(fares);
+                card.updateTotalFares(fares);
+                TransitSystem.updateAllFares(date, fares); // static problem here!!
             }
             lastTrip.setTransitType("continueS");
           } else { // if it is a new trip
             TripSegment trip = new TripSegment(spot, time, date, type);
             card.addTrip(trip);
+            calculator.calculateTripFares(trip);
           }
         } else { // illegal entry
           System.out.println("Declined: Illegal entry");
-          // complete the trip segment( without exit) with "illegal", use enterTime as exitTime, use
-          // enterDate as exitDate
           lastTrip.setExitSpot("illegal");
           lastTrip.setExitTime(time);
           // update fares (penalty)
@@ -87,13 +63,9 @@ class TripManager extends TransitSystem {
     } else { // normal legal exit
       current.setExitSpot(spot);
       current.setExitTime(time);
-      //update fares
-      /*if (current.getTransitType().equals("S") || current.getTransitType().equals("B")) {
-        // update fares
-        // tap out of a continuous trip
-      } else {
-
-      }*/
+      if (!current.getTransitType().equals("B") && !current.getTransitType().equals("continueB"))
+      calculator.calculateTripFares(current);
     }
+      current.setTransitType("continuous");
   }
 }
