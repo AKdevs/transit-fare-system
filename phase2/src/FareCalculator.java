@@ -42,6 +42,11 @@ public class FareCalculator extends TransitSystem{
     return fare;
   }
 
+  public double calculateTripFares(TripSegment ts) {
+      if (ts.getTransitType().equals("B")) {
+      }
+  }
+
     // for both subway and bus so we can add the number of stations reached to our daily report
     // and also we can calculate subway fares by using the result of this method
     int calculateStaionsReached(String enterSpot, String exitSpot) {
@@ -63,6 +68,14 @@ public class FareCalculator extends TransitSystem{
         } else {
             return Math.abs(exitIndex - enterIndex);
         }
+    }
+
+    int calculateDuration(String lastStartTime, String currentStartTime) {
+        int last = Integer.parseInt(lastStartTime.substring(0, 2)) * 60
+                + Integer.parseInt(lastStartTime.substring(3, 5));
+        int current = Integer.parseInt(currentStartTime.substring(0, 2)) * 60
+                + Integer.parseInt(currentStartTime.substring(3, 5));
+        return current - last;
     }
 
 }

@@ -245,19 +245,12 @@ class Card {
     trips.add(newtrip);
   }
 
-  /**
-   * Updates all stored fares by the change of the amount of fares
-   *
-   * @param tripSegment the target trip segment
-   * @param fares the amount of fares that need to be updated
-   */
-  void updateFares(TripSegment tripSegment, Double fares) {
-    // deduct fares from card balance
+  void updateBalance(double fares) {
     this.deductBalance(fares);
-    // add fares to totalFare
-    this.totalFares += fares;
-    // add fares to allFares
-    TransitSystem.addAllFares(tripSegment.getDate(), fares);
+  }
+
+  void updateTotalFares(double fares) {
+      this.totalFares += fares;
   }
 
   /**

@@ -41,7 +41,7 @@ public class EventHandler {
           TripManager.recordTapIn(eventTokens[4],eventTokens[2],eventTokens[1],eventTokens[5],eventTokens[3]);
           break;
         case "exit":
-          TripManager.recordTapOut(eventTokens[4],eventTokens[2],eventTokens[1]);
+          TripManager.recordTapOut(eventTokens[4],eventTokens[2],eventTokens[1], eventTokens[5], eventTokens[3]);
           break;
         case "create":
           if ((eventTokens[1].equals("account")) && (eventTokens[2].equals("CardHolder"))) {

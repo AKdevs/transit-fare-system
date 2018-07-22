@@ -155,7 +155,7 @@ public class TransitSystem {
    * @param date date on which fares were accumulated.
    * @param fares fares accumulated on date.
    */
-  static void addAllFares(String date, double fares) {
+  static void updateAllFares(String date, double fares) {
     if (allFares.containsKey(date)) {
       for (String d : allFares.keySet()) {
         if (d.equals(date)) {

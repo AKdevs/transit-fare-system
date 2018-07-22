@@ -99,7 +99,11 @@ public class TripSegment {
     return contiSpot;
   }
 
-  public void setEnterSpot(String enterSpot) {
+    public String getTransitType() {
+        return transitType;
+    }
+
+    public void setEnterSpot(String enterSpot) {
     this.enterSpot = enterSpot;
   }
 
