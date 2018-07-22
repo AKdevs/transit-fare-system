@@ -3,22 +3,11 @@ public class TripSegment {
   private String enterSpot;
   private String exitSpot;
   private String contiSpot;
-  private String transitType; // ??
+  private String transitType;
   private String enterTime;
   private String exitTime;
   private String date;
   private double currentFares;
-
-  // private String contiExitS;
-  // private String contiEnterTime;
-  // private String contiExitTime;
-  // private String contiType;
-  // private int duration;
-  // private int timetracker; // duration in this trip + (enter time of next trip - exit time of
-  // this trip)
-  // private double fare;
-  // private double contiFare;
-  // private double fareTracker;
 
   public TripSegment(String enterSpot, String enterTime, String enterDate, String type) {
     this.enterSpot = enterSpot;
@@ -26,7 +15,8 @@ public class TripSegment {
     this.transitType = type;
     this.enterTime = enterTime;
     this.date = enterDate;
-    this.contiSpot = "unknown";
+    this.contiSpot = null;
+    this.currentFares = 0.0;
   }
 
   // check whether it is illegal when they tap out
@@ -108,6 +98,7 @@ public class TripSegment {
     public double getCurrentFares() {
         return currentFares;
     }
+
 
     public void setEnterSpot(String enterSpot) {
     this.enterSpot = enterSpot;
