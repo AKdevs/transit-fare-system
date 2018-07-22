@@ -2,12 +2,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TransitSystem {
+  /** Stores the trip manager */
+  private TripManager tripManager = new TripManager();
+  /** Stores the transit manager */
+  // private TransitManager transitManager = new TransitManager();
+  /** Stores the account manager */
+  private AccountManager accountManager = new AccountManager();
+
   /** Keeps a track of all cards in the system. */
   private static ArrayList<Card> cards = new ArrayList<>();
   /** Keeps a track of transit lines in the system by name */
   protected static HashMap<String, TransitLine> transitLines = new HashMap<>();
   /** Keeps a track of all user accounts in the system */
-  private static ArrayList<UserAccount> userAccounts = new ArrayList<>();
+  // private static ArrayList<UserAccount> userAccounts = new ArrayList<>();
 
   /** Stores system current month */
   private String currentMonth;
@@ -25,6 +32,21 @@ public class TransitSystem {
 
   /** Operating status of system, either "on" or "off" */
   private String operatingStatus = "off";
+
+
+  TripManager getTripManager() {
+    return tripManager;
+  }
+
+  /*
+  TransitManager getTransitManager() {
+    return transitManager;
+  }
+  */
+
+  AccountManager getAccountManager() {
+    return accountManager;
+  }
 
   /** @return operating status of the system, either "on" or "off". */
   String getOperatingStatus() {
@@ -107,26 +129,6 @@ public class TransitSystem {
    */
   void removeCard(String cardNumber) {
     cards.remove(findCard(cardNumber));
-  }
-
-  /**
-   * Finds and returns user account for given accountNumber, null if not found.
-   *
-   * @param accountNumber number of account to be found.
-   * @return user account for given accountNumber, null if not found.
-   */
-  UserAccount findUserAccount(String accountNumber) {
-    for (UserAccount ua : userAccounts) {
-      if (ua.getAccountNum().equals(accountNumber)) {
-        return ua;
-      }
-    }
-    return null;
-  }
-
-  /** @return list of user accounts. */
-  ArrayList<UserAccount> getUserAccounts() {
-    return userAccounts;
   }
 
   /**

@@ -1,6 +1,8 @@
-/** Manage all accounts which are stored in TransitSystem. */
-class AccountManager extends TransitSystem {
+import java.util.ArrayList;
 
+/** Manage all accounts which are stored in TransitSystem. */
+class AccountManager {
+  private static ArrayList<UserAccount> userAccounts = new ArrayList<>();
   /**
    * Creates an account for card holder.
    *
@@ -26,9 +28,30 @@ class AccountManager extends TransitSystem {
   }
 
   /**
+   * Finds and returns user account for given accountNumber, null if not found.
+   *
+   * @param accountNumber number of account to be found.
+   * @return user account for given accountNumber, null if not found.
+   */
+  UserAccount findUserAccount(String accountNumber) {
+    for (UserAccount ua : userAccounts) {
+      if (ua.getAccountNum().equals(accountNumber)) {
+        return ua;
+      }
+    }
+    return null;
+  }
+
+  /** @return list of user accounts. */
+  ArrayList<UserAccount> getUserAccounts() {
+    return userAccounts;
+  }
+
+  /**
    * Add a user account.
    *
    * @param newUser a new user with account
+   *
    */
   private void addUserAccount(UserAccount newUser) {
     getUserAccounts().add(newUser);

@@ -4,12 +4,7 @@ import java.util.Scanner;
 public class EventHandler {
   /** Stores the transit system */
   private TransitSystem system;
-  /** Stores the trip manager */
-  private TripManager tripManager;
-  /** Stores the transit manager */
-  private TransitManager transitManager;
-  /** Stores the account manager */
-  private AccountManager accountManager;
+
   /** Stores the file that events are read from */
   private Scanner eventsBuffer;
 
@@ -24,10 +19,7 @@ public class EventHandler {
 
   EventHandler(TransitSystem system) throws Exception {
     this.system = system;
-    this.eventsBuffer = new Scanner(new File("./events.txt"));
-    this.tripManager = new TripManager();
-    this.transitManager = new TransitManager();
-    this.accountManager = new AccountManager();
+    this.eventsBuffer = new Scanner(new File("phase2/event.txt"));
   }
 
   /** Reads events from file and performs the corresponding actions. */
@@ -45,9 +37,9 @@ public class EventHandler {
           break;
         case "create":
           if ((eventTokens[1].equals("account")) && (eventTokens[2].equals("CardHolder"))) {
-            accountManager.createCardHolderAccount(eventTokens[3], eventTokens[4]);
+            system.getAccountManager().createCardHolderAccount(eventTokens[3], eventTokens[4]);
           } else if ((eventTokens[1].equals("account")) && (eventTokens[2].equals("AdminUser"))) {
-            accountManager.createAdminAccount(eventTokens[3], eventTokens[4]);
+            system.getAccountManager().createAdminAccount(eventTokens[3], eventTokens[4]);
           } else if (eventTokens[1].equals("card")) {
             system.createCard();
           }
@@ -63,7 +55,7 @@ public class EventHandler {
             System.out.println("Activation failed. User does not exist");
             break;
           }
-          CardHolder cha = (CardHolder) system.findUserAccount(eventTokens[1]);
+          CardHolder cha = (CardHolder) system.getAccountManager().findUserAccount(eventTokens[1]);
           cha.activateCard(ca);
           break;
 
@@ -77,7 +69,7 @@ public class EventHandler {
             System.out.println("Dectivation failed. User does not exist");
             break;
           }
-          CardHolder chd = (CardHolder) system.findUserAccount(eventTokens[1]);
+          CardHolder chd = (CardHolder) system.getAccountManager().findUserAccount(eventTokens[1]);
           chd.deactivateCard(cd);
           break;
 
@@ -87,7 +79,7 @@ public class EventHandler {
             break;
           }
           Card currentCard = system.findCard(eventTokens[2]);
-          UserAccount currentHolder = system.findUserAccount(eventTokens[1]);
+          UserAccount currentHolder = system.getAccountManager().findUserAccount(eventTokens[1]);
           ((CardHolder) currentHolder).linkCard(currentCard);
           break;
 
@@ -96,7 +88,7 @@ public class EventHandler {
             System.out.println("Action failed. Account or card does not exist");
             break;
           }
-          UserAccount ua = system.findUserAccount(eventTokens[1]);
+          UserAccount ua = system.getAccountManager().findUserAccount(eventTokens[1]);
           Card cc = system.findCard(eventTokens[2]);
           ((CardHolder) ua).unlinkCard(cc);
           break;
@@ -125,7 +117,7 @@ public class EventHandler {
           }
 
           if (eventTokens[1].equals("info")) {
-            UserAccount user = system.findUserAccount(eventTokens[2]);
+            UserAccount user = system.getAccountManager().findUserAccount(eventTokens[2]);
             user.viewInfo();
           } else if (eventTokens[1].equals("trips")) {
             Card card = system.findCard(eventTokens[3]);
@@ -134,7 +126,7 @@ public class EventHandler {
             Card card = system.findCard(eventTokens[3]);
             card.viewBalance();
           } else if (eventTokens[1].equals("cost")) {
-            UserAccount user = system.findUserAccount(eventTokens[2]);
+            UserAccount user = system.getAccountManager().findUserAccount(eventTokens[2]);
             ((CardHolder) user).viewMonthlyCost();
           } else if (eventTokens[1].equals("allTrips")) {
             Card card = system.findCard(eventTokens[3]);
@@ -147,7 +139,7 @@ public class EventHandler {
             System.out.println("Name change failed. Account does not exist");
             break;
           }
-          UserAccount useracc = system.findUserAccount(eventTokens[1]);
+          UserAccount useracc = system.getAccountManager().findUserAccount(eventTokens[1]);
           useracc.changeName(eventTokens[2]);
           break;
 
@@ -179,7 +171,7 @@ public class EventHandler {
    * @return true if user account exists for accountNumber.
    */
   private boolean userExists(String accountNumber) {
-    return !(system.findUserAccount(accountNumber) == null);
+    return !(system.getAccountManager().findUserAccount(accountNumber) == null);
   }
 
   /**

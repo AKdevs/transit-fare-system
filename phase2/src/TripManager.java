@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-class TripManager extends TransitSystem {
+class TripManager {
 
   static void recordTapIn(String time, String spot, String cardNumber, String date, String type) {
     FareCalculator calculator = new FareCalculator();
