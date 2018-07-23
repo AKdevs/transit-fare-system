@@ -65,15 +65,20 @@ class TripManager {
       TripSegment updatedCurrent = allTrips.get(allTrips.size() - 1);
       updatedCurrent.setExitSpot(spot);
       updatedCurrent.setExitTime(time);
-      updatedCurrent.setTransitType("continue");
-      // update fares(penalty)
+      updateFares(fareCalculator.getFareCap(), card, date);//penalty is charging them the cap for this trip
     } else { // normal legal exit
       current.setExitSpot(spot);
       current.setExitTime(time);
-      if (!current.getTransitType().equals("B") && !current.getTransitType().equals("continueB"))
-        fareCalculator.calculateTripFares(current);
+      if (!current.getTransitType().equals("B") && !current.getTransitType().equals("continueB")) {
+        double fares = fareCalculator.calculateTripFares(current);
+        updateFares(fares, card, date);
+        }
+        TransitSystem.addNumberOfStation(date, fareCalculator.calculateStaionsReached()); // static problem here!! Who adds it to the TransitSystem??
     }
-    current.setTransitType("continuous");
+    if (current.getTransitType().equals("continueB")
+        || current.getTransitType().equals("continueS")) {
+      current.setTransitType("continuous");
+    }
   }
 
   private void addNewTrip(String time, String spot, Card card, String date, String type) {
@@ -85,6 +90,6 @@ class TripManager {
   private void updateFares(double fares, Card card, String date) {
       card.updateBalance(fares);
       card.updateTotalFares(fares);
-      TransitSystem.updateAllFares(date, fares); // static problem here!!
+      TransitSystem.updateAllFares(date, fares); // static problem here!! Who updates the TransitSystem??
   }
 }
