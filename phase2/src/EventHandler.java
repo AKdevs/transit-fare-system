@@ -19,7 +19,7 @@ public class EventHandler {
 
   EventHandler(TransitSystem system) throws Exception {
     this.system = system;
-    this.eventsBuffer = new Scanner(new File("event.txt"));
+    this.eventsBuffer = new Scanner(new File("group_0134/phase2/event.txt"));
     //this.tripManager = new TripManager();
     //this.transitManager = new TransitManager();
     //this.accountManager = new AccountManager();

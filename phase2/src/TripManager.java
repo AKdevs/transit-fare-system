@@ -73,7 +73,7 @@ class TripManager {
         double fares = fareCalculator.calculateTripFares(current);
         updateFares(fares, card, date);
         }
-        TransitSystem.addNumberOfStation(date, fareCalculator.calculateStaionsReached()); // static problem here!! Who adds it to the TransitSystem??
+        TransitSystem.addNumberOfStation(date, fareCalculator.calculateStaionsReached(current)); // static problem here!! Who adds it to the TransitSystem??
     }
     if (current.getTransitType().equals("continueB")
         || current.getTransitType().equals("continueS")) {
