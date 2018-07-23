@@ -53,6 +53,9 @@ public class FareCalculator {
       result = calculateContiBusFare(ts.getCurrentFares());
     } else if (ts.getTransitType().equals("S")) {
       result = stationFare * calculateStaionsReached(ts);
+      if (result > fareCap) {
+          result = fareCap;
+      }
     } else if (ts.getTransitType().equals("continueS")) {
       int distance = calculateStaionsReached(ts);
       result = calculateContiSubFare(ts.getCurrentFares(), distance);

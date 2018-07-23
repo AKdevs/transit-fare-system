@@ -39,6 +39,11 @@ class TripManager {
             lastTrip.setTransitType("continueS");
           } else { // if it is a new trip
               addNewTrip(time, spot, card, date, type);
+            if (type.equals("B")) {
+                TripSegment updatedLastTrip = allTrips.get(allTrips.size() - 1);
+              double fares = fareCalculator.calculateTripFares(updatedLastTrip);
+              updateFares(fares, card, date);
+              }
           }
         } else { // illegal entry
             System.out.println("Declined: Illegal entry");
@@ -50,6 +55,11 @@ class TripManager {
         }
       } else {// if this is the first time the CardHolder travel with this card
           addNewTrip(time, spot, card, date, type);
+          if (type.equals("B")){
+          TripSegment updatedLastTrip = card.getTrips().get(card.getTrips().size() - 1);
+          double fares = fareCalculator.calculateTripFares(updatedLastTrip);
+          updateFares(fares, card, date);
+          }
       }
     }
   }
@@ -84,7 +94,6 @@ class TripManager {
   private void addNewTrip(String time, String spot, Card card, String date, String type) {
       TripSegment trip = new TripSegment(spot, time, date, type);
       card.addTrip(trip);
-      fareCalculator.calculateTripFares(trip);
   }
 
   private void updateFares(double fares, Card card, String date) {
