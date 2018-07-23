@@ -91,16 +91,15 @@ public class TripSegment {
     return contiSpot;
   }
 
-    public String getTransitType() {
-        return transitType;
-    }
+  public String getTransitType() {
+    return transitType;
+  }
 
-    public double getCurrentFares() {
-        return currentFares;
-    }
+  public double getCurrentFares() {
+    return currentFares;
+  }
 
-
-    public void setEnterSpot(String enterSpot) {
+  public void setEnterSpot(String enterSpot) {
     this.enterSpot = enterSpot;
   }
 
@@ -127,5 +126,4 @@ public class TripSegment {
   public void setContiSpot(String contiSpot) {
     this.contiSpot = contiSpot;
   }
-  }
-
+}

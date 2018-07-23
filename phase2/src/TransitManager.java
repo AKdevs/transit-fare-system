@@ -1,12 +1,18 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /** Manage the transit system. */
-class TransitManager extends TransitSystem {
+class TransitManager {
+  private HashMap<String, TransitLine> transitLines = new HashMap<>();
 
   /** Constructs a transit system manager. */
   TransitManager() {
     defaultSetup();
+  }
+
+  HashMap<String, TransitLine> getTransitLines() {
+    return transitLines;
   }
 
   /** Sets up transit lines in transit system. */
@@ -105,6 +111,4 @@ class TransitManager extends TransitSystem {
   private void addTransitLine(String name, TransitLine line) {
     transitLines.put(name, line);
   }
-
-
 }
