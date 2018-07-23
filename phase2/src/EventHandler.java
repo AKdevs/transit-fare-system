@@ -122,7 +122,7 @@ public class EventHandler {
         case "view":
           if (eventTokens[1].equals("report")) {
             String date = eventTokens[2];
-            AdminUser.getDailyReport(date);
+            system.getTripManager().getAggregator().getDailyReport(date);
             break;
           }
           String accountNumber = eventTokens[2];

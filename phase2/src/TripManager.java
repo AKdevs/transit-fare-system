@@ -4,9 +4,15 @@ import java.util.HashMap;
 class TripManager {
   private HashMap<String, TransitLine> transitLines;
   private FareCalculator fareCalculator;
+  private Aggregator aggregator;
 
   TripManager() {
     this.fareCalculator = new FareCalculator();
+    this.aggregator = new Aggregator();
+  }
+
+  Aggregator getAggregator() {
+    return aggregator;
   }
 
   void addTransitLines(HashMap<String, TransitLine> transitLines) {
@@ -36,7 +42,7 @@ class TripManager {
               double fares = fareCalculator.calculateTripFares(lastTrip);
               card.updateBalance(fares);
               card.updateTotalFares(fares);
-              TransitSystem.updateAllFares(date, fares); // static problem here!!
+              aggregator.updateAllFares(date, fares); // static problem here!!
             }
             lastTrip.setTransitType("continueS");
           } else { // if it is a new trip
