@@ -14,6 +14,8 @@ public class FareCalculator {
     return maximumDuration;
   }
 
+  double getFareCap(){return busFare;}
+
   void addTransitLines(HashMap<String, TransitLine> transitLines) {
     this.transitLines = transitLines;
   }

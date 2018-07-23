@@ -15,8 +15,6 @@ class TripManager {
   }
 
   void recordTapIn(String time, String spot, Card card, String date, String type) {
-    // FareCalculator calculator = new FareCalculator();
-    // Card card = TransitSystem.findCard(cardNumber);
     if (card.getBalance() < 0) {
       System.out.println("Declined: Card is out of funds, please load money.");
     } else {
@@ -34,39 +32,35 @@ class TripManager {
             if (type.equals("B")) {
               lastTrip.setTransitType("continueB");
               double fares = fareCalculator.calculateTripFares(lastTrip);
-              card.updateBalance(fares);
-              card.updateTotalFares(fares);
-              TransitSystem.updateAllFares(date, fares); // static problem here!!
+              // apply Observer pattern here? what is observable?
+              //observers are: Card, TransitSystem
+              updateFares(fares, card, date);
             }
             lastTrip.setTransitType("continueS");
           } else { // if it is a new trip
-            TripSegment trip = new TripSegment(spot, time, date, type);
-            card.addTrip(trip);
-            fareCalculator.calculateTripFares(trip);
+              addNewTrip(time, spot, card, date, type);
           }
         } else { // illegal entry
-          System.out.println("Declined: Illegal entry");
-          lastTrip.setExitSpot("illegal");
-          lastTrip.setExitTime(time);
-          // update fares (penalty)
+            System.out.println("Declined: Illegal entry");
+            lastTrip.setExitSpot("illegal");
+            lastTrip.setExitTime(time);
+            TripSegment trip = new TripSegment(spot, time, date, type);
+            card.addTrip(trip);
+            updateFares(fareCalculator.getFareCap(), card, date);//penalty is charging them the cap for last trip
         }
-        // if this is the first time the CardHolder travel with this card
-      } else {
-        TripSegment trip = new TripSegment(spot, time, date, type);
-        card.addTrip(trip);
+      } else {// if this is the first time the CardHolder travel with this card
+          addNewTrip(time, spot, card, date, type);
       }
     }
   }
 
   void recordTapOut(String time, String spot, Card card, String date, String type) {
-    // FareCalculator calculator = new FareCalculator();
-    // Card card = TransitSystem.findCard(cardNumber);
     ArrayList<TripSegment> allTrips = card.getTrips();
     TripSegment current = allTrips.get(allTrips.size() - 1);
-    // if it a illegal exit (didn't tap in for this trip)
+    // if it is a illegal exit (didn't tap in for this trip)
     if (current.getExitSpot() != null) {
       System.out.println("Declined: Illegal exit.");
-      TripSegment ts = new TripSegment(spot, time, date, type);
+      TripSegment ts = new TripSegment("illegal", time, date, type);
       card.addTrip(ts);
       TripSegment updatedCurrent = allTrips.get(allTrips.size() - 1);
       updatedCurrent.setExitSpot(spot);
@@ -80,5 +74,17 @@ class TripManager {
         fareCalculator.calculateTripFares(current);
     }
     current.setTransitType("continuous");
+  }
+
+  private void addNewTrip(String time, String spot, Card card, String date, String type) {
+      TripSegment trip = new TripSegment(spot, time, date, type);
+      card.addTrip(trip);
+      fareCalculator.calculateTripFares(trip);
+  }
+
+  private void updateFares(double fares, Card card, String date) {
+      card.updateBalance(fares);
+      card.updateTotalFares(fares);
+      TransitSystem.updateAllFares(date, fares); // static problem here!!
   }
 }
