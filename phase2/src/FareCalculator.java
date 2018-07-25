@@ -14,6 +14,8 @@ public class FareCalculator {
     return maximumDuration;
   }
 
+  double getFareCap(){return busFare;}
+
   void addTransitLines(HashMap<String, TransitLine> transitLines) {
     this.transitLines = transitLines;
   }
@@ -50,9 +52,12 @@ public class FareCalculator {
     } else if (ts.getTransitType().equals("continueB")) {
       result = calculateContiBusFare(ts.getCurrentFares());
     } else if (ts.getTransitType().equals("S")) {
-      result = stationFare * calculateStaionsReached(ts.getEnterSpot(), ts.getExitSpot());
+      result = stationFare * calculateStaionsReached(ts);
+      if (result > fareCap) {
+          result = fareCap;
+      }
     } else if (ts.getTransitType().equals("continueS")) {
-      int distance = calculateStaionsReached(ts.getContiSpot(), ts.getExitSpot());
+      int distance = calculateStaionsReached(ts);
       result = calculateContiSubFare(ts.getCurrentFares(), distance);
     }
     return result;
@@ -60,16 +65,21 @@ public class FareCalculator {
 
   // for both subway and bus so we can add the number of stations reached to our daily report
   // and also we can calculate subway fares by using the result of this method
-  int calculateStaionsReached(String enterSpot, String exitSpot) {
+  int calculateStaionsReached(TripSegment trip) {
     int enterIndex = 0;
     int exitIndex = 0;
+    String startSpot;
+    if (trip.getTransitType().equals("B") || trip.getTransitType().equals("S")){
+        startSpot = trip.getEnterSpot();
+    }else { startSpot = trip.getContiSpot();}
+
     for (String lineName : transitLines.keySet()) {
       TransitLine line = transitLines.get(lineName);
       for (int i = 0; i < line.getPoints().size(); i++) {
-        if (line.getPoints().get(i).equals(enterSpot)) {
+        if (line.getPoints().get(i).equals(startSpot)) {
           enterIndex = i;
         }
-        if (line.getPoints().get(i).equals(exitSpot)) {
+        if (line.getPoints().get(i).equals(trip.getExitSpot())) {
           exitIndex = i;
         }
       }
