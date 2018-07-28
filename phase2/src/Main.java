@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
+
     public void showRecovery(ActionEvent event) throws Exception {
         Parent rootParent = FXMLLoader.load(getClass().getResource("view/PasswordRecovery.fxml"));
         Scene rootScene = new Scene(rootParent);
