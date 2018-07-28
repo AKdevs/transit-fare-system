@@ -1,154 +1,59 @@
 public class TripSegment {
-  /** Stores the card number of card associated with this trip segment. */
-  private String associatedCard;
-  /** Stores the location (stop/station) of entry */
+
   private String enterSpot;
-  /** Stores the location (stop/station) of exit */
   private String exitSpot;
-  /** Stores the type (bus/subway) of entry */
-  private String enterTransitType;
-  /** Stores the location (bus/subway) of exit */
-  private String exitTransitType;
-  /** Stores the time of entry */
+  private String contiSpot;
+  private String transitType;
   private String enterTime;
-  /** Stores the time of exit */
   private String exitTime;
-  /** Stores the date of entry */
-  private String enterDate;
-  /** Stores the date of exit */
-  private String exitDate;
-  /** Stores the duration of the trip (minutes) */
-  private int duration;
-  /** Accumulates the total fare of the segment */
-  private double segmentFares = 0.0;
-  /** stores whether TripSegment is a continued subway TripSegment */
-  private boolean contiSub;
+  private String date;
+  private double currentFares;
 
-  TripSegment(
-      String cardNumber, String enterSpot, String transitType, String enterTime, String enterDate) {
-    this.associatedCard = cardNumber;
+  public TripSegment(String enterSpot, String enterTime, String enterDate, String type) {
     this.enterSpot = enterSpot;
-    this.enterTransitType = transitType;
+    this.exitSpot = null;
+    this.transitType = type;
     this.enterTime = enterTime;
-    this.enterDate = enterDate;
-    this.exitSpot = "unknown";
-    this.exitTransitType = "unknown";
-    this.exitTime = "unknown";
-    this.exitDate = "unknown";
-    this.contiSub = false;
+    this.date = enterDate;
+    this.contiSpot = null;
+    this.currentFares = 0.0;
   }
 
-  /**
-   * Updates the exit information of the trip segment, thereby completing it.
-   *
-   * @param exitSpot Station/stop of exit
-   * @param transitType Type of transport (bus or subway)
-   * @param exitTime Time of exit
-   * @param exitDate Date of exit
-   */
-  void completeTripSegment(String exitSpot, String transitType, String exitTime, String exitDate) {
-    this.exitSpot = exitSpot;
-    this.exitTransitType = transitType;
-    this.exitTime = exitTime;
-    this.exitDate = exitDate;
+  // check whether it is illegal when they tap out
+  boolean hasEnter() {
+    return this.enterSpot != null;
   }
 
-  /** @return Card number of associated card */
-  String getAssociatedCard() {
-    return this.associatedCard;
+  boolean hasExit() {
+    return this.exitSpot != null;
   }
 
-  /** @return stop/station of exit */
-  String getExitSpot() {
-    return this.exitSpot;
-  }
-
-  /** @return type of transport of entry (bus/subway) */
-  String getEnterTransitType() {
-    return this.enterTransitType;
-  }
-
-  /** @return type of transport of exit (bus/subway) */
-  String getExitTransitType() {
-    return this.exitTransitType;
-  }
-
-  /** @return Returns time of entry in HH:MM format */
-  String getEnterTime() {
-    return this.enterTime;
-  }
-
-  /** @return Returns time of exit in HH:MM format */
-  String getExitTime() {
-    return this.exitTime;
-  }
-
-  /** @return duration of trip segment. */
-  int getDuration() {
-    return this.duration;
-  }
-
-  /** @param duration of the trip segment. */
-  void setDuration(int duration) {
-    this.duration = duration;
-  }
-
-  /** @return stop/station of entry. */
-  String getEnterSpot() {
-    return this.enterSpot;
-  }
-
-  /** @return date of entry in YY-MM-DD format. */
-  String getEnterDate() {
-    return this.enterDate;
-  }
-
-  /** @return date of exit. */
-  String getExitDate() {
-    return this.exitDate;
-  }
-
-  /** @return total fare for this segment. */
-  double getSegmentFares() {
-    return this.segmentFares;
-  }
-
-  /** @param fares amount of money accumulated for this segment. */
-  void setSegmentFares(double fares) {
-    this.segmentFares = fares;
-  }
-
-  /** @return a string representation of the trip segment. */
   @Override
   public String toString() {
-    String entryType;
-    String exitType;
-    if (enterTransitType.equals("B")) {
-      entryType = "bus";
+    String type;
+    if (transitType.equals("B")) {
+      type = "Bus";
+    } else if (transitType.equals("S")) {
+      type = "Subway";
     } else {
-      entryType = "subway";
-    }
-
-    if (exitTransitType.equals("B")) {
-      exitType = "bus";
-    } else {
-      exitType = "subway";
+      type = "Continue";
     }
 
     StringBuilder s =
         new StringBuilder(
             "Date: "
-                + this.enterDate
+                + date
+                + " - "
+                + type
+                + " trip "
                 + " - "
                 + "Entered "
-                + entryType
                 + " at "
                 + enterSpot
                 + " at "
                 + enterTime
                 + "."
                 + " Exited "
-                + exitType
                 + " at "
                 + exitSpot
                 + " at "
@@ -158,17 +63,67 @@ public class TripSegment {
     return s.toString();
   }
 
-  /**
-   * Returns true iff subway trip is continuous
-   *
-   * @return true iff subway trip is continous
-   */
-  boolean getContiSub() {
-    return this.contiSub;
+  public String getDate() {
+    return date;
   }
 
-  /** @param b status of whether subway trip is continuous */
-  void setContiSub(boolean b) {
-    this.contiSub = b;
+  public String getEnterSpot() {
+
+    return this.enterSpot;
+  }
+
+  public String getExitSpot() {
+
+    return this.exitSpot;
+  }
+
+  public String getEnterTime() {
+
+    return this.enterTime;
+  }
+
+  public String getExitTime() {
+
+    return this.exitTime;
+  }
+
+  public String getContiSpot() {
+    return contiSpot;
+  }
+
+  public String getTransitType() {
+    return transitType;
+  }
+
+  public double getCurrentFares() {
+    return currentFares;
+  }
+
+  public void setEnterSpot(String enterSpot) {
+    this.enterSpot = enterSpot;
+  }
+
+  public void setDate(String enterDate) {
+    this.date = enterDate;
+  }
+
+  public void setEnterTime(String enterTime) {
+    this.enterTime = enterTime;
+  }
+
+  public void setExitSpot(String exitSpot) {
+    this.exitSpot = exitSpot;
+  }
+
+  public void setExitTime(String exitTime) {
+    this.exitTime = exitTime;
+  }
+
+  public void setTransitType(String transitType) {
+    this.transitType = transitType;
+  }
+
+  public void setContiSpot(String contiSpot) {
+    this.contiSpot = contiSpot;
   }
 }

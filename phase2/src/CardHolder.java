@@ -17,6 +17,10 @@ public class CardHolder extends UserAccount {
     this.travelCards = new ArrayList<>();
   }
 
+  public void enter(String time, String spot, String cardNumber, String date, String type) {}
+
+  public void exit(String time, String spot, String cardNumber) {}
+
   /**
    * Links card to this account. Prints out a message to inform the CardHolder whether the card is
    * linked to his/her account successfully.
