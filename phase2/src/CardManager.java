@@ -2,7 +2,11 @@ import java.util.ArrayList;
 
 public class CardManager {
   /** Keeps a track of all cards in the system. */
-  private ArrayList<Card> cards = new ArrayList<>();
+  private ArrayList<Card> cards;
+
+  CardManager(){
+    this.cards = new ArrayList<>();
+  }
 
   /**
    * Finds and returns the card denoted by cardNumber, or null if not found.
