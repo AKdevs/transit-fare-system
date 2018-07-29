@@ -1,11 +1,17 @@
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Aggregator {
+public class Aggregator implements Serializable{
     /** Stores the total amount of accumulated fares in the system by date */
-    private HashMap<String, Double> allFares = new HashMap<>();
+    private HashMap<String, Double> allFares;
 
     /** Stores the number of stations reached in the entire system by date */
-    private HashMap<String, Integer> numberOfStations = new HashMap<>();
+    private HashMap<String, Integer> numberOfStations;
+
+    Aggregator(){
+        this.allFares = new HashMap<>();
+        this.numberOfStations = new HashMap<>();
+    }
 
     /** @return amount of fares in system, stored by date. */
     public HashMap<String, Double> getAllFares() {
