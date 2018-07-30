@@ -15,9 +15,20 @@ public class Controller {
     }
 
     void changeWindow(ActionEvent event, String url) throws IOException {
-        Parent createAccountParent = FXMLLoader.load(getClass().getResource(url));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
+        Parent newWindowParent = loader.load();
+        // Controller newWindowController = loader.getController();
         Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
-        window.setScene(new Scene(createAccountParent));
+        window.setScene(new Scene(newWindowParent));
         window.show();
     }
+
+    /*
+    private void passState() {
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("view/Login.fxml"));
+        Parent root = loginLoader.load();
+        LoginController loginController = loginLoader.getController();
+        //loginController.storeState(mainSystem);
+    }
+    */
 }
