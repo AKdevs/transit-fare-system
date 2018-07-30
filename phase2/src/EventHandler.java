@@ -53,9 +53,9 @@ public class EventHandler {
           break;
         case "create":
           if ((eventTokens[1].equals("account")) && (eventTokens[2].equals("CardHolder"))) {
-            system.getAccountManager().createCardHolderAccount(eventTokens[3], eventTokens[4]);
+            //system.getAccountManager().createCardHolderAccount(eventTokens[3], eventTokens[4]);
           } else if ((eventTokens[1].equals("account")) && (eventTokens[2].equals("AdminUser"))) {
-            system.getAccountManager().createAdminAccount(eventTokens[3], eventTokens[4]);
+            //system.getAccountManager().createAdminAccount(eventTokens[3], eventTokens[4]);
           } else if (eventTokens[1].equals("card")) {
             system.getCardManager().createCard();
           }
