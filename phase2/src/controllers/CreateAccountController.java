@@ -1,17 +1,26 @@
 package controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class CreateAccountController {
+    @FXML private TextField name;
+    @FXML private TextField email;
+    @FXML private TextField password;
 
     public void createAccount(ActionEvent event) {
+        String currentName = name.getText();
+        String currentEmail = email.getText();
+        String currentPassword = password.getText();
 
     }
 
