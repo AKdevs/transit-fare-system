@@ -9,10 +9,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LoginController {
-    @FXML
-    private TextField cardTextField;
+import javax.swing.*;
 
+public class LoginController {
+    @FXML private TextField accountNumber;
+    @FXML private TextField password;
+    @FXML private TextField cardTextField;
+
+
+    public void verifyLogin(ActionEvent event) {
+        String currentAccountNumber = accountNumber.getText();
+        String currentPassword = password.getText();
+    }
+
+    public void showAccountCreation(ActionEvent event) throws Exception {
+    }
 
     public void showRecovery(ActionEvent event) throws Exception {
         Parent rootParent = FXMLLoader.load(getClass().getResource("../view/PasswordRecovery.fxml"));
