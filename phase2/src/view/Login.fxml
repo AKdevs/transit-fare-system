@@ -91,7 +91,7 @@
                   <VBox prefHeight="152.0" prefWidth="325.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label text="Please enter card number:" />
-                        <TextField prefHeight="31.0" prefWidth="309.0" promptText="card number" />
+                        <TextField prefHeight="31.0" prefWidth="309.0" promptText="card number" fx:id="cardTextField" />
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
                               <Button mnemonicParsing="false" text="Continue" />
