@@ -64,7 +64,7 @@
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <Button fx:id="forgotPassBtn" onAction="#showRecovery" mnemonicParsing="false" text="Forgot Password?" />
-                        <Label layoutX="10.0" layoutY="10.0" text="Create account" />
+                        <Button onAction="#showAccountCreation" mnemonicParsing="false" text="Create Account" />
                      </children>
                      <GridPane.margin>
                         <Insets top="20.0" />

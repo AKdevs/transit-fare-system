@@ -12,7 +12,8 @@
 <?import javafx.scene.text.Font?>
 
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="15.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.PasswordField?>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="15.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateAccountController">
    <children>
       <Label text="Please enter your account Information">
          <font>
@@ -43,7 +44,7 @@
             <TextField GridPane.columnIndex="1" />
             <TextField layoutX="310.0" layoutY="3.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label layoutX="10.0" layoutY="17.0" nodeOrientation="RIGHT_TO_LEFT" text="* Password" GridPane.rowIndex="2" />
-            <TextField layoutX="210.0" layoutY="13.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <PasswordField layoutX="210.0" layoutY="13.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <VBox.margin>
             <Insets left="100.0" right="100.0" />
@@ -52,7 +53,7 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
             <Button mnemonicParsing="false" text="Create My Account" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cancel" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cancel" onAction="#showLogin"/>
          </children>
       </HBox>
    </children>
