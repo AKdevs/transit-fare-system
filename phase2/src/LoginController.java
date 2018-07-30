@@ -7,16 +7,31 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class LoginController {
     TransitSystem system;
     @FXML private TextField accountNumber;
     @FXML private TextField password;
     @FXML private TextField cardTextField;
 
+    public void showUserAccount(ActionEvent event) throws IOException {
+        if (userExists()) {
+            Parent createAccountParent = FXMLLoader.load(getClass().getResource("view/CardHolderWindow.fxml"));
+            Scene createAccountScene = new Scene(createAccountParent);
 
-    public void verifyLogin(ActionEvent event) {
+            Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
+            window.setScene(createAccountScene);
+            window.show();
+        }
+    }
+
+    private boolean userExists() {
         String currentAccountNumber = accountNumber.getText();
         String currentPassword = password.getText();
+        UserAccount currentAccount = system.getAccountManager().findUserAccount(currentAccountNumber);
+        return true;
+        //return !(currentAccount == null);
     }
 
     public void showAccountCreation(ActionEvent event) throws Exception {
