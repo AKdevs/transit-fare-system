@@ -21,11 +21,14 @@ public class LoginController extends Controller {
     }
 
     private boolean userExists() {
+        return true;
+        /*
         String currentAccountNumber = accountNumber.getText();
         String currentPassword = password.getText();
         UserAccount currentAccount = system.getAccountManager().findUserAccount(currentAccountNumber);
-        return true;
-        //return !(currentAccount == null);
+
+        return !(currentAccount == null);
+        */
     }
 
     public void showAccountCreation(ActionEvent event) throws Exception {
