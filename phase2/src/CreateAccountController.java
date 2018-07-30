@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class CreateAccountController {
+    TransitSystem system;
     @FXML private TextField name;
     @FXML private TextField email;
     @FXML private TextField password;
@@ -20,6 +21,10 @@ public class CreateAccountController {
         String currentEmail = email.getText();
         String currentPassword = password.getText();
 
+    }
+
+    void storeState(TransitSystem system) {
+        this.system = system;
     }
 
     public void showLogin(ActionEvent event) throws IOException {

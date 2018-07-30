@@ -7,9 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-
 public class LoginController {
+    TransitSystem system;
     @FXML private TextField accountNumber;
     @FXML private TextField password;
     @FXML private TextField cardTextField;
@@ -27,7 +26,10 @@ public class LoginController {
         Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
         window.setScene(createAccountScene);
         window.show();
+    }
 
+    void storeState(TransitSystem system) {
+        this.system = system;
     }
 
     public void showRecovery(ActionEvent event) throws Exception {
