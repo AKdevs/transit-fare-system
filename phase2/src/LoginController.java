@@ -11,14 +11,20 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LoginController extends Controller {
+    @FXML private Label cardInputInstructions;
     @FXML private Label loginInstructions;
     @FXML private TextField accountNumber;
     @FXML private TextField password;
-    @FXML private TextField cardTextField;
+    @FXML private TextField cardNumber;
 
 
     public void showCard(ActionEvent event) throws IOException {
-        changeWindow(event, "view/Card.fxml");
+        if (cardExists()) {
+            changeWindow(event, "view/Card.fxml");
+        } else {
+            cardInputInstructions.setText("Card not found. Try again");
+        }
+
     }
 
     public void showUserAccount(ActionEvent event) throws IOException {
@@ -39,7 +45,17 @@ public class LoginController extends Controller {
         UserAccount currentAccount = system.getAccountManager().findUserAccount(currentAccountNumber);
 
         return !(currentAccount == null);
+    }
 
+    private boolean cardExists() {
+        String currentCardNumber = cardNumber.getText();
+        // temporary bypass
+        if (currentCardNumber.equals("")) {
+            return true;
+        }
+
+        Card currentCard = system.getCardManager().findCard(currentCardNumber);
+        return !(currentCard == null);
     }
 
     public void showAccountCreation(ActionEvent event) throws Exception {

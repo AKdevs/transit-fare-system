@@ -27,7 +27,7 @@ public class TravelSimulationController {
     //change scene method
     public void backToCardButtonPushed(ActionEvent event) throws IOException {
         // new Scene
-        Parent cardParent = FXMLLoader.load(getClass().getResource("Card.fxml"));
+        Parent cardParent = FXMLLoader.load(getClass().getResource("view/Card.fxml"));
         Scene cardScene = new Scene(cardParent);
 
         // get the Stage info
