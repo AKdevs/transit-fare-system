@@ -14,8 +14,7 @@ import javafx.stage.Stage;
 
 
 public class CardController implements Initializable {
-
-    private Card card;
+    Card card;
     @FXML private Label cardNumber;
     @FXML private Label owner;
     @FXML private Label status;
