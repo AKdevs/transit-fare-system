@@ -17,7 +17,8 @@ public class LoginController {
 
     public void showUserAccount(ActionEvent event) throws IOException {
         if (userExists()) {
-            Parent createAccountParent = FXMLLoader.load(getClass().getResource("view/CardHolderWindow.fxml"));
+            Parent createAccountParent = FXMLLoader.load(getClass().getResource(
+                "view/CardHolder.fxml"));
             Scene createAccountScene = new Scene(createAccountParent);
 
             Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
