@@ -4,8 +4,8 @@ class AdminUser extends UserAccount {
   private static int nextAccountNum = 20000001;
   /* Account Number for AdminUser starts at 20000001 to distinguish with other account/card numbers.*/
 
-  AdminUser(String name, String email) {
-    super(name, email);
+  AdminUser(String name, String email, String password) {
+    super(name, email, password);
     this.accountNumber = Integer.toString(nextAccountNum);
     nextAccountNum += 1;
   }

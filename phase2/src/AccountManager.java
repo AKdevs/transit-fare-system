@@ -45,8 +45,8 @@ class AccountManager implements Serializable{
    * @param name name of card holder
    * @param email email of card holder
    */
-  void createCardHolderAccount(String name, String email) {
-    CardHolder newAccount = new CardHolder(name, email);
+  void createCardHolderAccount(String name, String email, String password) {
+    CardHolder newAccount = new CardHolder(name, email, password);
     addUserAccount(newAccount);
     System.out.println("CardHolder Account " + newAccount.getAccountNum() + " created");
   }
@@ -57,8 +57,8 @@ class AccountManager implements Serializable{
    * @param name name of an administration user
    * @param email email of an administration user
    */
-  void createAdminAccount(String name, String email) {
-    AdminUser newAccount = new AdminUser(name, email);
+  void createAdminAccount(String name, String email, String password) {
+    AdminUser newAccount = new AdminUser(name, email, password);
     addUserAccount(newAccount);
     System.out.println("AdminUser Account " + newAccount.getAccountNum() + " created");
   }

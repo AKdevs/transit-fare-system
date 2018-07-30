@@ -10,8 +10,8 @@ public class CardHolder extends UserAccount {
   /* Account Number for CardHolder starts at 10000001 to distinguish with other account/card numbers.*/
   private static int nextAccountNum = 10000001;
 
-  CardHolder(String name, String email) {
-    super(name, email);
+  CardHolder(String name, String email, String password) {
+    super(name, email, password);
     this.accountNumber = Integer.toString(nextAccountNum);
     nextAccountNum += 1;
     this.travelCards = new ArrayList<>();

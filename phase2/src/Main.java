@@ -19,8 +19,8 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
-    /*@Override
+    /*
+    @Override
     public void start(Stage stage) throws Exception{
         TransitSystem mainSystem = new TransitSystem();
         Parent root = FXMLLoader.load(getClass().getResource("view/CardHolderWindow.fxml"));
@@ -30,9 +30,9 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+    */
     public static void main(String[] args) {
         launch(args);
     }
-    */
+
 }

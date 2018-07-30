@@ -6,10 +6,12 @@ public class UserAccount {
   private String email;
   /** Stores account number of this user account */
   protected String accountNumber;
+  protected String password;
 
-  UserAccount(String name, String email) {
+  UserAccount(String name, String email, String password) {
     this.name = name;
     this.email = email;
+    this.password = password;
   }
 
   /** @return name of UserAccount */
