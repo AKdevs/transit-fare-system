@@ -16,6 +16,11 @@ public class LoginController extends Controller {
     @FXML private TextField password;
     @FXML private TextField cardTextField;
 
+
+    public void showCard(ActionEvent event) throws IOException {
+        changeWindow(event, "view/Card.fxml");
+    }
+
     public void showUserAccount(ActionEvent event) throws IOException {
         if (userExists()) {
             changeWindow(event,"view/CardHolder.fxml" );

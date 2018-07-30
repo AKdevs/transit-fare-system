@@ -94,7 +94,7 @@
                         <TextField prefHeight="31.0" prefWidth="309.0" promptText="card number" fx:id="cardTextField" />
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Continue" />
+                              <Button onAction="#showCard" mnemonicParsing="false" text="Continue" />
                            </children>
                         </HBox>
                      </children>
