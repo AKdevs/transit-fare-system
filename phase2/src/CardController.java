@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 
 
-public class CardController implements Initializable {
+public class CardController extends Controller implements Initializable {
     Card card;
     @FXML private Label cardNumber;
     @FXML private Label owner;
@@ -30,13 +30,17 @@ public class CardController implements Initializable {
     //change scene method
     public void changeSceneButtonPushed(ActionEvent event) throws IOException {
         // new Scene
-        Parent travelSimulationParent = FXMLLoader.load(getClass().getResource("TravelSimulation.fxml"));
+        Parent travelSimulationParent = FXMLLoader.load(getClass().getResource("view/TravelSimulation.fxml"));
         Scene TravelSimulationScene = new Scene(travelSimulationParent);
 
         // get the Stage info
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(TravelSimulationScene);
         window.show();
+    }
+
+    public void showLogin(ActionEvent event) throws IOException {
+        changeWindow(event,"view/Login.fxml" );
     }
 
 
