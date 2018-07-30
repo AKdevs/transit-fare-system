@@ -21,7 +21,7 @@ public class LoginController {
     }
 
     public void showAccountCreation(ActionEvent event) throws Exception {
-        Parent createAccountParent = FXMLLoader.load(getClass().getResource("../view/CreateAccount.fxml"));
+        Parent createAccountParent = FXMLLoader.load(getClass().getResource("view/CreateAccount.fxml"));
         Scene createAccountScene = new Scene(createAccountParent);
 
         Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
@@ -31,7 +31,7 @@ public class LoginController {
     }
 
     public void showRecovery(ActionEvent event) throws Exception {
-        Parent PasswordRecoveryParent = FXMLLoader.load(getClass().getResource("../view/PasswordRecovery.fxml"));
+        Parent PasswordRecoveryParent = FXMLLoader.load(getClass().getResource("view/PasswordRecovery.fxml"));
         Scene rootScene = new Scene(PasswordRecoveryParent);
 
         Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());

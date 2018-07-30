@@ -23,7 +23,7 @@ public class CreateAccountController {
     }
 
     public void showLogin(ActionEvent event) throws IOException {
-        Parent loginNode = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
+        Parent loginNode = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
         Scene scene = new Scene(loginNode);
         Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
         window.setScene(scene);
