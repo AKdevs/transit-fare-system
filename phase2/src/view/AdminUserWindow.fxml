@@ -21,7 +21,7 @@
                </font>
             </Label>
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" text="Return to Main">
+            <Button mnemonicParsing="false" text="Return to model.Main">
                <HBox.margin>
                   <Insets top="4.0" />
                </HBox.margin>

@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class TransitSystem {
   /** Stores the trip manager */
   private TripManager tripManager;
@@ -19,7 +16,7 @@ public class TransitSystem {
   /** Operating status of system, either "on" or "off" */
   private String operatingStatus = "off";
 
-  TransitSystem() {
+  public TransitSystem() {
     tripManager = new TripManager();
     transitManager = new TransitManager();
     tripManager.addTransitLines(transitManager.getTransitLines());
