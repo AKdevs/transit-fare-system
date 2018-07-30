@@ -1,11 +1,49 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Aggregator {
+public class Aggregator implements Serializable{
     /** Stores the total amount of accumulated fares in the system by date */
-    private HashMap<String, Double> allFares = new HashMap<>();
+    private HashMap<String, Double> allFares;
 
     /** Stores the number of stations reached in the entire system by date */
-    private HashMap<String, Integer> numberOfStations = new HashMap<>();
+    private HashMap<String, Integer> numberOfStations;
+
+    Aggregator(){
+        this.allFares = new HashMap<>();
+        this.numberOfStations = new HashMap<>();
+
+      try
+      {
+        // Reading the object from a file
+        FileInputStream file = new FileInputStream("data-Aggregator.bin");
+        ObjectInputStream in = new ObjectInputStream(file);
+
+        // Method for deserialization of object
+        allFares = (HashMap<String, Double>)in.readObject();
+        numberOfStations = (HashMap<String, Integer>)in.readObject();
+
+        in.close();
+        file.close();
+
+        System.out.println("Object has been deserialized ");
+      }
+
+      catch(IOException ex)
+      {
+        System.out.println("IOException is caught");
+      }
+
+      catch(ClassNotFoundException ex)
+      {
+        System.out.println("ClassNotFoundException is caught");
+      }
+    }
 
     /** @return amount of fares in system, stored by date. */
     public HashMap<String, Double> getAllFares() {
@@ -50,6 +88,27 @@ public class Aggregator {
         } else {
             allFares.put(date, fares);
         }
+
+      try
+      {
+        //Saving of object in a file
+        FileOutputStream file = new FileOutputStream("data-Aggregator.bin");
+        ObjectOutputStream out = new ObjectOutputStream(file);
+
+        // Method for serialization of object
+        out.writeObject(allFares);
+
+        out.close();
+        file.close();
+
+        System.out.println("Object has been serialized");
+
+      }
+      catch(IOException ex)
+      {
+        System.out.println("IOException is caught");
+      }
+
     }
 
     /**
@@ -71,6 +130,26 @@ public class Aggregator {
         } else {
             numberOfStations.put(date, n);
         }
+
+      try
+      {
+        //Saving of object in a file
+        FileOutputStream file = new FileOutputStream("data-Aggregator.bin");
+        ObjectOutputStream out = new ObjectOutputStream(file);
+
+        // Method for serialization of object
+        out.writeObject(numberOfStations);
+
+        out.close();
+        file.close();
+
+        System.out.println("Object has been serialized");
+
+      }
+      catch(IOException ex)
+      {
+        System.out.println("IOException is caught");
+      }
     }
 
     /**
