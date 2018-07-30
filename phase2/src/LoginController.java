@@ -16,13 +16,7 @@ public class LoginController extends Controller {
 
     public void showUserAccount(ActionEvent event) throws IOException {
         if (userExists()) {
-            Parent createAccountParent = FXMLLoader.load(getClass().getResource(
-                "view/CardHolder.fxml"));
-            Scene createAccountScene = new Scene(createAccountParent);
-
-            Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
-            window.setScene(createAccountScene);
-            window.show();
+            changeWindow(event,"view/CardHolder.fxml" );
         }
     }
 
@@ -35,20 +29,11 @@ public class LoginController extends Controller {
     }
 
     public void showAccountCreation(ActionEvent event) throws Exception {
-        changeWindow("view/CreateAccount.fxml");
-        Parent createAccountParent = FXMLLoader.load(getClass().getResource("view/CreateAccount.fxml"));
-        Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
-        window.setScene(new Scene(createAccountParent));
-        window.show();
+        changeWindow(event, "view/CreateAccount.fxml");
     }
 
     public void showRecovery(ActionEvent event) throws Exception {
-        Parent PasswordRecoveryParent = FXMLLoader.load(getClass().getResource("view/PasswordRecovery.fxml"));
-        Scene rootScene = new Scene(PasswordRecoveryParent);
-
-        Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
-        window.setScene(rootScene);
-        window.show();
+        changeWindow(event, "view/PasswordRecovery.fxml");
     }
 
 
