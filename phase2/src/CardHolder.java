@@ -114,4 +114,8 @@ public class CardHolder extends UserAccount {
     System.out.println(
         "Account " + accountNumber + " cost for the month: " + result / travelCards.size());
   }
+
+  ArrayList<Card> getTravelCards() {
+      return this.travelCards;
+  }
 }
