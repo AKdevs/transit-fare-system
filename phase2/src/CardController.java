@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,6 +20,11 @@ public class CardController implements Initializable {
     @FXML private Label owner;
     @FXML private Label status;
     @FXML private Label balance;
+
+    @FXML private Button load10;
+    @FXML private Button load20;
+    @FXML private Button load50;
+    @FXML private Button travelSimulation;
 
 
     //change scene method
