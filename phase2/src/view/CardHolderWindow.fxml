@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="420.0" prefWidth="541.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CardHolderWindowController">
+  <children>
+    <ChoiceBox id="choicebox" fx:id="choicebox" layoutX="196.0" layoutY="191.0" prefWidth="150.0" />
+    <Button id="button" fx:id="button" layoutX="220.0" layoutY="272.0" mnemonicParsing="false" onMouseClicked="#getChoice" prefHeight="39.0" prefWidth="101.0" text="OK" textAlignment="CENTER" AnchorPane.rightAnchor="220.0" />
+    <Label layoutX="148.0" layoutY="125.0" prefHeight="39.0" prefWidth="246.0" text="Choose A Card to Continue">
+      <font>
+        <Font name="Century Gothic" size="18.0" />
+      </font>
+    </Label>
+    <Label layoutX="217.0" layoutY="50.0" text="Card Holder" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+      <font>
+        <Font name="Century Gothic" size="18.0" />
+      </font>
+    </Label>
+  </children>
+</AnchorPane>
+
