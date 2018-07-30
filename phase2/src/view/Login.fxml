@@ -32,7 +32,7 @@
                <children>
                   <VBox prefHeight="152.0" prefWidth="325.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label text="Please log in to continue." />
+                        <Label fx:id="loginInstructions" text="Please log in to continue." wrapText="true" />
                         <TextField fx:id="accountNumber" prefHeight="31.0" prefWidth="309.0" promptText="account number" />
                         <PasswordField fx:id="password" promptText="password" />
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">

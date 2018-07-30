@@ -10,8 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CreateAccountController {
-    TransitSystem system;
+public class CreateAccountController extends Controller {
     @FXML private TextField name;
     @FXML private TextField email;
     @FXML private TextField password;
@@ -21,17 +20,11 @@ public class CreateAccountController {
         String currentEmail = email.getText();
         String currentPassword = password.getText();
 
-    }
-
-    void storeState(TransitSystem system) {
-        this.system = system;
+        system.getAccountManager().createCardHolderAccount(currentName,
+                currentEmail, currentPassword);
     }
 
     public void showLogin(ActionEvent event) throws IOException {
-        Parent loginNode = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
-        Scene scene = new Scene(loginNode);
-        Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
-        window.setScene(scene);
-        window.show();
+        changeWindow(event,"view/Login.fxml" );
     }
 }
