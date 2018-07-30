@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class CardHolderWindowController {
+public class CardHolderController {
 
   //link to the scene of Card
   public void getChoice(MouseEvent mouseEvent) {
