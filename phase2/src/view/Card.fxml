@@ -15,24 +15,20 @@
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <VBox layoutY="6.0" prefHeight="140.0" prefWidth="200.0">
+            <VBox layoutY="41.0" prefHeight="140.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="cardNumber" text="Card 30000001">
-                     <font>
-                        <Font size="23.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="owner" text="Owner: James">
+                  <Label text="Card Number: " />
+                  <Label text="Owner: ">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="status" text="status: activated">
+                  <Label text="status: ">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="balance" text="balance: 19.0">
+                  <Label text="balance: ">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -41,6 +37,19 @@
             </VBox>
             <Button fx:id="home" layoutX="516.0" layoutY="14.0" mnemonicParsing="false" onAction="#homeButtonPushed" text="Home" />
             <Button fx:id="backToAccount" layoutX="455.0" layoutY="63.0" mnemonicParsing="false" onAction="#backToAccountButtonPushed" text="Back To Account" />
+            <VBox layoutX="90.0" layoutY="38.0" prefHeight="105.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="cardNumber" />
+                  <Label fx:id="owner" />
+                  <Label fx:id="status" />
+                  <Label fx:id="balance" />
+               </children>
+            </VBox>
+            <Label layoutX="9.0" layoutY="-2.0" prefHeight="48.0" prefWidth="53.0" text="Card">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
     <AnchorPane fx:id="back" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>

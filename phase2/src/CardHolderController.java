@@ -61,9 +61,15 @@ public class CardHolderController extends Controller implements Initializable {
     // change scene
     @FXML
     private void goToCardButtonPushed(ActionEvent event) throws IOException {
-        // new Scene
-        Parent cardParent = FXMLLoader.load(getClass().getResource("view/Card.fxml"));
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("view/Card.fxml"));
+        Parent cardParent = loader.load();
+
         Scene cardScene = new Scene(cardParent);
+
+        CardController ct = loader.getController();
+        ct.initialCardInfo(cards.getSelectionModel().getSelectedItem().toString());
 
         // get the Stage info
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -76,7 +82,7 @@ public class CardHolderController extends Controller implements Initializable {
     @FXML
     void viewMonthlyCostButtonPushed(ActionEvent event) {
         // should get from the account and it's manager
-        monthlyCost.setText("3.0");
+        monthlyCost.setText(cards.getSelectionModel().getSelectedItem().toString());
     }
 
     @FXML

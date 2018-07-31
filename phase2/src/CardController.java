@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 
 public class CardController extends Controller implements Initializable {
-    Card card;
+    private Card myCard;
     @FXML private Label cardNumber;
     @FXML private Label owner;
     @FXML private Label status;
@@ -29,20 +29,8 @@ public class CardController extends Controller implements Initializable {
     @FXML private Button backToAccount;
 
 
-    //change scene method
     public void travelSimulationButtonPushed(ActionEvent event) throws IOException {
         changeWindow(event,"view/TravelSimulation.fxml" );
-
-
-        /*
-        // new Scene
-        Parent travelSimulationParent = FXMLLoader.load(getClass().getResource("view/TravelSimulation.fxml"));
-        Scene TravelSimulationScene = new Scene(travelSimulationParent);
-
-        // get the Stage info
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(TravelSimulationScene);
-        window.show();*/
     }
 
     public void homeButtonPushed(ActionEvent event) throws IOException {
@@ -55,16 +43,20 @@ public class CardController extends Controller implements Initializable {
 
 
     public void initialize(URL url, ResourceBundle rb) {
+        myCard = new Card();
+    }
 
-        this.card = new Card();
-        cardNumber.setText("Card: " + card.getCardNumber());
-        owner.setText("Owner: " + card.getOwner());
-        status.setText("status: activated");
-        balance.setText("Balance: " + card.getBalance());
+
+    void initialCardInfo(String cardNum) {
+        //Card card = this.system.getCardManager().findCard(cardNum);
+        cardNumber.setText(cardNum);
+        //owner.setText(card.getOwner().getName());
+        //status.setText(card.getStatus());
+        //balance.setText(Double.toString(card.getBalance()));
     }
 
     public void loadButtonPushed() {
-        this.card.addBalance(20.0);
-        balance.setText("Balance: " + card.getBalance());
+        //this.card.addBalance(20.0);
+
     }
 }

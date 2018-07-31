@@ -221,4 +221,11 @@ class Card {
       return false;
     }
   }
+
+  String getStatus() {
+      if (active) {
+          return "active";
+      }
+      return "deactivated";
+  }
 }
