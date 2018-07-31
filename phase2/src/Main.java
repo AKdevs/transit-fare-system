@@ -19,6 +19,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+
     /*
     @Override
     public void start(Stage stage) throws Exception{
@@ -29,8 +30,8 @@ public class Main extends Application {
 
         stage.setScene(scene);
         stage.show();
-    }*/
-
+    }
+    */
 
     public static void main(String[] args) {
         launch(args);
