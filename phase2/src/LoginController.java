@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -33,7 +34,20 @@ public class LoginController extends Controller {
             if (system.getAccountManager().isAdmin(currentAccount)) {
                 changeWindow(event,"view/AdminUser.fxml");
             } else {
-                changeWindow(event,"view/CardHolder.fxml" );
+                //changeWindow(event,"view/CardHolder.fxml" );
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("view/CardHolder.fxml"));
+                Parent cardHolderParent = loader.load();
+
+                Scene cardHolderScene = new Scene(cardHolderParent);
+
+                CardHolderController cht = loader.getController();
+                cht.initialCardHolderInfo(accountNumber.getText());
+
+                // get the Stage info
+                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                window.setScene(cardHolderScene);
+                window.show();
             }
         } else {
             loginInstructions.setText("Invalid username or password.");
@@ -74,6 +88,5 @@ public class LoginController extends Controller {
     public void showRecovery(ActionEvent event) throws Exception {
         changeWindow(event, "view/PasswordRecovery.fxml");
     }
-
 
 }
