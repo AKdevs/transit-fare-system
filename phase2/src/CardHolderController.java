@@ -23,6 +23,7 @@ public class CardHolderController extends Controller implements Initializable {
     @FXML private Label cardNumber;
     @FXML private Label name;
     @FXML private Label email;
+    @FXML private Label monthlyCost;
 
     // choiceBox info
     @FXML private ChoiceBox cards;
@@ -30,12 +31,15 @@ public class CardHolderController extends Controller implements Initializable {
     // Button info
     @FXML private Button viewMonthlyCost;
     @FXML private Button logOut;
+    @FXML private Button goToCard;
 
 
     public void initialize(URL url, ResourceBundle rb) {
 
         viewMonthlyCost.setText("View Monthly Cost");
         logOut.setText("Log Out");
+        goToCard.setText("Go To Card");
+        monthlyCost.setText("");
 
         cardNumber.setText("10000001"); // get this value from user input
         name.setText(""); // get this value from the manager
@@ -48,12 +52,40 @@ public class CardHolderController extends Controller implements Initializable {
         }*/
 
         cards.getItems().add("30000001");
+        cards.getItems().add("30000002");
+        cards.getItems().add("30000003");
+
 
     }
 
-    private void choiceBoxButtonPushed(ActionEvent event) throws IOException {
+    // goToCardButtonPushed
+    private void goToCardButtonPushed(ActionEvent event) throws IOException {
 
         //change to another scene
 
     }
+
+
+    @FXML
+    void viewMonthlyCostButtonPushed(ActionEvent event) {
+        // should get from the account and it's manager
+        monthlyCost.setText("3.0");
+    }
+
+    @FXML
+    private void logOutButtonPushed(ActionEvent event) throws IOException {
+        //change to another scene
+        // new Scene
+        Parent travelSimulationParent = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
+        Scene TravelSimulationScene = new Scene(travelSimulationParent);
+
+        // get the Stage info
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(TravelSimulationScene);
+        window.show();
+
+    }
+
+
+
 }
