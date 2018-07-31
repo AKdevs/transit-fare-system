@@ -25,10 +25,16 @@ public class CardController extends Controller implements Initializable {
     @FXML private Button load20;
     @FXML private Button load50;
     @FXML private Button travelSimulation;
+    @FXML private Button home;
+    @FXML private Button backToAccount;
 
 
     //change scene method
-    public void changeSceneButtonPushed(ActionEvent event) throws IOException {
+    public void travelSimulationButtonPushed(ActionEvent event) throws IOException {
+        changeWindow(event,"view/TravelSimulation.fxml" );
+
+
+        /*
         // new Scene
         Parent travelSimulationParent = FXMLLoader.load(getClass().getResource("view/TravelSimulation.fxml"));
         Scene TravelSimulationScene = new Scene(travelSimulationParent);
@@ -36,15 +42,20 @@ public class CardController extends Controller implements Initializable {
         // get the Stage info
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(TravelSimulationScene);
-        window.show();
+        window.show();*/
     }
 
-    public void showLogin(ActionEvent event) throws IOException {
+    public void homeButtonPushed(ActionEvent event) throws IOException {
+        changeWindow(event,"view/Login.fxml" );
+    }
+
+    public void backToAccountButtonPushed(ActionEvent event) throws IOException {
         changeWindow(event,"view/CardHolder.fxml" );
     }
 
 
     public void initialize(URL url, ResourceBundle rb) {
+
         this.card = new Card();
         cardNumber.setText("Card: " + card.getCardNumber());
         owner.setText("Owner: " + card.getOwner());
