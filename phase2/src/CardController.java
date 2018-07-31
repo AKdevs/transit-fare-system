@@ -40,7 +40,7 @@ public class CardController extends Controller implements Initializable {
     }
 
     public void showLogin(ActionEvent event) throws IOException {
-        changeWindow(event,"view/Login.fxml" );
+        changeWindow(event,"view/CardHolder.fxml" );
     }
 
 

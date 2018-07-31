@@ -58,6 +58,6 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="goToCard" layoutX="401.0" layoutY="126.0" mnemonicParsing="false" text="Go To Card" />
+      <Button fx:id="goToCard" layoutX="401.0" layoutY="126.0" mnemonicParsing="false" onAction="#goToCardButtonPushed" text="Go To Card" />
   </children>
 </AnchorPane>

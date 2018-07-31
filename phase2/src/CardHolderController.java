@@ -58,10 +58,17 @@ public class CardHolderController extends Controller implements Initializable {
 
     }
 
-    // goToCardButtonPushed
+    // change scene
+    @FXML
     private void goToCardButtonPushed(ActionEvent event) throws IOException {
+        // new Scene
+        Parent cardParent = FXMLLoader.load(getClass().getResource("view/Card.fxml"));
+        Scene cardScene = new Scene(cardParent);
 
-        //change to another scene
+        // get the Stage info
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(cardScene);
+        window.show();
 
     }
 
@@ -76,12 +83,12 @@ public class CardHolderController extends Controller implements Initializable {
     private void logOutButtonPushed(ActionEvent event) throws IOException {
         //change to another scene
         // new Scene
-        Parent travelSimulationParent = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
-        Scene TravelSimulationScene = new Scene(travelSimulationParent);
+        Parent logInParent = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
+        Scene LogInScene = new Scene(logInParent);
 
         // get the Stage info
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(TravelSimulationScene);
+        window.setScene(LogInScene);
         window.show();
 
     }
