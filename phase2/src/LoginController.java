@@ -67,6 +67,10 @@ public class LoginController extends Controller {
         changeWindow(event, "view/CreateAccount.fxml");
     }
 
+    public void showCardCreation(ActionEvent event) throws Exception {
+        changeWindow(event, "view/CreateCard.fxml");
+    }
+
     public void showRecovery(ActionEvent event) throws Exception {
         changeWindow(event, "view/PasswordRecovery.fxml");
     }

@@ -17,7 +17,10 @@ public class Controller {
     void changeWindow(ActionEvent event, String url) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
         Parent newWindowParent = loader.load();
-        // Controller newWindowController = loader.getController();
+        Controller newWindowController = loader.getController();
+        if (newWindowController.system == null) {
+            newWindowController.storeState(this.system);
+        }
         Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
         window.setScene(new Scene(newWindowParent));
         window.show();
