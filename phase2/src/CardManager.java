@@ -54,6 +54,10 @@ public class CardManager implements Serializable {
     return null;
   }
 
+  Card getLastCard() {
+    return cards.get(cards.size() - 1);
+  }
+
   /**
    * Adds newCard to list of existing cards.
    *

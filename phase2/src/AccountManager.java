@@ -78,6 +78,10 @@ class AccountManager implements Serializable{
     return null;
   }
 
+  boolean isAdmin(UserAccount ua) {
+    return ua instanceof AdminUser;
+  }
+
   /** @return list of user accounts. */
   ArrayList<UserAccount> getUserAccounts() {
     return userAccounts;
