@@ -9,6 +9,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         TransitSystem mainSystem = new TransitSystem();
+        // Create base administrator, this will be moved to serialization
+        mainSystem.getAccountManager().createAdminAccount("sysadmin", "admin@gmail.com", "sysadmin");
+
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("view/Login.fxml"));
         Parent root = loginLoader.load();
         LoginController loginController = loginLoader.getController();

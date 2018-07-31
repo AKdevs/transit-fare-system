@@ -41,10 +41,10 @@
          <children>
             <Label nodeOrientation="RIGHT_TO_LEFT" text="* Email Address" />
             <Label nodeOrientation="RIGHT_TO_LEFT" text="* Name" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField layoutX="310.0" layoutY="3.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="email" GridPane.columnIndex="1" />
+            <TextField fx:id="name" layoutX="310.0" layoutY="3.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label layoutX="10.0" layoutY="17.0" nodeOrientation="RIGHT_TO_LEFT" text="* Password" GridPane.rowIndex="2" />
-            <PasswordField layoutX="210.0" layoutY="13.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <PasswordField fx:id="password" layoutX="210.0" layoutY="13.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <VBox.margin>
             <Insets left="100.0" right="100.0" />
@@ -52,7 +52,7 @@
       </GridPane>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <Button mnemonicParsing="false" text="Create My Account" />
+            <Button onAction="#createAccount" mnemonicParsing="false" text="Create My Account" />
             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cancel" onAction="#showLogin"/>
          </children>
       </HBox>

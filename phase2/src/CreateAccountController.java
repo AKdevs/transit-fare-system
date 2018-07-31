@@ -15,13 +15,14 @@ public class CreateAccountController extends Controller {
     @FXML private TextField email;
     @FXML private TextField password;
 
-    public void createAccount(ActionEvent event) {
+    public void createAccount(ActionEvent event) throws IOException {
         String currentName = name.getText();
         String currentEmail = email.getText();
         String currentPassword = password.getText();
 
         system.getAccountManager().createCardHolderAccount(currentName,
                 currentEmail, currentPassword);
+        showLogin(event);
     }
 
     public void showLogin(ActionEvent event) throws IOException {

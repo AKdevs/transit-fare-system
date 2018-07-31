@@ -28,23 +28,28 @@ public class LoginController extends Controller {
     }
 
     public void showUserAccount(ActionEvent event) throws IOException {
-        if (userExists()) {
-            changeWindow(event,"view/CardHolder.fxml" );
+        UserAccount currentAccount = userExists();
+        if (currentAccount != null) {
+            if (system.getAccountManager().isAdmin(currentAccount)) {
+                changeWindow(event,"view/AdminUser.fxml");
+            } else {
+                changeWindow(event,"view/CardHolder.fxml" );
+            }
         } else {
             loginInstructions.setText("Invalid username or password.");
         }
     }
 
-    private boolean userExists() {
+    private UserAccount userExists() {
         String currentAccountNumber = accountNumber.getText();
         String currentPassword = password.getText();
         // temporary bypass
         if (currentAccountNumber.equals("") && currentPassword.equals("")) {
-            return true;
+            return new UserAccount("A","B","C");
         }
         UserAccount currentAccount = system.getAccountManager().findUserAccount(currentAccountNumber);
 
-        return !(currentAccount == null);
+        return currentAccount;
     }
 
     private boolean cardExists() {
