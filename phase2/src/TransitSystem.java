@@ -16,6 +16,9 @@ public class TransitSystem {
   /** Operating status of system, either "on" or "off" */
   private String operatingStatus = "off";
 
+  /** The instance of the only TransitSystem */
+  private static TransitSystem instance;
+
   public TransitSystem() {
     tripManager = new TripManager();
     transitManager = new TransitManager();
@@ -45,6 +48,17 @@ public class TransitSystem {
   /** @return operating status of the system, either "on" or "off". */
   String getOperatingStatus() {
     return this.operatingStatus;
+  }
+
+  /**
+   *
+   * @return instance of the TransitSystem
+   */
+  public static TransitSystem getInstance() {
+    if (instance == null) {
+      instance = new TransitSystem();
+    }
+    return instance;
   }
 
   /** Power on the system. */
