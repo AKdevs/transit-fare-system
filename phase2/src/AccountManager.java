@@ -95,8 +95,7 @@ class AccountManager implements Serializable{
   private void addUserAccount(UserAccount newUser) {
 
     userAccounts.add(newUser);
-    System.out.println(userAccounts);
-    /*
+
     try
     {
       //Saving of object in a file
@@ -115,6 +114,6 @@ class AccountManager implements Serializable{
     catch(IOException ex)
     {
       System.out.println("IOException is caught");
-    }*/
+    }
   }
 }
