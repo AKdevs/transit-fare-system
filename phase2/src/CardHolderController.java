@@ -91,6 +91,7 @@ public class CardHolderController extends Controller implements Initializable {
 
     void initialCardHolderInfo(String accountNum) {
         accountNumber.setText(accountNum);
+
         System.out.println(this.system);
         //UserAccount ua = this.system.getAccountManager().findUserAccount(accountNum);
 
