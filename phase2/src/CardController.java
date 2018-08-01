@@ -44,20 +44,33 @@ public class CardController extends Controller implements Initializable {
 
 
     public void initialize(URL url, ResourceBundle rb) {
-        //myCard = new Card();
+
     }
 
 
     void initialCardInfo(String cardNum) {
-        //Card card = this.system.getCardManager().findCard(cardNum);
+        Card card = this.system.getCardManager().findCard(cardNum);
         cardNumber.setText(cardNum);
-        //owner.setText(card.getOwner().getName());
-        //status.setText(card.getStatus());
-        //balance.setText(Double.toString(card.getBalance()));
+        owner.setText(card.getOwner().getName());
+        status.setText(card.getStatus());
+        balance.setText(Double.toString(card.getBalance()));
     }
 
-    public void loadButtonPushed() {
-        //this.card.addBalance(20.0);
+    public void load20ButtonPushed() {
+        Card card = this.system.getCardManager().findCard(cardNumber.getText());
+        card.addBalance(20.0);
+        balance.setText(Double.toString(card.getBalance()));
+    }
 
+    public void load10ButtonPushed() {
+        Card card = this.system.getCardManager().findCard(cardNumber.getText());
+        card.addBalance(10.0);
+        balance.setText(Double.toString(card.getBalance()));
+    }
+
+    public void load50ButtonPushed() {
+        Card card = this.system.getCardManager().findCard(cardNumber.getText());
+        card.addBalance(50.0);
+        balance.setText(Double.toString(card.getBalance()));
     }
 }

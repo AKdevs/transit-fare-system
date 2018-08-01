@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CardHolderController extends Controller implements Initializable {
+
     // label info
     @FXML private Label accountNumber;
     @FXML private Label name;
@@ -31,14 +32,18 @@ public class CardHolderController extends Controller implements Initializable {
     @FXML private Button viewMonthlyCost;
     @FXML private Button logOut;
     @FXML private Button goToCard;
+    @FXML private Button linkCard;
+    @FXML private Button unlinkCard;
+
+    // textField info
+    @FXML private TextField linkedCardNum;
+    @FXML private TextField unlinkedCardNum;
 
 
     public void initialize(URL url, ResourceBundle rb) {
         viewMonthlyCost.setText("View Monthly Cost");
         logOut.setText("Log Out");
         goToCard.setText("Go To Card");
-        //monthlyCost.setText("");
-
     }
 
 
@@ -52,9 +57,7 @@ public class CardHolderController extends Controller implements Initializable {
         Scene cardScene = new Scene(cardParent);
 
         CardController ct = loader.getController();
-        if (ct.system == null) {
-            ct.storeState(system);
-        }
+        ct.storeState(super.system);
         ct.initialCardInfo(cards.getSelectionModel().getSelectedItem().toString());
 
         // get the Stage info
@@ -67,13 +70,13 @@ public class CardHolderController extends Controller implements Initializable {
 
     @FXML
     void viewMonthlyCostButtonPushed(ActionEvent event) {
-        // should get from the account and it's manager
-        //monthlyCost.setText(cards.getSelectionModel().getSelectedItem().toString());
+        UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
+        CardHolder ch = (CardHolder)ua;
+        monthlyCost.setText(Double.toString(ch.getMonthlyCost()));
     }
 
     @FXML
-    private void logOutButtonPushed(ActionEvent event) throws IOException {
-
+    void logOutButtonPushed(ActionEvent event) throws IOException {
 
         //change to another scene
         // new Scene
@@ -89,11 +92,31 @@ public class CardHolderController extends Controller implements Initializable {
 
     void initialCardHolderInfo(String accountNum) {
         accountNumber.setText(accountNum);
-        System.out.println(system == null);
-        //UserAccount ua = this.system.getAccountManager().findUserAccount(accountNum);
+        UserAccount ua = system.getAccountManager().findUserAccount(accountNum);
+        name.setText(ua.getName());
+        email.setText(ua.getEmail());
+        CardHolder ch = (CardHolder)ua;
+        for (Card card: ch.getTravelCards()) {
+            cards.getItems().add(card.getCardNumber());
+        }
+    }
 
-        //name.setText(ua.getName());
-        //email.setText(ua.getEmail());
+    @FXML
+    void linkCardButtonPushed(ActionEvent event) throws IOException {
+        String cardNum = linkedCardNum.getText();
+        Card card = system.getCardManager().findCard(cardNum);
+        UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
+        ((CardHolder)ua).linkCard(card);
+        cards.getItems().add(cardNum);
+    }
+
+    @FXML
+    void unlinkCardButtonPushed(ActionEvent event) throws IOException {
+        String cardNum = unlinkedCardNum.getText();
+        Card card = system.getCardManager().findCard(cardNum);
+        UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
+        ((CardHolder)ua).unlinkCard(card);
+        cards.getItems().remove(cardNum);
     }
 
 

@@ -39,7 +39,7 @@
         <Font name="Century Gothic" size="18.0" />
       </font>
     </Label>
-      <VBox layoutX="146.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0">
+      <VBox layoutX="146.0" layoutY="40.0" prefHeight="77.0" prefWidth="374.0">
          <children>
             <Label fx:id="accountNumber" />
             <Label fx:id="name" />
@@ -51,6 +51,14 @@
             <Button fx:id="viewMonthlyCost" mnemonicParsing="false" onAction="#viewMonthlyCostButtonPushed" prefHeight="27.0" prefWidth="141.0" text="View Monthly Cost" />
             <Label text="Your monthly cost is:" />
             <Label fx:id="monthlyCost" />
+            <VBox prefHeight="152.0" prefWidth="100.0">
+               <children>
+                  <TextField fx:id="linkedCardNum" />
+                  <Button fx:id="linkCard" mnemonicParsing="false" onAction="#linkCardButtonPushed" text="Link Card" />
+                  <TextField fx:id="unlinkedCardNum" />
+                  <Button fx:id="unlinkCard" mnemonicParsing="false" onAction="#unlinkCardButtonPushed" text="Unlink Card" />
+               </children>
+            </VBox>
          </children>
       </VBox>
       <Button fx:id="logOut" layoutX="430.0" layoutY="364.0" mnemonicParsing="false" onAction="#logOutButtonPushed" prefHeight="46.0" prefWidth="97.0" text="Log Out">

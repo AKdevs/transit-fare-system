@@ -31,11 +31,11 @@ public class TransitSystem {
     return tripManager;
   }
 
-  /*
+
   TransitManager getTransitManager() {
     return transitManager;
   }
-  */
+
 
   AccountManager getAccountManager() {
     return accountManager;

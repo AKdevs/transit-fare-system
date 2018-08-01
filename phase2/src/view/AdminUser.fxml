@@ -2,14 +2,16 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="559.0" spacing="8.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminUserController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="559.0" spacing="8.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminUserController">
    <children>
       <HBox prefHeight="37.0" prefWidth="559.0">
          <children>
@@ -19,7 +21,7 @@
                </font>
             </Label>
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" text="Return to Main">
+            <Button fx:id="returnToMainButton" mnemonicParsing="false" onAction="#returnToMain" text="Return to Main">
                <HBox.margin>
                   <Insets top="4.0" />
                </HBox.margin>
@@ -37,7 +39,7 @@
             <Insets left="8.0" />
          </padding>
       </Label>
-      <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="466.0" spacing="10.0">
+      <HBox alignment="CENTER_LEFT" spacing="10.0">
          <children>
             <Button fx:id="powerOnButton" alignment="CENTER" mnemonicParsing="false" onAction="#powerOnSystem" text="Power On">
                <HBox.margin>
@@ -51,7 +53,7 @@
             </Button>
             <Label fx:id="powerResult">
                <HBox.margin>
-                  <Insets left="50.0" />
+                  <Insets left="35.0" />
                </HBox.margin>
                <font>
                   <Font size="14.0" />
@@ -63,6 +65,90 @@
          </VBox.margin>
       </HBox>
       <Separator>
+         <padding>
+            <Insets left="8.0" right="30.0" />
+         </padding>
+      </Separator>
+      <Label layoutX="10.0" layoutY="60.0" text="Daily Report">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <padding>
+            <Insets left="8.0" />
+         </padding>
+      </Label>
+      <HBox spacing="15.0">
+         <children>
+            <Label text="Date: ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="dailyReportDate" promptText="enter yyyy-mm-dd" />
+            <Button fx:id="runDailyReportButton" mnemonicParsing="false" text="Run Daily Report">
+               <HBox.margin>
+                  <Insets left="60.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="35.0" />
+         </padding>
+      </HBox>
+      <Separator layoutX="10.0" layoutY="131.0">
+         <padding>
+            <Insets left="8.0" right="30.0" />
+         </padding>
+      </Separator>
+      <Label layoutX="10.0" layoutY="142.0" text="Transit Scheduling">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <padding>
+            <Insets left="8.0" />
+         </padding>
+      </Label>
+      <HBox spacing="15.0">
+         <children>
+            <Label text="TransitLine:  ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="transitLinesList" prefWidth="150.0" promptText="Select a Transit Line" />
+            <Label text="Date: ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="transitSchedulingDate" promptText="enter yyyy-mm-dd" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="262.0" spacing="15.0">
+         <children>
+            <Label text="Number of Trips: ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="transitNumOfTrips" promptText="enter # of trips" />
+            <Button fx:id="setSchedulingButton" mnemonicParsing="false" text="Set Scheduling">
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </HBox>
+      <Separator layoutX="10.0" layoutY="131.0">
          <padding>
             <Insets left="8.0" right="30.0" />
          </padding>
