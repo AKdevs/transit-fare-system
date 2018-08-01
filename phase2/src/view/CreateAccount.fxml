@@ -20,7 +20,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label text="* Required information">
+      <Label fx:id="requiredInfoLabel" text="* Required information">
          <VBox.margin>
             <Insets bottom="30.0" />
          </VBox.margin>
@@ -52,8 +52,8 @@
       </GridPane>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <Button onAction="#createAccount" mnemonicParsing="false" text="Create My Account" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cancel" onAction="#showLogin"/>
+            <Button onAction="#createAccountButtonPushed" mnemonicParsing="false" text="Create My Account" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cancel" onAction="#cancelButtonPushed"/>
          </children>
       </HBox>
    </children>
