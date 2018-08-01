@@ -33,5 +33,4 @@ public class Controller {
             newWindowController.storeState(this.system);
         }
     }
-
 }

@@ -12,10 +12,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 
 
 public class CardController extends Controller implements Initializable {
-
+    // 0 for Login, 1 for CardHolder
+    private int source;
     //private Card myCard;
     @FXML private Label cardNumber;
     @FXML private Label owner;
@@ -31,9 +33,22 @@ public class CardController extends Controller implements Initializable {
     @FXML private Button backToAccount;
 
 
+    public void setSource(int source) {
+        this.source = source;
+    }
+
+    public void homeButtonPushed(ActionEvent event) throws IOException {
+        if (source == 0) {
+            changeWindowToHome(event);
+        } else if (source == 1) {
+            changeWindow(event, "view/CardHolder.fxml");
+        }
+    }
+
     public void travelSimulationButtonPushed(ActionEvent event) throws IOException {
         changeWindow(event,"view/TravelSimulation.fxml" );
     }
+
 
     public void logOutButtonPushed(ActionEvent event) throws IOException {
         changeWindow(event,"view/Login.fxml" );
