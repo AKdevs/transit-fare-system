@@ -54,9 +54,7 @@ public class CardHolderController extends Controller implements Initializable {
         Scene cardScene = new Scene(cardParent);
 
         CardController ct = loader.getController();
-        if (ct.system == null) {
-            ct.storeState(system);
-        }
+        ct.storeState(super.system);
         ct.initialCardInfo(cards.getSelectionModel().getSelectedItem().toString());
 
         // get the Stage info
@@ -91,12 +89,9 @@ public class CardHolderController extends Controller implements Initializable {
 
     void initialCardHolderInfo(String accountNum) {
         accountNumber.setText(accountNum);
-
-        System.out.println(this.system);
-        //UserAccount ua = this.system.getAccountManager().findUserAccount(accountNum);
-
-        //name.setText(ua.getName());
-        //email.setText(ua.getEmail());
+        UserAccount ua = this.system.getAccountManager().findUserAccount(accountNum);
+        name.setText(ua.getName());
+        email.setText(ua.getEmail());
     }
 
 
