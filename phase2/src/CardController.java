@@ -103,15 +103,6 @@ public class CardController extends Controller implements Initializable {
         }
     }
 
-    void initialCardInfoWithoutAccount(String cardNum) {
-        Card card = this.system.getCardManager().findCard(cardNum);
-        cardNumber.setText(cardNum);
-        owner.setText("unlinked");
-        status.setText(card.getStatus());
-        balance.setText(Double.toString(card.getBalance()));
-    }
-
-
     public void load20ButtonPushed(ActionEvent event) throws IOException {
         Card card = this.system.getCardManager().findCard(cardNumber.getText());
         card.addBalance(20.0);
