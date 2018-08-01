@@ -143,7 +143,7 @@ public class EventHandler {
             card.viewBalance();
           } else if (eventTokens[1].equals("cost")) {
             UserAccount user = system.getAccountManager().findUserAccount(eventTokens[2]);
-            ((CardHolder) user).viewMonthlyCost();
+            ((CardHolder) user).getMonthlyCost();
           } else if (eventTokens[1].equals("allTrips")) {
             Card card = system.getCardManager().findCard(eventTokens[3]);
             card.viewAllTrips();
