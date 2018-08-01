@@ -45,7 +45,7 @@ public class LoginController extends Controller {
 
                 // read user input and set value in CardHolder window
                 CardHolderController cht = loader.getController();
-                cht.storeState(system);
+                cht.storeState(super.system);
                 cht.initialCardHolderInfo(accountNumber.getText());
 
                 // get the Stage info

@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CardHolderController extends Controller implements Initializable {
-    TransitSystem system;
 
     // label info
     @FXML private Label accountNumber;
@@ -92,7 +91,7 @@ public class CardHolderController extends Controller implements Initializable {
 
     void initialCardHolderInfo(String accountNum) {
         accountNumber.setText(accountNum);
-        System.out.println(system);
+        System.out.println(this.system);
         //UserAccount ua = this.system.getAccountManager().findUserAccount(accountNum);
 
         //name.setText(ua.getName());
