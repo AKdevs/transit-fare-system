@@ -39,7 +39,7 @@
         <Font name="Century Gothic" size="18.0" />
       </font>
     </Label>
-      <VBox layoutX="146.0" layoutY="40.0" prefHeight="77.0" prefWidth="374.0">
+      <VBox layoutX="146.0" layoutY="40.0" prefHeight="62.0" prefWidth="374.0">
          <children>
             <Label fx:id="accountNumber" />
             <Label fx:id="name" />
@@ -53,9 +53,9 @@
             <Label fx:id="monthlyCost" />
             <VBox prefHeight="152.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="linkedCardNum" />
+                  <TextField fx:id="linkedCardNum" promptText="Card Number" />
                   <Button fx:id="linkCard" mnemonicParsing="false" onAction="#linkCardButtonPushed" text="Link Card" />
-                  <TextField fx:id="unlinkedCardNum" />
+                  <TextField fx:id="unlinkedCardNum" promptText="Card Number" />
                   <Button fx:id="unlinkCard" mnemonicParsing="false" onAction="#unlinkCardButtonPushed" text="Unlink Card" />
                </children>
             </VBox>
@@ -67,5 +67,6 @@
          </font>
       </Button>
       <Button fx:id="goToCard" layoutX="401.0" layoutY="126.0" mnemonicParsing="false" onAction="#goToCardButtonPushed" text="Go To Card" />
+      <Label fx:id="chooseCardInstructions" layoutX="203.0" layoutY="112.0" />
   </children>
 </AnchorPane>

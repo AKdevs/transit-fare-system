@@ -82,6 +82,7 @@ class AccountManager implements Serializable{
     return ua instanceof AdminUser;
   }
 
+
   /** @return list of user accounts. */
   ArrayList<UserAccount> getUserAccounts() {
     return userAccounts;

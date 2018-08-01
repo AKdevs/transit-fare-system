@@ -29,7 +29,7 @@ public class AdminUserController extends Controller implements Initializable {
         @FXML private Label schedulingResult;
 
 
-        TransitSystem theTransitSystem = TransitSystem.getInstance();
+        // TransitSystem theTransitSystem = TransitSystem.getInstance();
 
         public void returnToMain(ActionEvent event) throws IOException {
             changeWindow(event, "view/login.fxml");
@@ -37,13 +37,15 @@ public class AdminUserController extends Controller implements Initializable {
 
 
         public void powerOnSystem(ActionEvent event) throws IOException {
-            theTransitSystem.powerOnSystem();
+            // theTransitSystem.powerOnSystem();
+            system.powerOnSystem();
             powerResult.setText("The Transit System is now operating.");
             //System.out.println(theTransitSystem.getOperatingStatus());
         }
 
         public void powerOffSystem(ActionEvent event) throws IOException{
-            theTransitSystem.powerOffSystem();
+            system.powerOnSystem();
+            //theTransitSystem.powerOffSystem();
             //System.out.println(theTransitSystem.getOperatingStatus());
             powerResult.setText("The Transit System has been shut down.");
         }
@@ -51,7 +53,8 @@ public class AdminUserController extends Controller implements Initializable {
         @Override
         public void initialize(URL url, ResourceBundle rb) {
 
-            Set<String> transitLines =  theTransitSystem.getTransitManager().getTransitLines().keySet();
+            // Set<String> transitLines =  theTransitSystem.getTransitManager().getTransitLines().keySet();
+            Set<String> transitLines =  system.getTransitManager().getTransitLines().keySet();
             for (String line : transitLines) {
                 transitLinesList.getItems().add(line);
             }
