@@ -43,6 +43,7 @@ public class TravelSimulationController extends Controller {
         CardController ct = loader.getController();
         ct.storeState(system);
         ct.initialCardInfo(cardNumber.getText());
+        ct.setSource(1);
 
         // get the Stage info
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
