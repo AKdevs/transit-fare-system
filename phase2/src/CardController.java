@@ -27,7 +27,7 @@ public class CardController extends Controller implements Initializable {
     @FXML private Button load20;
     @FXML private Button load50;
     @FXML private Button travelSimulation;
-    @FXML private Button home;
+    @FXML private Button logOut;
     @FXML private Button backToAccount;
 
 
@@ -35,12 +35,27 @@ public class CardController extends Controller implements Initializable {
         changeWindow(event,"view/TravelSimulation.fxml" );
     }
 
-    public void homeButtonPushed(ActionEvent event) throws IOException {
+    public void logOutButtonPushed(ActionEvent event) throws IOException {
         changeWindow(event,"view/Login.fxml" );
     }
 
     public void backToAccountButtonPushed(ActionEvent event) throws IOException {
-        changeWindow(event,"view/CardHolder.fxml" );
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("view/CardHolder.fxml"));
+        Parent cardParent = loader.load();
+
+        Scene cardScene = new Scene(cardParent);
+
+        CardHolderController cht = loader.getController();
+        cht.storeState(system);
+        Card card = system.getCardManager().findCard(cardNumber.getText());
+        CardHolder cardHolder = card.getOwner();
+        cht.initialCardHolderInfo(cardHolder.getAccountNum());
+
+        // get the Stage info
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(cardScene);
+        window.show();
     }
 
 
