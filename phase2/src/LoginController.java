@@ -94,10 +94,11 @@ public class LoginController extends Controller {
 
     private boolean cardExists() {
         String currentCardNumber = cardNumber.getText();
+        /*
         // temporary bypass
         if (currentCardNumber.equals("")) {
             return true;
-        }
+        }*/
 
         Card currentCard = system.getCardManager().findCard(currentCardNumber);
         return !(currentCard == null);
