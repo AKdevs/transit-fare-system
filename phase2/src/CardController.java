@@ -45,7 +45,6 @@ public class CardController extends Controller implements Initializable {
 
 
     public void initialize(URL url, ResourceBundle rb) {
-
     }
 
 
