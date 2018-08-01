@@ -148,9 +148,14 @@
             <Insets left="20.0" />
          </padding>
       </HBox>
+      <HBox alignment="CENTER">
+         <children>
+            <Label fx:id="schedulingResult" />
+         </children>
+      </HBox>
       <Separator layoutX="10.0" layoutY="131.0">
          <padding>
-            <Insets left="8.0" right="30.0" />
+            <Insets left="8.0" right="30.0" top="10.0" />
          </padding>
       </Separator>
    </children>
