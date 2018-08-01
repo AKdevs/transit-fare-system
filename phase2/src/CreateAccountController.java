@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class CreateAccountController extends Controller {
+
+
     @FXML private TextField name;
     @FXML private TextField email;
     @FXML private TextField password;

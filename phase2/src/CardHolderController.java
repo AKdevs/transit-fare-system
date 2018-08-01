@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CardHolderController extends Controller implements Initializable {
+    TransitSystem system;
+
 
     // label info
     @FXML private Label accountNumber;
@@ -39,23 +41,7 @@ public class CardHolderController extends Controller implements Initializable {
         viewMonthlyCost.setText("View Monthly Cost");
         logOut.setText("Log Out");
         goToCard.setText("Go To Card");
-        monthlyCost.setText("");
-
-        accountNumber.setText("10000001"); // get this value from user input
-        name.setText(""); // get this value from the manager
-        email.setText(""); // get this value from the manager
-
-        /*
-        UserAccount ua = this.system.getAccountManager().findUserAccount(cardNumber.getText());
-        ArrayList<Card> travelCards = ((CardHolder)ua).getTravelCards();
-        for (Card card: travelCards) {
-            cards.getItems().add(card.getCardNumber());
-        }*/
-
-        cards.getItems().add("30000001");
-        cards.getItems().add("30000002");
-        cards.getItems().add("30000003");
-
+        //monthlyCost.setText("");
 
     }
 
@@ -83,7 +69,7 @@ public class CardHolderController extends Controller implements Initializable {
     @FXML
     void viewMonthlyCostButtonPushed(ActionEvent event) {
         // should get from the account and it's manager
-        monthlyCost.setText(cards.getSelectionModel().getSelectedItem().toString());
+        //monthlyCost.setText(cards.getSelectionModel().getSelectedItem().toString());
     }
 
     @FXML
@@ -103,11 +89,12 @@ public class CardHolderController extends Controller implements Initializable {
     }
 
     void initialCardHolderInfo(String accountNum) {
-        //Card card = this.system.getCardManager().findCard(cardNum);
         accountNumber.setText(accountNum);
-        //owner.setText(card.getOwner().getName());
-        //status.setText(card.getStatus());
-        //balance.setText(Double.toString(card.getBalance()));
+        System.out.println(system == null);
+        //UserAccount ua = this.system.getAccountManager().findUserAccount(accountNum);
+
+        //name.setText(ua.getName());
+        //email.setText(ua.getEmail());
     }
 
 

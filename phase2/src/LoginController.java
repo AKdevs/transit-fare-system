@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LoginController extends Controller {
+
+
     @FXML private Label cardInputInstructions;
     @FXML private Label loginInstructions;
     @FXML private TextField accountNumber;
@@ -32,7 +34,7 @@ public class LoginController extends Controller {
         UserAccount currentAccount = userExists();
         if (currentAccount != null) {
             if (system.getAccountManager().isAdmin(currentAccount)) {
-                changeWindow(event,"view/AdminUser.fxml");
+                //changeWindow(event,"view/AdminUser.fxml");
             } else {
                 //changeWindow(event,"view/CardHolder.fxml" );
                 FXMLLoader loader = new FXMLLoader();

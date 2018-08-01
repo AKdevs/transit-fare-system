@@ -14,6 +14,7 @@ import java.io.IOException;
 
 
 public class AdminUserController extends Controller {
+
         @FXML private Button powerOnButton;
         @FXML private Button powerOffButton;
 

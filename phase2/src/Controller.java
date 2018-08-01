@@ -10,6 +10,7 @@ import java.io.IOException;
 public class Controller {
     TransitSystem system;
 
+
     void storeState(TransitSystem system) {
         this.system = system;
     }

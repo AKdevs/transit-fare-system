@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 
 public class CreateCardController extends Controller {
+
     @FXML
     VBox container;
     @FXML Button getCardButton;
@@ -26,6 +27,7 @@ public class CreateCardController extends Controller {
         Label cardMessage = new Label("Card Number: " + createdCardNumber);
         cardMessage.setFont(Font.font("Amble CN", FontWeight.BOLD, 24));
         Button exitButton = new Button("Exit");
+
         exitButton.setOnAction(e -> {
             try {
                 changeWindow(e, "view/login.fxml");
