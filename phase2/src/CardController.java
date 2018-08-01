@@ -96,9 +96,9 @@ public class CardController extends Controller implements Initializable {
         cardNumber.setText(cardNum);
         status.setText(card.getStatus());
         balance.setText(Double.toString(card.getBalance()));
-        if (source == 1) {
+        if (owner != null) {
             owner.setText(card.getOwner().getName());
-        }else if (source == 0) {
+        }else {
             owner.setText("unlinked");
         }
     }
