@@ -24,6 +24,7 @@ public class CardHolderController extends Controller implements Initializable {
     @FXML private Label name;
     @FXML private Label email;
     @FXML private Label monthlyCost;
+    @FXML private Label chooseCardInstructions;
 
     // choiceBox info
     @FXML private ChoiceBox cards;
@@ -49,21 +50,24 @@ public class CardHolderController extends Controller implements Initializable {
 
     @FXML
     private void goToCardButtonPushed(ActionEvent event) throws IOException {
+        if (cards.getSelectionModel().getSelectedItem() == null) {
+            chooseCardInstructions.setText("Please choose a card from below");
+        } else {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("view/Card.fxml"));
+            Parent cardParent = loader.load();
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("view/Card.fxml"));
-        Parent cardParent = loader.load();
+            Scene cardScene = new Scene(cardParent);
 
-        Scene cardScene = new Scene(cardParent);
+            CardController ct = loader.getController();
+            ct.storeState(super.system);
+            ct.initialCardInfo(cards.getSelectionModel().getSelectedItem().toString());
 
-        CardController ct = loader.getController();
-        ct.storeState(super.system);
-        ct.initialCardInfo(cards.getSelectionModel().getSelectedItem().toString());
-
-        // get the Stage info
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(cardScene);
-        window.show();
+            // get the Stage info
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(cardScene);
+            window.show();
+        }
 
     }
 
