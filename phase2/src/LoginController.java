@@ -21,14 +21,13 @@ public class LoginController extends Controller {
 
     public void showCard(ActionEvent event) throws IOException {
         if (cardExists()) {
-            //changeWindow(event, "view/Card.fxml");
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("view/Card.fxml"));
             Parent cardParent = loader.load();
 
             CardController ct = loader.getController();
             ct.storeState(system);
             ct.initialCardInfoWithoutAccount(cardNumber.getText());
-            // ct.cardWithoutAccountCreateAccount(event);
             ct.setSource(0);
 
             // get the Stage info
