@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 public class CardHolderController extends Controller implements Initializable {
 
     // label info
-    @FXML private Label cardNumber;
+    @FXML private Label accountNumber;
     @FXML private Label name;
     @FXML private Label email;
     @FXML private Label monthlyCost;
@@ -41,9 +41,10 @@ public class CardHolderController extends Controller implements Initializable {
         goToCard.setText("Go To Card");
         monthlyCost.setText("");
 
-        cardNumber.setText("10000001"); // get this value from user input
+        accountNumber.setText("10000001"); // get this value from user input
         name.setText(""); // get this value from the manager
         email.setText(""); // get this value from the manager
+
         /*
         UserAccount ua = this.system.getAccountManager().findUserAccount(cardNumber.getText());
         ArrayList<Card> travelCards = ((CardHolder)ua).getTravelCards();
@@ -58,7 +59,7 @@ public class CardHolderController extends Controller implements Initializable {
 
     }
 
-    // change scene
+
     @FXML
     private void goToCardButtonPushed(ActionEvent event) throws IOException {
 
@@ -99,6 +100,14 @@ public class CardHolderController extends Controller implements Initializable {
         window.setScene(LogInScene);
         window.show();
 
+    }
+
+    void initialCardHolderInfo(String accountNum) {
+        //Card card = this.system.getCardManager().findCard(cardNum);
+        accountNumber.setText(accountNum);
+        //owner.setText(card.getOwner().getName());
+        //status.setText(card.getStatus());
+        //balance.setText(Double.toString(card.getBalance()));
     }
 
 

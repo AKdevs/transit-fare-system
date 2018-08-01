@@ -7,11 +7,14 @@ class TransitLine {
   private String type;
   /** Identifier */
   private String id;
+  /** Number of Stops/Stations */
+  private int numOfStops;
 
   TransitLine(ArrayList<String> points, String type, String id) {
     this.points = points;
     this.type = type;
     this.id = id;
+    this.numOfStops = points.size();
   }
 
   /** @param points ArrayList of String for locations of stops/stations */
@@ -38,6 +41,12 @@ class TransitLine {
   String getId() {
     return this.id;
   }
+
+  /**
+   *
+   * @return number of stops/stations of the Transit Line
+   */
+  int getNumOfStops() {return this.numOfStops; }
 
   /**
    * Change name of a station/stop in the transit line from oldName to newName.
