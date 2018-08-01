@@ -113,10 +113,10 @@ class TransitManager implements Serializable{
                 "Newark Road",
                 "Dennis Road",
                 "Spring Street"));
-    TransitLine line1 = createTransitLine(line1Stations, "S", "line1");
-    TransitLine route1 = createTransitLine(route1Stops, "B", "route1");
-    TransitLine route3 = createTransitLine(route3Stops, "B", "route3");
-    TransitLine route5 = createTransitLine(route5Stops, "B", "route5");
+    TransitLine line1 = createTransitLine(line1Stations, "S", "Line1");
+    TransitLine route1 = createTransitLine(route1Stops, "B", "Route1");
+    TransitLine route3 = createTransitLine(route3Stops, "B", "Route3");
+    TransitLine route5 = createTransitLine(route5Stops, "B", "Route5");
     addTransitLine(line1.getId(), line1);
     addTransitLine(route1.getId(), route1);
     addTransitLine(route3.getId(), route3);
