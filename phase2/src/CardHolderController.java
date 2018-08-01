@@ -53,6 +53,9 @@ public class CardHolderController extends Controller implements Initializable {
         Scene cardScene = new Scene(cardParent);
 
         CardController ct = loader.getController();
+        if (ct.system == null) {
+            ct.storeState(system);
+        }
         ct.initialCardInfo(cards.getSelectionModel().getSelectedItem().toString());
 
         // get the Stage info
