@@ -21,7 +21,22 @@ public class LoginController extends Controller {
 
     public void showCard(ActionEvent event) throws IOException {
         if (cardExists()) {
-            changeWindow(event, "view/Card.fxml");
+            //changeWindow(event, "view/Card.fxml");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("view/Card.fxml"));
+            Parent cardParent = loader.load();
+
+            Scene cardScene = new Scene(cardParent);
+
+            CardController ct = loader.getController();
+            ct.storeState(super.system);
+            ct.initialCardInfoWithoutAccount(cardNumber.getText());
+            ct.cardWithoutAccountCreateAccount(event);
+
+            // get the Stage info
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(cardScene);
+            window.show();
         } else {
             cardInputInstructions.setText("Card not found. Try again");
         }

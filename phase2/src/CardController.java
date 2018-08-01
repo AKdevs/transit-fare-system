@@ -21,6 +21,7 @@ public class CardController extends Controller implements Initializable {
     @FXML private Label owner;
     @FXML private Label status;
     @FXML private Label balance;
+    @FXML private Label alert;
 
     @FXML private Button load10;
     @FXML private Button load20;
@@ -56,19 +57,32 @@ public class CardController extends Controller implements Initializable {
         balance.setText(Double.toString(card.getBalance()));
     }
 
-    public void load20ButtonPushed() {
+    void initialCardInfoWithoutAccount(String cardNum) {
+        Card card = this.system.getCardManager().findCard(cardNum);
+        cardNumber.setText(cardNum);
+        owner.setText("unlinked");
+        status.setText(card.getStatus());
+        balance.setText(Double.toString(card.getBalance()));
+        backToAccount.setText("Create an account");
+    }
+
+    void cardWithoutAccountCreateAccount(ActionEvent event) throws IOException{
+        backToAccount.setOnAction(e -> alert.setText("Please press 'Home' Button"));
+    }
+
+    public void load20ButtonPushed(ActionEvent event) throws IOException {
         Card card = this.system.getCardManager().findCard(cardNumber.getText());
         card.addBalance(20.0);
         balance.setText(Double.toString(card.getBalance()));
     }
 
-    public void load10ButtonPushed() {
+    public void load10ButtonPushed(ActionEvent event) throws IOException {
         Card card = this.system.getCardManager().findCard(cardNumber.getText());
         card.addBalance(10.0);
         balance.setText(Double.toString(card.getBalance()));
     }
 
-    public void load50ButtonPushed() {
+    public void load50ButtonPushed(ActionEvent event) throws IOException {
         Card card = this.system.getCardManager().findCard(cardNumber.getText());
         card.addBalance(50.0);
         balance.setText(Double.toString(card.getBalance()));
