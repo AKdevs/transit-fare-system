@@ -56,7 +56,6 @@ public class LoginController extends Controller {
                 window.setScene(new Scene(adminUserParent));
                 window.show();
             } else {
-                //changeWindow(event,"view/CardHolder.fxml" );
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("view/CardHolder.fxml"));
                 Parent cardHolderParent = loader.load();
