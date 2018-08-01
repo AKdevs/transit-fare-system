@@ -81,20 +81,7 @@ public class CardHolderController extends Controller implements Initializable {
 
     @FXML
     void logOutButtonPushed(ActionEvent event) throws IOException {
-
         changeWindow(event, "view/Login.fxml");
-
-        /*
-        //change to another scene
-        // new Scene
-        Parent logInParent = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
-        Scene LogInScene = new Scene(logInParent);
-
-        // get the Stage info
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(LogInScene);
-        window.show();*/
-
     }
 
     void initialCardHolderInfo(String accountNum) {
