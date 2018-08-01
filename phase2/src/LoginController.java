@@ -34,7 +34,14 @@ public class LoginController extends Controller {
         UserAccount currentAccount = verifyLogin(currentAccountNumber, currentPassword);
         if (currentAccount != null) {
             if (system.getAccountManager().isAdmin(currentAccount)) {
-                changeWindow(event,"view/AdminUser.fxml");
+                AdminUserController adminUserController = new AdminUserController();
+                adminUserController.storeState(system);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("view/AdminUser.fxml"));
+                loader.setController(adminUserController);
+                Parent adminUserParent = loader.load();
+                Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
+                window.setScene(new Scene(adminUserParent));
+                window.show();
             } else {
                 //changeWindow(event,"view/CardHolder.fxml" );
                 FXMLLoader loader = new FXMLLoader();
