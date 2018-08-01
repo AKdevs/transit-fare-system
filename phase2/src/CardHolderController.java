@@ -18,9 +18,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CardHolderController extends Controller implements Initializable {
-    TransitSystem system;
-
-
     // label info
     @FXML private Label accountNumber;
     @FXML private Label name;

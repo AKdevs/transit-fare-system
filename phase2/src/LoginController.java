@@ -44,6 +44,7 @@ public class LoginController extends Controller {
                 Scene cardHolderScene = new Scene(cardHolderParent);
 
                 CardHolderController cht = loader.getController();
+                cht.storeState(this.system);
                 cht.initialCardHolderInfo(accountNumber.getText());
 
                 // get the Stage info
