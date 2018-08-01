@@ -55,17 +55,17 @@
          <children>
             <VBox layoutX="14.0" layoutY="23.0" prefHeight="155.0" prefWidth="271.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#loadButtonPushed" prefHeight="48.0" prefWidth="248.0" text="Load $10">
+                  <Button fx:id="load10" mnemonicParsing="false" onAction="#load10ButtonPushed" prefHeight="48.0" prefWidth="248.0" text="Load $10">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="247.0" text="Load $50">
+                  <Button fx:id="load20" mnemonicParsing="false" onAction="#load20ButtonPushed" prefHeight="54.0" prefWidth="247.0" text="Load $50">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="247.0" text="Load $20">
+                  <Button fx:id="load50" mnemonicParsing="false" onAction="#load50ButtonPushed" prefHeight="54.0" prefWidth="247.0" text="Load $20">
                      <font>
                         <Font size="24.0" />
                      </font>

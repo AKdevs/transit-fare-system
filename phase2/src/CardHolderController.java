@@ -32,15 +32,18 @@ public class CardHolderController extends Controller implements Initializable {
     @FXML private Button viewMonthlyCost;
     @FXML private Button logOut;
     @FXML private Button goToCard;
+    @FXML private Button linkCard;
+    @FXML private Button unlinkCard;
+
+    // textField info
+    @FXML private TextField linkedCardNum;
+    @FXML private TextField unlinkedCardNum;
 
 
     public void initialize(URL url, ResourceBundle rb) {
-
         viewMonthlyCost.setText("View Monthly Cost");
         logOut.setText("Log Out");
         goToCard.setText("Go To Card");
-        //monthlyCost.setText("");
-
     }
 
 
@@ -72,8 +75,7 @@ public class CardHolderController extends Controller implements Initializable {
     }
 
     @FXML
-    private void logOutButtonPushed(ActionEvent event) throws IOException {
-
+    void logOutButtonPushed(ActionEvent event) throws IOException {
 
         //change to another scene
         // new Scene
@@ -89,9 +91,25 @@ public class CardHolderController extends Controller implements Initializable {
 
     void initialCardHolderInfo(String accountNum) {
         accountNumber.setText(accountNum);
-        UserAccount ua = this.system.getAccountManager().findUserAccount(accountNum);
+        UserAccount ua = system.getAccountManager().findUserAccount(accountNum);
         name.setText(ua.getName());
         email.setText(ua.getEmail());
+    }
+
+    @FXML
+    void linkCardButtonPushed(ActionEvent event) throws IOException {
+        String cardNum = linkedCardNum.getText();
+        Card card = system.getCardManager().findCard(cardNum);
+        UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
+        ((CardHolder)ua).linkCard(card);
+    }
+
+    @FXML
+    void unlinkCardButtonPushed(ActionEvent event) throws IOException {
+        String cardNum = unlinkedCardNum.getText();
+        Card card = system.getCardManager().findCard(cardNum);
+        UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
+        ((CardHolder)ua).unlinkCard(card);
     }
 
 
