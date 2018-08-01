@@ -59,15 +59,18 @@ public class CardController extends Controller implements Initializable {
     public void load20ButtonPushed() {
         Card card = this.system.getCardManager().findCard(cardNumber.getText());
         card.addBalance(20.0);
+        balance.setText(Double.toString(card.getBalance()));
     }
 
     public void load10ButtonPushed() {
         Card card = this.system.getCardManager().findCard(cardNumber.getText());
         card.addBalance(10.0);
+        balance.setText(Double.toString(card.getBalance()));
     }
 
     public void load50ButtonPushed() {
         Card card = this.system.getCardManager().findCard(cardNumber.getText());
         card.addBalance(50.0);
+        balance.setText(Double.toString(card.getBalance()));
     }
 }

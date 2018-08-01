@@ -106,13 +106,15 @@ public class CardHolder extends UserAccount {
   }
 
   /** Prints out the average monthly cost of all cards this account has. */
-  void viewMonthlyCost() {
+  double getMonthlyCost() {
     double result = 0.0;
     for (Card c : travelCards) {
       result += c.getTotalFares();
     }
+    /*
     System.out.println(
-        "Account " + accountNumber + " cost for the month: " + result / travelCards.size());
+        "Account " + accountNumber + " cost for the month: " + result / travelCards.size());*/
+    return result / travelCards.size();
   }
 
   ArrayList<Card> getTravelCards() {

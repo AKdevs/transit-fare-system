@@ -70,8 +70,9 @@ public class CardHolderController extends Controller implements Initializable {
 
     @FXML
     void viewMonthlyCostButtonPushed(ActionEvent event) {
-        // should get from the account and it's manager
-        //monthlyCost.setText(cards.getSelectionModel().getSelectedItem().toString());
+        UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
+        CardHolder ch = (CardHolder)ua;
+        monthlyCost.setText(Double.toString(ch.getMonthlyCost()));
     }
 
     @FXML
@@ -94,6 +95,10 @@ public class CardHolderController extends Controller implements Initializable {
         UserAccount ua = system.getAccountManager().findUserAccount(accountNum);
         name.setText(ua.getName());
         email.setText(ua.getEmail());
+        CardHolder ch = (CardHolder)ua;
+        for (Card card: ch.getTravelCards()) {
+            cards.getItems().add(card.getCardNumber());
+        }
     }
 
     @FXML
@@ -102,6 +107,7 @@ public class CardHolderController extends Controller implements Initializable {
         Card card = system.getCardManager().findCard(cardNum);
         UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
         ((CardHolder)ua).linkCard(card);
+        cards.getItems().add(cardNum);
     }
 
     @FXML
@@ -110,6 +116,7 @@ public class CardHolderController extends Controller implements Initializable {
         Card card = system.getCardManager().findCard(cardNum);
         UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
         ((CardHolder)ua).unlinkCard(card);
+        cards.getItems().remove(cardNum);
     }
 
 
