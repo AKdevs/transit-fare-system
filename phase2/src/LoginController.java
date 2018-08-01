@@ -28,7 +28,7 @@ public class LoginController extends Controller {
             CardController ct = loader.getController();
             ct.storeState(system);
             ct.initialCardInfoWithoutAccount(cardNumber.getText());
-            ct.cardWithoutAccountCreateAccount(event);
+            // ct.cardWithoutAccountCreateAccount(event);
             ct.setSource(0);
 
             // get the Stage info

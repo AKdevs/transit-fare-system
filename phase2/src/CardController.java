@@ -37,11 +37,11 @@ public class CardController extends Controller implements Initializable {
         this.source = source;
     }
 
-    public void homeButtonPushed(ActionEvent event) throws IOException {
+    public void backButtonPushed(ActionEvent event) throws IOException {
         if (source == 0) {
             changeWindowToHome(event);
         } else if (source == 1) {
-            changeWindow(event, "view/CardHolder.fxml");
+            backToAccountButtonPushed(event);
         }
     }
 
@@ -92,7 +92,7 @@ public class CardController extends Controller implements Initializable {
         owner.setText("unlinked");
         status.setText(card.getStatus());
         balance.setText(Double.toString(card.getBalance()));
-        backToAccount.setText("Create an account");
+        // backToAccount.setText("Create an account");
     }
 
     void cardWithoutAccountCreateAccount(ActionEvent event) throws IOException{
