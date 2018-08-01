@@ -105,12 +105,8 @@ public class CardController extends Controller implements Initializable {
         owner.setText("unlinked");
         status.setText(card.getStatus());
         balance.setText(Double.toString(card.getBalance()));
-        // backToAccount.setText("Create an account");
     }
-
-    void cardWithoutAccountCreateAccount(ActionEvent event) throws IOException{
-        backToAccount.setOnAction(e -> alert.setText("Please press 'Home' Button"));
-    }
+    
 
     public void load20ButtonPushed(ActionEvent event) throws IOException {
         Card card = this.system.getCardManager().findCard(cardNumber.getText());
