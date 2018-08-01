@@ -70,8 +70,9 @@ public class CardHolderController extends Controller implements Initializable {
 
     @FXML
     void viewMonthlyCostButtonPushed(ActionEvent event) {
-        // should get from the account and it's manager
-        //monthlyCost.setText(cards.getSelectionModel().getSelectedItem().toString());
+        UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
+        CardHolder ch = (CardHolder)ua;
+        monthlyCost.setText(Double.toString(ch.getMonthlyCost()));
     }
 
     @FXML
