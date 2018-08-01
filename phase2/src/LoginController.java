@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LoginController extends Controller {
+
+
     @FXML private Label cardInputInstructions;
     @FXML private Label loginInstructions;
     @FXML private TextField accountNumber;
@@ -41,7 +43,9 @@ public class LoginController extends Controller {
 
                 Scene cardHolderScene = new Scene(cardHolderParent);
 
+                // read user input and set value in CardHolder window
                 CardHolderController cht = loader.getController();
+                cht.storeState(super.system);
                 cht.initialCardHolderInfo(accountNumber.getText());
 
                 // get the Stage info

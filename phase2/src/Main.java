@@ -12,13 +12,26 @@ public class Main extends Application {
         // Create base administrator, this will be moved to serialization
         mainSystem.getAccountManager().createAdminAccount("sysadmin", "admin@gmail.com", "sysadmin");
 
+        //FXMLLoader loginLoader = new FXMLLoader();
+        //loginLoader.setLocation(getClass().getResource("view/Login.fxml"));
+        //Parent loginParent = loginLoader.load();
+
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("view/Login.fxml"));
         Parent root = loginLoader.load();
-        LoginController loginController = loginLoader.getController();
-        loginController.storeState(mainSystem);
+        Scene loginScene = new Scene(root);
+
+
+
+        //LoginController loginController = loginLoader.getController();
+        //loginController.storeState(mainSystem);
+
+        Controller controller = loginLoader.getController();
+        controller.storeState(mainSystem);
+
+
         primaryStage.setTitle("Login");
-        Scene scene = new Scene(root, 534, 400);
-        primaryStage.setScene(scene);
+        //Scene scene = new Scene(root, 534, 400);
+        primaryStage.setScene(loginScene);
         primaryStage.show();
     }
 

@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class TravelSimulationController {
+public class TravelSimulationController extends Controller {
     /*
     @FXML private Button tapIn;
     @FXML private Button tapOut;

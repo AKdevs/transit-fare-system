@@ -95,6 +95,7 @@ class AccountManager implements Serializable{
   private void addUserAccount(UserAccount newUser) {
 
     userAccounts.add(newUser);
+
     try
     {
       //Saving of object in a file
