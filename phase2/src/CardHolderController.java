@@ -34,7 +34,6 @@ public class CardHolderController extends Controller implements Initializable {
 
 
     public void initialize(URL url, ResourceBundle rb) {
-
         viewMonthlyCost.setText("View Monthly Cost");
         logOut.setText("Log Out");
         goToCard.setText("Go To Card");

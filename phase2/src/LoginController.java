@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LoginController extends Controller {
-
-
     @FXML private Label cardInputInstructions;
     @FXML private Label loginInstructions;
     @FXML private TextField accountNumber;
