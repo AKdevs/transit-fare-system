@@ -29,7 +29,9 @@ public class LoginController extends Controller {
     }
 
     public void showUserAccount(ActionEvent event) throws IOException {
-        UserAccount currentAccount = userExists();
+        String currentAccountNumber = accountNumber.getText();
+        String currentPassword = password.getText();
+        UserAccount currentAccount = verifyLogin(currentAccountNumber, currentPassword);
         if (currentAccount != null) {
             if (system.getAccountManager().isAdmin(currentAccount)) {
                 changeWindow(event,"view/AdminUser.fxml");
@@ -43,8 +45,8 @@ public class LoginController extends Controller {
 
                 // read user input and set value in CardHolder window
                 CardHolderController cht = loader.getController();
-                cht.storeState(super.system);
-                cht.initialCardHolderInfo(accountNumber.getText());
+                cht.storeState(system);
+                cht.initialCardHolderInfo(currentAccountNumber);
 
                 // get the Stage info
                 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -56,15 +58,15 @@ public class LoginController extends Controller {
         }
     }
 
-    private UserAccount userExists() {
-        String currentAccountNumber = accountNumber.getText();
-        String currentPassword = password.getText();
-        // temporary bypass
-        if (currentAccountNumber.equals("") && currentPassword.equals("")) {
-            return new UserAccount("A","B","C");
-        }
+    private UserAccount verifyLogin(String currentAccountNumber, String currentPassword) {
+        System.out.println(system == null);
         UserAccount currentAccount = system.getAccountManager().findUserAccount(currentAccountNumber);
-
+        // check for password
+        if (currentAccount != null) {
+            if (!currentAccount.password.equals(currentPassword)) {
+                currentAccount = null;
+            }
+        }
         return currentAccount;
     }
 
