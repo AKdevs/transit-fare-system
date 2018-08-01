@@ -16,18 +16,21 @@ import java.io.IOException;
 public class AdminUserController extends Controller {
         @FXML private Button powerOnButton;
         @FXML private Button powerOffButton;
+        @FXML private Label powerResult;
 
         TransitSystem theTransitSystem = TransitSystem.getInstance();
 
 
         public void powerOnSystem(ActionEvent event) throws IOException {
             theTransitSystem.powerOnSystem();
-            System.out.println(theTransitSystem.getOperatingStatus());
+            powerResult.setText("The Transit System is now operating.");
+            //System.out.println(theTransitSystem.getOperatingStatus());
         }
 
         public void powerOffSystem(ActionEvent event) throws IOException{
             theTransitSystem.powerOffSystem();
-            System.out.println(theTransitSystem.getOperatingStatus());
+            //System.out.println(theTransitSystem.getOperatingStatus());
+            powerResult.setText("The Transit System has been shut down.");
         }
 
         /**@Override
