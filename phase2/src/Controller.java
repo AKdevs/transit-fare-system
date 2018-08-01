@@ -10,7 +10,6 @@ import java.io.IOException;
 public class Controller {
     TransitSystem system;
 
-
     void storeState(TransitSystem system) {
         this.system = system;
     }
@@ -19,20 +18,20 @@ public class Controller {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
         Parent newWindowParent = loader.load();
         Controller newWindowController = loader.getController();
-        if (newWindowController.system == null) {
-            newWindowController.storeState(this.system);
-        }
+        passState(newWindowController);
         Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
         window.setScene(new Scene(newWindowParent));
         window.show();
     }
 
-    /*
-    private void passState() {
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("view/Login.fxml"));
-        Parent root = loginLoader.load();
-        LoginController loginController = loginLoader.getController();
-        //loginController.storeState(mainSystem);
+    void changeWindowToHome(ActionEvent event) throws IOException {
+        changeWindow(event, "view/Login.fxml");
     }
-    */
+
+    private void passState(Controller newWindowController) {
+        if (newWindowController.system == null) {
+            newWindowController.storeState(this.system);
+        }
+    }
+
 }
