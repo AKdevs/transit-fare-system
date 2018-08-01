@@ -20,7 +20,6 @@ import java.util.ResourceBundle;
 public class CardHolderController extends Controller implements Initializable {
     TransitSystem system;
 
-
     // label info
     @FXML private Label accountNumber;
     @FXML private Label name;
@@ -56,6 +55,9 @@ public class CardHolderController extends Controller implements Initializable {
         Scene cardScene = new Scene(cardParent);
 
         CardController ct = loader.getController();
+        if (ct.system == null) {
+            ct.storeState(system);
+        }
         ct.initialCardInfo(cards.getSelectionModel().getSelectedItem().toString());
 
         // get the Stage info
@@ -90,7 +92,7 @@ public class CardHolderController extends Controller implements Initializable {
 
     void initialCardHolderInfo(String accountNum) {
         accountNumber.setText(accountNum);
-        System.out.println(system == null);
+        System.out.println(system);
         //UserAccount ua = this.system.getAccountManager().findUserAccount(accountNum);
 
         //name.setText(ua.getName());

@@ -34,7 +34,7 @@ public class LoginController extends Controller {
         UserAccount currentAccount = userExists();
         if (currentAccount != null) {
             if (system.getAccountManager().isAdmin(currentAccount)) {
-                //changeWindow(event,"view/AdminUser.fxml");
+                changeWindow(event,"view/AdminUser.fxml");
             } else {
                 //changeWindow(event,"view/CardHolder.fxml" );
                 FXMLLoader loader = new FXMLLoader();
@@ -43,7 +43,9 @@ public class LoginController extends Controller {
 
                 Scene cardHolderScene = new Scene(cardHolderParent);
 
+                // read user input and set value in CardHolder window
                 CardHolderController cht = loader.getController();
+                cht.storeState(system);
                 cht.initialCardHolderInfo(accountNumber.getText());
 
                 // get the Stage info
