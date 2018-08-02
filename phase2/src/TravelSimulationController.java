@@ -10,7 +10,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
@@ -22,6 +24,17 @@ public class TravelSimulationController extends Controller {
 
     @FXML private Label cardNumber;
 
+    @FXML private TextField enterSpot;
+    @FXML private TextField enterTime;
+    @FXML private TextField enterDate;
+    @FXML private ChoiceBox enterType;
+
+    @FXML private TextField exitSpot;
+    @FXML private TextField exitTime;
+    @FXML private TextField exitDate;
+    @FXML private ChoiceBox exitType;
+
+
 
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -29,6 +42,10 @@ public class TravelSimulationController extends Controller {
 
     void initialTravelSimulationInfo(String cardNum) {
         cardNumber.setText(cardNum);
+        enterType.getItems().add("S");
+        enterType.getItems().add("B");
+        exitType.getItems().add("S");
+        exitType.getItems().add("B");
     }
 
     public void setSource(int source) {
@@ -43,7 +60,7 @@ public class TravelSimulationController extends Controller {
 
         Scene cardHolderScene = new Scene(cardHolderParent);
 
-        // read user input and set value in CardHolder window
+        // read user input and set value in Card window
         CardController ct = loader.getController();
         ct.storeState(system);
         ct.initialCardInfo(cardNumber.getText());
@@ -53,5 +70,27 @@ public class TravelSimulationController extends Controller {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(cardHolderScene);
         window.show();
+    }
+
+    @FXML
+    void tapInButtonPushed(ActionEvent event) throws IOException {
+        Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
+        system.getTripManager().recordTapIn(
+                        enterTime.getText(),
+                        enterSpot.getText(),
+                        associatedEntryCard,
+                        enterDate.getText(),
+                        enterType.getSelectionModel().getSelectedItem().toString());
+    }
+
+    @FXML
+    void tapOutButtonPushed(ActionEvent event) throws IOException {
+        Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
+        system.getTripManager().recordTapOut(
+                exitTime.getText(),
+                exitSpot.getText(),
+                associatedEntryCard,
+                exitDate.getText(),
+                exitType.getSelectionModel().getSelectedItem().toString());
     }
 }
