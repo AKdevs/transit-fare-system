@@ -52,9 +52,8 @@ public class FareCalculator {
     } else if (ts.getTransitType().equals("continueB")) {
       result = calculateContiBusFare(ts.getCurrentFares());
     } else if (ts.getTransitType().equals("S")) {
-        int duration = calculateDuration(ts.getEnterTime(), ts.getExitTime());
       result = stationFare * calculateStationsReached(ts);
-      if (result > fareCap && duration <= maximumDuration) {
+      if (result > fareCap) {
           result = fareCap;
       }
     } else if (ts.getTransitType().equals("continueS")) {
