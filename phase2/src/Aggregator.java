@@ -81,6 +81,7 @@ public class Aggregator implements Serializable{
             for (String d : allFares.keySet()) {
                 if (d.equals(date)) {
                     Double f = allFares.get(d);
+                    //double f = allFares.get(d);
                     f += fares;
                     allFares.put(d, f);
                 }

@@ -23,6 +23,9 @@ public class TravelSimulationController extends Controller {
     @FXML private Button backToCard;
 
     @FXML private Label cardNumber;
+    @FXML private Label owner;
+    @FXML private Label status;
+    @FXML private Label balance;
 
     @FXML private TextField enterSpot;
     @FXML private TextField enterTime;
@@ -41,11 +44,19 @@ public class TravelSimulationController extends Controller {
     }
 
     void initialTravelSimulationInfo(String cardNum) {
+        Card card = this.system.getCardManager().findCard(cardNum);
         cardNumber.setText(cardNum);
-        enterType.getItems().add("S");
-        enterType.getItems().add("B");
-        exitType.getItems().add("S");
-        exitType.getItems().add("B");
+        status.setText(card.getStatus());
+        balance.setText(Double.toString(card.getBalance()));
+        if (card.getOwner() != null) {
+            owner.setText(card.getOwner().getName());
+        }else {
+            owner.setText("unlinked");
+        }
+        enterType.getItems().add("Subway");
+        enterType.getItems().add("Bus");
+        exitType.getItems().add("Subway");
+        exitType.getItems().add("Bus");
     }
 
     public void setSource(int source) {
@@ -56,15 +67,19 @@ public class TravelSimulationController extends Controller {
     public void backToCardButtonPushed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("view/Card.fxml"));
-        Parent cardHolderParent = loader.load();
+        Parent cardParent = loader.load();
 
-        Scene cardHolderScene = new Scene(cardHolderParent);
+        Scene cardHolderScene = new Scene(cardParent);
 
         // read user input and set value in Card window
         CardController ct = loader.getController();
         ct.storeState(system);
         ct.initialCardInfo(cardNumber.getText());
+
+        //ct.setSource(1);
+
         ct.setSource(source);
+
 
         // get the Stage info
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -80,7 +95,8 @@ public class TravelSimulationController extends Controller {
                         enterSpot.getText(),
                         associatedEntryCard,
                         enterDate.getText(),
-                        enterType.getSelectionModel().getSelectedItem().toString());
+                        enterType.getSelectionModel().getSelectedItem().toString().substring(0,1));
+        balance.setText(Double.toString(associatedEntryCard.getBalance()));
     }
 
     @FXML
@@ -91,6 +107,7 @@ public class TravelSimulationController extends Controller {
                 exitSpot.getText(),
                 associatedEntryCard,
                 exitDate.getText(),
-                exitType.getSelectionModel().getSelectedItem().toString());
+                exitType.getSelectionModel().getSelectedItem().toString().substring(0, 1));
+        balance.setText(Double.toString(associatedEntryCard.getBalance()));
     }
 }
