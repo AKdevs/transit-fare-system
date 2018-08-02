@@ -63,7 +63,7 @@ public class CardHolderController extends Controller implements Initializable {
             ct.storeState(system);
             ct.setSource(1);
             ct.initialCardInfo(cards.getSelectionModel().getSelectedItem().toString());
-            //ct.setSource(1);
+
 
             // get the Stage info
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
