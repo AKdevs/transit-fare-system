@@ -25,6 +25,10 @@ public class TransitSystem {
     tripManager.addTransitLines(transitManager.getTransitLines());
     accountManager = new AccountManager();
     cardManager = new CardManager();
+    // Create root administrator
+    accountManager.createRootAdmin();
+    AdminUser root = accountManager.getRootAdmin();
+    root.setAggregator(tripManager.getAggregator());
   }
 
   TripManager getTripManager() {
