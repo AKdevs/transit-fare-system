@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 
 public class TravelSimulationController extends Controller {
-
+    private int source; // 0 if loader is CardHolder, 1 if loader is Card
     @FXML private Button tapIn;
     @FXML private Button tapOut;
     @FXML private Button backToCard;
@@ -59,6 +59,10 @@ public class TravelSimulationController extends Controller {
         exitType.getItems().add("Bus");
     }
 
+    public void setSource(int source) {
+        this.source = source;
+    }
+
     //change scene method
     public void backToCardButtonPushed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -71,7 +75,11 @@ public class TravelSimulationController extends Controller {
         CardController ct = loader.getController();
         ct.storeState(system);
         ct.initialCardInfo(cardNumber.getText());
+
         //ct.setSource(1);
+
+        ct.setSource(source);
+
 
         // get the Stage info
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
