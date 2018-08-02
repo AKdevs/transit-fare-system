@@ -74,7 +74,7 @@ class TripManager {
     ArrayList<TripSegment> allTrips = card.getTrips();
     TripSegment current = allTrips.get(allTrips.size() - 1);
     // if it is a illegal exit (didn't tap in for this trip)
-    if (current.getExitSpot() != null) {
+    if (current.getExitSpot() != null && !current.getTransitType().equals("continueB")&& !current.getTransitType().equals("continueS") ) {
       System.out.println("Declined: Illegal exit.");
       TripSegment ts = new TripSegment("illegal", time, date, type);
       card.addTrip(ts);
