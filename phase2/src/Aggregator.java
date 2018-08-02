@@ -17,7 +17,7 @@ public class Aggregator implements Serializable{
     Aggregator(){
         this.allFares = new HashMap<>();
         this.numberOfStations = new HashMap<>();
-
+/*
       try
       {
         // Reading the object from a file
@@ -42,7 +42,7 @@ public class Aggregator implements Serializable{
       catch(ClassNotFoundException ex)
       {
         System.out.println("ClassNotFoundException is caught");
-      }
+      }*/
     }
 
     /** @return amount of fares in system, stored by date. */
