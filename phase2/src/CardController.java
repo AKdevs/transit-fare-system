@@ -54,6 +54,7 @@ public class CardController extends Controller implements Initializable {
 
         TravelSimulationController tsc = loader.getController();
         tsc.storeState(system);
+        tsc.setSource(source);
         tsc.initialTravelSimulationInfo(cardNumber.getText());
 
         // get the Stage info
@@ -99,7 +100,7 @@ public class CardController extends Controller implements Initializable {
         if (card.getOwner() != null) {
             owner.setText(card.getOwner().getName());
         }else {
-            owner.setText("unlinked");
+            owner.setText("not linked");
         }
     }
 
