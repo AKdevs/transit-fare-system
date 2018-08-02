@@ -89,7 +89,7 @@ class TripManager {
         double fares = fareCalculator.calculateTripFares(current);
         updateFares(fares, card, date);
         }
-        aggregator.addNumberOfStation(date, fareCalculator.calculateStaionsReached(current));
+        aggregator.addNumberOfStation(date, fareCalculator.calculateStationsReached(current));
     }
     if (current.getTransitType().equals("continueB")
         || current.getTransitType().equals("continueS")) {
@@ -105,6 +105,6 @@ class TripManager {
   private void updateFares(double fares, Card card, String date) {
       card.updateBalance(fares);
       card.updateTotalFares(fares);
-      aggregator.updateAllFares(date, fares); // static problem here!! Who updates the TransitSystem??
+      aggregator.updateAllFares(date, fares);
   }
 }

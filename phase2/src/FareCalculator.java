@@ -52,12 +52,12 @@ public class FareCalculator {
     } else if (ts.getTransitType().equals("continueB")) {
       result = calculateContiBusFare(ts.getCurrentFares());
     } else if (ts.getTransitType().equals("S")) {
-      result = stationFare * calculateStaionsReached(ts);
+      result = stationFare * calculateStationsReached(ts);
       if (result > fareCap) {
           result = fareCap;
       }
     } else if (ts.getTransitType().equals("continueS")) {
-      int distance = calculateStaionsReached(ts);
+      int distance = calculateStationsReached(ts);
       result = calculateContiSubFare(ts.getCurrentFares(), distance);
     }
     return result;
@@ -65,7 +65,7 @@ public class FareCalculator {
 
   // for both subway and bus so we can add the number of stations reached to our daily report
   // and also we can calculate subway fares by using the result of this method
-  int calculateStaionsReached(TripSegment trip) {
+  int calculateStationsReached(TripSegment trip) {
     int enterIndex = 0;
     int exitIndex = 0;
     String startSpot;

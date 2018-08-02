@@ -1,5 +1,5 @@
 power | on | TransitSystem | 2018-02-11
-create | account | CardHolder | James Rodriguez | james@gmail.com
+create | account | CardHolder | James Rodriguez | james@gmail.com | 111
 create | card
 change | 10000001 | David Villa
 view | info | 10000001
@@ -36,15 +36,15 @@ view | cost | 10000001
 view | allTrips | 10000001 | 30000001
 view | trips | 10000001 | 30000001
 view | report | 2018-02-11
-create | account | CardHolder | Tim Smith | tim@gmail.com
-create | account | AdminUser | Admin1 | admin1@transit.com
+create | account | CardHolder | Tim Smith | tim@gmail.com | 111
+create | account | AdminUser | Admin1 | admin1@transit.com | 111
 create | card
 create | card
 link | 10000002 | 30000002
 link | 10000002 | 30000003
 view | info | 10000002
-create | account | CardHolder | Jason Longman | jason@gmail.com
-create | account | CardHolder | Jane Kee | jane@gmail.com
+create | account | CardHolder | Jason Longman | jason@gmail.com | 111
+create | account | CardHolder | Jane Kee | jane@gmail.com | 111
 create | card
 create | card
 create | card
@@ -61,26 +61,26 @@ link | 10000004 | 30000006
 unlink | 10000003 | 30000007
 link | 10000004 | 30000007
 view | info | 10000004
-create | account | CardHolder | Jack Ashman | jack@gmail.com
+create | account | CardHolder | Jack Ashman | jack@gmail.com | 111
 create | card
 create | card
 create | card
 link | 10000005 | 30000008
 link | 10000005 | 30000009
 link | 10000005 | 30000010
-create | account | AdminUser | Admin2 | admin2@transit.com
-create | account | CardHolder | Helen Wood | helen@gmail.com
+create | account | AdminUser | Admin2 | admin2@transit.com | 111
+create | account | CardHolder | Helen Wood | helen@gmail.com | 111
 create | card
 create | card
 link | 10000006 | 30000011
 link | 10000006 | 30000012
-create | account | CardHolder | Beth Robinson | beth@gmail.com
+create | account | CardHolder | Beth Robinson | beth@gmail.com | 111
 create | card
 create | card
 link | 10000007 | 30000013
 link | 10000007 | 30000014
-create | account | CardHolder | David Wagonda | david@gmail.com
-create | account | CardHolder | Ken Washington | ken@gmail.com
+create | account | CardHolder | David Wagonda | david@gmail.com | 111
+create | account | CardHolder | Ken Washington | ken@gmail.com | 111
 view | info | 10000002
 entry | 30000002 | College | S | 12:14 | 2018-02-11
 entry | 30000001 | Union | S | 12:15 | 2018-02-11

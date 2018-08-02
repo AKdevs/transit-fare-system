@@ -19,7 +19,7 @@ public class EventHandler {
 
   EventHandler(TransitSystem system) throws Exception {
     this.system = system;
-    this.eventsBuffer = new Scanner(new File("phase2/event.txt"));
+    this.eventsBuffer = new Scanner(new File("/Users/jingjingzhan/Desktop/final/group_0134/phase2/event.txt"));
   }
 
   /** Reads events from file and performs the corresponding actions. */
@@ -53,9 +53,9 @@ public class EventHandler {
           break;
         case "create":
           if ((eventTokens[1].equals("account")) && (eventTokens[2].equals("CardHolder"))) {
-            //system.getAccountManager().createCardHolderAccount(eventTokens[3], eventTokens[4]);
+            system.getAccountManager().createCardHolderAccount(eventTokens[3], eventTokens[4], eventTokens[5]);
           } else if ((eventTokens[1].equals("account")) && (eventTokens[2].equals("AdminUser"))) {
-            //system.getAccountManager().createAdminAccount(eventTokens[3], eventTokens[4]);
+            system.getAccountManager().createAdminAccount(eventTokens[3], eventTokens[4], eventTokens[5]);
           } else if (eventTokens[1].equals("card")) {
             system.getCardManager().createCard();
           }
