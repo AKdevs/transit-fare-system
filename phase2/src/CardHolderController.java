@@ -26,6 +26,7 @@ public class CardHolderController extends Controller implements Initializable {
     @FXML private Label monthlyCost;
     @FXML private Label chooseCardInstructions;
     @FXML private Label transferBalanceInstructions;
+    @FXML private Label linkCardInstructions;
 
     // choiceBox info
     @FXML private ChoiceBox cards;
@@ -117,11 +118,20 @@ public class CardHolderController extends Controller implements Initializable {
     void linkCardButtonPushed(ActionEvent event) throws IOException {
         String cardNum = linkedCardNum.getText();
         Card card = system.getCardManager().findCard(cardNum);
-        UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
-        ((CardHolder)ua).linkCard(card);
+        if (card == null) {
+            linkCardInstructions.setText("Card " + cardNum + "\ndoesn't exist");
+    } else {
+      UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
+      if (!cards.getItems().contains(cardNum)) {
+          ((CardHolder) ua).linkCard(card);
         cards.getItems().add(cardNum);
         card1.getItems().add(cardNum);
         card2.getItems().add(cardNum);
+          linkCardInstructions.setText("Card " + cardNum + "\n is now linked\nto your account");
+      }else {
+          linkCardInstructions.setText("You have already linked\nCard " + cardNum + "\nto your account");
+      }
+        }
         linkedCardNum.setText("");
 
     }
@@ -130,11 +140,21 @@ public class CardHolderController extends Controller implements Initializable {
     void unlinkCardButtonPushed(ActionEvent event) throws IOException {
         String cardNum = unlinkedCardNum.getText();
         Card card = system.getCardManager().findCard(cardNum);
-        UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
-        ((CardHolder)ua).unlinkCard(card);
+        if (card == null) {
+            linkCardInstructions.setText("Card " + cardNum + "\ndoesn't exist");
+    } else {
+      UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
+      if (cards.getItems().contains(cardNum)) {
+          ((CardHolder) ua).unlinkCard(card);
         cards.getItems().remove(cardNum);
         card1.getItems().remove(cardNum);
         card2.getItems().remove(cardNum);
+          linkCardInstructions.setText("Card " + cardNum + "\n is now unlinked\nfrom your account");
+      } else {
+        linkCardInstructions.setText(
+            "Card " + cardNum + "\nis not linked to your account");
+      }
+    }
         unlinkedCardNum.setText("");
     }
 

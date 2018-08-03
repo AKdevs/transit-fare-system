@@ -31,10 +31,11 @@ public class CardHolder extends UserAccount {
     if (!(card.getOwner() == null)) {
       // If card is currently linked to another CardHolder, it cannot be linked to this CardHolder.
       System.out.println("Action denied. This card is currently linked to another account.");
-    } else {
+    } else if (!card.isLinked()){
       // link a valid card to this CardHolder
       this.travelCards.add(card);
       card.setOwner(this);
+      card.linkAccount();
       card.linkAccount();
       System.out.println(
           "Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
@@ -47,11 +48,16 @@ public class CardHolder extends UserAccount {
    * @param card the card that is to be unlinked
    */
   void unlinkCard(Card card) {
-    this.travelCards.remove(card);
-    card.setOwner(null);
-    card.unlinkAccount();
-    System.out.println(
-        "Card " + card.getCardNumber() + " unlinked to CardHolder Account " + this.getAccountNum());
+    if (travelCards.contains(card) && card.isLinked()) {
+      this.travelCards.remove(card);
+      card.setOwner(null);
+      card.unlinkAccount();
+      System.out.println(
+          "Card "
+              + card.getCardNumber()
+              + " unlinked to CardHolder Account "
+              + this.getAccountNum());
+    }
   }
 
   /**

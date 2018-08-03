@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CardManager implements Serializable {
@@ -103,5 +104,9 @@ public class CardManager implements Serializable {
    */
   void removeCard(String cardNumber) {
     cards.remove(findCard(cardNumber));
+  }
+
+  ArrayList<Card> getCards() {
+      return cards;
   }
 }
