@@ -121,4 +121,12 @@ public class CardHolder extends UserAccount {
   ArrayList<Card> getTravelCards() {
       return this.travelCards;
   }
+
+
+  void transferBalance(Card card1, Card card2, double amount) {
+      if (amount <= card1.getBalance()) {
+          card1.deductBalance(amount);
+          card2.addBalance(amount);
+      }
+  }
 }
