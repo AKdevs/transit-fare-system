@@ -77,7 +77,6 @@ public class LoginController extends Controller {
     }
 
     private UserAccount verifyLogin(String currentAccountNumber, String currentPassword) {
-        System.out.println(system == null);
         UserAccount currentAccount = system.getAccountManager().findUserAccount(currentAccountNumber);
         // check for password
         if (currentAccount != null) {
