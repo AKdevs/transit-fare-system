@@ -20,7 +20,7 @@
       </Label>
       <HBox prefHeight="50.0" prefWidth="521.0">
          <children>
-            <Label text="Please answer the following security questions so that we may verify your identity." wrapText="true">
+            <Label fx:id="infoLabel" text="Please answer the following security questions so that we may verify your identity." wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -32,22 +32,22 @@
       </HBox>
       <VBox alignment="CENTER" prefHeight="109.0" prefWidth="541.0" spacing="10.0">
          <children>
-            <Label text="Question 1:">
+            <Label fx:id="question1Label" text="Question 1:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField prefHeight="25.0" prefWidth="345.0">
+            <TextField fx:id="question1Answer" prefHeight="25.0" prefWidth="345.0">
                <VBox.margin>
                   <Insets left="150.0" right="150.0" />
                </VBox.margin>
             </TextField>
-            <Label layoutX="216.0" layoutY="30.0" text="Question 2:">
+            <Label fx:id="question2Label" layoutX="216.0" layoutY="30.0" text="Question 2:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="160.0" layoutY="55.0" prefHeight="25.0" prefWidth="345.0">
+            <TextField fx:id="question2Answer" layoutX="160.0" layoutY="55.0" prefHeight="25.0" prefWidth="345.0">
                <VBox.margin>
                   <Insets left="150.0" right="150.0" />
                </VBox.margin>
@@ -59,8 +59,8 @@
       </VBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
          <children>
-            <Button mnemonicParsing="false" text="Continue" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cancel" />
+            <Button onAction="#continueButtonPushed" mnemonicParsing="false" text="Continue" />
+            <Button onAction="#cancelButtonPushed" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cancel" />
          </children>
       </HBox>
    </children>

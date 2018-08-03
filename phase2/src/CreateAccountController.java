@@ -32,7 +32,9 @@ public class CreateAccountController extends Controller {
                         system.getAccountManager().
                                 getPasswordManager().getQuestionList());
         questionBox1.setItems(elements);
+        questionBox1.getSelectionModel().selectFirst();
         questionBox2.setItems(elements);
+        questionBox2.getSelectionModel().select(1);
     }
 
     public void createAccountButtonPushed(ActionEvent event) throws IOException {
@@ -46,14 +48,19 @@ public class CreateAccountController extends Controller {
         } else {
             system.getAccountManager().createCardHolderAccount(currentName,
                     currentEmail, currentPassword);
-            Map<Integer, String> securityAnswers = new LinkedHashMap<>();
+            UserAccount currentAccount = system.getAccountManager().getLastCreatedAccount();
+            List<Integer> userQuestionList = new ArrayList<>();
+            List<String> answerList = new ArrayList<>();
             String question1 = questionBox1.getValue();
             String question2 = questionBox2.getValue();
             List<String> questions = system.getAccountManager().getPasswordManager()
                     .getQuestionList();
-            securityAnswers.put(questions.indexOf(question1), answer1.getText());
-            securityAnswers.put(questions.indexOf(question2), answer2.getText());
-            system.getAccountManager().getLastCreatedAccount().addSecurityAnswers(securityAnswers);
+            userQuestionList.add(questions.indexOf(question1));
+            userQuestionList.add(questions.indexOf(question2));
+            answerList.add(answer1.getText());
+            answerList.add(answer2.getText());
+            currentAccount.setAnswerList(answerList);
+            currentAccount.setQuestionIndexList(userQuestionList);
             changeWindow(event,"view/Login.fxml" );
         }
     }
