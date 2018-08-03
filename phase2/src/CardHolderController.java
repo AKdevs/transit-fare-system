@@ -64,7 +64,6 @@ public class CardHolderController extends Controller implements Initializable {
             ct.setSource(1);
             ct.initialCardInfo(cards.getSelectionModel().getSelectedItem().toString());
 
-
             // get the Stage info
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(cardScene);
@@ -72,7 +71,6 @@ public class CardHolderController extends Controller implements Initializable {
         }
 
     }
-
 
     @FXML
     void viewMonthlyCostButtonPushed(ActionEvent event) {
