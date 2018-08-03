@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /** Class UserAccount is used to define users of the system. */
 public class UserAccount {
   /** Stores name of this user account */
@@ -7,11 +9,16 @@ public class UserAccount {
   /** Stores account number of this user account */
   protected String accountNumber;
   protected String password;
+  HashMap<Integer, String> securityAnswers;
 
   UserAccount(String name, String email, String password) {
     this.name = name;
     this.email = email;
     this.password = password;
+  }
+
+  void addSecurityAnswers(HashMap<Integer, String> securityAnswers) {
+    this.securityAnswers = securityAnswers;
   }
 
   /** @return name of UserAccount */
