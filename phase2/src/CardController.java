@@ -69,24 +69,8 @@ public class CardController extends Controller implements Initializable {
     }
 
     public void backToAccountButtonPushed(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("view/CardHolder.fxml"));
-        Parent cardParent = loader.load();
-
-        Scene cardScene = new Scene(cardParent);
-
-        CardHolderController cht = loader.getController();
-        cht.storeState(system);
-        //Card card = system.getCardManager().findCard(cardNumber.getText());
-        //CardHolder cardHolder = card.getOwner();
-        cht.initialCardHolderInfo();
-
-        // get the Stage info
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(cardScene);
-        window.show();
+        changeWindowPassAccount(event, "view/CardHolder.fxml");
     }
-
 
     public void initialize(URL url, ResourceBundle rb) {
     }

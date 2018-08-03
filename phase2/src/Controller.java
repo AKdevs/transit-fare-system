@@ -24,6 +24,17 @@ public class Controller {
         window.show();
     }
 
+    void changeWindowPassAccount(ActionEvent event, String url) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
+        Parent newWindowParent = loader.load();
+        CardHolderController newWindowController = loader.getController();
+        passState(newWindowController);
+        newWindowController.initialCardHolderInfo();
+        Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
+        window.setScene(new Scene(newWindowParent));
+        window.show();
+    }
+
     void changeWindowToHome(ActionEvent event) throws IOException {
         changeWindow(event, "view/Login.fxml");
     }
