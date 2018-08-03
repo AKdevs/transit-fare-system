@@ -55,6 +55,7 @@ public class LoginController extends Controller {
                 window.setScene(new Scene(adminUserParent));
                 window.show();
             } else {
+                system.getAccountManager().setLoggedInUser(currentAccount);
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("view/CardHolder.fxml"));
                 Parent cardHolderParent = loader.load();
@@ -64,12 +65,13 @@ public class LoginController extends Controller {
                 // read user input and set value in CardHolder window
                 CardHolderController cht = loader.getController();
                 cht.storeState(system);
-                cht.initialCardHolderInfo(currentAccountNumber);
+                cht.initialCardHolderInfo();
 
                 // get the Stage info
                 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
                 window.setScene(cardHolderScene);
                 window.show();
+
             }
         } else {
             loginInstructions.setText("Invalid username or password.");

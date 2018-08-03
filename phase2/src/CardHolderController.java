@@ -83,9 +83,20 @@ public class CardHolderController extends Controller implements Initializable {
 
     @FXML
     void logOutButtonPushed(ActionEvent event) throws IOException {
+        system.getAccountManager().setLoggedInUser(null);
         changeWindow(event, "view/Login.fxml");
     }
 
+    void initialCardHolderInfo() {
+        CardHolder loggedInUser = (CardHolder) system.getAccountManager().getLoggedInUser();
+        accountNumber.setText(loggedInUser.getAccountNum());
+        name.setText(loggedInUser.getName());
+        email.setText(loggedInUser.getEmail());
+        for (Card card: loggedInUser.getTravelCards()) {
+            cards.getItems().add(card.getCardNumber());
+        }
+    }
+    /*
     void initialCardHolderInfo(String accountNum) {
         accountNumber.setText(accountNum);
         UserAccount ua = system.getAccountManager().findUserAccount(accountNum);
@@ -96,6 +107,7 @@ public class CardHolderController extends Controller implements Initializable {
             cards.getItems().add(card.getCardNumber());
         }
     }
+    */
 
     @FXML
     void linkCardButtonPushed(ActionEvent event) throws IOException {

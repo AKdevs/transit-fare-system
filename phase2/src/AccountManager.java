@@ -9,6 +9,7 @@ import java.util.ArrayList;
 /** Manage all accounts which are stored in TransitSystem. */
 class AccountManager implements Serializable{
   private ArrayList<UserAccount> userAccounts;
+  private UserAccount loggedInUser;
 
   AccountManager(){
     this.userAccounts = new ArrayList<>();
@@ -37,6 +38,14 @@ class AccountManager implements Serializable{
     {
       System.out.println("ClassNotFoundException is caught");
     }
+  }
+
+  void setLoggedInUser(UserAccount ua) {
+    loggedInUser = ua;
+  }
+
+  UserAccount getLoggedInUser() {
+    return loggedInUser;
   }
 
   /**

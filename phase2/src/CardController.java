@@ -77,9 +77,9 @@ public class CardController extends Controller implements Initializable {
 
         CardHolderController cht = loader.getController();
         cht.storeState(system);
-        Card card = system.getCardManager().findCard(cardNumber.getText());
-        CardHolder cardHolder = card.getOwner();
-        cht.initialCardHolderInfo(cardHolder.getAccountNum());
+        //Card card = system.getCardManager().findCard(cardNumber.getText());
+        //CardHolder cardHolder = card.getOwner();
+        cht.initialCardHolderInfo();
 
         // get the Stage info
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
