@@ -15,16 +15,12 @@ load | 10000001 | 30000001 | 20
 view | balance | 10000001 | 30000001
 entry | 30000001 | Dufferin | B | 03:58 | 2018-02-11
 exit | 30000001 | Bathurst | B | 05:01 | 2018-02-11
-view | balance | 10000001 | 30000001
 entry | 30000001 | Finch | S | 06:01 | 2018-02-11
 exit | 30000001 | St Patrick | S | 09:02 | 2018-02-11
-view | balance | 10000001 | 30000001
 entry | 30000001 | Osgoode | S | 09:02 | 2018-02-11
 exit | 30000001 | Finch | S | 10:02 | 2018-02-11
-view | balance | 10000001 | 30000001
 entry | 30000001 | Dufferin | B | 10:58 | 2018-02-11
 exit | 30000001 | Bathurst | B | 11:01 | 2018-02-11
-view | balance | 10000001 | 30000001
 entry | 30000001 | Osgoode | S | 11:15 | 2018-02-11
 exit | 30000001 | Sheppard-Yonge | S | 12:11 | 2018-02-11
 entry | 30000001 | Sheppard-Yonge | B | 12:12 | 2018-02-11
