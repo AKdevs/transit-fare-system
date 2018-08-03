@@ -9,7 +9,6 @@ import java.util.ArrayList;
 /** Manage all accounts which are stored in TransitSystem. */
 class AccountManager implements Serializable{
   private ArrayList<UserAccount> userAccounts;
-  private AdminUser root;
 
   AccountManager(){
     this.userAccounts = new ArrayList<>();
@@ -40,14 +39,6 @@ class AccountManager implements Serializable{
     }
   }
 
-  void createRootAdmin() {
-    this.root = new AdminUser("root", "", "root");
-  }
-
-  AdminUser getRootAdmin() {
-    return this.root;
-  }
-
   /**
    * Creates an account for card holder.
    *
@@ -68,14 +59,10 @@ class AccountManager implements Serializable{
    */
   void createAdminAccount(String name, String email, String password) {
     AdminUser newAccount = new AdminUser(name, email, password);
-    passAggregator(newAccount);
     addUserAccount(newAccount);
     System.out.println("AdminUser Account " + newAccount.getAccountNum() + " created");
   }
 
-  void passAggregator(AdminUser au) {
-    au.setAggregator(root.getAggregator());
-  }
   /**
    * Finds and returns user account for given accountNumber, null if not found.
    *

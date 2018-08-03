@@ -172,4 +172,13 @@ public class Aggregator implements Serializable{
                         + ": "
                         + getDailyStation(date));
     }
+
+    public void initializeDate(String date) {
+        if (!(allFares.containsKey(date))){
+            allFares.put(date,0.0);
+        }
+        if (!(numberOfStations.containsKey(date))) {
+            numberOfStations.put(date,0);
+        }
+    }
 }
