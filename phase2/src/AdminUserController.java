@@ -68,6 +68,11 @@ public class AdminUserController extends Controller implements Initializable {
                 // set currentDate in Transit System
                 String dateString = date.toString();
                 system.setCurrentDate(dateString);
+
+                // create initial (date, value) pair in Aggregator
+                system.getTripManager().getAggregator().initializeDate(dateString);
+
+                // set display of date in systemDate and todayDateLabel at top
                 systemDate.setPromptText(dateString);
                 String todayDate = "Today is " + dateString +".";
                 todayDateLabel.setText(todayDate);
