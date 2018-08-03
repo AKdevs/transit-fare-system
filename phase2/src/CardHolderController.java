@@ -28,6 +28,8 @@ public class CardHolderController extends Controller implements Initializable {
 
     // choiceBox info
     @FXML private ChoiceBox cards;
+    @FXML private ChoiceBox card1;
+    @FXML private ChoiceBox card2;
 
     // Button info
     @FXML private Button viewMonthlyCost;
@@ -92,6 +94,8 @@ public class CardHolderController extends Controller implements Initializable {
         email.setText(loggedInUser.getEmail());
         for (Card card: loggedInUser.getTravelCards()) {
             cards.getItems().add(card.getCardNumber());
+            card1.getItems().add(card.getCardNumber());
+            card2.getItems().add(card.getCardNumber());
         }
     }
     /*
@@ -114,6 +118,9 @@ public class CardHolderController extends Controller implements Initializable {
         UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
         ((CardHolder)ua).linkCard(card);
         cards.getItems().add(cardNum);
+        card1.getItems().add(cardNum);
+        card2.getItems().add(cardNum);
+
     }
 
     @FXML
@@ -123,6 +130,8 @@ public class CardHolderController extends Controller implements Initializable {
         UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
         ((CardHolder)ua).unlinkCard(card);
         cards.getItems().remove(cardNum);
+        card1.getItems().remove(cardNum);
+        card2.getItems().remove(cardNum);
     }
 
 
