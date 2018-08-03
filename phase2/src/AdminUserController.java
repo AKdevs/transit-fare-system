@@ -25,9 +25,11 @@ import java.text.DateFormat;
 public class AdminUserController extends Controller implements Initializable {
         @FXML private Button returnToMainButton;
         @FXML private DatePicker systemDate;
+        @FXML private Label powerOnDateWarning;
         @FXML private Button powerOnButton;
         @FXML private Button powerOffButton;
         @FXML private Label systemStatusLabel;
+        @FXML private Label todayDateLabel;
         @FXML private DatePicker dailyReportDate;
         @FXML private Button runDailyReportButton;
         @FXML private ComboBox<String> transitLinesList;
@@ -48,14 +50,31 @@ public class AdminUserController extends Controller implements Initializable {
 
         public void powerOnSystem(ActionEvent event) throws IOException {
             // theTransitSystem.powerOnSystem();
-            system.powerOnSystem();
-            //set currentDate in Transit System
-            String date = systemDate.getValue().toString();
-            system.setCurrentDate(date);
-            //System.out.println(date);
+            LocalDate date = systemDate.getValue();
+            powerOnDateWarning.setTextFill(Color.RED);
+            // warning when date is not selected
+            if (date == null){
+                powerOnDateWarning.setText("Please Select a Date!");
+            }
 
-            //create <date, 0> for attributes in Aggregator and Transit Scheduling
-            showSystemStatus();
+           else if (system.getOperatingStatus().equals("on")) {
+                powerOnDateWarning.setText("The System is currently OPERATING!");
+            }
+
+            else{
+                // clear warning message
+                powerOnDateWarning.setText("");
+                system.powerOnSystem();
+                // set currentDate in Transit System
+                String dateString = date.toString();
+                system.setCurrentDate(dateString);
+                systemDate.setPromptText(dateString);
+                String todayDate = "Today is " + dateString +".";
+                todayDateLabel.setText(todayDate);
+
+                //create <date, 0> for attributes in Aggregator and Transit Scheduling
+                showSystemStatus();
+            }
 
             // powerResult.setText("The Transit System is now operating.");
             //System.out.println(theTransitSystem.getOperatingStatus());
@@ -64,6 +83,8 @@ public class AdminUserController extends Controller implements Initializable {
         public void powerOffSystem(ActionEvent event) throws IOException{
             system.powerOffSystem();
             showSystemStatus();
+            powerOnDateWarning.setText("");
+            todayDateLabel.setText("");
             //theTransitSystem.powerOffSystem();
             //System.out.println(theTransitSystem.getOperatingStatus());
             //powerResult.setText("The Transit System has been shut down.");
@@ -121,6 +142,7 @@ public class AdminUserController extends Controller implements Initializable {
 
             // Convert format of dailyReportDate and transitSchedulingDate to "yyyy-mm-dd"
             Locale.setDefault(Locale.US);
+            systemDate.setConverter(converter);
             dailyReportDate.setConverter(converter);
             transitSchedulingDate.setConverter(converter);
 
