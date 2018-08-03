@@ -123,10 +123,15 @@ public class CardHolder extends UserAccount {
   }
 
 
-  void transferBalance(Card card1, Card card2, double amount) {
-      if (amount <= card1.getBalance()) {
+  String transferBalance(Card card1, Card card2, double amount) {
+      if (amount <= card1.getBalance() && amount >= 0) {
           card1.deductBalance(amount);
           card2.addBalance(amount);
+      }else if (amount > card1.getBalance()){
+          return "Your balance in Card \n"  + card1.getCardNumber()  + " is not enough.";
+      }else if (amount < 0) {
+          return "Please type in \n a positive number";
       }
+      return "Transfer balance \n succeed";
   }
 }

@@ -25,6 +25,7 @@ public class CardHolderController extends Controller implements Initializable {
     @FXML private Label email;
     @FXML private Label monthlyCost;
     @FXML private Label chooseCardInstructions;
+    @FXML private Label transferBalanceInstructions;
 
     // choiceBox info
     @FXML private ChoiceBox cards;
@@ -37,10 +38,12 @@ public class CardHolderController extends Controller implements Initializable {
     @FXML private Button goToCard;
     @FXML private Button linkCard;
     @FXML private Button unlinkCard;
+    @FXML private Button transfer;
 
     // textField info
     @FXML private TextField linkedCardNum;
     @FXML private TextField unlinkedCardNum;
+    @FXML private TextField amount;
 
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -72,6 +75,17 @@ public class CardHolderController extends Controller implements Initializable {
             window.show();
         }
 
+    }
+
+    @FXML
+    void transferButtonPushed(ActionEvent event) {
+        String c1Num = card1.getSelectionModel().getSelectedItem().toString();
+        String c2Num = card2.getSelectionModel().getSelectedItem().toString();
+        double balance = Double.parseDouble(amount.getText());
+        Card c1 = system.getCardManager().findCard(c1Num);
+        Card c2 = system.getCardManager().findCard(c2Num);
+        CardHolder ch = (CardHolder) system.getAccountManager().findUserAccount(accountNumber.getText());
+        transferBalanceInstructions.setText(ch.transferBalance(c1, c2, balance));
     }
 
     @FXML

@@ -61,7 +61,7 @@
             <Button fx:id="unlinkCard" mnemonicParsing="false" onAction="#unlinkCardButtonPushed" text="Unlink Card" />
          </children>
       </VBox>
-      <VBox layoutX="192.0" layoutY="179.0" prefHeight="169.0" prefWidth="158.0">
+      <VBox layoutX="188.0" layoutY="179.0" prefHeight="232.0" prefWidth="158.0">
          <children>
             <Label text="Transfer Balance">
                <font>
@@ -72,6 +72,10 @@
             <ChoiceBox fx:id="card1" prefWidth="150.0" />
             <Label text="To Card" />
             <ChoiceBox fx:id="card2" prefWidth="150.0" />
+            <Label text="Amount" />
+            <TextField fx:id="amount" promptText="amount" />
+            <Button fx:id="transfer" mnemonicParsing="false" onAction="#transferButtonPushed" text="Transfer" />
+            <Label fx:id="transferBalanceInstructions" prefHeight="72.0" prefWidth="158.0" />
          </children>
       </VBox>
       <VBox layoutX="367.0" layoutY="179.0" prefHeight="169.0" prefWidth="158.0">
