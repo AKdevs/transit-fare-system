@@ -126,4 +126,8 @@ public class TripSegment {
   public void setContiSpot(String contiSpot) {
     this.contiSpot = contiSpot;
   }
+
+    public void setCurrentFares(double currentFares) {
+        this.currentFares = currentFares;
+    }
 }
