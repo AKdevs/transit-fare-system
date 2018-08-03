@@ -21,7 +21,7 @@ public class PasswordRecoveryController extends Controller {
         UserAccount account = system.getAccountManager().findUserAccount(accountNumberField.getText());
         if (account != null) {
             system.getAccountManager().setLoggedInUser(account);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("view/SecurityQuestionController.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("view/SecurityQuestion.fxml"));
             Parent newWindowParent = loader.load();
             SecurityQuestionController newWindowController = loader.getController();
             newWindowController.storeState(system);
