@@ -15,6 +15,7 @@ public class UserAccount {
     this.name = name;
     this.email = email;
     this.password = password;
+    this.securityAnswers = new HashMap<>();
   }
 
   void addSecurityAnswers(HashMap<Integer, String> securityAnswers) {

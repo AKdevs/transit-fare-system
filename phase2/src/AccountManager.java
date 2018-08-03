@@ -10,10 +10,11 @@ import java.util.ArrayList;
 class AccountManager implements Serializable{
   private ArrayList<UserAccount> userAccounts;
   private UserAccount loggedInUser;
+  private PasswordManager passwordManager;
 
   AccountManager(){
     this.userAccounts = new ArrayList<>();
-
+    this.passwordManager = new PasswordManager();
     try
     {
       // Reading the object from a file
@@ -38,6 +39,14 @@ class AccountManager implements Serializable{
     {
       System.out.println("ClassNotFoundException is caught");
     }
+  }
+
+  PasswordManager getPasswordManager() {
+    return this.passwordManager;
+  }
+
+  UserAccount getLastCreatedAccount() {
+    return userAccounts.get(userAccounts.size() - 1);
   }
 
   void setLoggedInUser(UserAccount ua) {

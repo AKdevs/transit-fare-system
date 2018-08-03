@@ -88,7 +88,14 @@ public class LoginController extends Controller {
     }
 
     public void showAccountCreation(ActionEvent event) throws Exception {
-        changeWindow(event, "view/CreateAccount.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/CreateAccount.fxml"));
+        Parent createAccountParent = loader.load();
+        CreateAccountController controller = loader.getController();
+        controller.storeState(system);
+        controller.initializeComboBox();
+        Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
+        window.setScene(new Scene(createAccountParent));
+        window.show();
     }
 
     public void showCardCreation(ActionEvent event) throws Exception {
