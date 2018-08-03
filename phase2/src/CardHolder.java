@@ -107,17 +107,31 @@ public class CardHolder extends UserAccount {
 
   /** Prints out the average monthly cost of all cards this account has. */
   double getMonthlyCost() {
-    double result = 0.0;
-    for (Card c : travelCards) {
-      result += c.getTotalFares();
+      double result = 0.0;
+      if (travelCards.size() == 0) {
+          return result;
+    } else {
+      for (Card c : travelCards) {
+        result += c.getTotalFares();
+      }
     }
-    /*
-    System.out.println(
-        "Account " + accountNumber + " cost for the month: " + result / travelCards.size());*/
     return result / travelCards.size();
   }
 
   ArrayList<Card> getTravelCards() {
       return this.travelCards;
+  }
+
+
+  String transferBalance(Card card1, Card card2, double amount) {
+      if (amount <= card1.getBalance() && amount >= 0) {
+          card1.deductBalance(amount);
+          card2.addBalance(amount);
+      }else if (amount > card1.getBalance()){
+          return "Your balance in Card \n"  + card1.getCardNumber()  + " is not enough.";
+      }else if (amount < 0) {
+          return "Please type in \n a positive number";
+      }
+      return "Transfer balance \n succeed";
   }
 }
