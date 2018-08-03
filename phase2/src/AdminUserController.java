@@ -24,6 +24,7 @@ import java.text.DateFormat;
 
 public class AdminUserController extends Controller implements Initializable {
         @FXML private Button returnToMainButton;
+        @FXML private DatePicker systemDate;
         @FXML private Button powerOnButton;
         @FXML private Button powerOffButton;
         @FXML private Label systemStatusLabel;
@@ -48,6 +49,12 @@ public class AdminUserController extends Controller implements Initializable {
         public void powerOnSystem(ActionEvent event) throws IOException {
             // theTransitSystem.powerOnSystem();
             system.powerOnSystem();
+            //set currentDate in Transit System
+            String date = systemDate.getValue().toString();
+            system.setCurrentDate(date);
+            //System.out.println(date);
+
+            //create <date, 0> for attributes in Aggregator and Transit Scheduling
             showSystemStatus();
 
             // powerResult.setText("The Transit System is now operating.");
@@ -102,6 +109,9 @@ public class AdminUserController extends Controller implements Initializable {
             }
         }
         };
+   // public void setScheduling
+
+
 
         @Override
         public void initialize(URL url, ResourceBundle rb) {

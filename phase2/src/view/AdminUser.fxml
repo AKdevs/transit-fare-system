@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="559.0" spacing="8.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="572.0" spacing="8.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="37.0" prefWidth="559.0">
          <children>
@@ -42,19 +42,32 @@
       </Label>
       <HBox alignment="CENTER_LEFT" spacing="10.0">
          <children>
+            <Label text="Date: ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="systemDate" promptText="yyyy-mm-dd" />
             <Button fx:id="powerOnButton" alignment="CENTER" mnemonicParsing="false" onAction="#powerOnSystem" text="Power On">
                <HBox.margin>
-                  <Insets left="30.0" />
+                  <Insets left="38.0" />
                </HBox.margin>
             </Button>
             <Button fx:id="powerOffButton" alignment="CENTER" layoutX="238.0" layoutY="10.0" mnemonicParsing="false" onAction="#powerOffSystem" text="Power Off">
                <HBox.margin>
-                  <Insets left="15.0" />
+                  <Insets left="18.0" />
                </HBox.margin>
             </Button>
+         </children>
+         <VBox.margin>
+            <Insets left="8.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+         <children>
             <Label text="System Status:">
                <HBox.margin>
-                  <Insets left="35.0" />
+                  <Insets left="130.0" />
                </HBox.margin>
                <font>
                   <Font size="14.0" />
@@ -62,16 +75,13 @@
             </Label>
             <Label fx:id="systemStatusLabel">
                <HBox.margin>
-                  <Insets left="15.0" />
+                  <Insets left="30.0" />
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
          </children>
-         <VBox.margin>
-            <Insets left="8.0" />
-         </VBox.margin>
       </HBox>
       <Separator>
          <padding>
