@@ -112,18 +112,6 @@ public class CardHolderController extends Controller implements Initializable {
             card2.getItems().add(card.getCardNumber());
         }
     }
-    /*
-    void initialCardHolderInfo(String accountNum) {
-        accountNumber.setText(accountNum);
-        UserAccount ua = system.getAccountManager().findUserAccount(accountNum);
-        name.setText(ua.getName());
-        email.setText(ua.getEmail());
-        CardHolder ch = (CardHolder)ua;
-        for (Card card: ch.getTravelCards()) {
-            cards.getItems().add(card.getCardNumber());
-        }
-    }
-    */
 
     @FXML
     void linkCardButtonPushed(ActionEvent event) throws IOException {
@@ -134,6 +122,7 @@ public class CardHolderController extends Controller implements Initializable {
         cards.getItems().add(cardNum);
         card1.getItems().add(cardNum);
         card2.getItems().add(cardNum);
+        linkedCardNum.setText("");
 
     }
 
@@ -146,6 +135,7 @@ public class CardHolderController extends Controller implements Initializable {
         cards.getItems().remove(cardNum);
         card1.getItems().remove(cardNum);
         card2.getItems().remove(cardNum);
+        unlinkedCardNum.setText("");
     }
 
 
