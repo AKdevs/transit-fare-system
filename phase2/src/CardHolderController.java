@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class CardHolderController extends Controller implements Initializable {
+public class CardHolderController extends Controller {
 
     // label info
     @FXML private Label accountNumber;
@@ -46,12 +46,6 @@ public class CardHolderController extends Controller implements Initializable {
     @FXML private TextField unlinkedCardNum;
     @FXML private TextField amount;
 
-
-    public void initialize(URL url, ResourceBundle rb) {
-        viewMonthlyCost.setText("View Monthly Cost");
-        logOut.setText("Log Out");
-        goToCard.setText("Go To Card");
-    }
 
 
     @FXML
