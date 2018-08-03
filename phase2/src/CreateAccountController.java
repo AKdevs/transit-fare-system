@@ -15,9 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class CreateAccountController extends Controller {
     @FXML private ComboBox<String> questionBox1;
@@ -48,7 +46,7 @@ public class CreateAccountController extends Controller {
         } else {
             system.getAccountManager().createCardHolderAccount(currentName,
                     currentEmail, currentPassword);
-            HashMap<Integer, String> securityAnswers = new HashMap<>();
+            Map<Integer, String> securityAnswers = new LinkedHashMap<>();
             String question1 = questionBox1.getValue();
             String question2 = questionBox2.getValue();
             List<String> questions = system.getAccountManager().getPasswordManager()

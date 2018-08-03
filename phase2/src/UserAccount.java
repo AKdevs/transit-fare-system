@@ -1,4 +1,6 @@
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /** Class UserAccount is used to define users of the system. */
 public class UserAccount {
@@ -9,17 +11,21 @@ public class UserAccount {
   /** Stores account number of this user account */
   protected String accountNumber;
   protected String password;
-  HashMap<Integer, String> securityAnswers;
+  Map<Integer, String> securityAnswers;
 
   UserAccount(String name, String email, String password) {
     this.name = name;
     this.email = email;
     this.password = password;
-    this.securityAnswers = new HashMap<>();
+    this.securityAnswers = new LinkedHashMap<>();
   }
 
-  void addSecurityAnswers(HashMap<Integer, String> securityAnswers) {
+  void addSecurityAnswers(Map<Integer, String> securityAnswers) {
     this.securityAnswers = securityAnswers;
+  }
+
+  Map<Integer, String> getSecurityAnswers() {
+    return securityAnswers;
   }
 
   /** @return name of UserAccount */

@@ -10,7 +10,7 @@
 
 <VBox prefHeight="375.0" prefWidth="541.0" spacing="10.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PasswordRecoveryController">
    <children>
-      <Label text="Password Recovery: Step 2">
+      <Label text="Password Reset: Step 2">
          <font>
             <Font size="20.0" />
          </font>
