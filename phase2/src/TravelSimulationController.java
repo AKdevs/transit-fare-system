@@ -39,10 +39,6 @@ public class TravelSimulationController extends Controller {
 
 
 
-    public void initialize(URL url, ResourceBundle rb) {
-
-    }
-
     void initialTravelSimulationInfo(String cardNum) {
         Card card = this.system.getCardManager().findCard(cardNum);
         cardNumber.setText(cardNum);
