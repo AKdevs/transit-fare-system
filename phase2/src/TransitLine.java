@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class TransitLine {
+class TransitLine implements Serializable {
   /** Specifies the stops/stations on the transit line, in order */
   private ArrayList<String> points;
   /** Specifies the type of transit line. "B" - bus, "S" - subway */

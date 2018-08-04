@@ -19,7 +19,7 @@ public class EventHandler {
 
   EventHandler(TransitSystem system) throws Exception {
     this.system = system;
-    this.eventsBuffer = new Scanner(new File("/Users/jingjingzhan/Desktop/final/group_0134/phase2/event.txt"));
+    this.eventsBuffer = new Scanner(new File("C:\\Users\\fengw\\Desktop\\group_0134\\phase2\\event.txt"));
   }
 
   /** Reads events from file and performs the corresponding actions. */

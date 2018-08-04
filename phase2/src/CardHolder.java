@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * CardHolder is a person who owns and uses a Card, ie a passenger who travels in the TransitSystem.
  * The person is able to link Cards to his/her account and view his/her travel history.
  */
-public class CardHolder extends UserAccount {
+public class CardHolder extends UserAccount implements Serializable{
 
   private ArrayList<Card> travelCards;
   /* Account Number for CardHolder starts at 10000001 to distinguish with other account/card numbers.*/
