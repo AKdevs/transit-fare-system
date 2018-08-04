@@ -46,21 +46,6 @@
             <Label fx:id="email" />
          </children>
       </VBox>
-      <VBox layoutX="54.0" layoutY="183.0" prefHeight="200.0" prefWidth="150.0">
-         <children>
-            <Button fx:id="viewMonthlyCost" mnemonicParsing="false" onAction="#viewMonthlyCostButtonPushed" prefHeight="27.0" prefWidth="141.0" text="View Monthly Cost" />
-            <Label text="Your monthly cost is:" />
-            <Label fx:id="monthlyCost" />
-            <VBox prefHeight="152.0" prefWidth="100.0">
-               <children>
-                  <TextField fx:id="linkedCardNum" promptText="Card Number" />
-                  <Button fx:id="linkCard" mnemonicParsing="false" onAction="#linkCardButtonPushed" text="Link Card" />
-                  <TextField fx:id="unlinkedCardNum" promptText="Card Number" />
-                  <Button fx:id="unlinkCard" mnemonicParsing="false" onAction="#unlinkCardButtonPushed" text="Unlink Card" />
-               </children>
-            </VBox>
-         </children>
-      </VBox>
       <Button fx:id="logOut" layoutX="430.0" layoutY="364.0" mnemonicParsing="false" onAction="#logOutButtonPushed" prefHeight="46.0" prefWidth="97.0" text="Log Out">
          <font>
             <Font size="14.0" />
@@ -68,5 +53,42 @@
       </Button>
       <Button fx:id="goToCard" layoutX="401.0" layoutY="126.0" mnemonicParsing="false" onAction="#goToCardButtonPushed" text="Go To Card" />
       <Label fx:id="chooseCardInstructions" layoutX="203.0" layoutY="112.0" />
+      <VBox layoutX="18.0" layoutY="179.0" prefHeight="238.0" prefWidth="158.0">
+         <children>
+            <TextField fx:id="linkedCardNum" promptText="Card Number" />
+            <Button fx:id="linkCard" mnemonicParsing="false" onAction="#linkCardButtonPushed" text="Link Card" />
+            <TextField fx:id="unlinkedCardNum" prefHeight="27.0" prefWidth="163.0" promptText="Card Number" />
+            <Button fx:id="unlinkCard" mnemonicParsing="false" onAction="#unlinkCardButtonPushed" text="Unlink Card" />
+            <Label fx:id="linkCardInstructions" prefHeight="138.0" prefWidth="158.0" />
+         </children>
+      </VBox>
+      <VBox layoutX="188.0" layoutY="179.0" prefHeight="232.0" prefWidth="158.0">
+         <children>
+            <Label text="Transfer Balance">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label text="From Card" />
+            <ChoiceBox fx:id="card1" prefWidth="150.0" />
+            <Label text="To Card" />
+            <ChoiceBox fx:id="card2" prefWidth="150.0" />
+            <Label text="Amount" />
+            <TextField fx:id="amount" promptText="amount" />
+            <Button fx:id="transfer" mnemonicParsing="false" onAction="#transferButtonPushed" text="Transfer" />
+            <Label fx:id="transferBalanceInstructions" prefHeight="72.0" prefWidth="158.0" />
+         </children>
+      </VBox>
+      <VBox layoutX="367.0" layoutY="179.0" prefHeight="169.0" prefWidth="158.0">
+         <children>
+            <Button fx:id="viewMonthlyCost" mnemonicParsing="false" onAction="#viewMonthlyCostButtonPushed" prefHeight="27.0" prefWidth="141.0" text="View Monthly Cost" />
+            <Label text="Your monthly cost is:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="monthlyCost" />
+         </children>
+      </VBox>
   </children>
 </AnchorPane>

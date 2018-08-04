@@ -31,23 +31,25 @@ class TripManager {
         // if it is a legal entry
         if (lastTrip.hasExit()) {
           int duration = fareCalculator.calculateDuration(lastTrip.getEnterTime(), time);
-          // if it the enter of a continuous trip
+          // if it is the enter of a continuous trip
           if (lastTrip.getExitSpot().equals(spot)
               && duration < fareCalculator.getMaximumDuration()) {
             lastTrip.setContiSpot(spot);
             if (type.equals("B")) {
               lastTrip.setTransitType("continueB");
-              double fares = fareCalculator.calculateTripFares(lastTrip);
+              double fares = fareCalculator.calculateContiBusFare(lastTrip.getCurrentFares());
               // apply Observer pattern here? what is observable?
               //observers are: Card, TransitSystem
               updateFares(fares, card, date);
+            }else {
+                lastTrip.setTransitType("continueS");
             }
-            lastTrip.setTransitType("continueS");
           } else { // if it is a new trip
               addNewTrip(time, spot, card, date, type);
             if (type.equals("B")) {
                 TripSegment updatedLastTrip = allTrips.get(allTrips.size() - 1);
               double fares = fareCalculator.calculateTripFares(updatedLastTrip);
+              updatedLastTrip.setCurrentFares(fares);
               updateFares(fares, card, date);
               }
           }
@@ -64,6 +66,7 @@ class TripManager {
           if (type.equals("B")){
           TripSegment updatedLastTrip = card.getTrips().get(card.getTrips().size() - 1);
           double fares = fareCalculator.calculateTripFares(updatedLastTrip);
+          updatedLastTrip.setCurrentFares(fares);
           updateFares(fares, card, date);
           }
       }
@@ -85,10 +88,16 @@ class TripManager {
     } else { // normal legal exit
       current.setExitSpot(spot);
       current.setExitTime(time);
-      if (!current.getTransitType().equals("B") && !current.getTransitType().equals("continueB")) {
+      if (current.getTransitType().equals("S")) {
         double fares = fareCalculator.calculateTripFares(current);
+        current.setCurrentFares(fares);
         updateFares(fares, card, date);
-        }
+        }else if (current.getTransitType().equals("continueS")) {
+          int distance = fareCalculator.calculateStationsReached(current);
+          double fares = fareCalculator.calculateContiSubFare(current.getCurrentFares(), distance);
+          current.setCurrentFares(fares);
+          updateFares(fares, card, date);
+      }
         aggregator.addNumberOfStation(date, fareCalculator.calculateStationsReached(current));
     }
     if (current.getTransitType().equals("continueB")

@@ -20,7 +20,7 @@ public class FareCalculator {
     this.transitLines = transitLines;
   }
 
-  private double calculateContiBusFare(double currentFares) {
+  double calculateContiBusFare(double currentFares) {
     double fare;
     if (currentFares == fareCap) {
       fare = 0.0;
@@ -32,7 +32,7 @@ public class FareCalculator {
     return fare;
   }
 
-  private double calculateContiSubFare(double currentFares, int distance) {
+  double calculateContiSubFare(double currentFares, int distance) {
     double fare;
     double tripFare = distance * stationFare;
     if (currentFares == fareCap) {
@@ -45,7 +45,7 @@ public class FareCalculator {
     return fare;
   }
 
-  public double calculateTripFares(TripSegment ts) {
+  double calculateTripFares(TripSegment ts) {
     double result = 0.0;
     if (ts.getTransitType().equals("B")) {
       result = busFare;

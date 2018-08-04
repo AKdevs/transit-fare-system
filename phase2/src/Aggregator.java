@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Aggregator implements Serializable{
+public class Aggregator {
     /** Stores the total amount of accumulated fares in the system by date */
     private HashMap<String, Double> allFares;
 

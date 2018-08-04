@@ -55,29 +55,16 @@ public class LoginController extends Controller {
                 window.setScene(new Scene(adminUserParent));
                 window.show();
             } else {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("view/CardHolder.fxml"));
-                Parent cardHolderParent = loader.load();
-
-                Scene cardHolderScene = new Scene(cardHolderParent);
-
-                // read user input and set value in CardHolder window
-                CardHolderController cht = loader.getController();
-                cht.storeState(system);
-                cht.initialCardHolderInfo(currentAccountNumber);
-
-                // get the Stage info
-                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-                window.setScene(cardHolderScene);
-                window.show();
+                system.getAccountManager().setLoggedInUser(currentAccount);
+                changeWindowPassAccount(event, "view/CardHolder.fxml");
             }
+
         } else {
             loginInstructions.setText("Invalid username or password.");
         }
     }
 
     private UserAccount verifyLogin(String currentAccountNumber, String currentPassword) {
-        System.out.println(system == null);
         UserAccount currentAccount = system.getAccountManager().findUserAccount(currentAccountNumber);
         // check for password
         if (currentAccount != null) {
@@ -101,7 +88,14 @@ public class LoginController extends Controller {
     }
 
     public void showAccountCreation(ActionEvent event) throws Exception {
-        changeWindow(event, "view/CreateAccount.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/CreateAccount.fxml"));
+        Parent createAccountParent = loader.load();
+        CreateAccountController controller = loader.getController();
+        controller.storeState(system);
+        controller.initializeComboBox();
+        Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
+        window.setScene(new Scene(createAccountParent));
+        window.show();
     }
 
     public void showCardCreation(ActionEvent event) throws Exception {

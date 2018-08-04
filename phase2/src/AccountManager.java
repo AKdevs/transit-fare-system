@@ -7,13 +7,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /** Manage all accounts which are stored in TransitSystem. */
-class AccountManager implements Serializable{
+class AccountManager {
   private ArrayList<UserAccount> userAccounts;
-  private AdminUser root;
+  private UserAccount loggedInUser;
+  private PasswordManager passwordManager;
 
   AccountManager(){
     this.userAccounts = new ArrayList<>();
-
+    this.passwordManager = new PasswordManager();
     try
     {
       // Reading the object from a file
@@ -40,12 +41,20 @@ class AccountManager implements Serializable{
     }
   }
 
-  void createRootAdmin() {
-    this.root = new AdminUser("root", "", "root");
+  PasswordManager getPasswordManager() {
+    return this.passwordManager;
   }
 
-  AdminUser getRootAdmin() {
-    return this.root;
+  UserAccount getLastCreatedAccount() {
+    return userAccounts.get(userAccounts.size() - 1);
+  }
+
+  void setLoggedInUser(UserAccount ua) {
+    loggedInUser = ua;
+  }
+
+  UserAccount getLoggedInUser() {
+    return loggedInUser;
   }
 
   /**
@@ -68,14 +77,10 @@ class AccountManager implements Serializable{
    */
   void createAdminAccount(String name, String email, String password) {
     AdminUser newAccount = new AdminUser(name, email, password);
-    passAggregator(newAccount);
     addUserAccount(newAccount);
     System.out.println("AdminUser Account " + newAccount.getAccountNum() + " created");
   }
 
-  void passAggregator(AdminUser au) {
-    au.setAggregator(root.getAggregator());
-  }
   /**
    * Finds and returns user account for given accountNumber, null if not found.
    *

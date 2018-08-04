@@ -1,5 +1,8 @@
+import java.io.Serializable;
+import java.util.*;
+
 /** Class UserAccount is used to define users of the system. */
-public class UserAccount {
+public class UserAccount implements Serializable{
   /** Stores name of this user account */
   private String name;
   /** Stores e-mail of this user account */
@@ -7,11 +10,34 @@ public class UserAccount {
   /** Stores account number of this user account */
   protected String accountNumber;
   protected String password;
+  protected List<Integer> questionIndexList;
+  protected List<String> answerList;
 
   UserAccount(String name, String email, String password) {
     this.name = name;
     this.email = email;
     this.password = password;
+    this.questionIndexList = new ArrayList<>();
+    this.answerList = new ArrayList<>();
+  }
+
+  void setPassword(String password) {
+    this.password = password;
+  }
+
+  void setQuestionIndexList(List<Integer> indexList) {
+    questionIndexList = indexList;
+  }
+
+  void setAnswerList(List<String> answerList) {
+    this.answerList = answerList;
+  }
+
+  List<Integer> getQuestionIndexList() {
+    return questionIndexList;
+  }
+  List<String> getAnswerList() {
+    return answerList;
   }
 
   /** @return name of UserAccount */

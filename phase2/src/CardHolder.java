@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -31,10 +32,11 @@ public class CardHolder extends UserAccount {
     if (!(card.getOwner() == null)) {
       // If card is currently linked to another CardHolder, it cannot be linked to this CardHolder.
       System.out.println("Action denied. This card is currently linked to another account.");
-    } else {
+    } else if (!card.isLinked()){
       // link a valid card to this CardHolder
       this.travelCards.add(card);
       card.setOwner(this);
+      card.linkAccount();
       card.linkAccount();
       System.out.println(
           "Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
@@ -47,11 +49,16 @@ public class CardHolder extends UserAccount {
    * @param card the card that is to be unlinked
    */
   void unlinkCard(Card card) {
-    this.travelCards.remove(card);
-    card.setOwner(null);
-    card.unlinkAccount();
-    System.out.println(
-        "Card " + card.getCardNumber() + " unlinked to CardHolder Account " + this.getAccountNum());
+    if (travelCards.contains(card) && card.isLinked()) {
+      this.travelCards.remove(card);
+      card.setOwner(null);
+      card.unlinkAccount();
+      System.out.println(
+          "Card "
+              + card.getCardNumber()
+              + " unlinked to CardHolder Account "
+              + this.getAccountNum());
+    }
   }
 
   /**
@@ -107,17 +114,31 @@ public class CardHolder extends UserAccount {
 
   /** Prints out the average monthly cost of all cards this account has. */
   double getMonthlyCost() {
-    double result = 0.0;
-    for (Card c : travelCards) {
-      result += c.getTotalFares();
+      double result = 0.0;
+      if (travelCards.size() == 0) {
+          return result;
+    } else {
+      for (Card c : travelCards) {
+        result += c.getTotalFares();
+      }
     }
-    /*
-    System.out.println(
-        "Account " + accountNumber + " cost for the month: " + result / travelCards.size());*/
     return result / travelCards.size();
   }
 
   ArrayList<Card> getTravelCards() {
       return this.travelCards;
+  }
+
+
+  String transferBalance(Card card1, Card card2, double amount) {
+      if (amount <= card1.getBalance() && amount >= 0) {
+          card1.deductBalance(amount);
+          card2.addBalance(amount);
+      }else if (amount > card1.getBalance()){
+          return "Your balance in Card \n"  + card1.getCardNumber()  + " is not enough.";
+      }else if (amount < 0) {
+          return "Please type in \n a positive number";
+      }
+      return "Transfer balance \n succeed";
   }
 }
