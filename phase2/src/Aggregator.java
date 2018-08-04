@@ -160,17 +160,26 @@ public class Aggregator implements Serializable{
      * @param date the date which AdminUser would like to view the report for
      */
 
-    void getDailyReport(String date) {
-        System.out.println(
+    String getDailyReport(String date) {
+
+        String dailyReport = "\n";
+        dailyReport = dailyReport + "The amount of all fares collected is $" + getDailyFares(date)
+                + ".\n";
+        dailyReport = dailyReport + "The number of stations reached by travellers is " + getDailyStation(date)
+                + ".\n";
+
+        return dailyReport;
+
+        /*System.out.println(
                 "All fares received by transit system on "
                         + date
                         + ": "
-                        + getDailyFares(date));
-        System.out.println(
+                        + getDailyFares(date)); */
+        /*System.out.println(
                 "Number of stations reached by travellers on "
                         + date
                         + ": "
-                        + getDailyStation(date));
+                        + getDailyStation(date)); */
     }
 
     public void initializeDate(String date) {
