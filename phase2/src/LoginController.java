@@ -106,4 +106,8 @@ public class LoginController extends Controller {
         changeWindow(event, "view/PasswordRecovery.fxml");
     }
 
+    public void closeButtonPushed(ActionEvent event) {
+        Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
+        window.close();
+    }
 }

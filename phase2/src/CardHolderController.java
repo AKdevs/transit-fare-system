@@ -22,7 +22,7 @@ public class CardHolderController extends Controller {
     // label info
     @FXML private Label accountNumber;
     @FXML private Label name;
-    @FXML private Label email;
+    @FXML private TextField email;
     @FXML private Label monthlyCost;
     @FXML private Label chooseCardInstructions;
     @FXML private Label transferBalanceInstructions;
