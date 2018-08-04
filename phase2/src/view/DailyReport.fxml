@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="453.0" spacing="10.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="Transit System Daily Report">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="10.0" />
+         </VBox.margin>
+      </Label>
+      <HBox>
+         <children>
+            <Region prefHeight="20.0" prefWidth="300.0" />
+            <Label text="Date: ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="dateLabel" text="2018-08-08">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <VBox>
+         <children>
+            <HBox alignment="BOTTOM_LEFT">
+               <children>
+                  <Label text="The amount of all fares collected:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="10.0">
+               <children>
+                  <Label text="The cost of operation:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="30.0">
+               <children>
+                  <Label text="Operating profit of the day:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+         </children>
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </VBox>
+      <VBox layoutX="20.0" layoutY="92.0">
+         <children>
+            <HBox alignment="BOTTOM_LEFT">
+               <children>
+                  <Label text="The number of stations reached by travellers:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="10.0">
+               <children>
+                  <Label text="The number of stations serviced by transit:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="30.0">
+               <children>
+                  <Label text="Reached/Serviced ratio:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </VBox>
+      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <TableView prefHeight="100.0" prefWidth="308.0">
+              <columns>
+                <TableColumn maxWidth="160.0" minWidth="99.0" prefWidth="102.0" sortable="false">
+                    <graphic>
+                        <Label text="Transit Line" textAlignment="CENTER" wrapText="true" />
+                    </graphic>
+                </TableColumn>
+                <TableColumn maxWidth="160.0" minWidth="99.0" prefWidth="102.0" sortable="false">
+                    <graphic>
+                        <Label text="Number of Trips Operated" textAlignment="CENTER" wrapText="true" />
+                    </graphic>
+                </TableColumn>
+                  <TableColumn maxWidth="160.0" minWidth="99.0" prefWidth="102.0" sortable="false">
+                      <graphic>
+                          <Label text="Ridership" textAlignment="CENTER" wrapText="true" />
+                      </graphic>
+                  </TableColumn>
+                  <TableColumn maxWidth="160.0" minWidth="99.0" prefWidth="102.0" sortable="false">
+                      <graphic>
+                          <Label text="Average Riders per Trip" textAlignment="CENTER" wrapText="true" />
+                      </graphic>
+                  </TableColumn>
+              </columns>
+            </TableView>
+         </children>
+         <VBox.margin>
+            <Insets top="8.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+   <padding>
+      <Insets left="10.0" top="10.0" />
+   </padding>
+</VBox>
