@@ -25,6 +25,10 @@ public class UserAccount implements Serializable{
     this.password = password;
   }
 
+  String getPassword() {
+    return password;
+  }
+
   void setQuestionIndexList(List<Integer> indexList) {
     questionIndexList = indexList;
   }

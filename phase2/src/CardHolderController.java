@@ -5,10 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -23,6 +20,8 @@ public class CardHolderController extends Controller {
     @FXML private Label accountNumber;
     @FXML private Label name;
     @FXML private TextField email;
+    @FXML private PasswordField passField;
+    @FXML private PasswordField confirmPassField;
     @FXML private Label monthlyCost;
     @FXML private Label chooseCardInstructions;
     @FXML private Label transferBalanceInstructions;
@@ -83,6 +82,7 @@ public class CardHolderController extends Controller {
         transferBalanceInstructions.setText(ch.transferBalance(c1, c2, balance));
     }
 
+
     @FXML
     void viewMonthlyCostButtonPushed(ActionEvent event) {
         UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
@@ -101,6 +101,9 @@ public class CardHolderController extends Controller {
         accountNumber.setText(loggedInUser.getAccountNum());
         name.setText(loggedInUser.getName());
         email.setText(loggedInUser.getEmail());
+        passField.setText(loggedInUser.getPassword());
+        confirmPassField.setText(loggedInUser.getPassword());
+        monthlyCost.setText("Monthly Cost:      " + Double.toString(loggedInUser.getMonthlyCost()));
         for (Card card: loggedInUser.getTravelCards()) {
             cards.getItems().add(card.getCardNumber());
             card1.getItems().add(card.getCardNumber());
