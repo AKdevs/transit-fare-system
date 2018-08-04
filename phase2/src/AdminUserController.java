@@ -31,6 +31,8 @@ public class AdminUserController extends Controller implements Initializable {
         @FXML private Label systemStatusLabel;
         @FXML private Label todayDateLabel;
         @FXML private DatePicker dailyReportDate;
+        @FXML private Label dailyReportDateWarning;
+        @FXML private Label dailyReportUnavailableWarning;
         @FXML private Button runDailyReportButton;
         @FXML private ComboBox<String> transitLinesList;
         @FXML private DatePicker transitSchedulingDate;
@@ -105,6 +107,29 @@ public class AdminUserController extends Controller implements Initializable {
                 systemStatusLabel.setTextFill(Color.ORANGE);
             }
         }
+
+    public void showDailyReport(ActionEvent event) throws IOException {
+        LocalDate date = dailyReportDate.getValue();
+        dailyReportDateWarning.setTextFill(Color.RED);
+        // warning when date is not selected
+        if (date == null){
+            dailyReportDateWarning.setText("Please Select a Date!");
+        }
+        else {
+            String dateString = date.toString();
+            dailyReportDateWarning.setText("");
+            dailyReportUnavailableWarning.setText("");
+            if (system.getTripManager().getAggregator().isReportAvailable(dateString)) {
+
+            }
+            else {
+                dailyReportUnavailableWarning.setText("No report is available for the selected date.\n" +
+                        "Please select another date.");
+                dailyReportUnavailableWarning.setTextFill(Color.RED);
+            }
+        }
+
+    }
 
         //java.util.regex is not available
     /**
