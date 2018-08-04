@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public class TripSegment{
+public class TripSegment implements Serializable{
 
   private String enterSpot;
   private String exitSpot;
