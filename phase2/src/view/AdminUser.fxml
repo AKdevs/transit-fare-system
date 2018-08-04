@@ -16,7 +16,7 @@
    <children>
       <AnchorPane>
          <children>
-            <Label fx:id="todayDateLabel" layoutX="220.0" layoutY="-3.0" textFill="#261590">
+            <Label fx:id="todayDateLabel" layoutX="235.0" layoutY="-3.0" textFill="#261590">
                <font>
                   <Font size="13.0" />
                </font>
@@ -97,14 +97,28 @@
             <Insets left="8.0" right="30.0" />
          </padding>
       </Separator>
-      <Label layoutX="10.0" layoutY="60.0" text="Daily Report">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <padding>
-            <Insets left="8.0" />
-         </padding>
-      </Label>
+      <HBox>
+         <children>
+            <Label text="Daily Report">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+            </Label>
+            <Label fx:id="dailyReportUnavailableWarning">
+               <HBox.margin>
+                  <Insets left="130.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="dailyReportDateWarning">
+               <HBox.margin>
+                  <Insets left="15.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
       <HBox spacing="15.0">
          <children>
             <Label text="Date: ">
@@ -113,7 +127,7 @@
                </font>
             </Label>
             <DatePicker fx:id="dailyReportDate" promptText="yyyy-mm-dd" />
-            <Button fx:id="runDailyReportButton" mnemonicParsing="false" text="Run Daily Report">
+            <Button fx:id="runDailyReportButton" mnemonicParsing="false" onAction="#showDailyReport" text="Run Daily Report">
                <HBox.margin>
                   <Insets left="60.0" />
                </HBox.margin>

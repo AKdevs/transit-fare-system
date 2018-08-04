@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Aggregator {
     /** Stores the total amount of accumulated fares in the system by date */
@@ -14,9 +16,13 @@ public class Aggregator {
     /** Stores the number of stations reached in the entire system by date */
     private HashMap<String, Integer> numberOfStations;
 
+    /** Stores the date when the daily report would be available*/
+    private Set<String> availableDate;
+
     Aggregator(){
         this.allFares = new HashMap<>();
         this.numberOfStations = new HashMap<>();
+        this.availableDate = new HashSet<String>();
 /*
       try
       {
@@ -160,25 +166,39 @@ public class Aggregator {
      * @param date the date which AdminUser would like to view the report for
      */
 
-    void getDailyReport(String date) {
-        System.out.println(
+    String getDailyReport(String date) {
+
+        String dailyReport = "\n";
+        dailyReport = dailyReport + "The amount of all fares collected is $" + getDailyFares(date)
+                + ".\n";
+        dailyReport = dailyReport + "The number of stations reached by travellers is " + getDailyStation(date)
+                + ".\n";
+
+        return dailyReport;
+
+        /*System.out.println(
                 "All fares received by transit system on "
                         + date
                         + ": "
-                        + getDailyFares(date));
-        System.out.println(
+                        + getDailyFares(date)); */
+        /*System.out.println(
                 "Number of stations reached by travellers on "
                         + date
                         + ": "
-                        + getDailyStation(date));
+                        + getDailyStation(date)); */
     }
 
     public void initializeDate(String date) {
+        availableDate.add(date);
         if (!(allFares.containsKey(date))){
             allFares.put(date,0.0);
         }
         if (!(numberOfStations.containsKey(date))) {
             numberOfStations.put(date,0);
         }
+    }
+
+    public boolean isReportAvailable (String date) {
+        return availableDate.contains(date);
     }
 }
