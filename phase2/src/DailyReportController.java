@@ -25,6 +25,20 @@ import java.text.DateFormat;
 public class DailyReportController extends Controller implements Initializable {
 
     @FXML private Label dateLabel;
+    @FXML private Label fareLabel;
+    @FXML private Label costLabel;
+    @FXML private Label profitLabel;
+    @FXML private Label numStationReachedLabel;
+    @FXML private Label numStationServicedLabel;
+    @FXML private Label reachServiceRatioLabel;
+    @FXML private TableView transitStatTable;
+    @FXML private TableColumn transitLineColumn;
+    @FXML private TableColumn numTripsColumn;
+    @FXML private TableColumn ridershipColumn;
+    @FXML private TableColumn avgRiderColumn;
+
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="453.0" spacing="10.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="453.0" spacing="10.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="Transit System Daily Report">
          <font>
@@ -47,6 +46,8 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <Region prefWidth="120.0" />
+                  <Label fx:id="fareLabel" text="150" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -59,6 +60,8 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <Region prefWidth="189.0" />
+                  <Label fx:id="costLabel" text="200" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -71,6 +74,8 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <Region prefWidth="155.0" />
+                  <Label fx:id="profitLabel" text="50" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -90,6 +95,8 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <Region prefWidth="48.0" />
+                  <Label fx:id="numStationReachedLabel" text="15" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -102,6 +109,8 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <Region prefWidth="64.0" />
+                  <Label fx:id="numStationServicedLabel" text="30" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -114,6 +123,8 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <Region prefWidth="180.0" />
+                  <Label fx:id="reachServiceRatioLabel" text="30" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -124,31 +135,34 @@
             <Insets top="10.0" />
          </VBox.margin>
       </VBox>
-      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="200.0" prefWidth="433.0">
          <children>
-            <TableView prefHeight="100.0" prefWidth="308.0">
+            <TableView fx:id="transitStatTable" prefHeight="200.0">
               <columns>
-                <TableColumn maxWidth="160.0" minWidth="99.0" prefWidth="102.0" sortable="false">
+                <TableColumn fx:id="transitLineColumn" maxWidth="160.0" minWidth="99.0" prefWidth="102.0" sortable="false">
                     <graphic>
                         <Label text="Transit Line" textAlignment="CENTER" wrapText="true" />
                     </graphic>
                 </TableColumn>
-                <TableColumn maxWidth="160.0" minWidth="99.0" prefWidth="102.0" sortable="false">
+                <TableColumn fx:id="numTripsColumn" maxWidth="160.0" minWidth="99.0" prefWidth="102.0" sortable="false">
                     <graphic>
-                        <Label text="Number of Trips Operated" textAlignment="CENTER" wrapText="true" />
+                        <Label prefHeight="40.0" text="Number of Trips Operated" textAlignment="CENTER" wrapText="true" />
                     </graphic>
                 </TableColumn>
-                  <TableColumn maxWidth="160.0" minWidth="99.0" prefWidth="102.0" sortable="false">
+                  <TableColumn fx:id="ridershipColumn" maxWidth="160.0" minWidth="99.0" prefWidth="102.0" sortable="false">
                       <graphic>
                           <Label text="Ridership" textAlignment="CENTER" wrapText="true" />
                       </graphic>
                   </TableColumn>
-                  <TableColumn maxWidth="160.0" minWidth="99.0" prefWidth="102.0" sortable="false">
+                  <TableColumn fx:id="avgRiderColumn" maxWidth="160.0" minWidth="99.0" prefWidth="102.0" sortable="false">
                       <graphic>
                           <Label text="Average Riders per Trip" textAlignment="CENTER" wrapText="true" />
                       </graphic>
                   </TableColumn>
               </columns>
+               <HBox.margin>
+                  <Insets left="12.0" />
+               </HBox.margin>
             </TableView>
          </children>
          <VBox.margin>
