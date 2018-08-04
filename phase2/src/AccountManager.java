@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /** Manage all accounts which are stored in TransitSystem. */
-class AccountManager implements Serializable{
+class AccountManager {
   private ArrayList<UserAccount> userAccounts;
   private UserAccount loggedInUser;
   private PasswordManager passwordManager;

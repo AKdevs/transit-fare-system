@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class CardManager implements Serializable {
+public class CardManager {
   /** Keeps a track of all cards in the system. */
   private ArrayList<Card> cards;
 

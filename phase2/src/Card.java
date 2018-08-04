@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /** Card is used to tap in and tap out when enter and exit a stop or station. */
-class Card {
+class Card implements Serializable {
 
   /** Stores number assigned to this card */
   private String cardNumber;

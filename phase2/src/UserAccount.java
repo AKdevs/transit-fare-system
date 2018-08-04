@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.*;
 
 /** Class UserAccount is used to define users of the system. */
-public class UserAccount {
+public class UserAccount implements Serializable{
   /** Stores name of this user account */
   private String name;
   /** Stores e-mail of this user account */
