@@ -1,10 +1,6 @@
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,10 +15,14 @@ public class Aggregator {
     /** Stores the date when the daily report would be available*/
     private Set<String> availableDate;
 
+    /** Stores the daily stat information of Transit Line by date*/
+    private HashMap<String, TransitLineDailyStat> transitLineDailySummary;
+
     Aggregator(){
         this.allFares = new HashMap<>();
         this.numberOfStations = new HashMap<>();
         this.availableDate = new HashSet<String>();
+        this.transitLineDailySummary = new HashMap<>();
 /*
       try
       {
@@ -188,6 +188,29 @@ public class Aggregator {
                         + getDailyStation(date)); */
     }
 
+    /**
+     * Gets TransitLineDailyStat with date
+     * @param date
+     * @return TransitLineDailyStat
+     */
+    public TransitLineDailyStat getTransitLineDailyStat (String date) {
+        return transitLineDailySummary.get(date);
+    }
+
+    /**
+     * Adds <date, TransitLineDailyStat> to transitLineDailySummary.
+     * @param date
+     * @param tLDS
+     */
+    public void addTransitLineDailyStat (String date, TransitLineDailyStat tLDS){
+        transitLineDailySummary.put(date, tLDS);
+    }
+
+    /**
+     *  Sets default value for attributes when Transit System is powered on for the
+     *  first time on date.
+     * @param date
+     */
     public void initializeDate(String date) {
         availableDate.add(date);
         if (!(allFares.containsKey(date))){
@@ -196,6 +219,11 @@ public class Aggregator {
         if (!(numberOfStations.containsKey(date))) {
             numberOfStations.put(date,0);
         }
+        if (!(transitLineDailySummary.containsKey(date))) {
+            TransitLineDailyStat tLDS = new TransitLineDailyStat();
+            transitLineDailySummary.put(date, tLDS);
+        }
+
     }
 
     public boolean isReportAvailable (String date) {
