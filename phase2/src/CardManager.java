@@ -66,7 +66,18 @@ public class CardManager {
    */
   private void addCard(Card newCard) {
 
+    int cardnum;
+    if (cards.size() == 0){
+      cardnum = 30000001;
+    } else {
+      int lastnumber;
+      lastnumber = Integer.parseInt(cards.get(cards.size() -1).getCardNumber());
+      cardnum = lastnumber + 1;
+    }
+
     cards.add(newCard);
+    newCard.setCardNumber(Integer.toString(cardnum));
+
 
     try
     {
