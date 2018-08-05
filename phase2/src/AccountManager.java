@@ -127,7 +127,7 @@ class AccountManager {
       out.close();
       file.close();
 
-      System.out.println("Object has been serialized");
+      System.out.println("AdminUser has been serialized");
 
     }
     catch(IOException ex)
