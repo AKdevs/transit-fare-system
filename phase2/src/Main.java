@@ -10,7 +10,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         TransitSystem mainSystem = new TransitSystem();
         // Create base administrator, this will be moved to serialization
-        mainSystem.getAccountManager().createAdminAccount("sysadmin", "admin@gmail.com", "sysadmin");
+        // mainSystem.getAccountManager().createAdminAccount("sysadmin", "admin@gmail.com", "sysadmin");
 
         //FXMLLoader loginLoader = new FXMLLoader();
         //loginLoader.setLocation(getClass().getResource("view/Login.fxml"));
@@ -32,6 +32,7 @@ public class Main extends Application {
         primaryStage.setTitle("Login");
         //Scene scene = new Scene(root, 534, 400);
         primaryStage.setScene(loginScene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

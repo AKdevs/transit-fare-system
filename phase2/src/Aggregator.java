@@ -108,7 +108,7 @@ public class Aggregator {
         out.close();
         file.close();
 
-        System.out.println("Object has been serialized");
+        System.out.println("Fares has been serialized");
 
       }
       catch(IOException ex)
@@ -150,7 +150,7 @@ public class Aggregator {
         out.close();
         file.close();
 
-        System.out.println("Object has been serialized");
+        System.out.println("Station has been serialized");
 
       }
       catch(IOException ex)

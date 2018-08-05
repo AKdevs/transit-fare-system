@@ -25,12 +25,20 @@ public class UserAccount implements Serializable{
     this.password = password;
   }
 
+  String getPassword() {
+    return password;
+  }
+
   void setQuestionIndexList(List<Integer> indexList) {
     questionIndexList = indexList;
   }
 
   void setAnswerList(List<String> answerList) {
     this.answerList = answerList;
+  }
+
+  public void setAccountNumber(String accountNumber) {
+    this.accountNumber = accountNumber;
   }
 
   List<Integer> getQuestionIndexList() {
@@ -64,6 +72,7 @@ public class UserAccount implements Serializable{
     this.name = newName;
     System.out.println("Account " + this.getAccountNum() + " name changed to " + this.name);
   }
+
 
   /* Functionality handled by Card for phase 1
   public String viewBalance(Card card){

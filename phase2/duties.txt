@@ -1,0 +1,22 @@
+Phase 2 Duties
+
+Atharva Karandikar
+- Created the view and controllers for the following windows (see view package for windows)
+    - CreateAccount
+    - CreateCard
+    - Login
+    - Password Recovery, Security Question, Password Reset
+
+- Implemented Login system
+    - Extended UserAccount functionality by adding password field
+    and PasswordManager class to manage it
+    - Created security question system for password reset
+
+- Ensured consistency of UI
+    - Fixing layout of windows where required
+
+Isabel Zhan
+
+Yang Chen
+
+Amy Feng
