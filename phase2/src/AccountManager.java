@@ -89,7 +89,7 @@ class AccountManager {
     AdminUser newAccount = new AdminUser(name, email, password);
     int accountnum;
     if (userAccounts.size() == 0){
-      accountnum = 10000001;
+      accountnum = 20000001;
     } else {
       int lastnumber;
       lastnumber = Integer.parseInt(userAccounts.get(userAccounts.size() -1).getAccountNum());
