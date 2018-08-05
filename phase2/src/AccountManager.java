@@ -3,20 +3,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /** Manage all accounts which are stored in TransitSystem. */
 class AccountManager {
   private ArrayList<CardHolder> cardholders;
-  private ArrayList<AdminUser> adminusers;
+  private ArrayList<AdminUser> adminUsers;
   private ArrayList<UserAccount> userAccounts;
   private UserAccount loggedInUser;
   private PasswordManager passwordManager;
 
   AccountManager(){
     this.cardholders = new ArrayList<>();
-    this.adminusers = new ArrayList<>();
+    this.adminUsers = new ArrayList<>();
     this.userAccounts = new ArrayList<>();
     this.passwordManager = new PasswordManager();
     try
@@ -27,7 +26,7 @@ class AccountManager {
 
       // Method for deserialization of object
       cardholders = (ArrayList<CardHolder>)in.readObject();
-      adminusers = (ArrayList<AdminUser>)in.readObject();
+      adminUsers = (ArrayList<AdminUser>)in.readObject();
       userAccounts = (ArrayList<UserAccount>)in.readObject();
 
       in.close();
@@ -72,13 +71,7 @@ class AccountManager {
   void createCardHolderAccount(String name, String email, String password) {
     CardHolder newAccount = new CardHolder(name, email, password);
     int accountnum;
-    if (cardholders.size() == 0){
-      accountnum = 10000001;
-    } else {
-      int lastnumber;
-      lastnumber = Integer.parseInt(cardholders.get(cardholders.size() -1).getAccountNum());
-      accountnum = lastnumber + 1;
-    }
+    accountnum = 1000000 + cardholders.size();
 
     cardholders.add(newAccount);
     userAccounts.add(newAccount);
@@ -115,16 +108,8 @@ class AccountManager {
    */
   void createAdminAccount(String name, String email, String password) {
     AdminUser newAccount = new AdminUser(name, email, password);
-    int accountnum;
-    if (adminusers.size() == 0){
-      accountnum = 20000001;
-    } else {
-      int lastnumber;
-      lastnumber = Integer.parseInt(adminusers.get(adminusers.size() -1).getAccountNum());
-      accountnum = lastnumber + 1;
-    }
-
-    adminusers.add(newAccount);
+    int accountnum = 2000000 + adminUsers.size();
+    adminUsers.add(newAccount);
     userAccounts.add(newAccount);
     newAccount.setAccountNumber(Integer.toString(accountnum));
     System.out.println("AdminUser Account " + newAccount.getAccountNum() + " created");
@@ -136,7 +121,7 @@ class AccountManager {
       ObjectOutputStream out = new ObjectOutputStream(file);
 
       // Method for serialization of object
-      out.writeObject(adminusers);
+      out.writeObject(adminUsers);
       out.writeObject(userAccounts);
 
       out.close();
