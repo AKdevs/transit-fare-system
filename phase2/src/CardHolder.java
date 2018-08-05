@@ -1,3 +1,9 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -5,12 +11,11 @@ import java.util.ArrayList;
  * CardHolder is a person who owns and uses a Card, ie a passenger who travels in the TransitSystem.
  * The person is able to link Cards to his/her account and view his/her travel history.
  */
-public class CardHolder extends UserAccount {
+public class CardHolder extends UserAccount implements Serializable{
 
 
   private ArrayList<Card> travelCards;
   /* Account Number for CardHolder starts at 10000001 to distinguish with other account/card numbers.*/
-  private static int nextAccountNum = 10000001;
 
   private double accountBalance;
 
@@ -18,11 +23,34 @@ public class CardHolder extends UserAccount {
 
   CardHolder(String name, String email, String password) {
     super(name, email, password);
-    this.accountNumber = Integer.toString(nextAccountNum);
-    nextAccountNum += 1;
     this.travelCards = new ArrayList<>();
     this.accountBalance = 0.0;
     this.autoLoadStatus = 0;
+
+    try
+    {
+      // Reading the object from a file
+      FileInputStream file = new FileInputStream("data-cardholder.bin");
+      ObjectInputStream in = new ObjectInputStream(file);
+
+      // Method for deserialization of object
+      travelCards = (ArrayList<Card>)in.readObject();
+
+      in.close();
+      file.close();
+
+      System.out.println("Object has been deserialized ");
+    }
+
+    catch(IOException ex)
+    {
+      System.out.println("IOException is caught");
+    }
+
+    catch(ClassNotFoundException ex)
+    {
+      System.out.println("ClassNotFoundException is caught");
+    }
   }
 
   /**
@@ -44,6 +72,26 @@ public class CardHolder extends UserAccount {
       System.out.println(
           "Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
     }
+
+    try
+    {
+      //Saving of object in a file
+      FileOutputStream file = new FileOutputStream("data-cardholder.bin");
+      ObjectOutputStream out = new ObjectOutputStream(file);
+
+      // Method for serialization of object
+      out.writeObject(travelCards);
+
+      out.close();
+      file.close();
+
+      System.out.println("Object has been serialized");
+
+    }
+    catch(IOException ex)
+    {
+      System.out.println("IOException is caught");
+    }
   }
 
   /**
@@ -61,6 +109,26 @@ public class CardHolder extends UserAccount {
               + card.getCardNumber()
               + " unlinked to CardHolder Account "
               + this.getAccountNum());
+    }
+
+    try
+    {
+      //Saving of object in a file
+      FileOutputStream file = new FileOutputStream("data-cardholder.bin");
+      ObjectOutputStream out = new ObjectOutputStream(file);
+
+      // Method for serialization of object
+      out.writeObject(travelCards);
+
+      out.close();
+      file.close();
+
+      System.out.println("Object has been serialized");
+
+    }
+    catch(IOException ex)
+    {
+      System.out.println("IOException is caught");
     }
   }
 

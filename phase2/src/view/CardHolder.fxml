@@ -1,94 +1,195 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="420.0" prefWidth="541.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CardHolderController">
-  <children>
-    <ChoiceBox id="choicebox" fx:id="cards" layoutX="196.0" layoutY="126.0" prefWidth="150.0" />
-    <Label layoutX="14.0" prefHeight="46.0" prefWidth="150.0" text="Card Holder" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-      <font>
-        <Font size="24.0" />
-      </font>
-    </Label>
-      <VBox layoutX="14.0" layoutY="36.0" prefHeight="62.0" prefWidth="121.0">
-         <children>
-            <Label text="Account Number: ">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label text="Name:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label text="Email: ">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-    <Label layoutX="25.0" layoutY="120.0" prefHeight="39.0" prefWidth="246.0" text="Travel Cards:">
-      <font>
-        <Font name="Century Gothic" size="18.0" />
-      </font>
-    </Label>
-      <VBox layoutX="146.0" layoutY="40.0" prefHeight="62.0" prefWidth="374.0">
-         <children>
-            <Label fx:id="accountNumber" />
-            <Label fx:id="name" />
-            <Label fx:id="email" />
-         </children>
-      </VBox>
-      <Button fx:id="logOut" layoutX="430.0" layoutY="364.0" mnemonicParsing="false" onAction="#logOutButtonPushed" prefHeight="46.0" prefWidth="97.0" text="Log Out">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="goToCard" layoutX="401.0" layoutY="126.0" mnemonicParsing="false" onAction="#goToCardButtonPushed" text="Go To Card" />
-      <Label fx:id="chooseCardInstructions" layoutX="203.0" layoutY="112.0" />
-      <VBox layoutX="18.0" layoutY="179.0" prefHeight="238.0" prefWidth="158.0">
-         <children>
-            <TextField fx:id="linkedCardNum" promptText="Card Number" />
-            <Button fx:id="linkCard" mnemonicParsing="false" onAction="#linkCardButtonPushed" text="Link Card" />
-            <TextField fx:id="unlinkedCardNum" prefHeight="27.0" prefWidth="163.0" promptText="Card Number" />
-            <Button fx:id="unlinkCard" mnemonicParsing="false" onAction="#unlinkCardButtonPushed" text="Unlink Card" />
-            <Label fx:id="linkCardInstructions" prefHeight="138.0" prefWidth="158.0" />
-         </children>
-      </VBox>
-      <VBox layoutX="188.0" layoutY="179.0" prefHeight="232.0" prefWidth="158.0">
-         <children>
-            <Label text="Transfer Balance">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label text="From Card" />
-            <ChoiceBox fx:id="card1" prefWidth="150.0" />
-            <Label text="To Card" />
-            <ChoiceBox fx:id="card2" prefWidth="150.0" />
-            <Label text="Amount" />
-            <TextField fx:id="amount" promptText="amount" />
-            <Button fx:id="transfer" mnemonicParsing="false" onAction="#transferButtonPushed" text="Transfer" />
-            <Label fx:id="transferBalanceInstructions" prefHeight="72.0" prefWidth="158.0" />
-         </children>
-      </VBox>
-      <VBox layoutX="367.0" layoutY="179.0" prefHeight="169.0" prefWidth="158.0">
-         <children>
-            <Button fx:id="viewMonthlyCost" mnemonicParsing="false" onAction="#viewMonthlyCostButtonPushed" prefHeight="27.0" prefWidth="141.0" text="View Monthly Cost" />
-            <Label text="Your monthly cost is:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="monthlyCost" />
-         </children>
-      </VBox>
-  </children>
-</AnchorPane>
+<TabPane tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CardHolderController">
+   <tabs>
+      <Tab text="Account Profile">
+         <content>
+            <VBox prefHeight="375.0" prefWidth="541.0" spacing="10.0">
+               <children>
+                  <HBox prefHeight="33.0" prefWidth="543.0">
+                     <children>
+                        <Label text="Account Profile">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="logOut2" mnemonicParsing="false" onAction="#logOutButtonPushed" prefHeight="39.0" prefWidth="86.0" text="Log Out">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="280.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <GridPane alignment="BOTTOM_CENTER" layoutX="50.0" layoutY="130.0" nodeOrientation="LEFT_TO_RIGHT" vgap="5.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.0" minWidth="10.0" prefWidth="271.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" prefWidth="190.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="Name" GridPane.rowIndex="1" />
+                        <Label text="Email Address" GridPane.rowIndex="2" />
+                        <Label layoutX="33.0" layoutY="52.0" text="Current Password" GridPane.rowIndex="3" />
+                        <TextField fx:id="email" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <PasswordField fx:id="passField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Account Number" />
+                        <Label fx:id="accountNumber" GridPane.columnIndex="1" />
+                        <Label text="Confirm Current Password" GridPane.rowIndex="4" />
+                        <PasswordField fx:id="confirmPassField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                     </children>
+                  </GridPane>
+                  <HBox alignment="CENTER" prefHeight="54.0" prefWidth="541.0" spacing="50.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Save Changes" />
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Back" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </Tab>
+      <Tab text="Travel Profile">
+         <content>
+            <VBox prefHeight="407.0" prefWidth="543.0">
+               <children>
+                  <VBox prefHeight="140.0" prefWidth="523.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Travel Profile">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="logOut" mnemonicParsing="false" onAction="#logOutButtonPushed" prefHeight="32.0" prefWidth="88.0" text="Log Out">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="300.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Label fx:id="monthlyCost" text="Monthly Cost:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="monthlyCost1" />
+                        <HBox prefHeight="117.0" prefWidth="523.0" spacing="50.0">
+                           <children>
+                              <Label text="Travel Cards:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox id="choicebox" fx:id="cards" prefWidth="150.0">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </ChoiceBox>
+                              <Button fx:id="goToCard" mnemonicParsing="false" onAction="#goToCardButtonPushed" text="Go To Card" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <Separator prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin>
+                  </Separator>
+                  <HBox alignment="CENTER" prefHeight="240.0" prefWidth="543.0">
+                     <children>
+                        <VBox prefHeight="232.0" prefWidth="158.0">
+                           <children>
+                              <Label prefHeight="27.0" prefWidth="130.0" text="Transfer Balance">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="From Card" />
+                              <ChoiceBox fx:id="card1" prefWidth="150.0" />
+                              <Label text="To Card" />
+                              <ChoiceBox fx:id="card2" prefWidth="150.0" />
+                              <Label text="Amount" />
+                              <TextField fx:id="amount" promptText="amount" />
+                              <Button fx:id="transfer" mnemonicParsing="false" onAction="#transferButtonPushed" text="Transfer" />
+                              <Label fx:id="transferBalanceInstructions" prefHeight="72.0" prefWidth="158.0" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="238.0" prefWidth="158.0" spacing="5.0">
+                           <children>
+                              <Label text="Manage Cards">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="10.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="linkedCardNum" promptText="Card Number" />
+                              <Button fx:id="linkCard" mnemonicParsing="false" onAction="#linkCardButtonPushed" text="Link Card">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Button>
+                              <TextField fx:id="unlinkedCardNum" prefHeight="27.0" prefWidth="163.0" promptText="Card Number">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Button fx:id="unlinkCard" mnemonicParsing="false" onAction="#unlinkCardButtonPushed" text="Unlink Card" />
+                              <Label fx:id="linkCardInstructions" prefHeight="75.0" prefWidth="158.0" />
+                           </children>
+                           <HBox.margin>
+                              <Insets left="100.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>

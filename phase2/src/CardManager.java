@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class CardManager implements Serializable {
+public class CardManager {
   /** Keeps a track of all cards in the system. */
   private ArrayList<Card> cards;
 
@@ -66,7 +66,18 @@ public class CardManager implements Serializable {
    */
   private void addCard(Card newCard) {
 
+    int cardnum;
+    if (cards.size() == 0){
+      cardnum = 30000001;
+    } else {
+      int lastnumber;
+      lastnumber = Integer.parseInt(cards.get(cards.size() -1).getCardNumber());
+      cardnum = lastnumber + 1;
+    }
+
     cards.add(newCard);
+    newCard.setCardNumber(Integer.toString(cardnum));
+
 
     try
     {

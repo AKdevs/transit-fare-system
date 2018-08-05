@@ -1,4 +1,6 @@
-public class TransitSystem {
+import java.io.Serializable;
+
+public class TransitSystem implements Serializable {
   /** Stores the trip manager */
   private TripManager tripManager;
   /** Stores the transit manager */

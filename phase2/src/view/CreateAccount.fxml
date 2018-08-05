@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CreateAccountController">
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="5.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CreateAccountController">
    <children>
       <Label alignment="TOP_CENTER" text="Account Information">
          <font>
@@ -32,20 +32,20 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <GridPane vgap="20.0">
+      <GridPane vgap="10.0">
         <columnConstraints>
           <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label nodeOrientation="RIGHT_TO_LEFT" text="* Email Address" />
             <Label nodeOrientation="RIGHT_TO_LEFT" text="* Name" GridPane.rowIndex="1" />
-            <TextField fx:id="email" GridPane.columnIndex="1" />
+            <TextField fx:id="email" prefWidth="240.0" GridPane.columnIndex="1" />
             <TextField fx:id="name" layoutX="310.0" layoutY="3.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label layoutX="10.0" layoutY="17.0" nodeOrientation="RIGHT_TO_LEFT" text="* Password" GridPane.rowIndex="2" />
             <PasswordField fx:id="password" layoutX="210.0" layoutY="13.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -56,7 +56,7 @@
       </GridPane>
       <Separator prefWidth="200.0">
          <VBox.margin>
-            <Insets left="8.0" right="30.0" />
+            <Insets left="8.0" right="30.0" top="10.0" />
          </VBox.margin>
       </Separator>
       <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="148.0" layoutY="10.0" text="Security Questions">
@@ -64,20 +64,26 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <GridPane layoutX="110.0" layoutY="136.0" vgap="20.0">
+      <GridPane layoutX="110.0" layoutY="136.0" vgap="10.0">
          <columnConstraints>
-            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="136.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="344.0" minWidth="10.0" prefWidth="344.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label nodeOrientation="RIGHT_TO_LEFT" text="* Security Question" />
+            <Label nodeOrientation="RIGHT_TO_LEFT" text="* Security Question 1" />
             <Label nodeOrientation="RIGHT_TO_LEFT" text="* Answer" GridPane.rowIndex="1" />
-            <TextField fx:id="name1" layoutX="310.0" layoutY="3.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ChoiceBox prefHeight="25.0" GridPane.columnIndex="1" />
+            <TextField fx:id="answer1" layoutX="310.0" layoutY="3.0" prefHeight="25.0" prefWidth="285.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="questionBox1" prefHeight="25.0" prefWidth="360.0" promptText="Select A Question" visibleRowCount="4" GridPane.columnIndex="1" />
+            <Label layoutX="10.0" layoutY="11.0" nodeOrientation="RIGHT_TO_LEFT" text="* Security Question 2" GridPane.rowIndex="2" />
+            <ComboBox fx:id="questionBox2" layoutX="146.0" layoutY="7.0" prefHeight="25.0" prefWidth="360.0" promptText="Select A Question" visibleRowCount="4" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label layoutX="10.0" layoutY="49.0" nodeOrientation="RIGHT_TO_LEFT" text="* Answer" GridPane.rowIndex="3" />
+            <TextField fx:id="answer2" layoutX="146.0" layoutY="45.0" prefHeight="25.0" prefWidth="285.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
          <VBox.margin>
             <Insets left="50.0" right="50.0" />

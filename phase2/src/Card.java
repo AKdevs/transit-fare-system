@@ -1,12 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /** Card is used to tap in and tap out when enter and exit a stop or station. */
-class Card {
+class Card implements Serializable {
 
   /** Stores number assigned to this card */
   private String cardNumber;
-  /** Keeps track of the next card number to be assigned. */
-  private static int nextCardNumber = 30000001;
   /** Keeps track of the balance in this card */
   private double balance;
   /** Stores owner of this card */
@@ -22,8 +21,7 @@ class Card {
 
   /** Constructs a card. */
   Card() {
-    this.cardNumber = Integer.toString(nextCardNumber);
-    nextCardNumber += 1;
+    this.cardNumber = null;
     this.owner = null;
     this.balance = 19;
     this.linked = false;
@@ -223,6 +221,10 @@ class Card {
       System.out.println("Rejected");
       return false;
     }
+  }
+
+  public void setCardNumber(String cardNumber) {
+    this.cardNumber = cardNumber;
   }
 
   String getStatus() {

@@ -1,7 +1,8 @@
-import java.util.HashMap;
+import java.io.Serializable;
+import java.util.*;
 
 /** Class UserAccount is used to define users of the system. */
-public class UserAccount {
+public class UserAccount implements Serializable{
   /** Stores name of this user account */
   private String name;
   /** Stores e-mail of this user account */
@@ -9,16 +10,42 @@ public class UserAccount {
   /** Stores account number of this user account */
   protected String accountNumber;
   protected String password;
-  HashMap<Integer, String> securityAnswers;
+  protected List<Integer> questionIndexList;
+  protected List<String> answerList;
 
   UserAccount(String name, String email, String password) {
     this.name = name;
     this.email = email;
     this.password = password;
+    this.questionIndexList = new ArrayList<>();
+    this.answerList = new ArrayList<>();
   }
 
-  void addSecurityAnswers(HashMap<Integer, String> securityAnswers) {
-    this.securityAnswers = securityAnswers;
+  void setPassword(String password) {
+    this.password = password;
+  }
+
+  String getPassword() {
+    return password;
+  }
+
+  void setQuestionIndexList(List<Integer> indexList) {
+    questionIndexList = indexList;
+  }
+
+  void setAnswerList(List<String> answerList) {
+    this.answerList = answerList;
+  }
+
+  public void setAccountNumber(String accountNumber) {
+    this.accountNumber = accountNumber;
+  }
+
+  List<Integer> getQuestionIndexList() {
+    return questionIndexList;
+  }
+  List<String> getAnswerList() {
+    return answerList;
   }
 
   /** @return name of UserAccount */
@@ -45,6 +72,7 @@ public class UserAccount {
     this.name = newName;
     System.out.println("Account " + this.getAccountNum() + " name changed to " + this.name);
   }
+
 
   /* Functionality handled by Card for phase 1
   public String viewBalance(Card card){
