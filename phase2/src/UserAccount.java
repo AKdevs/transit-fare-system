@@ -37,6 +37,10 @@ public class UserAccount implements Serializable{
     this.answerList = answerList;
   }
 
+  public void setAccountNumber(String accountNumber) {
+    this.accountNumber = accountNumber;
+  }
+
   List<Integer> getQuestionIndexList() {
     return questionIndexList;
   }
@@ -68,6 +72,7 @@ public class UserAccount implements Serializable{
     this.name = newName;
     System.out.println("Account " + this.getAccountNum() + " name changed to " + this.name);
   }
+
 
   /* Functionality handled by Card for phase 1
   public String viewBalance(Card card){

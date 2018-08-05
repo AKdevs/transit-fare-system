@@ -65,7 +65,17 @@ class AccountManager {
    */
   void createCardHolderAccount(String name, String email, String password) {
     CardHolder newAccount = new CardHolder(name, email, password);
-    addUserAccount(newAccount);
+    int accountnum;
+    if (userAccounts.size() == 0){
+      accountnum = 10000001;
+    } else {
+      int lastnumber;
+      lastnumber = Integer.parseInt(userAccounts.get(userAccounts.size() -1).getAccountNum());
+      accountnum = lastnumber + 1;
+    }
+
+    userAccounts.add(newAccount);
+    newAccount.setAccountNumber(Integer.toString(accountnum));
     System.out.println("CardHolder Account " + newAccount.getAccountNum() + " created");
   }
 
@@ -77,8 +87,19 @@ class AccountManager {
    */
   void createAdminAccount(String name, String email, String password) {
     AdminUser newAccount = new AdminUser(name, email, password);
-    addUserAccount(newAccount);
+    int accountnum;
+    if (userAccounts.size() == 0){
+      accountnum = 10000001;
+    } else {
+      int lastnumber;
+      lastnumber = Integer.parseInt(userAccounts.get(userAccounts.size() -1).getAccountNum());
+      accountnum = lastnumber + 1;
+    }
+
+    userAccounts.add(newAccount);
+    newAccount.setAccountNumber(Integer.toString(accountnum));
     System.out.println("AdminUser Account " + newAccount.getAccountNum() + " created");
+
   }
 
   /**
