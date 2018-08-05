@@ -94,6 +94,9 @@ class Card {
    */
   void deductBalance(Double fares) {
     if (active) {
+        if (this.getBalance() < 10) {
+            owner.autoLoad(this);
+        }
       this.balance -= fares;
     } else {
       System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
@@ -223,9 +226,9 @@ class Card {
   }
 
   String getStatus() {
-      if (active) {
-          return "active";
-      }
-      return "deactivated";
+    if (active) {
+      return "active";
+    }
+    return "deactivated";
   }
 }

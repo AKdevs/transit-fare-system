@@ -1,25 +1,29 @@
 import java.util.ArrayList;
 
+
 /**
  * CardHolder is a person who owns and uses a Card, ie a passenger who travels in the TransitSystem.
  * The person is able to link Cards to his/her account and view his/her travel history.
  */
 public class CardHolder extends UserAccount {
 
+
   private ArrayList<Card> travelCards;
   /* Account Number for CardHolder starts at 10000001 to distinguish with other account/card numbers.*/
   private static int nextAccountNum = 10000001;
+
+  private double accountBalance;
+
+  private int autoLoadStatus;
 
   CardHolder(String name, String email, String password) {
     super(name, email, password);
     this.accountNumber = Integer.toString(nextAccountNum);
     nextAccountNum += 1;
     this.travelCards = new ArrayList<>();
+    this.accountBalance = 0.0;
+    this.autoLoadStatus = 0;
   }
-
-  public void enter(String time, String spot, String cardNumber, String date, String type) {}
-
-  public void exit(String time, String spot, String cardNumber) {}
 
   /**
    * Links card to this account. Prints out a message to inform the CardHolder whether the card is
@@ -133,6 +137,9 @@ public class CardHolder extends UserAccount {
       if (amount <= card1.getBalance() && amount >= 0) {
           card1.deductBalance(amount);
           card2.addBalance(amount);
+          if (card1.getBalance() < 10) {
+              autoLoad(card1);
+          }
       }else if (amount > card1.getBalance()){
           return "Your balance in Card \n"  + card1.getCardNumber()  + " is not enough.";
       }else if (amount < 0) {
@@ -140,4 +147,33 @@ public class CardHolder extends UserAccount {
       }
       return "Transfer balance \n succeed";
   }
+
+  int getAutoLoadStatus() {
+      return autoLoadStatus;
+  }
+
+   void setAutoLoadStatus(int status) {
+        autoLoadStatus = status;
+  }
+
+  double getAccountBalance() {
+      return accountBalance;
+  }
+
+  void addAccountBalance(double amount) {
+      accountBalance += amount;
+  }
+
+  void deductAccountBalance(double amount) {
+      accountBalance -= amount;
+  }
+
+  void autoLoad(Card card) {
+      double difference = 10 - card.getBalance();
+      if (accountBalance >= difference && this.autoLoadStatus == 1) {
+          deductAccountBalance(difference);
+          card.addBalance(difference);
+      }
+  }
+
 }
