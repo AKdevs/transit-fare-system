@@ -71,7 +71,7 @@ class AccountManager {
   void createCardHolderAccount(String name, String email, String password) {
     CardHolder newAccount = new CardHolder(name, email, password);
     int accountnum;
-    accountnum = 1000000 + cardholders.size();
+    accountnum = 10000000 + cardholders.size();
 
     cardholders.add(newAccount);
     userAccounts.add(newAccount);
@@ -108,7 +108,7 @@ class AccountManager {
    */
   void createAdminAccount(String name, String email, String password) {
     AdminUser newAccount = new AdminUser(name, email, password);
-    int accountnum = 2000000 + adminUsers.size();
+    int accountnum = 20000000 + adminUsers.size();
     adminUsers.add(newAccount);
     userAccounts.add(newAccount);
     newAccount.setAccountNumber(Integer.toString(accountnum));
