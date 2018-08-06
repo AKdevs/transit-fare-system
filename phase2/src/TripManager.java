@@ -32,7 +32,7 @@ class TripManager implements Serializable{
     this.avgCostPerStation = avgCostPerStation;
   }
 
-  void recordTapIn(String time, String spot, Card card, String date, String type) {
+  void recordTapIn(String time, String spot, Card card, String date, String type, String transitLine) {
     if (card.getBalance() < 0) {
       TransitSystem.log(Level.ALL,"Declined: Card " + card.getCardNumber() +" is out of funds, please load money.");
     } else {
@@ -132,5 +132,16 @@ class TripManager implements Serializable{
       TransitSystem.log(Level.ALL,fares+"$ is deducted from card " + card.getCardNumber());
       card.updateTotalFares(fares);
       aggregator.updateAllFares(date, fares);
+  }
+
+  private String findTransitLine(String type, String station) {
+    for (String id: transitLines.keySet()) {
+      ArrayList<String> stations = transitLines.get(id).getPoints();
+      if (transitLines.get(id).getType().equals(type)
+              && stations.contains(station)) {
+        return id;
+      }
+    }
+    return null;
   }
 }
