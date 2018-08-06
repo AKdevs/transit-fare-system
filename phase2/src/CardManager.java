@@ -6,38 +6,14 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
-public class CardManager {
+public class CardManager implements Serializable{
   /** Keeps a track of all cards in the system. */
   private ArrayList<Card> cards;
 
   CardManager(){
     this.cards = new ArrayList<>();
-
-    try
-    {
-      // Reading the object from a file
-      FileInputStream file = new FileInputStream("data-CardManager.bin");
-      ObjectInputStream in = new ObjectInputStream(file);
-
-      // Method for deserialization of object
-      cards = (ArrayList<Card>)in.readObject();
-
-      in.close();
-      file.close();
-
-      System.out.println("Object has been deserialized ");
-    }
-
-    catch(IOException ex)
-    {
-      System.out.println("IOException is caught");
-    }
-
-    catch(ClassNotFoundException ex)
-    {
-      System.out.println("ClassNotFoundException is caught");
-    }
   }
 
   /**
@@ -77,28 +53,6 @@ public class CardManager {
 
     cards.add(newCard);
     newCard.setCardNumber(Integer.toString(cardnum));
-
-
-    try
-    {
-      //Saving of object in a file
-      FileOutputStream file = new FileOutputStream("data-CardManager.bin");
-      ObjectOutputStream out = new ObjectOutputStream(file);
-
-      // Method for serialization of object
-      out.writeObject(cards);
-
-      out.close();
-      file.close();
-
-      System.out.println("Object has been serialized");
-
-    }
-    catch(IOException ex)
-    {
-      System.out.println("IOException is caught");
-    }
-
   }
 
   /** Creates new card, card number is assigned automatically. */
@@ -106,6 +60,7 @@ public class CardManager {
     Card newCard = new Card();
     addCard(newCard);
     System.out.println("Card " + newCard.getCardNumber() + " created");
+      TransitSystem.log(Level.ALL, "Card created!!!");
   }
 
   /**
@@ -120,4 +75,5 @@ public class CardManager {
   ArrayList<Card> getCards() {
       return cards;
   }
+
 }

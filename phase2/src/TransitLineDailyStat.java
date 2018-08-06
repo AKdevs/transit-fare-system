@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class TransitLineDailyStat implements Serializable {
+public class TransitLineDailyStat implements Serializable{
 
     /** Stores a collection of daily stat for all Transit Lines
      * in <String id, SingleTransitLineDailyStat>

@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class FareCalculator {
+public class FareCalculator implements Serializable {
   private final double busFare = 2.0;
   private final double stationFare = 0.5;
   private final double fareCap = 6.0;
