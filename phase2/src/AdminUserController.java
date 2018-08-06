@@ -87,6 +87,8 @@ public class AdminUserController extends Controller implements Initializable {
 
                 // create initial (date, value) pair in Aggregator
                 system.getTripManager().getAggregator().initializeDate(dateString);
+                //System.out.println("Fare:" + system.getTripManager().getAggregator().getDailyFares(dateString));
+                //System.out.println(system.getTripManager().getAggregator().getDailyStation(dateString));
 
                 // if TransitLineDailyStat is empty for the day, set up SingleTransitLineDailyStat for each
                 // Transit Line
@@ -145,7 +147,9 @@ public class AdminUserController extends Controller implements Initializable {
             dailyReportDateWarning.setText("");
             dailyReportUnavailableWarning.setText("");
             if (system.getTripManager().getAggregator().isReportAvailable(dateString)) {
+                prepareReport(dateString);
 
+                /*
                 HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
                 for (String id: transitLines.keySet()) {
                     SingleTransitLineDailyStat singleTransitStat = system.getTripManager().getAggregator()
@@ -155,15 +159,8 @@ public class AdminUserController extends Controller implements Initializable {
                     System.out.println("Ridership: " + singleTransitStat.getRidership());
                     System.out.println("Average: " + singleTransitStat.getAvgRiderPerTrip());
 
-                   /** Stage dailyReportWindow = new Stage();
-                    dailyReportWindow.initModality(Modality.APPLICATION_MODAL);
-                    dailyReportWindow.setTitle("Transit System Daily Report");
-
-                FXMLLoader dailyReportLoader = new FXMLLoader(getClass().getResource("view/DailyReport.fxml"));
-                Parent root = dailyReportLoader.load();
-                Scene dailyReportScene = new Scene(root);
-                    */
                 }
+                */
 
             }
             else {
@@ -238,6 +235,22 @@ public class AdminUserController extends Controller implements Initializable {
         costSettingResultLabel.setText(message);
     }
 
+    public void prepareReport(String dateString) throws IOException {
+            Stage reportWindow = new Stage();
+        FXMLLoader dailyReportLoader = new FXMLLoader(getClass().getResource("view/DailyReport.fxml"));
+        Parent root = dailyReportLoader.load();
+        Scene dailyReportScene = new Scene(root);
+
+        DailyReportController controller = dailyReportLoader.getController();
+        controller.storeState(system);
+        controller.initReport(dateString);
+
+        reportWindow.setTitle("Transit System Daily Report");
+        reportWindow.initModality(Modality.APPLICATION_MODAL);
+        reportWindow.setScene(dailyReportScene);
+        reportWindow.setResizable(false);
+        reportWindow.showAndWait();
+    }
 
 
         //java.util.regex is not available

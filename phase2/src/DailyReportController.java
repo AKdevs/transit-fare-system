@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.util.StringConverter;
@@ -24,6 +25,8 @@ import java.text.DateFormat;
 
 public class DailyReportController extends Controller implements Initializable {
 
+    private String reportDateString;
+
     @FXML private Label dateLabel;
     @FXML private Label fareLabel;
     @FXML private Label costLabel;
@@ -40,8 +43,34 @@ public class DailyReportController extends Controller implements Initializable {
 
 
 
+
+    /**
+     *  set date in the dateLabel
+     */
+    void showDate() {
+        dateLabel.setText(reportDateString);
+    }
+
+    void showFare(String date) {
+        Double fare = system.getTripManager().getAggregator().getDailyFares(date);
+        //System.out.println("Fare:" + fare);
+        fareLabel.setText(fare.toString());
+    }
+
+    public void initReport(String date){
+        reportDateString = date;
+        showDate();
+        showFare(date);
+    }
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //String date = system.getCurrentDate();
+        //showDate();
+        //showFare(reportDateString);
 
 
     }
