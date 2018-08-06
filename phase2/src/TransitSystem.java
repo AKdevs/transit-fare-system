@@ -34,11 +34,11 @@ public class TransitSystem implements Serializable {
 
 
   public TransitSystem(String filePath) throws ClassNotFoundException, IOException {
-
     tripManager = new TripManager();
     transitManager = new TransitManager();
     tripManager.addTransitLines(transitManager.getTransitLines());
     accountManager = new AccountManager();
+    accountManager.createAdminAccount("root", "", "root");
     cardManager = new CardManager();
 
     try{
@@ -52,6 +52,7 @@ public class TransitSystem implements Serializable {
       } catch (IOException e) {
         e.printStackTrace();
     }
+
 
     File file = new File(filePath);
     if (file.exists()) {
