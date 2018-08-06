@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
 
 class TripManager implements Serializable{
   private HashMap<String, TransitLine> transitLines;
@@ -23,7 +24,7 @@ class TripManager implements Serializable{
 
   void recordTapIn(String time, String spot, Card card, String date, String type) {
     if (card.getBalance() < 0) {
-      System.out.println("Declined: Card is out of funds, please load money.");
+      TransitSystem.log(Level.INFO,"Declined: Card" + card.getCardNumber() +"is out of funds, please load money.");
     } else {
       // if the cardHolder traveled with this card before
       if (!card.getTrips().isEmpty()) {
@@ -55,12 +56,12 @@ class TripManager implements Serializable{
               }
           }
         } else { // illegal entry
-            System.out.println("Declined: Illegal entry");
-            lastTrip.setExitSpot("illegal");
-            lastTrip.setExitTime(time);
-            TripSegment trip = new TripSegment(spot, time, date, type);
-            card.addTrip(trip);
-            updateFares(fareCalculator.getFareCap(), card, date);//penalty is charging them the cap for last trip
+          TransitSystem.log(Level.INFO, "Declined: Illegal entry by" + card.getCardNumber());
+          lastTrip.setExitSpot("illegal");
+          lastTrip.setExitTime(time);
+          TripSegment trip = new TripSegment(spot, time, date, type);
+          card.addTrip(trip);
+          updateFares(fareCalculator.getFareCap(), card, date);//penalty is charging them the cap for last trip
         }
       } else {// if this is the first time the CardHolder travel with this card
           addNewTrip(time, spot, card, date, type);
@@ -79,7 +80,7 @@ class TripManager implements Serializable{
     TripSegment current = allTrips.get(allTrips.size() - 1);
     // if it is a illegal exit (didn't tap in for this trip)
     if (current.getExitSpot() != null && !current.getTransitType().equals("continueB")&& !current.getTransitType().equals("continueS") ) {
-      System.out.println("Declined: Illegal exit.");
+      TransitSystem.log(Level.INFO, "Declined: Illegal entry by" + card.getCardNumber());
       TripSegment ts = new TripSegment("illegal", time, date, type);
       card.addTrip(ts);
       TripSegment updatedCurrent = allTrips.get(allTrips.size() - 1);
