@@ -260,7 +260,7 @@ public class CardHolderController extends Controller {
         accountBalance.setText(Double.toString(accBalance + 10.0));
         ch.addAccountBalance(10.0);
         } else {
-            loadAccountBalanceInstructions.setText("please turn autoload\nservice on before loading.");
+            loadAccountBalanceInstructions.setText("Please turn autoload\nservice on before loading.");
         }
     }
 
@@ -273,7 +273,7 @@ public class CardHolderController extends Controller {
         accountBalance.setText(Double.toString(accBalance + 20.0));
         ch.addAccountBalance(20.0);
         } else {
-            loadAccountBalanceInstructions.setText("please turn autoload\nservice on before loading.");
+            loadAccountBalanceInstructions.setText("Please turn autoload\nservice on before loading.");
         }
     }
 
@@ -286,7 +286,7 @@ public class CardHolderController extends Controller {
         accountBalance.setText(Double.toString(accBalance + 50.0));
         ch.addAccountBalance(50.0);
         } else {
-            loadAccountBalanceInstructions.setText("please turn autoload\nservice on before loading.");
+            loadAccountBalanceInstructions.setText("Please turn autoload\nservice on before loading.");
         }
     }
 

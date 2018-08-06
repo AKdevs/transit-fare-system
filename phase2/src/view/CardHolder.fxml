@@ -136,7 +136,7 @@
                               <Insets left="20.0" />
                            </padding>
                         </Label>
-                        <Button onAction="#changeSecurityQuestionButtonPushed" mnemonicParsing="false" text="Change Security Questions" />
+                        <Button mnemonicParsing="false" onAction="#changeSecurityQuestionButtonPushed" text="Change Security Questions" />
                      </children>
                   </HBox>
                </children>
@@ -175,27 +175,39 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <Label text="Account Balance:" />
-                              <Label fx:id="accountBalance" text="0.0" />
-                              <Button fx:id="turnOn" mnemonicParsing="false" onAction="#turnOnButtonPushed" text="Turn On AutoLoad" />
+                              <Label text="Account Balance:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
+                              <Label fx:id="accountBalance" text="0.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
+                              <Button fx:id="turnOn" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#turnOnButtonPushed" text="Turn On AutoLoad">
+                                 <HBox.margin>
+                                    <Insets left="90.0" />
+                                 </HBox.margin></Button>
                               <Button fx:id="turnOff" mnemonicParsing="false" onAction="#turnOffButtonPushed" text="Turn Off AutoLoad" />
                            </children>
                         </HBox>
                         <HBox prefHeight="117.0" prefWidth="523.0" spacing="50.0">
                            <children>
-                              <Label text="Travel Cards:">
+                              <Label prefHeight="20.0" prefWidth="110.0" text="Travel Cards:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
                               <ChoiceBox id="choicebox" fx:id="cards" prefWidth="150.0">
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets left="110.0" />
                                  </HBox.margin>
                               </ChoiceBox>
-                              <Button fx:id="goToCard" mnemonicParsing="false" onAction="#goToCardButtonPushed" text="Go To Card" />
+                              <Button fx:id="goToCard" mnemonicParsing="false" onAction="#goToCardButtonPushed" prefHeight="25.0" prefWidth="104.0" text="Go To Card">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin></Button>
                            </children>
                         </HBox>
                      </children>
@@ -208,11 +220,11 @@
                         <Insets left="10.0" right="10.0" />
                      </VBox.margin>
                   </Separator>
-                  <HBox alignment="CENTER" prefHeight="240.0" prefWidth="543.0">
+                  <HBox alignment="CENTER" prefHeight="240.0" prefWidth="543.0" spacing="20.0">
                      <children>
                         <VBox prefHeight="240.0" prefWidth="164.0">
                            <children>
-                              <Label prefHeight="28.0" prefWidth="156.0" text="Transfer Balance">
+                              <Label alignment="TOP_LEFT" prefHeight="28.0" prefWidth="156.0" text="Transfer Balance">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -229,10 +241,13 @@
                               <Button fx:id="transfer" mnemonicParsing="false" onAction="#transferButtonPushed" text="Transfer" />
                               <Label fx:id="transferBalanceInstructions" prefHeight="72.0" prefWidth="158.0" />
                            </children>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
                         </VBox>
                         <VBox prefHeight="240.0" prefWidth="163.0" spacing="5.0">
                            <children>
-                              <Label text="Manage Cards">
+                              <Label alignment="CENTER" contentDisplay="CENTER" text="Manage Cards">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -255,14 +270,20 @@
                               <Label fx:id="linkCardInstructions" prefHeight="75.0" prefWidth="158.0" />
                            </children>
                            <HBox.margin>
-                              <Insets left="100.0" />
+                              <Insets />
                            </HBox.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
                         </VBox>
-                        <VBox prefHeight="240.0" prefWidth="175.0">
+                        <VBox alignment="TOP_CENTER" prefHeight="240.0" prefWidth="175.0" spacing="20.0">
                            <children>
-                              <Label prefHeight="37.0" prefWidth="163.0" text="Load Account Balance">
+                              <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="163.0" text="AutoLoad" textAlignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="18.0" />
                                  </font>
                               </Label>
                               <Button fx:id="load10ToAccount" mnemonicParsing="false" onAction="#load10ToAccountButtonPushed" text="Load $10" />
