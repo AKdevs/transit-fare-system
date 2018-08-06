@@ -26,17 +26,12 @@ public class TransitSystem implements Serializable {
   /** Operating status of system, either "on" or "off" */
   private String operatingStatus = "off";
 
-  /** The instance of the only TransitSystem */
-  private static TransitSystem instance;
-
     private static final Logger logger =
             Logger.getLogger(TransitSystem.class.getName());
     private static final Handler consoleHandler = new ConsoleHandler();
 
     private static Handler fh;
 
-
-  public TransitSystem() {
 
   public TransitSystem(String filePath) throws ClassNotFoundException, IOException {
 
@@ -65,7 +60,7 @@ public class TransitSystem implements Serializable {
       file.createNewFile();
     }
   }
-  }
+
 
     private static Logger getLogger(){
         return logger;
