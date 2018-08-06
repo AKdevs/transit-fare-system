@@ -34,7 +34,7 @@ class TripManager implements Serializable{
 
   void recordTapIn(String time, String spot, Card card, String date, String type) {
     if (card.getBalance() < 0) {
-      TransitSystem.log(Level.INFO,"Declined: Card " + card.getCardNumber() +" is out of funds, please load money.");
+      TransitSystem.log(Level.ALL,"Declined: Card " + card.getCardNumber() +" is out of funds, please load money.");
     } else {
       // if the cardHolder traveled with this card before
       if (!card.getTrips().isEmpty()) {
@@ -47,7 +47,7 @@ class TripManager implements Serializable{
           if (lastTrip.getExitSpot().equals(spot)
               && duration < fareCalculator.getMaximumDuration()) {
             lastTrip.setContiSpot(spot);
-            TransitSystem.log(Level.INFO,"Card " + card.getCardNumber() + "tapped in at " + spot);
+            TransitSystem.log(Level.ALL,"Card " + card.getCardNumber() + "tapped in at " + spot);
             if (type.equals("B")) {
               lastTrip.setTransitType("continueB");
               double fares = fareCalculator.calculateContiBusFare(lastTrip.getCurrentFares());
@@ -68,7 +68,7 @@ class TripManager implements Serializable{
               }
           }
         } else { // illegal entry
-          TransitSystem.log(Level.INFO, "Declined: Illegal entry by " + card.getCardNumber());
+          TransitSystem.log(Level.ALL, "Declined: Illegal entry by " + card.getCardNumber());
           lastTrip.setExitSpot("illegal");
           lastTrip.setExitTime(time);
           TripSegment trip = new TripSegment(spot, time, date, type);
@@ -92,7 +92,7 @@ class TripManager implements Serializable{
     TripSegment current = allTrips.get(allTrips.size() - 1);
     // if it is a illegal exit (didn't tap in for this trip)
     if (current.getExitSpot() != null && !current.getTransitType().equals("continueB")&& !current.getTransitType().equals("continueS") ) {
-      TransitSystem.log(Level.INFO, "Declined: Illegal entry by " + card.getCardNumber());
+      TransitSystem.log(Level.ALL, "Declined: Illegal entry by " + card.getCardNumber());
       TripSegment ts = new TripSegment("illegal", time, date, type);
       card.addTrip(ts);
       TripSegment updatedCurrent = allTrips.get(allTrips.size() - 1);
@@ -102,7 +102,7 @@ class TripManager implements Serializable{
     } else { // normal legal exit
       current.setExitSpot(spot);
       current.setExitTime(time);
-      TransitSystem.log(Level.INFO,"Card " + card.getCardNumber() + "tapped out at " + spot);
+      TransitSystem.log(Level.ALL,"Card " + card.getCardNumber() + "tapped out at " + spot);
       if (current.getTransitType().equals("S")) {
         double fares = fareCalculator.calculateTripFares(current);
         current.setCurrentFares(fares);
@@ -124,12 +124,12 @@ class TripManager implements Serializable{
   private void addNewTrip(String time, String spot, Card card, String date, String type) {
       TripSegment trip = new TripSegment(spot, time, date, type);
       card.addTrip(trip);
-      TransitSystem.log(Level.INFO,"Card " + card.getCardNumber() + "tapped in at " + spot);
+      TransitSystem.log(Level.ALL,"Card " + card.getCardNumber() + "tapped in at " + spot);
   }
 
   private void updateFares(double fares, Card card, String date) {
       card.updateBalance(fares);
-      TransitSystem.log(Level.INFO,fares+"$ is deducted from card " + card.getCardNumber());
+      TransitSystem.log(Level.ALL,fares+"$ is deducted from card " + card.getCardNumber());
       card.updateTotalFares(fares);
       aggregator.updateAllFares(date, fares);
   }

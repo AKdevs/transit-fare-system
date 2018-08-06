@@ -77,7 +77,7 @@ class Card implements Serializable {
   void addBalance(Double fares) {
     if (active) {
       this.balance += fares;
-      TransitSystem.log(Level.INFO,
+      TransitSystem.log(Level.ALL,
           "Sucessfully added $"
               + fares
               + " to card "
@@ -86,7 +86,7 @@ class Card implements Serializable {
               + " The balance is now "
               + this.balance);
     } else {
-      TransitSystem.log(Level.INFO,"Action denied: Card " + this.getCardNumber() + "is deactivated");
+      TransitSystem.log(Level.ALL,"Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
   }
 
