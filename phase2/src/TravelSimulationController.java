@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -30,16 +31,18 @@ public class TravelSimulationController extends Controller implements Initializa
     @FXML private Label owner;
     @FXML private Label status;
     @FXML private Label balance;
+    @FXML private Label enterDate;
+    @FXML private Label exitDate;
 
-    @FXML private TextField enterSpot;
-    @FXML private TextField enterTime;
-    @FXML private TextField enterDate;
+    @FXML private ChoiceBox enterSpot;
+    @FXML private ChoiceBox enterHour;
+    @FXML private ChoiceBox enterMinute;
     @FXML private ChoiceBox<String> enterType;
     @FXML private ChoiceBox<String> enterTransitLine;
 
-    @FXML private TextField exitSpot;
-    @FXML private TextField exitTime;
-    @FXML private TextField exitDate;
+    @FXML private ChoiceBox exitSpot;
+    @FXML private ChoiceBox exitHour;
+    @FXML private ChoiceBox exitMinute;
     @FXML private ChoiceBox exitType;
 
 
@@ -54,6 +57,8 @@ public class TravelSimulationController extends Controller implements Initializa
         }else {
             owner.setText("unlinked");
         }
+        enterDate.setText(system.getCurrentDate());
+        exitDate.setText(system.getCurrentDate());
         enterType.getItems().add("Subway");
         enterType.getItems().add("Bus");
         exitType.getItems().add("Subway");
@@ -63,6 +68,8 @@ public class TravelSimulationController extends Controller implements Initializa
         for (String id : transitLines.keySet()) {
                 enterTransitLine.getItems().add(id);
             }
+
+        initializeTime();
     }
 
     public void setSource(int source) {
@@ -96,12 +103,13 @@ public class TravelSimulationController extends Controller implements Initializa
     @FXML
     void tapInButtonPushed(ActionEvent event) throws IOException {
         Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
+        String enterTime = enterHour.getSelectionModel().getSelectedItem().toString() + ":" + enterMinute.getSelectionModel().getSelectedItem().toString();
         system.getTripManager().recordTapIn(
-                        enterTime.getText(),
-                        enterSpot.getText(),
+                        enterTime,
+                        enterSpot.getSelectionModel().getSelectedItem().toString(),
                         associatedEntryCard,
                         enterDate.getText(),
-                        enterType.getSelectionModel().getSelectedItem().toString().substring(0,1),
+                        enterType.getSelectionModel().getSelectedItem().substring(0,1),
                         enterTransitLine.getValue());
         balance.setText(Double.toString(associatedEntryCard.getBalance()));
     }
@@ -109,14 +117,26 @@ public class TravelSimulationController extends Controller implements Initializa
     @FXML
     void tapOutButtonPushed(ActionEvent event) throws IOException {
         Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
+        String lineId = enterTransitLine.getSelectionModel().getSelectedItem();
+        HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
+        for (String id : transitLines.keySet()) {
+            if (id.equals(lineId)) {
+                ArrayList<String> points = transitLines.get(id).getPoints();
+                for (String pt : points) {
+                    exitSpot.getItems().add(pt);
+                }
+            }
+        }
+        String exitTime = exitHour.getSelectionModel().getSelectedItem().toString() + ":" + exitMinute.getSelectionModel().getSelectedItem().toString();
         system.getTripManager().recordTapOut(
-                exitTime.getText(),
-                exitSpot.getText(),
+                exitTime,
+                exitSpot.getSelectionModel().getSelectedItem().toString(),
                 associatedEntryCard,
                 exitDate.getText(),
                 exitType.getSelectionModel().getSelectedItem().toString().substring(0, 1));
         balance.setText(Double.toString(associatedEntryCard.getBalance()));
     }
+
     void populateTransitLine(String type) {
         type.substring(0,1);
         HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
@@ -150,6 +170,26 @@ public class TravelSimulationController extends Controller implements Initializa
                 }
     }
     });
+        initializeTime();
+    }
+
+    void initializeTime() {
+        for (int i = 0; i < 10; i ++) {
+            String time = "0" + String.valueOf(i);
+            enterHour.getItems().add(time);
+            exitHour.getItems().add(time);
+            enterMinute.getItems().add(time);
+            exitMinute.getItems().add(time);
+        }
+        for (int i = 10; i < 25; i ++) {
+            enterHour.getItems().add(String.valueOf(i));
+            exitHour.getItems().add(String.valueOf(i));
+        }
+
+        for (int i = 10; i < 60; i ++) {
+            enterMinute.getItems().add(String.valueOf(i));
+            exitMinute.getItems().add(String.valueOf(i));
+        }
     }
 }
 
