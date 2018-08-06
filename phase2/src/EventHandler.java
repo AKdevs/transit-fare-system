@@ -32,8 +32,7 @@ public class EventHandler {
       switch (action) {
         case "entry":
           Card associatedEntryCard = system.getCardManager().findCard(eventTokens[1]);
-          system
-              .getTripManager()
+          system.getTripManager()
               .recordTapIn(
                   eventTokens[4],
                   eventTokens[2],
