@@ -3,47 +3,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /** Manage all accounts which are stored in TransitSystem. */
-class AccountManager {
+class AccountManager implements Serializable{
   private ArrayList<CardHolder> cardholders;
   private ArrayList<AdminUser> adminUsers;
   private ArrayList<UserAccount> userAccounts;
   private UserAccount loggedInUser;
   private PasswordManager passwordManager;
+  private DataSaving dataSaving;
 
   AccountManager(){
     this.cardholders = new ArrayList<>();
     this.adminUsers = new ArrayList<>();
     this.userAccounts = new ArrayList<>();
     this.passwordManager = new PasswordManager();
-    try
-    {
-      // Reading the object from a file
-      FileInputStream file = new FileInputStream("data-AccountManager.bin");
-      ObjectInputStream in = new ObjectInputStream(file);
-
-      // Method for deserialization of object
-      cardholders = (ArrayList<CardHolder>)in.readObject();
-      adminUsers = (ArrayList<AdminUser>)in.readObject();
-      userAccounts = (ArrayList<UserAccount>)in.readObject();
-
-      in.close();
-      file.close();
-
-      System.out.println("Object has been deserialized ");
-    }
-
-    catch(IOException ex)
-    {
-      System.out.println("IOException is caught");
-    }
-
-    catch(ClassNotFoundException ex)
-    {
-      System.out.println("ClassNotFoundException is caught");
-    }
   }
 
   PasswordManager getPasswordManager() {
@@ -77,27 +53,8 @@ class AccountManager {
     userAccounts.add(newAccount);
     newAccount.setAccountNumber(Integer.toString(accountnum));
     System.out.println("CardHolder Account " + newAccount.getAccountNum() + " created");
+    dataSaving.save();
 
-    try
-    {
-      //Saving of object in a file
-      FileOutputStream file = new FileOutputStream("data-AccountManager.bin");
-      ObjectOutputStream out = new ObjectOutputStream(file);
-
-      // Method for serialization of object
-      out.writeObject(cardholders);
-      out.writeObject(userAccounts);
-
-      out.close();
-      file.close();
-
-      System.out.println("Object has been serialized");
-
-    }
-    catch(IOException ex)
-    {
-      System.out.println("IOException is caught");
-    }
   }
 
   /**
@@ -113,29 +70,7 @@ class AccountManager {
     userAccounts.add(newAccount);
     newAccount.setAccountNumber(Integer.toString(accountnum));
     System.out.println("AdminUser Account " + newAccount.getAccountNum() + " created");
-
-    try
-    {
-      //Saving of object in a file
-      FileOutputStream file = new FileOutputStream("data-AccountManager.bin");
-      ObjectOutputStream out = new ObjectOutputStream(file);
-
-      // Method for serialization of object
-      out.writeObject(adminUsers);
-      out.writeObject(userAccounts);
-
-      out.close();
-      file.close();
-
-      System.out.println("AdminUser has been serialized");
-
-    }
-    catch(IOException ex)
-    {
-      System.out.println("IOException is caught");
-    }
-
-
+    dataSaving.save();
   }
 
 

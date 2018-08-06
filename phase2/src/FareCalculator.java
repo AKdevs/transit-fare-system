@@ -6,6 +6,7 @@ public class FareCalculator {
   private final double fareCap = 6.0;
   /** Maximum amount of time where the fareCap is applicable. */
   private final int maximumDuration = 120;
+  private DataSaving dataSaving;
 
   private HashMap<String, TransitLine> transitLines;
   // private double fare;
@@ -18,6 +19,7 @@ public class FareCalculator {
 
   void addTransitLines(HashMap<String, TransitLine> transitLines) {
     this.transitLines = transitLines;
+    dataSaving.save();
   }
 
   double calculateContiBusFare(double currentFares) {

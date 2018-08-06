@@ -1,10 +1,12 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PasswordManager {
+public class PasswordManager implements Serializable{
     private List<String> securityQuestions;
     private int minimumPasswordLength;
+    private DataSaving dataSaving;
 
 
     PasswordManager() {
@@ -13,6 +15,7 @@ public class PasswordManager {
         securityQuestions.add("In what city did your mother and father meet?");
         securityQuestions.add("What was the name of your first pet?");
         securityQuestions.add("What was your childhood nickname?");
+        dataSaving.save();
 
 
     }

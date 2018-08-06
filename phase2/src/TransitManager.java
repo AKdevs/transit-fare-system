@@ -11,36 +11,12 @@ import java.util.HashMap;
 /** Manage the transit system. */
 class TransitManager implements Serializable{
   private HashMap<String, TransitLine> transitLines;
+  private DataSaving dataSaving;
 
   /** Constructs a transit system manager. */
   TransitManager() {
     this.transitLines = new HashMap<>();
     defaultSetup();
-
-    try
-    {
-      // Reading the object from a file
-      FileInputStream file = new FileInputStream("data-TransitManager.bin");
-      ObjectInputStream in = new ObjectInputStream(file);
-
-      // Method for deserialization of object
-      transitLines = (HashMap<String, TransitLine>)in.readObject();
-
-      in.close();
-      file.close();
-
-      System.out.println("Object has been deserialized ");
-    }
-
-    catch(IOException ex)
-    {
-      System.out.println("IOException is caught");
-    }
-
-    catch(ClassNotFoundException ex)
-    {
-      System.out.println("ClassNotFoundException is caught");
-    }
   }
 
   HashMap<String, TransitLine> getTransitLines() {
@@ -121,26 +97,7 @@ class TransitManager implements Serializable{
     addTransitLine(route1.getId(), route1);
     addTransitLine(route3.getId(), route3);
     addTransitLine(route5.getId(), route5);
-
-    try
-    {
-      //Saving of object in a file
-      FileOutputStream file = new FileOutputStream("data-TransitManager.bin");
-      ObjectOutputStream out = new ObjectOutputStream(file);
-
-      // Method for serialization of object
-      out.writeObject(transitLines);
-
-      out.close();
-      file.close();
-
-      System.out.println("Object has been serialized");
-
-    }
-    catch(IOException ex)
-    {
-      System.out.println("IOException is caught");
-    }
+    dataSaving.save();
   }
 
   /**
@@ -163,24 +120,6 @@ class TransitManager implements Serializable{
   private void addTransitLine(String name, TransitLine line) {
 
     transitLines.put(name, line);
-    try
-    {
-      //Saving of object in a file
-      FileOutputStream file = new FileOutputStream("data-TransitManager.bin");
-      ObjectOutputStream out = new ObjectOutputStream(file);
-
-      // Method for serialization of object
-      out.writeObject(transitLines);
-
-      out.close();
-      file.close();
-
-      System.out.println("Object has been serialized");
-
-    }
-    catch(IOException ex)
-    {
-      System.out.println("IOException is caught");
-    }
+    dataSaving.save();
   }
 }

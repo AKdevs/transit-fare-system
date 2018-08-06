@@ -1,10 +1,14 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class TransitSystem implements Serializable {
   /** Stores the trip manager */
   private TripManager tripManager;
   /** Stores the transit manager */
-  private TransitManager transitManager;
+  protected TransitManager transitManager;
   /** Stores the account manager */
   private AccountManager accountManager;
 
@@ -21,12 +25,46 @@ public class TransitSystem implements Serializable {
   /** The instance of the only TransitSystem */
   private static TransitSystem instance;
 
+  private DataSaving dataSaving;
+
+
   public TransitSystem() {
     tripManager = new TripManager();
     transitManager = new TransitManager();
     tripManager.addTransitLines(transitManager.getTransitLines());
     accountManager = new AccountManager();
     cardManager = new CardManager();
+    accountManager = new AccountManager();
+
+    try
+    {
+      // Reading the object from a file
+      FileInputStream file = new FileInputStream("data.bin");
+      ObjectInputStream in = new ObjectInputStream(file);
+
+      // Method for deserialization of object
+      currentDate = (String)in.readObject();
+      currentMonth = (String)in.readObject();
+      operatingStatus = (String)in.readObject();
+      tripManager = (TripManager)in.readObject();
+      transitManager = (TransitManager)in.readObject();
+
+
+
+      in.close();
+      file.close();
+
+      System.out.println("Object has been deserialized ");
+    }
+
+    catch(IOException ex)
+    {
+      System.out.println("IOException is caught");
+    }
+
+    catch(ClassNotFoundException ex) {
+      System.out.println("ClassNotFoundException is caught");
+    }
   }
 
   TripManager getTripManager() {
@@ -66,12 +104,14 @@ public class TransitSystem implements Serializable {
   /** Power on the system. */
   void powerOnSystem() {
     this.operatingStatus = "on";
+    dataSaving.save();
   }
 
   /** Power off the system. */
   void powerOffSystem() {
     this.operatingStatus = "off";
     System.out.println("The TransitSystem has been powered off.");
+    dataSaving.save();
   }
 
   /** @return current month in MM format */

@@ -1,10 +1,12 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class TripManager {
+class TripManager implements Serializable{
   private HashMap<String, TransitLine> transitLines;
   private FareCalculator fareCalculator;
   private Aggregator aggregator;
+  private DataSaving dataSaving;
 
   TripManager() {
     this.fareCalculator = new FareCalculator();
@@ -18,6 +20,7 @@ class TripManager {
   void addTransitLines(HashMap<String, TransitLine> transitLines) {
     this.transitLines = transitLines;
     fareCalculator.addTransitLines(transitLines);
+    dataSaving.save();
   }
 
   void recordTapIn(String time, String spot, Card card, String date, String type) {
@@ -71,6 +74,7 @@ class TripManager {
           }
       }
     }
+    dataSaving.save();
   }
 
   void recordTapOut(String time, String spot, Card card, String date, String type) {
@@ -104,6 +108,7 @@ class TripManager {
         || current.getTransitType().equals("continueS")) {
       current.setTransitType("continuous");
     }
+    dataSaving.save();
   }
 
   private void addNewTrip(String time, String spot, Card card, String date, String type) {
