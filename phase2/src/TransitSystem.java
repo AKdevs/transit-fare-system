@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.logging.*;
 
 public class TransitSystem implements Serializable {
   /** Stores the trip manager */
@@ -21,13 +23,41 @@ public class TransitSystem implements Serializable {
   /** The instance of the only TransitSystem */
   private static TransitSystem instance;
 
+    private static final Logger logger =
+            Logger.getLogger(TransitSystem.class.getName());
+    private static final Handler consoleHandler = new ConsoleHandler();
+
+    private static Handler fh;
+
+
   public TransitSystem() {
     tripManager = new TripManager();
     transitManager = new TransitManager();
     tripManager.addTransitLines(transitManager.getTransitLines());
     accountManager = new AccountManager();
     cardManager = new CardManager();
+
+    try{
+    logger.setLevel(Level.ALL);
+    consoleHandler.setLevel(Level.ALL);
+    logger.addHandler(consoleHandler);
+      fh = new FileHandler("/Users/jingjingzhan/Desktop/test_log.txt");
+      logger.addHandler(fh);
+      SimpleFormatter formatter = new SimpleFormatter();
+      fh.setFormatter(formatter);
+      } catch (IOException e) {
+        e.printStackTrace();
+    }
+
   }
+
+    private static Logger getLogger(){
+        return logger;
+    }
+
+    public static void log(Level level, String msg){
+        getLogger().log(level, msg);
+    }
 
   TripManager getTripManager() {
     return tripManager;

@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 public class CardManager {
   /** Keeps a track of all cards in the system. */
@@ -106,6 +107,7 @@ public class CardManager {
     Card newCard = new Card();
     addCard(newCard);
     System.out.println("Card " + newCard.getCardNumber() + " created");
+      TransitSystem.log(Level.ALL, "Card created!!!");
   }
 
   /**
