@@ -39,7 +39,8 @@ public class EventHandler {
                   eventTokens[2],
                   associatedEntryCard,
                   eventTokens[5],
-                  eventTokens[3]);
+                  eventTokens[3],
+                      eventTokens[6]);
           break;
         case "exit":
           Card associatedExitCard = system.getCardManager().findCard(eventTokens[1]);
