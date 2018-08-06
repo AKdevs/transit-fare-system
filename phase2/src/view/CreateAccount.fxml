@@ -32,6 +32,7 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Label fx:id="promptLabel" textFill="RED" />
       <GridPane vgap="10.0">
         <columnConstraints>
           <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -78,12 +79,12 @@
          <children>
             <Label nodeOrientation="RIGHT_TO_LEFT" text="* Security Question 1" />
             <Label nodeOrientation="RIGHT_TO_LEFT" text="* Answer" GridPane.rowIndex="1" />
-            <TextField fx:id="answer1" layoutX="310.0" layoutY="3.0" prefHeight="25.0" prefWidth="285.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="answer1Field" layoutX="310.0" layoutY="3.0" prefHeight="25.0" prefWidth="285.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ComboBox fx:id="questionBox1" prefHeight="25.0" prefWidth="360.0" promptText="Select A Question" visibleRowCount="4" GridPane.columnIndex="1" />
             <Label layoutX="10.0" layoutY="11.0" nodeOrientation="RIGHT_TO_LEFT" text="* Security Question 2" GridPane.rowIndex="2" />
             <ComboBox fx:id="questionBox2" layoutX="146.0" layoutY="7.0" prefHeight="25.0" prefWidth="360.0" promptText="Select A Question" visibleRowCount="4" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label layoutX="10.0" layoutY="49.0" nodeOrientation="RIGHT_TO_LEFT" text="* Answer" GridPane.rowIndex="3" />
-            <TextField fx:id="answer2" layoutX="146.0" layoutY="45.0" prefHeight="25.0" prefWidth="285.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="answer2Field" layoutX="146.0" layoutY="45.0" prefHeight="25.0" prefWidth="285.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
          <VBox.margin>
             <Insets left="50.0" right="50.0" />

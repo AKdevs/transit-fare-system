@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 /** Card is used to tap in and tap out when enter and exit a stop or station. */
 class Card implements Serializable {
@@ -76,7 +77,7 @@ class Card implements Serializable {
   void addBalance(Double fares) {
     if (active) {
       this.balance += fares;
-      System.out.println(
+      TransitSystem.log(Level.ALL,
           "Sucessfully added $"
               + fares
               + " to card "
@@ -85,7 +86,7 @@ class Card implements Serializable {
               + " The balance is now "
               + this.balance);
     } else {
-      System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
+      TransitSystem.log(Level.ALL,"Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
   }
 
