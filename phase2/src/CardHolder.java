@@ -27,10 +27,6 @@ public class CardHolder extends UserAccount implements Serializable{
     this.travelCards = new ArrayList<>();
   }
 
-  public void enter(String time, String spot, String cardNumber, String date, String type) {}
-
-  public void exit(String time, String spot, String cardNumber) {}
-
   /**
    * Links card to this account. Prints out a message to inform the CardHolder whether the card is
    * linked to his/her account successfully.
@@ -143,6 +139,9 @@ public class CardHolder extends UserAccount implements Serializable{
       if (amount <= card1.getBalance() && amount >= 0) {
           card1.deductBalance(amount);
           card2.addBalance(amount);
+          if (card1.getBalance() < 10) {
+              autoLoad(card1);
+          }
       }else if (amount > card1.getBalance()){
           TransitSystem.log(Level.ALL,"Your balance in Card \n"  + card1.getCardNumber()  + " is not enough.");
           return "Your balance in Card \n"  + card1.getCardNumber()  + " is not enough.";

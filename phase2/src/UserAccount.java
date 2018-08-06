@@ -21,6 +21,10 @@ public class UserAccount implements Serializable{
     this.answerList = new ArrayList<>();
   }
 
+  void setEmail(String email) {
+    this.email = email;
+  }
+
   void setPassword(String password) {
     this.password = password;
   }
@@ -36,6 +40,7 @@ public class UserAccount implements Serializable{
   void setAnswerList(List<String> answerList) {
     this.answerList = answerList;
   }
+
 
   public void setAccountNumber(String accountNumber) {
     this.accountNumber = accountNumber;

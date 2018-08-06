@@ -28,7 +28,7 @@ public class CreateAccountController extends Controller {
     @FXML private TextField email;
     @FXML private TextField password;
 
-    public void initializeComboBox() {
+    public void initializeCustom() {
         ObservableList<String> elements = FXCollections.observableList(
                         system.getAccountManager().
                                 getPasswordManager().getQuestionList());

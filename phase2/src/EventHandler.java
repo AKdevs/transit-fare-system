@@ -23,6 +23,7 @@ public class EventHandler {
   }
 
   /** Reads events from file and performs the corresponding actions. */
+
   private void play() {
     String currentEvent = eventsBuffer.nextLine();
     String[] eventTokens = currentEvent.split(" \\| ");
@@ -199,4 +200,5 @@ public class EventHandler {
   private boolean cardExists(String cardNumber) {
     return !(system.getCardManager().findCard(cardNumber) == null);
   }
+
 }

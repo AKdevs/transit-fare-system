@@ -92,7 +92,7 @@ public class LoginController extends Controller {
         Parent createAccountParent = loader.load();
         CreateAccountController controller = loader.getController();
         controller.storeState(system);
-        controller.initializeComboBox();
+        controller.initializeCustom();
         Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
         window.setScene(new Scene(createAccountParent));
         window.show();

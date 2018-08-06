@@ -98,6 +98,9 @@ class Card implements Serializable {
   void deductBalance(Double fares) {
     if (active) {
       this.balance -= fares;
+        if (this.getBalance() < 10) {
+            owner.autoLoad(this);
+        }
     } else {
       System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
