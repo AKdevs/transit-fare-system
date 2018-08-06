@@ -21,7 +21,6 @@ class Card implements Serializable {
   private ArrayList<TripSegment> trips;
   /** Keeps track of total fares accumulated on this card */
   private double totalFares;
-  private DataSaving dataSaving;
 
 
   /** Constructs a card. */
@@ -88,7 +87,6 @@ class Card implements Serializable {
     } else {
       System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
-    dataSaving.save();
   }
 
   /**
@@ -102,7 +100,6 @@ class Card implements Serializable {
     } else {
       System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
     }
-    dataSaving.save();
   }
 
   /** Prints out the balance of the card. */
@@ -117,25 +114,21 @@ class Card implements Serializable {
   /** Activates the card. */
   void activate() {
     this.active = true;
-    dataSaving.save();
   }
 
   /** Deactivates the card. */
   void deactivate() {
     this.active = false;
-    dataSaving.save();
   }
 
   /** Sets the status of the card linking to a account to be true. */
   void linkAccount() {
     this.linked = true;
-    dataSaving.save();
   }
 
   /** Sets the status of the card linking to a account to be false. */
   void unlinkAccount() {
     this.linked = false;
-    dataSaving.save();
   }
 
   /**
@@ -206,12 +199,10 @@ class Card implements Serializable {
 
   void addTrip(TripSegment newtrip) {
     trips.add(newtrip);
-    dataSaving.save();
   }
 
   void updateBalance(double fares) {
     this.deductBalance(fares);
-    dataSaving.save();
   }
 
   void updateTotalFares(double fares) {

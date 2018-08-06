@@ -6,8 +6,6 @@ import java.util.List;
 public class PasswordManager implements Serializable{
     private List<String> securityQuestions;
     private int minimumPasswordLength;
-    private DataSaving dataSaving;
-
 
     PasswordManager() {
         securityQuestions = new ArrayList<>();
@@ -15,9 +13,6 @@ public class PasswordManager implements Serializable{
         securityQuestions.add("In what city did your mother and father meet?");
         securityQuestions.add("What was the name of your first pet?");
         securityQuestions.add("What was your childhood nickname?");
-        dataSaving.save();
-
-
     }
 
     String getSecurityQuestion(int index) {

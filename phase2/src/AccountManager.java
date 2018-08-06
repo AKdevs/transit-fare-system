@@ -8,18 +8,17 @@ import java.util.ArrayList;
 
 /** Manage all accounts which are stored in TransitSystem. */
 class AccountManager implements Serializable{
-  private ArrayList<CardHolder> cardholders;
-  private ArrayList<AdminUser> adminUsers;
   private ArrayList<UserAccount> userAccounts;
   private UserAccount loggedInUser;
   private PasswordManager passwordManager;
-  private DataSaving dataSaving;
+  private int nextCardHolderNumber;
+  private int nextAdminUserNumber;
 
   AccountManager(){
-    this.cardholders = new ArrayList<>();
-    this.adminUsers = new ArrayList<>();
     this.userAccounts = new ArrayList<>();
     this.passwordManager = new PasswordManager();
+    this.nextCardHolderNumber = 10000001;
+    this.nextAdminUserNumber = 20000001;
   }
 
   PasswordManager getPasswordManager() {
@@ -46,15 +45,10 @@ class AccountManager implements Serializable{
    */
   void createCardHolderAccount(String name, String email, String password) {
     CardHolder newAccount = new CardHolder(name, email, password);
-    int accountnum;
-    accountnum = 10000000 + cardholders.size();
-
-    cardholders.add(newAccount);
     userAccounts.add(newAccount);
-    newAccount.setAccountNumber(Integer.toString(accountnum));
+    newAccount.setAccountNumber(Integer.toString(nextCardHolderNumber));
+    nextCardHolderNumber++;
     System.out.println("CardHolder Account " + newAccount.getAccountNum() + " created");
-    dataSaving.save();
-
   }
 
   /**
@@ -65,12 +59,10 @@ class AccountManager implements Serializable{
    */
   void createAdminAccount(String name, String email, String password) {
     AdminUser newAccount = new AdminUser(name, email, password);
-    int accountnum = 20000000 + adminUsers.size();
-    adminUsers.add(newAccount);
     userAccounts.add(newAccount);
-    newAccount.setAccountNumber(Integer.toString(accountnum));
+    newAccount.setAccountNumber(Integer.toString(nextAdminUserNumber));
+    nextAdminUserNumber++;
     System.out.println("AdminUser Account " + newAccount.getAccountNum() + " created");
-    dataSaving.save();
   }
 
 

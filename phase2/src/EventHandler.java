@@ -9,7 +9,7 @@ public class EventHandler {
   private Scanner eventsBuffer;
 
   public static void main(String[] args) throws Exception {
-    TransitSystem mainSystem = new TransitSystem();
+    TransitSystem mainSystem = new TransitSystem("");
 
     EventHandler mainHandler = new EventHandler(mainSystem);
     while (mainHandler.eventsBuffer.hasNextLine()) {

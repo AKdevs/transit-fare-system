@@ -43,8 +43,6 @@ public class CardHolder extends UserAccount implements Serializable{
       System.out.println(
           "Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
     }
-    dataSaving.save();
-
   }
 
   /**
@@ -63,7 +61,6 @@ public class CardHolder extends UserAccount implements Serializable{
               + " unlinked to CardHolder Account "
               + this.getAccountNum());
     }
-    dataSaving.save();
   }
 
   /**
@@ -81,7 +78,6 @@ public class CardHolder extends UserAccount implements Serializable{
       System.out.println(
           "Action denied. Card" + card.getCardNumber() + " is not linked to your account");
     }
-    dataSaving.save();
   }
 
   /**
@@ -99,7 +95,6 @@ public class CardHolder extends UserAccount implements Serializable{
       System.out.println(
           "Action denied. Card" + card.getCardNumber() + " is not linked to your account");
     }
-    dataSaving.save();
   }
 
   /** Prints out information about the account and card(s) linked to his/her account. */
@@ -146,7 +141,6 @@ public class CardHolder extends UserAccount implements Serializable{
       }else if (amount < 0) {
           return "Please type in \n a positive number";
       }
-    dataSaving.save();
       return "Transfer balance \n succeed";
   }
 }

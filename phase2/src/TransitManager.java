@@ -11,7 +11,6 @@ import java.util.HashMap;
 /** Manage the transit system. */
 class TransitManager implements Serializable{
   private HashMap<String, TransitLine> transitLines;
-  private DataSaving dataSaving;
 
   /** Constructs a transit system manager. */
   TransitManager() {
@@ -97,7 +96,6 @@ class TransitManager implements Serializable{
     addTransitLine(route1.getId(), route1);
     addTransitLine(route3.getId(), route3);
     addTransitLine(route5.getId(), route5);
-    dataSaving.save();
   }
 
   /**
@@ -120,6 +118,5 @@ class TransitManager implements Serializable{
   private void addTransitLine(String name, TransitLine line) {
 
     transitLines.put(name, line);
-    dataSaving.save();
   }
 }

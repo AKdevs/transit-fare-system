@@ -1,12 +1,12 @@
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class FareCalculator {
+public class FareCalculator implements Serializable {
   private final double busFare = 2.0;
   private final double stationFare = 0.5;
   private final double fareCap = 6.0;
   /** Maximum amount of time where the fareCap is applicable. */
   private final int maximumDuration = 120;
-  private DataSaving dataSaving;
 
   private HashMap<String, TransitLine> transitLines;
   // private double fare;
@@ -19,7 +19,6 @@ public class FareCalculator {
 
   void addTransitLines(HashMap<String, TransitLine> transitLines) {
     this.transitLines = transitLines;
-    dataSaving.save();
   }
 
   double calculateContiBusFare(double currentFares) {

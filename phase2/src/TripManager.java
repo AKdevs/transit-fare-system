@@ -6,7 +6,6 @@ class TripManager implements Serializable{
   private HashMap<String, TransitLine> transitLines;
   private FareCalculator fareCalculator;
   private Aggregator aggregator;
-  private DataSaving dataSaving;
 
   TripManager() {
     this.fareCalculator = new FareCalculator();
@@ -20,7 +19,6 @@ class TripManager implements Serializable{
   void addTransitLines(HashMap<String, TransitLine> transitLines) {
     this.transitLines = transitLines;
     fareCalculator.addTransitLines(transitLines);
-    dataSaving.save();
   }
 
   void recordTapIn(String time, String spot, Card card, String date, String type) {
@@ -74,7 +72,6 @@ class TripManager implements Serializable{
           }
       }
     }
-    dataSaving.save();
   }
 
   void recordTapOut(String time, String spot, Card card, String date, String type) {
@@ -108,7 +105,6 @@ class TripManager implements Serializable{
         || current.getTransitType().equals("continueS")) {
       current.setTransitType("continuous");
     }
-    dataSaving.save();
   }
 
   private void addNewTrip(String time, String spot, Card card, String date, String type) {

@@ -22,44 +22,14 @@ public class Aggregator implements Serializable{
     /** Stores the daily stat information of Transit Line by date*/
     private HashMap<String, TransitLineDailyStat> transitLineDailySummary;
 
-    private DataSaving dataSaving;
-
-    Aggregator(){
-        this.allFares = new HashMap<>();
-        this.numberOfStations = new HashMap<>();
-        this.availableDate = new HashSet<String>();
-        this.transitLineDailySummary = new HashMap<>();
-
-      try
-      {
-        // Reading the object from a file
-        FileInputStream file = new FileInputStream("data-.bin");
-        ObjectInputStream in = new ObjectInputStream(file);
-
-        // Method for deserialization of object
-        allFares = (HashMap<String, Double>)in.readObject();
-        numberOfStations = (HashMap<String, Integer>)in.readObject();
-        availableDate= (Set<String>)in.readObject();
-        transitLineDailySummary = (HashMap<String, TransitLineDailyStat> ) in.readObject();
+  Aggregator() {
+    this.allFares = new HashMap<>();
+    this.numberOfStations = new HashMap<>();
+    this.availableDate = new HashSet<String>();
+    this.transitLineDailySummary = new HashMap<>();
+  }
 
 
-        in.close();
-        file.close();
-
-        System.out.println("Object has been deserialized ");
-      }
-
-      catch(IOException ex)
-      {
-        System.out.println("IOException is caught");
-      }
-
-      catch(ClassNotFoundException ex)
-      {
-        System.out.println("ClassNotFoundException is caught");
-      }
-
-    }
 
   public Set<String> getAvailableDate() {
     return availableDate;
@@ -117,8 +87,6 @@ public class Aggregator implements Serializable{
         } else {
             allFares.put(date, fares);
         }
-
-      dataSaving.saveReport();
     }
 
     /**
@@ -140,7 +108,6 @@ public class Aggregator implements Serializable{
         } else {
             numberOfStations.put(date, n);
         }
-        dataSaving.saveReport();
     }
 
     /**
@@ -207,10 +174,7 @@ public class Aggregator implements Serializable{
             TransitLineDailyStat tLDS = new TransitLineDailyStat();
             transitLineDailySummary.put(date, tLDS);
         }
-
-        dataSaving.saveReport();
-
-    }
+            }
 
     public boolean isReportAvailable (String date) {
         return availableDate.contains(date);

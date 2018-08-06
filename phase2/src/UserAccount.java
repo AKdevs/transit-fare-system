@@ -12,7 +12,6 @@ public class UserAccount implements Serializable{
   protected String password;
   protected List<Integer> questionIndexList;
   protected List<String> answerList;
-  protected DataSaving dataSaving;
 
   UserAccount(String name, String email, String password) {
     this.name = name;
@@ -72,7 +71,6 @@ public class UserAccount implements Serializable{
   void changeName(String newName) {
     this.name = newName;
     System.out.println("Account " + this.getAccountNum() + " name changed to " + this.name);
-    dataSaving.save();
   }
 
 

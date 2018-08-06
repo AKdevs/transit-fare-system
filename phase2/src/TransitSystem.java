@@ -1,8 +1,7 @@
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.logging.Level;
 
 public class TransitSystem implements Serializable {
   /** Stores the trip manager */
@@ -25,45 +24,19 @@ public class TransitSystem implements Serializable {
   /** The instance of the only TransitSystem */
   private static TransitSystem instance;
 
-  private DataSaving dataSaving;
-
-
-  public TransitSystem() {
+  public TransitSystem(String filePath) throws ClassNotFoundException, IOException {
     tripManager = new TripManager();
     transitManager = new TransitManager();
     tripManager.addTransitLines(transitManager.getTransitLines());
     accountManager = new AccountManager();
     cardManager = new CardManager();
-    accountManager = new AccountManager();
 
-    try
-    {
-      // Reading the object from a file
-      FileInputStream file = new FileInputStream("data.bin");
-      ObjectInputStream in = new ObjectInputStream(file);
-
-      // Method for deserialization of object
-      currentDate = (String)in.readObject();
-      currentMonth = (String)in.readObject();
-      operatingStatus = (String)in.readObject();
-      tripManager = (TripManager)in.readObject();
-      transitManager = (TransitManager)in.readObject();
-
-
-
-      in.close();
-      file.close();
-
-      System.out.println("Object has been deserialized ");
-    }
-
-    catch(IOException ex)
-    {
-      System.out.println("IOException is caught");
-    }
-
-    catch(ClassNotFoundException ex) {
-      System.out.println("ClassNotFoundException is caught");
+    File file = new File(filePath);
+    if (file.exists()) {
+      System.out.println("YAHOO");
+      readFromFile(filePath);
+    } else {
+      file.createNewFile();
     }
   }
 
@@ -90,28 +63,15 @@ public class TransitSystem implements Serializable {
     return this.operatingStatus;
   }
 
-  /**
-   *
-   * @return instance of the TransitSystem
-   */
-  public static TransitSystem getInstance() {
-    if (instance == null) {
-      instance = new TransitSystem();
-    }
-    return instance;
-  }
-
   /** Power on the system. */
   void powerOnSystem() {
     this.operatingStatus = "on";
-    dataSaving.save();
   }
 
   /** Power off the system. */
   void powerOffSystem() {
     this.operatingStatus = "off";
     System.out.println("The TransitSystem has been powered off.");
-    dataSaving.save();
   }
 
   /** @return current month in MM format */
@@ -133,4 +93,52 @@ public class TransitSystem implements Serializable {
   void setCurrentDate(String date) {
     this.currentDate = date;
   }
+
+
+  public void readFromFile(String path) throws ClassNotFoundException {
+    try {
+      InputStream file = new FileInputStream(path);
+      InputStream buffer = new BufferedInputStream(file);
+      ObjectInput input = new ObjectInputStream(buffer);
+
+      ArrayList<Object> data = (ArrayList<Object>)input.readObject();
+      tripManager = (TripManager)data.get(0);
+      transitManager = (TransitManager)data.get(1);
+      accountManager = (AccountManager)data.get(2);
+      cardManager = (CardManager)data.get(3);
+      //deserialize all TransitSystem instance fields
+      input.close();
+      System.out.println("Object has been deserialized ");
+    }
+
+    catch (IOException ex) {
+      System.out.print("IO Exception caught");
+    }
+
+    catch(ClassNotFoundException ex) {
+      System.out.println("ClassNotFoundException is caught");
+    }
+  }
+
+  public void saveToFile(String filePath) throws IOException {
+
+    OutputStream file = new FileOutputStream(filePath);
+    OutputStream buffer = new BufferedOutputStream(file);
+    ObjectOutput output = new ObjectOutputStream(buffer);
+
+    // serialize the Map
+    //output.writeObject(currentDate);
+   // output.writeObject(currentMonth);
+
+    ArrayList<Object> data = new ArrayList<>();
+    data.add(tripManager);
+    data.add(transitManager);
+    data.add(accountManager);
+    data.add(cardManager);
+    output.writeObject(data);
+
+    output.close();
+  }
+
 }
+

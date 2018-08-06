@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class CardManager implements Serializable{
   /** Keeps a track of all cards in the system. */
   private ArrayList<Card> cards;
-  private DataSaving dataSaving;
 
   CardManager(){
     this.cards = new ArrayList<>();
@@ -53,8 +52,6 @@ public class CardManager implements Serializable{
 
     cards.add(newCard);
     newCard.setCardNumber(Integer.toString(cardnum));
-
-    dataSaving.save();
   }
 
   /** Creates new card, card number is assigned automatically. */
