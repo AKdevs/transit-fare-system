@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="572.0" spacing="8.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="572.0" spacing="8.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane>
          <children>
@@ -193,7 +193,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Spinner fx:id="transitNumOfTrips" editable="true" amountToStepBy="1" initialValue="100" max="99999999" min="0" />
+            <Spinner fx:id="transitNumOfTrips" amountToStepBy="1" editable="true" initialValue="100" max="99999999" min="0" />
             <Button fx:id="setSchedulingButton" mnemonicParsing="false" onAction="#setTransitScheduling" text="Set Scheduling">
                <HBox.margin>
                   <Insets left="50.0" />
@@ -233,10 +233,10 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Spinner fx:id="avgCostPerStation" editable="true" amountToStepBy="0.01" initialValue="5.00" max="3000.00" min="0.0" />
-            <Button fx:id="costSettingButton" mnemonicParsing="false" onAction="#setTransitScheduling" text="Set Scheduling">
+            <Spinner fx:id="avgCostPerStation" amountToStepBy="0.01" editable="true" initialValue="5.00" max="8000.00" min="0.0" />
+            <Button fx:id="costSettingButton" mnemonicParsing="false" onAction="#setAvgCost" text=" Set Cost ">
                <HBox.margin>
-                  <Insets left="50.0" />
+                  <Insets left="20.0" />
                </HBox.margin>
             </Button>
          </children>
@@ -244,10 +244,17 @@
             <Insets left="20.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="365.0">
+      <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="365.0">
          <children>
-            <Label fx:id="costSettingLabel" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="viewCostButton" mnemonicParsing="false" onAction="#viewAvgCost" text="View Current Setting" />
+            <Label fx:id="costSettingResultLabel" textAlignment="CENTER" wrapText="true">
+               <HBox.margin>
+                  <Insets left="28.0" />
+               </HBox.margin></Label>
          </children>
+         <padding>
+            <Insets left="30.0" />
+         </padding>
       </HBox>
    </children>
 </VBox>

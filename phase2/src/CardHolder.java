@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 /**
  * CardHolder is a person who owns and uses a Card, ie a passenger who travels in the TransitSystem.
@@ -33,14 +34,14 @@ public class CardHolder extends UserAccount implements Serializable{
   void linkCard(Card card) {
     if (!(card.getOwner() == null)) {
       // If card is currently linked to another CardHolder, it cannot be linked to this CardHolder.
-      System.out.println("Action denied. This card is currently linked to another account.");
-    } else if (!card.isLinked()){
+      TransitSystem.log(Level.INFO, "Action denied. Card " + card.getCardNumber() + " is currently linked to another account.");
+    } else if (!card.isLinked()) {
       // link a valid card to this CardHolder
       this.travelCards.add(card);
       card.setOwner(this);
       card.linkAccount();
       card.linkAccount();
-      System.out.println(
+      TransitSystem.log(Level.INFO,
           "Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
     }
   }
@@ -55,7 +56,7 @@ public class CardHolder extends UserAccount implements Serializable{
       this.travelCards.remove(card);
       card.setOwner(null);
       card.unlinkAccount();
-      System.out.println(
+      TransitSystem.log(Level.INFO,
           "Card "
               + card.getCardNumber()
               + " unlinked to CardHolder Account "
@@ -73,9 +74,9 @@ public class CardHolder extends UserAccount implements Serializable{
     // CardHolder is able to activate a card that is linked to his/her account.
     if (this.travelCards.contains(card)) {
       card.activate();
-      System.out.println("Card " + card.getCardNumber() + " activated");
+      TransitSystem.log(Level.INFO,"Card " + card.getCardNumber() + " activated");
     } else {
-      System.out.println(
+      TransitSystem.log(Level.INFO,
           "Action denied. Card" + card.getCardNumber() + " is not linked to your account");
     }
   }
@@ -90,9 +91,9 @@ public class CardHolder extends UserAccount implements Serializable{
     // CardHolder is able to deactivate a card that is linked to his/her account.
     if (this.travelCards.contains(card)) {
       card.deactivate();
-      System.out.println("Card " + card.getCardNumber() + " deactivated");
+      TransitSystem.log(Level.INFO,"Card " + card.getCardNumber() + " deactivated");
     } else {
-      System.out.println(
+      TransitSystem.log(Level.INFO,
           "Action denied. Card" + card.getCardNumber() + " is not linked to your account");
     }
   }
@@ -137,10 +138,13 @@ public class CardHolder extends UserAccount implements Serializable{
           card1.deductBalance(amount);
           card2.addBalance(amount);
       }else if (amount > card1.getBalance()){
+          TransitSystem.log(Level.INFO,"Your balance in Card \n"  + card1.getCardNumber()  + " is not enough.");
           return "Your balance in Card \n"  + card1.getCardNumber()  + " is not enough.";
       }else if (amount < 0) {
+          TransitSystem.log(Level.INFO,"Entered negative number to transfer balance for Card \n"  + card1.getCardNumber());
           return "Please type in \n a positive number";
       }
+      TransitSystem.log(Level.INFO, "Transfer Balance from Card "+card1.getCardNumber()+ " to Card " + card2.getCardNumber() + " is succeed.");
       return "Transfer balance \n succeed";
   }
 }
