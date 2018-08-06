@@ -115,7 +115,7 @@ public class CardHolderController extends Controller {
         email.setText(loggedInUser.getEmail());
         passField.setText(loggedInUser.getPassword());
         confirmPassField.setText(loggedInUser.getPassword());
-        initializeCustom();
+        // initializeCustom();
 
         monthlyCost.setText("Monthly Cost:      " + Double.toString(loggedInUser.getMonthlyCost()));
         for (Card card: loggedInUser.getTravelCards()) {
@@ -173,6 +173,8 @@ public class CardHolderController extends Controller {
         }
     }
 
+    /*
+
     @FXML
     void changeSecurityQuestionButtonPushed(ActionEvent event) throws IOException {
         if (questionBox1.getValue().equals(questionBox2.getValue())) {
@@ -195,6 +197,7 @@ public class CardHolderController extends Controller {
             securityPrompt.setText("Questions cannot be the same!");
         }
     }
+    */
 
     @FXML
     void linkCardButtonPushed(ActionEvent event) throws IOException {
