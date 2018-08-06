@@ -1,11 +1,15 @@
 import java.io.IOException;
 import java.net.URL;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,7 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
-public class TravelSimulationController extends Controller {
+public class TravelSimulationController extends Controller implements Initializable {
     private int source; // 0 if loader is CardHolder, 1 if loader is Card
     @FXML private Button tapIn;
     @FXML private Button tapOut;
@@ -30,7 +34,8 @@ public class TravelSimulationController extends Controller {
     @FXML private TextField enterSpot;
     @FXML private TextField enterTime;
     @FXML private TextField enterDate;
-    @FXML private ChoiceBox enterType;
+    @FXML private ChoiceBox<String> enterType;
+    @FXML private ChoiceBox<String> enterTransitLine;
 
     @FXML private TextField exitSpot;
     @FXML private TextField exitTime;
@@ -53,6 +58,11 @@ public class TravelSimulationController extends Controller {
         enterType.getItems().add("Bus");
         exitType.getItems().add("Subway");
         exitType.getItems().add("Bus");
+
+        HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
+        for (String id : transitLines.keySet()) {
+                enterTransitLine.getItems().add(id);
+            }
     }
 
     public void setSource(int source) {
@@ -91,7 +101,8 @@ public class TravelSimulationController extends Controller {
                         enterSpot.getText(),
                         associatedEntryCard,
                         enterDate.getText(),
-                        enterType.getSelectionModel().getSelectedItem().toString().substring(0,1));
+                        enterType.getSelectionModel().getSelectedItem().toString().substring(0,1),
+                        enterTransitLine.getValue());
         balance.setText(Double.toString(associatedEntryCard.getBalance()));
     }
 
@@ -106,4 +117,39 @@ public class TravelSimulationController extends Controller {
                 exitType.getSelectionModel().getSelectedItem().toString().substring(0, 1));
         balance.setText(Double.toString(associatedEntryCard.getBalance()));
     }
+    void populateTransitLine(String type) {
+        type.substring(0,1);
+        HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
+        for (String id : transitLines.keySet()) {
+            if (transitLines.get(id).getType().equals(type)) {
+                enterTransitLine.getItems().add(id);
+            }
+        }
+    }
+
+
+
+    /**
+    void populateTransitLine(ActionEvent event) throws IOException {
+        if (enterType.getSelectionModel().getSelectedItem() != null) {
+            String type = enterType.getSelectionModel().getSelectedItem().substring(0, 1);
+            HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
+            for (String id : transitLines.keySet()) {
+                if (transitLines.get(id).getType().equals(type)) {
+                    enterTransitLine.getItems().add(id);
+                }
+            }
+        }
+    }
+    */
+    public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+        enterType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue<? extends String> selected, String oldType, String newType) {
+                if (newType != null) {
+                    populateTransitLine(newType);
+                }
+    }
+    });
+    }
 }
+

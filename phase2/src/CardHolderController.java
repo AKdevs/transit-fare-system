@@ -102,14 +102,6 @@ public class CardHolderController extends Controller {
         transferBalanceInstructions.setText(ch.transferBalance(c1, c2, balance));
     }
 
-
-    @FXML
-    void viewMonthlyCostButtonPushed(ActionEvent event) {
-        UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
-        CardHolder ch = (CardHolder)ua;
-        monthlyCost.setText(Double.toString(ch.getMonthlyCost()));
-    }
-
     @FXML
     void logOutButtonPushed(ActionEvent event) throws IOException {
         system.getAccountManager().setLoggedInUser(null);
@@ -131,6 +123,7 @@ public class CardHolderController extends Controller {
             card1.getItems().add(card.getCardNumber());
             card2.getItems().add(card.getCardNumber());
         }
+        /*
 
         if (autoLoadStatus.getText().equals("ON")) {
             accountBalanceHeader.setText("Account Balance: ");
@@ -139,7 +132,7 @@ public class CardHolderController extends Controller {
             load10ToAccount.setText("Load $10");
             load20ToAccount.setText("Load $20");
             load50ToAccount.setText("Load $50");
-        }
+        }*/
 
     }
 
