@@ -47,9 +47,10 @@ public class AdminUserController extends Controller implements Initializable {
         @FXML private Spinner<Integer> transitNumOfTrips;
         @FXML private Button setSchedulingButton;
         @FXML private Label schedulingResult;
-        @FXML private Spinner<Float> avgCostPerStation;
-        @FXML private Label costSettingLabel;
+        @FXML private Spinner<Double> avgCostPerStation;
+        @FXML private Label costSettingResultLabel;
         @FXML private Button costSettingButton;
+        @FXML private Button viewCostButton;
 
 
 
@@ -221,6 +222,22 @@ public class AdminUserController extends Controller implements Initializable {
             }
         }
     }
+
+    public void setAvgCost(ActionEvent event) throws IOException {
+            Double cost = avgCostPerStation.getValue();
+            system.getTripManager().setAvgCostPerStation(cost);
+            costSettingResultLabel.setTextFill(Color.DARKGREEN);
+            String success = "The Average Cost Per Station has been set to $" + cost + " successfully.";
+            costSettingResultLabel.setText(success);
+    }
+
+    public void viewAvgCost(ActionEvent event) throws IOException {
+            Double cost = system.getTripManager().getAvgCostPerStation();
+            String message = "The current setting for Average Cost Per Station is $" + cost +".";
+        costSettingResultLabel.setTextFill(Color.BLACK);
+        costSettingResultLabel.setText(message);
+    }
+
 
 
         //java.util.regex is not available
