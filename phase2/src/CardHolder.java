@@ -16,7 +16,13 @@ public class CardHolder extends UserAccount implements Serializable{
   private ArrayList<Card> travelCards;
   /* Account Number for CardHolder starts at 10000001 to distinguish with other account/card numbers.*/
 
-  CardHolder(String name, String email, String password) {
+
+    private double accountBalance;
+
+    private int autoLoadStatus;
+
+
+    CardHolder(String name, String email, String password) {
     super(name, email, password);
     this.travelCards = new ArrayList<>();
   }
@@ -147,4 +153,33 @@ public class CardHolder extends UserAccount implements Serializable{
       TransitSystem.log(Level.ALL, "Transfer Balance from Card "+card1.getCardNumber()+ " to Card " + card2.getCardNumber() + " is succeed.");
       return "Transfer balance \n succeed";
   }
+
+    int getAutoLoadStatus() {
+        return autoLoadStatus;
+    }
+
+    void setAutoLoadStatus(int status) {
+        autoLoadStatus = status;
+    }
+
+    double getAccountBalance() {
+        return accountBalance;
+    }
+
+    void addAccountBalance(double amount) {
+        accountBalance += amount;
+    }
+
+    void deductAccountBalance(double amount) {
+        accountBalance -= amount;
+    }
+
+    void autoLoad(Card card) {
+        double difference = 10 - card.getBalance();
+        if (accountBalance >= difference && this.autoLoadStatus == 1) {
+            deductAccountBalance(difference);
+            card.addBalance(difference);
+        }
+    }
+
 }
