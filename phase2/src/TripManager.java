@@ -36,6 +36,7 @@ class TripManager implements Serializable{
     if (card.getBalance() < 0) {
       TransitSystem.log(Level.ALL,"Declined: Card " + card.getCardNumber() +" is out of funds, please load money.");
     } else {
+        updateRidership(date,transitLine);
       // if the cardHolder traveled with this card before
       if (!card.getTrips().isEmpty()) {
         ArrayList<TripSegment> allTrips = card.getTrips();
@@ -132,6 +133,13 @@ class TripManager implements Serializable{
       TransitSystem.log(Level.ALL,fares+"$ is deducted from card " + card.getCardNumber());
       card.updateTotalFares(fares);
       aggregator.updateAllFares(date, fares);
+  }
+
+  private void updateRidership(String date, String transitLine) {
+      if (transitLine != null) {
+          SingleTransitLineDailyStat thisStat = aggregator.getTransitLineDailyStat(date).getSingleTransitLineDailyStat(transitLine);
+          thisStat.increaseRidership();
+      }
   }
 
   private String findTransitLine(String type, String station) {
