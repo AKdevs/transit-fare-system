@@ -75,7 +75,7 @@
                   </GridPane>
                   <HBox alignment="CENTER">
                      <children>
-                        <Button onAction="#changeEmailButtonPushed" alignment="CENTER" mnemonicParsing="false" text="Change Email" />
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#changeEmailButtonPushed" text="Change Email" />
                         <Label fx:id="emailPrompt" alignment="TOP_LEFT" contentDisplay="RIGHT" text="Label">
                            <HBox.margin>
                               <Insets left="20.0" />
@@ -104,7 +104,7 @@
                   </GridPane>
                   <HBox alignment="CENTER">
                      <children>
-                        <Button onAction="#changePasswordButtonPushed" mnemonicParsing="false" text="Change Password" />
+                        <Button mnemonicParsing="false" onAction="#changePasswordButtonPushed" text="Change Password" />
                         <Label fx:id="passwordPrompt" text="Label">
                            <HBox.margin>
                               <Insets left="20.0" />
@@ -136,7 +136,7 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                      <children>
-                        <Button onAction="#changeSecurityQuestionButtonPushed" mnemonicParsing="false" text="Change Security Questions" />
+                        <Button mnemonicParsing="false" onAction="#changeSecurityQuestionButtonPushed" text="Change Security Questions" />
                         <Label fx:id="securityPrompt" text="Label">
                            <padding>
                               <Insets left="20.0" />
