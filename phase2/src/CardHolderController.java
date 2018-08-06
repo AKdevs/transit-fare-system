@@ -1,3 +1,5 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,16 +9,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CardHolderController extends Controller {
 
     // label info
+    @FXML private Label emailPrompt;
+    @FXML private Label passwordPrompt;
+    @FXML private Label securityPrompt;
+    @FXML private TextField answer1Field;
+    @FXML private TextField answer2Field;
+    @FXML private ComboBox<String> questionBox1;
+    @FXML private ComboBox<String> questionBox2;
     @FXML private Label accountNumber;
     @FXML private Label name;
     @FXML private TextField email;
@@ -112,6 +123,8 @@ public class CardHolderController extends Controller {
         email.setText(loggedInUser.getEmail());
         passField.setText(loggedInUser.getPassword());
         confirmPassField.setText(loggedInUser.getPassword());
+        initializeCustom();
+
         monthlyCost.setText("Monthly Cost:      " + Double.toString(loggedInUser.getMonthlyCost()));
         for (Card card: loggedInUser.getTravelCards()) {
             cards.getItems().add(card.getCardNumber());
@@ -128,6 +141,66 @@ public class CardHolderController extends Controller {
             load50ToAccount.setText("Load $50");
         }
 
+    }
+
+
+    public void initializeCustom() {
+        ObservableList<String> elements = FXCollections.observableList(
+                system.getAccountManager().
+                        getPasswordManager().getQuestionList());
+        UserAccount ch = system.getAccountManager().getLoggedInUser();
+        questionBox1.setItems(elements);
+        questionBox1.getSelectionModel().select(ch.getQuestionIndexList().get(0));
+        questionBox2.setItems(elements);
+        questionBox2.getSelectionModel().select(ch.getQuestionIndexList().get(1));
+        answer1Field.setText(ch.getAnswerList().get(0));
+        answer2Field.setText(ch.getAnswerList().get(1));
+    }
+
+    @FXML
+    void changeEmailButtonPushed(ActionEvent event) throws IOException {
+        if (email.getText().equals("")) {
+            emailPrompt.setText("Please enter a valid email!");
+        } else {
+            system.getAccountManager().getLoggedInUser().setEmail(email.getText());
+            emailPrompt.setTextFill(Color.GREEN);
+            emailPrompt.setText("Email successfully changed!");
+        }
+    }
+
+    @FXML
+    void changePasswordButtonPushed(ActionEvent event) throws IOException {
+        if (passField.getText().equals(confirmPassField.getText())) {
+            system.getAccountManager().getLoggedInUser().setPassword(passField.getText());
+            passwordPrompt.setTextFill(Color.GREEN);
+            passwordPrompt.setText("Password successfully changed!");
+
+        } else {
+            passwordPrompt.setText("Passwords must match!");
+        }
+    }
+
+    @FXML
+    void changeSecurityQuestionButtonPushed(ActionEvent event) throws IOException {
+        if (questionBox1.getValue().equals(questionBox2.getValue())) {
+            UserAccount ch = system.getAccountManager().getLoggedInUser();
+            String question1 = questionBox1.getValue();
+            String question2 = questionBox2.getValue();
+            List<Integer> userQuestionList = new ArrayList<>();
+            List<String> answerList = new ArrayList<>();
+            List<String> questions = system.getAccountManager().getPasswordManager()
+                    .getQuestionList();
+            userQuestionList.add(questions.indexOf(question1));
+            userQuestionList.add(questions.indexOf(question2));
+            answerList.add(answer1Field.getText());
+            answerList.add(answer2Field.getText());
+            ch.setAnswerList(answerList);
+            ch.setQuestionIndexList(userQuestionList);
+            securityPrompt.setTextFill(Color.GREEN);
+            securityPrompt.setText("Questions successfully changed!");
+        } else {
+            securityPrompt.setText("Questions cannot be the same!");
+        }
     }
 
     @FXML
