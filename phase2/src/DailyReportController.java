@@ -1,9 +1,12 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -29,6 +32,7 @@ public class DailyReportController extends Controller implements Initializable {
     private String reportDateString;
     private Double fare;
     private Integer numStationServiced;
+    private TransitLineDailyStat statSummary;
 
     @FXML private Label dateLabel;
     @FXML private Label fareLabel;
@@ -38,11 +42,11 @@ public class DailyReportController extends Controller implements Initializable {
     @FXML private Label numStationReachedLabel;
     @FXML private Label numStationServicedLabel;
     @FXML private Label reachServiceRatioLabel;
-    @FXML private TableView transitStatTable;
-    @FXML private TableColumn transitLineColumn;
-    @FXML private TableColumn numTripsColumn;
-    @FXML private TableColumn ridershipColumn;
-    @FXML private TableColumn avgRiderColumn;
+    @FXML private TableView<SingleTransitLineDailyStat> transitStatTable;
+    @FXML private TableColumn<SingleTransitLineDailyStat, String> transitLineColumn;
+    @FXML private TableColumn<SingleTransitLineDailyStat, Integer> numTripsColumn;
+    @FXML private TableColumn<SingleTransitLineDailyStat, Integer> ridershipColumn;
+    @FXML private TableColumn<SingleTransitLineDailyStat, Integer> avgRiderColumn;
 
     public void initReport(String date){
         this.reportDateString = date;
@@ -51,6 +55,7 @@ public class DailyReportController extends Controller implements Initializable {
         showCost(reportDateString);
         showRidership(reportDateString);
         showStationTravelled(date);
+        populateTable();
     }
 
 
@@ -79,11 +84,11 @@ public class DailyReportController extends Controller implements Initializable {
 
     void showCost(String date){
         Integer totalServiced = 0;
-        TransitLineDailyStat summary = system.getTripManager().getAggregator().getTransitLineDailyStat(date);
-        for (String id : summary.getTransitLineSummary().keySet()) {
+        this.statSummary = system.getTripManager().getAggregator().getTransitLineDailyStat(date);
+        for (String id : statSummary.getTransitLineSummary().keySet()) {
             TransitLine transitLine = system.getTransitManager().getTransitLines().get(id);
             Integer numPerTrip = transitLine.getNumOfStops();
-            SingleTransitLineDailyStat singleStat = summary.getSingleTransitLineDailyStat(id);
+            SingleTransitLineDailyStat singleStat = statSummary.getSingleTransitLineDailyStat(id);
             totalServiced += numPerTrip * singleStat.getNumOfTrips();
         }
         Double cost = totalServiced * system.getTripManager().getAvgCostPerStation();
@@ -107,16 +112,16 @@ public class DailyReportController extends Controller implements Initializable {
      */
     void showRidership(String date){
         Integer totalRider = 0;
-        TransitLineDailyStat summary = system.getTripManager().getAggregator().getTransitLineDailyStat(date);
-        for (String id : summary.getTransitLineSummary().keySet()) {
-            SingleTransitLineDailyStat singleStat = summary.getSingleTransitLineDailyStat(id);
+        //TransitLineDailyStat summary = system.getTripManager().getAggregator().getTransitLineDailyStat(date);
+        for (String id : statSummary.getTransitLineSummary().keySet()) {
+            SingleTransitLineDailyStat singleStat = statSummary.getSingleTransitLineDailyStat(id);
             totalRider += singleStat.getRidership();
         }
         totalRidershipLabel.setText(totalRider.toString());
     }
 
     /**
-     *  set Number of Stations reached by traveller and Reach/Servied ratio
+     *  set Number of Stations reached by traveller and Reach/Serviced ratio
      */
 
     void showStationTravelled(String date){
@@ -131,8 +136,28 @@ public class DailyReportController extends Controller implements Initializable {
         reachServiceRatioLabel.setText(df.format(ratio));
     }
 
+    /**
+     *  Populates info for transitStatTable from statSummary
+     */
 
+    void populateTable(){
+        transitLineColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        numTripsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfTrips"));
+        ridershipColumn.setCellValueFactory(new PropertyValueFactory<>("ridership"));
+        avgRiderColumn.setCellValueFactory(new PropertyValueFactory<>("avgRiderPerTrip"));
 
+        transitStatTable.setItems(getData());
+    }
+    public ObservableList<SingleTransitLineDailyStat> getData(){
+        ObservableList<SingleTransitLineDailyStat> statRows = FXCollections.observableArrayList();
+        for (String id : statSummary.getTransitLineSummary().keySet()) {
+            SingleTransitLineDailyStat singleStat = statSummary.getSingleTransitLineDailyStat(id);
+            singleStat.setAvgRiderPerTrip();
+            statRows.add(singleStat);
+        }
+
+        return statRows;
+    }
 
 
 
@@ -140,8 +165,6 @@ public class DailyReportController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //String date = system.getCurrentDate();
 
-
     }
-
 
 }
