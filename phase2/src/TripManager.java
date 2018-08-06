@@ -7,10 +7,12 @@ class TripManager implements Serializable{
   private HashMap<String, TransitLine> transitLines;
   private FareCalculator fareCalculator;
   private Aggregator aggregator;
+  private Double avgCostPerStation;
 
   TripManager() {
     this.fareCalculator = new FareCalculator();
     this.aggregator = new Aggregator();
+    this.avgCostPerStation = 0.00;
   }
 
   Aggregator getAggregator() {
@@ -20,6 +22,14 @@ class TripManager implements Serializable{
   void addTransitLines(HashMap<String, TransitLine> transitLines) {
     this.transitLines = transitLines;
     fareCalculator.addTransitLines(transitLines);
+  }
+
+  public Double getAvgCostPerStation() {
+    return avgCostPerStation;
+  }
+
+  public void setAvgCostPerStation(Double avgCostPerStation) {
+    this.avgCostPerStation = avgCostPerStation;
   }
 
   void recordTapIn(String time, String spot, Card card, String date, String type) {
