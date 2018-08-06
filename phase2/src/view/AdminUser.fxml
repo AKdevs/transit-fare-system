@@ -193,7 +193,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Spinner fx:id="transitNumOfTrips" editable="true" amountToStepBy="1" initialValue="100" max="99999999" min="0" />
+            <Spinner fx:id="transitNumOfTrips" amountToStepBy="1" editable="true" initialValue="100" max="99999999" min="0" />
             <Button fx:id="setSchedulingButton" mnemonicParsing="false" onAction="#setTransitScheduling" text="Set Scheduling">
                <HBox.margin>
                   <Insets left="50.0" />
@@ -233,10 +233,10 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Spinner fx:id="avgCostPerStation" editable="true" amountToStepBy="0.01" initialValue="5.00" max="3000.00" min="0.0" />
-            <Button fx:id="costSettingButton" mnemonicParsing="false" onAction="#setTransitScheduling" text="Set Scheduling">
+            <Spinner fx:id="avgCostPerStation" amountToStepBy="0.01" editable="true" initialValue="5.00" max="3000.00" min="0.0" />
+            <Button fx:id="costSettingButton" mnemonicParsing="false" text="Set Cost">
                <HBox.margin>
-                  <Insets left="50.0" />
+                  <Insets left="38.0" />
                </HBox.margin>
             </Button>
          </children>

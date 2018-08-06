@@ -1,4 +1,3 @@
-import javafx.beans.property.IntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,9 +13,10 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.util.StringConverter;
 import javafx.scene.control.SpinnerValueFactory.*;
-import javafx.util.converter.IntegerStringConverter;
+import javafx.util.converter.*;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.time.LocalDate;
@@ -282,12 +282,12 @@ public class AdminUserController extends Controller implements Initializable {
              *  retrieved in August 2018)
              */
 
-            NumberFormat format = NumberFormat.getIntegerInstance();
-            UnaryOperator<TextFormatter.Change> filter = c -> {
+            NumberFormat intFormat = NumberFormat.getIntegerInstance();
+            UnaryOperator<TextFormatter.Change> intFilter = c -> {
                 if (c.isContentChange()) {
                     ParsePosition parsePosition = new ParsePosition(0);
                     // NumberFormat evaluates the beginning of the text
-                    format.parse(c.getControlNewText(), parsePosition);
+                    intFormat.parse(c.getControlNewText(), parsePosition);
                     if (parsePosition.getIndex() == 0 ||
                             parsePosition.getIndex() < c.getControlNewText().length()) {
                         // reject parsing the complete text failed
@@ -296,9 +296,29 @@ public class AdminUserController extends Controller implements Initializable {
                 }
                 return c;
             };
-            TextFormatter<Integer> priceFormatter = new TextFormatter<Integer>(
-                    new IntegerStringConverter(), 100, filter);
-            transitNumOfTrips.getEditor().setTextFormatter(priceFormatter);
+            TextFormatter<Integer> tripFormatter = new TextFormatter<>(
+                    new IntegerStringConverter(), 100, intFilter);
+            transitNumOfTrips.getEditor().setTextFormatter(tripFormatter);
+
+
+            /** restricts user input in avgCostPerStation to #.00*/
+            DecimalFormat costFormat = new DecimalFormat( "#.00" );
+            UnaryOperator<TextFormatter.Change> costFilter = c -> {
+                if (c.isContentChange()) {
+                    ParsePosition parsePosition = new ParsePosition(0);
+                    // NumberFormat evaluates the beginning of the text
+                    costFormat.parse(c.getControlNewText(), parsePosition);
+                    if (parsePosition.getIndex() == 0 ||
+                            parsePosition.getIndex() < c.getControlNewText().length()) {
+                        // reject parsing the complete text failed
+                        return null;
+                    }
+                }
+                return c;
+            };
+            TextFormatter<Double> costFormatter = new TextFormatter<>(
+                    new DoubleStringConverter(), 5.00, costFilter);
+            avgCostPerStation.getEditor().setTextFormatter(costFormatter);
 
 
         }
