@@ -26,8 +26,8 @@ public class CardHolderController extends Controller {
     @FXML private Label securityPrompt;
     @FXML private TextField answer1Field;
     @FXML private TextField answer2Field;
-    @FXML private ComboBox<String> questionBox1;
-    @FXML private ComboBox<String> questionBox2;
+    @FXML private ComboBox<String> question1Box;
+    @FXML private ComboBox<String> question2Box;
     @FXML private Label accountNumber;
     @FXML private Label name;
     @FXML private TextField email;
@@ -113,7 +113,7 @@ public class CardHolderController extends Controller {
         email.setText(loggedInUser.getEmail());
         passField.setText(loggedInUser.getPassword());
         confirmPassField.setText(loggedInUser.getPassword());
-        // initializeCustom();
+        initializeCustom();
 
         monthlyCost.setText("Monthly Cost:      " + Double.toString(loggedInUser.getMonthlyCost()));
         accountBalance.setText(Double.toString(loggedInUser.getAccountBalance()));
@@ -130,10 +130,10 @@ public class CardHolderController extends Controller {
                 system.getAccountManager().
                         getPasswordManager().getQuestionList());
         UserAccount ch = system.getAccountManager().getLoggedInUser();
-        questionBox1.setItems(elements);
-        questionBox1.getSelectionModel().select(ch.getQuestionIndexList().get(0));
-        questionBox2.setItems(elements);
-        questionBox2.getSelectionModel().select(ch.getQuestionIndexList().get(1));
+        question1Box.setItems(elements);
+        question1Box.getSelectionModel().select(ch.getQuestionIndexList().get(0));
+        question2Box.setItems(elements);
+        question2Box.getSelectionModel().select(ch.getQuestionIndexList().get(1));
         answer1Field.setText(ch.getAnswerList().get(0));
         answer2Field.setText(ch.getAnswerList().get(1));
     }
@@ -141,6 +141,7 @@ public class CardHolderController extends Controller {
     @FXML
     void changeEmailButtonPushed(ActionEvent event) throws IOException {
         if (email.getText().equals("")) {
+            emailPrompt.setTextFill(Color.RED);
             emailPrompt.setText("Please enter a valid email!");
         } else {
             system.getAccountManager().getLoggedInUser().setEmail(email.getText());
@@ -157,18 +158,19 @@ public class CardHolderController extends Controller {
             passwordPrompt.setText("Password successfully changed!");
 
         } else {
+            passwordPrompt.setTextFill(Color.RED);
             passwordPrompt.setText("Passwords must match!");
         }
     }
 
-    /*
+
 
     @FXML
     void changeSecurityQuestionButtonPushed(ActionEvent event) throws IOException {
-        if (questionBox1.getValue().equals(questionBox2.getValue())) {
+        if (!question1Box.getValue().equals(question2Box.getValue())) {
             UserAccount ch = system.getAccountManager().getLoggedInUser();
-            String question1 = questionBox1.getValue();
-            String question2 = questionBox2.getValue();
+            String question1 = question1Box.getValue();
+            String question2 = question2Box.getValue();
             List<Integer> userQuestionList = new ArrayList<>();
             List<String> answerList = new ArrayList<>();
             List<String> questions = system.getAccountManager().getPasswordManager()
@@ -182,10 +184,11 @@ public class CardHolderController extends Controller {
             securityPrompt.setTextFill(Color.GREEN);
             securityPrompt.setText("Questions successfully changed!");
         } else {
+            securityPrompt.setTextFill(Color.RED);
             securityPrompt.setText("Questions cannot be the same!");
         }
     }
-    */
+
 
     @FXML
     void linkCardButtonPushed(ActionEvent event) throws IOException {
@@ -257,7 +260,7 @@ public class CardHolderController extends Controller {
         accountBalance.setText(Double.toString(accBalance + 10.0));
         ch.addAccountBalance(10.0);
         } else {
-            loadAccountBalanceInstructions.setText("please turn autoload\nservice on before loading.");
+            loadAccountBalanceInstructions.setText("Please turn autoload\nservice on before loading.");
         }
     }
 
@@ -270,7 +273,7 @@ public class CardHolderController extends Controller {
         accountBalance.setText(Double.toString(accBalance + 20.0));
         ch.addAccountBalance(20.0);
         } else {
-            loadAccountBalanceInstructions.setText("please turn autoload\nservice on before loading.");
+            loadAccountBalanceInstructions.setText("Please turn autoload\nservice on before loading.");
         }
     }
 
@@ -283,7 +286,7 @@ public class CardHolderController extends Controller {
         accountBalance.setText(Double.toString(accBalance + 50.0));
         ch.addAccountBalance(50.0);
         } else {
-            loadAccountBalanceInstructions.setText("please turn autoload\nservice on before loading.");
+            loadAccountBalanceInstructions.setText("Please turn autoload\nservice on before loading.");
         }
     }
 
