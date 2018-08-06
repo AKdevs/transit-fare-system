@@ -26,6 +26,8 @@ public class TravelSimulationController extends Controller implements Initializa
     @FXML private Button tapIn;
     @FXML private Button tapOut;
     @FXML private Button backToCard;
+    @FXML private Button ok1;
+    @FXML private Button ok2;
 
     @FXML private Label cardNumber;
     @FXML private Label owner;
@@ -33,6 +35,8 @@ public class TravelSimulationController extends Controller implements Initializa
     @FXML private Label balance;
     @FXML private Label enterDate;
     @FXML private Label exitDate;
+    @FXML private Label exitType;
+
 
     @FXML private ChoiceBox enterSpot;
     @FXML private ChoiceBox enterHour;
@@ -43,7 +47,6 @@ public class TravelSimulationController extends Controller implements Initializa
     @FXML private ChoiceBox exitSpot;
     @FXML private ChoiceBox exitHour;
     @FXML private ChoiceBox exitMinute;
-    @FXML private ChoiceBox exitType;
 
 
 
@@ -61,8 +64,6 @@ public class TravelSimulationController extends Controller implements Initializa
         exitDate.setText(system.getCurrentDate());
         enterType.getItems().add("Subway");
         enterType.getItems().add("Bus");
-        exitType.getItems().add("Subway");
-        exitType.getItems().add("Bus");
 
         HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
         for (String id : transitLines.keySet()) {
@@ -117,25 +118,16 @@ public class TravelSimulationController extends Controller implements Initializa
     @FXML
     void tapOutButtonPushed(ActionEvent event) throws IOException {
         Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
-        String lineId = enterTransitLine.getSelectionModel().getSelectedItem();
-        HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
-        for (String id : transitLines.keySet()) {
-            if (id.equals(lineId)) {
-                ArrayList<String> points = transitLines.get(id).getPoints();
-                for (String pt : points) {
-                    exitSpot.getItems().add(pt);
-                }
-            }
-        }
         String exitTime = exitHour.getSelectionModel().getSelectedItem().toString() + ":" + exitMinute.getSelectionModel().getSelectedItem().toString();
         system.getTripManager().recordTapOut(
                 exitTime,
                 exitSpot.getSelectionModel().getSelectedItem().toString(),
                 associatedEntryCard,
                 exitDate.getText(),
-                exitType.getSelectionModel().getSelectedItem().toString().substring(0, 1));
+                exitType.getText());
         balance.setText(Double.toString(associatedEntryCard.getBalance()));
     }
+
 
     void populateTransitLine(String type) {
         type.substring(0,1);
@@ -191,5 +183,33 @@ public class TravelSimulationController extends Controller implements Initializa
             exitMinute.getItems().add(String.valueOf(i));
         }
     }
+
+    @FXML
+    void ok1ButtonPushed(ActionEvent event) throws IOException {
+        enterType.getValue().substring(0,1);
+        exitType.setText(enterType.getValue());
+        HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
+        for (String id : transitLines.keySet()) {
+            if (transitLines.get(id).getType().equals(enterType)) {
+                enterTransitLine.getItems().add(id);
+            }
+        }
+    }
+
+    @FXML
+    void ok2ButtonPushed(ActionEvent event) throws IOException {
+        String lineId = enterTransitLine.getSelectionModel().getSelectedItem();
+        HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
+        for (String id : transitLines.keySet()) {
+            if (id.equals(lineId)) {
+                ArrayList<String> points = transitLines.get(id).getPoints();
+                for (String pt : points) {
+                    enterSpot.getItems().add(pt);
+                    exitSpot.getItems().add(pt);
+                }
+            }
+        }
+    }
+
 }
 

@@ -19,7 +19,7 @@
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <Button fx:id="tapIn" layoutX="447.0" layoutY="98.0" mnemonicParsing="false" onAction="#tapInButtonPushed" prefHeight="28.0" prefWidth="74.0" text="Tap In">
+            <Button fx:id="tapIn" layoutX="473.0" layoutY="52.0" mnemonicParsing="false" onAction="#tapInButtonPushed" prefHeight="28.0" prefWidth="74.0" text="Tap In">
                <font>
                   <Font size="14.0" />
                </font>
@@ -83,10 +83,12 @@
                   <Label fx:id="balance" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
+            <Button fx:id="ok1" layoutX="435.0" layoutY="118.0" mnemonicParsing="false" onAction="#ok1ButtonPushed" text="OK" />
+            <Button fx:id="ok2" layoutX="435.0" layoutY="145.0" mnemonicParsing="false" onAction="#ok2ButtonPushed" text="OK" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <Button fx:id="tapOut" layoutX="453.0" layoutY="70.0" mnemonicParsing="false" onAction="#tapOutButtonPushed" text="Tap Out">
+            <Button fx:id="tapOut" layoutX="469.0" layoutY="24.0" mnemonicParsing="false" onAction="#tapOutButtonPushed" text="Tap Out">
                <font>
                   <Font size="14.0" />
                </font>
@@ -108,7 +110,6 @@
                   <Label text="Time" GridPane.rowIndex="1" />
                   <Label text="Date:" GridPane.rowIndex="2" />
                   <Label text="Transit Type:" GridPane.rowIndex="3" />
-                  <ChoiceBox fx:id="exitType" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label fx:id="exitDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <ChoiceBox fx:id="exitSpot" prefWidth="150.0" GridPane.columnIndex="1" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -117,6 +118,7 @@
                         <ChoiceBox fx:id="exitMinute" prefHeight="27.0" prefWidth="78.0" />
                      </children>
                   </HBox>
+                  <Label fx:id="exitType" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </children></AnchorPane>
