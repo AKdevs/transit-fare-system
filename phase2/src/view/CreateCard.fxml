@@ -8,12 +8,20 @@
 
 <VBox fx:id="container" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="50.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CreateCardController">
    <children>
-      <Label fx:id="userMessage" text="Please read the following information carefully: &#10;* You cannot .....&#10;* You cannot .....&#10; * You cannot ....." textAlignment="CENTER">
+      <Label prefHeight="17.0" prefWidth="638.0" text="Get A Travel Card">
+         <VBox.margin>
+            <Insets left="20.0" top="20.0" />
+         </VBox.margin>
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="userMessage" text="Please read the following information carefully.&#10;With a card that is not linked to any account:&#10;&#10;&#10;* The card balance cannot be protected in the &#10;case of theft/loss&#10;* You cannot suspend this card's activity &#10; * You cannot view card history">
+         <font>
+            <Font size="14.0" />
          </font>
          <VBox.margin>
-            <Insets top="75.0" />
+            <Insets />
          </VBox.margin>
       </Label>
       <Button fx:id="getCardButton" mnemonicParsing="false" onAction="#createCard" text="Get my card now!">
