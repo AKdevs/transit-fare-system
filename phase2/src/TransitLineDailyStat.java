@@ -14,6 +14,15 @@ public class TransitLineDailyStat implements Serializable{
     }
 
     /**
+     * Gets transitLineSummary
+     * @return transitLineSummary
+     */
+
+    public HashMap<String, SingleTransitLineDailyStat> getTransitLineSummary() {
+        return transitLineSummary;
+    }
+
+    /**
      *  Gets SingleTransitLineDailyStat via id
      * @param  id
      * @return SingleTransitLineDailyStat

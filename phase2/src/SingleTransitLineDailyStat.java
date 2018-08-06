@@ -37,9 +37,11 @@ public class SingleTransitLineDailyStat implements Serializable {
         return ridership;
     }
 
-    public void setRidership() {
-        this.ridership += 1;
+    public void setRidership(Integer ridership) {
+        this.ridership = ridership;
     }
+
+    public void increaseRidership() {this.ridership += 1;}
 
     public Integer getAvgRiderPerTrip() {
         return avgRiderPerTrip;
