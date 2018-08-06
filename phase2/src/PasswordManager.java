@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PasswordManager implements Serializable{
     private List<String> securityQuestions;
-    private int minimumPasswordLength;
+    private int minimumPasswordLength = 8;
 
     PasswordManager() {
         securityQuestions = new ArrayList<>();
