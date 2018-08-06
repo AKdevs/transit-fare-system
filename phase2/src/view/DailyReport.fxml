@@ -88,6 +88,20 @@
       </VBox>
       <VBox layoutX="20.0" layoutY="92.0">
          <children>
+            <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="10.0">
+               <children>
+                  <Label text="Total ridership: ">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Region prefWidth="230.0" />
+                  <Label fx:id="totalRidershipLabel" text="1000" />
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
             <HBox alignment="BOTTOM_LEFT">
                <children>
                   <Label text="The number of stations reached by travellers:">
