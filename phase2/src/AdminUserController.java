@@ -47,6 +47,11 @@ public class AdminUserController extends Controller implements Initializable {
         @FXML private Spinner<Integer> transitNumOfTrips;
         @FXML private Button setSchedulingButton;
         @FXML private Label schedulingResult;
+        @FXML private Spinner<Float> avgCostPerStation;
+        @FXML private Label costSettingLabel;
+        @FXML private Button costSettingButton;
+
+
 
         private final String datePattern = "yyyy-MM-dd";
 
@@ -168,7 +173,6 @@ public class AdminUserController extends Controller implements Initializable {
         }
 
     }
-
 
 
     public void setTransitScheduling(ActionEvent event) throws IOException {

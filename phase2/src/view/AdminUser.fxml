@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="572.0" spacing="8.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="572.0" spacing="8.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane>
          <children>
@@ -219,5 +219,44 @@
             <Insets left="8.0" right="30.0" />
          </padding>
       </Separator>
+      <HBox layoutX="10.0" layoutY="261.0">
+         <children>
+            <Label text="Cost Setting">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="332.0" spacing="15.0">
+         <children>
+            <Label text="Average Cost per Station: ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Spinner fx:id="avgCostPerStation" editable="true">
+               <valueFactory>
+                  <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="0.01" initialValue="5.00" max="3000.00" min="0.0" />
+               </valueFactory>
+            </Spinner>
+            <Button fx:id="costSettingButton" mnemonicParsing="false" onAction="#setTransitScheduling" text="Set Scheduling">
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="365.0">
+         <children>
+            <Label fx:id="costSettingLabel" textAlignment="CENTER" wrapText="true" />
+         </children>
+      </HBox>
    </children>
 </VBox>
