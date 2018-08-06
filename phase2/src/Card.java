@@ -1,3 +1,6 @@
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -18,6 +21,7 @@ class Card implements Serializable {
   private ArrayList<TripSegment> trips;
   /** Keeps track of total fares accumulated on this card */
   private double totalFares;
+
 
   /** Constructs a card. */
   Card() {
@@ -92,9 +96,6 @@ class Card implements Serializable {
    */
   void deductBalance(Double fares) {
     if (active) {
-        if (this.getBalance() < 10) {
-            owner.autoLoad(this);
-        }
       this.balance -= fares;
     } else {
       System.out.println("Action denied: Card " + this.getCardNumber() + "is deactivated");
@@ -228,9 +229,11 @@ class Card implements Serializable {
   }
 
   String getStatus() {
-    if (active) {
-      return "active";
-    }
-    return "deactivated";
+      if (active) {
+          return "active";
+      }
+      return "deactivated";
   }
+
+
 }

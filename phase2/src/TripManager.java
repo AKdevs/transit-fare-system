@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class TripManager {
+class TripManager implements Serializable{
   private HashMap<String, TransitLine> transitLines;
   private FareCalculator fareCalculator;
   private Aggregator aggregator;

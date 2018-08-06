@@ -7,8 +7,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        TransitSystem mainSystem = new TransitSystem();
+    public void start(Stage primaryStage) throws Exception {
+        String path="serializedobjects.ser";
+        TransitSystem mainSystem = new TransitSystem(path);
+        mainSystem.readFromFile(path);
         // Create base administrator, this will be moved to serialization
         // mainSystem.getAccountManager().createAdminAccount("sysadmin", "admin@gmail.com", "sysadmin");
 

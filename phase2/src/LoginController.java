@@ -106,8 +106,9 @@ public class LoginController extends Controller {
         changeWindow(event, "view/PasswordRecovery.fxml");
     }
 
-    public void closeButtonPushed(ActionEvent event) {
+    public void closeButtonPushed(ActionEvent event) throws IOException {
         Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
+        system.saveToFile("serializedobjects.ser");
         window.close();
     }
 }

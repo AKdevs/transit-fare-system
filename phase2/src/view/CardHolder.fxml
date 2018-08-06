@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -21,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CardHolderController">
+<TabPane tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CardHolderController">
    <tabs>
       <Tab text="Account Profile">
          <content>
@@ -71,14 +66,6 @@
                         <Label fx:id="accountNumber" GridPane.columnIndex="1" />
                         <Label text="Confirm Current Password" GridPane.rowIndex="4" />
                         <PasswordField fx:id="confirmPassField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text="AutoLoad Status" GridPane.rowIndex="5" />
-                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                           <children>
-                              <Label fx:id="autoLoadStatus" />
-                              <Button fx:id="turnOn" mnemonicParsing="false" onAction="#turnOnButtonPushed" text="Turn On " />
-                              <Button fx:id="turnOff" mnemonicParsing="false" onAction="#turnOffButtonPushed" text="Turn Off " />
-                           </children>
-                        </HBox>
                      </children>
                   </GridPane>
                   <HBox alignment="CENTER" prefHeight="54.0" prefWidth="541.0" spacing="50.0">
@@ -114,21 +101,12 @@
                               </Button>
                            </children>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="monthlyCost" text="Monthly Cost:">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="accountBalanceHeader" />
-                              <Label fx:id="accountBalance" />
-                           </children>
-                        </HBox>
+                        <Label fx:id="monthlyCost" text="Monthly Cost:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="monthlyCost1" />
                         <HBox prefHeight="117.0" prefWidth="523.0" spacing="50.0">
                            <children>
                               <Label text="Travel Cards:">
@@ -158,7 +136,7 @@
                      <children>
                         <VBox prefHeight="232.0" prefWidth="158.0">
                            <children>
-                              <Label prefHeight="28.0" prefWidth="159.0" text="Transfer Balance">
+                              <Label prefHeight="27.0" prefWidth="130.0" text="Transfer Balance">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -176,7 +154,7 @@
                               <Label fx:id="transferBalanceInstructions" prefHeight="72.0" prefWidth="158.0" />
                            </children>
                         </VBox>
-                        <VBox prefHeight="240.0" prefWidth="150.0" spacing="5.0">
+                        <VBox prefHeight="238.0" prefWidth="158.0" spacing="5.0">
                            <children>
                               <Label text="Manage Cards">
                                  <font>
@@ -203,14 +181,6 @@
                            <HBox.margin>
                               <Insets left="100.0" />
                            </HBox.margin>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Label fx:id="autoLoadHeader" prefHeight="44.0" prefWidth="100.0" />
-                              <Button fx:id="load10ToAccount" mnemonicParsing="false" onAction="#load10ToAccountButtonPushed" prefHeight="27.0" prefWidth="97.0" />
-                              <Button fx:id="load20ToAccount" mnemonicParsing="false" onAction="#load20ToAccountButtonPushed" prefHeight="27.0" prefWidth="98.0" />
-                              <Button fx:id="load50ToAccount" mnemonicParsing="false" onAction="#load50ToAccountButtonPushed" prefHeight="27.0" prefWidth="114.0" />
-                           </children>
                         </VBox>
                      </children>
                      <VBox.margin>

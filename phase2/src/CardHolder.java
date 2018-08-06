@@ -6,52 +6,23 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
 /**
  * CardHolder is a person who owns and uses a Card, ie a passenger who travels in the TransitSystem.
  * The person is able to link Cards to his/her account and view his/her travel history.
  */
 public class CardHolder extends UserAccount implements Serializable{
 
-
   private ArrayList<Card> travelCards;
   /* Account Number for CardHolder starts at 10000001 to distinguish with other account/card numbers.*/
-
-  private double accountBalance;
-
-  private int autoLoadStatus;
 
   CardHolder(String name, String email, String password) {
     super(name, email, password);
     this.travelCards = new ArrayList<>();
-    this.accountBalance = 0.0;
-    this.autoLoadStatus = 0;
-
-    try
-    {
-      // Reading the object from a file
-      FileInputStream file = new FileInputStream("data-cardholder.bin");
-      ObjectInputStream in = new ObjectInputStream(file);
-
-      // Method for deserialization of object
-      travelCards = (ArrayList<Card>)in.readObject();
-
-      in.close();
-      file.close();
-
-      System.out.println("Object has been deserialized ");
-    }
-
-    catch(IOException ex)
-    {
-      System.out.println("IOException is caught");
-    }
-
-    catch(ClassNotFoundException ex)
-    {
-      System.out.println("ClassNotFoundException is caught");
-    }
   }
+
+  public void enter(String time, String spot, String cardNumber, String date, String type) {}
+
+  public void exit(String time, String spot, String cardNumber) {}
 
   /**
    * Links card to this account. Prints out a message to inform the CardHolder whether the card is
@@ -72,26 +43,6 @@ public class CardHolder extends UserAccount implements Serializable{
       System.out.println(
           "Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
     }
-
-    try
-    {
-      //Saving of object in a file
-      FileOutputStream file = new FileOutputStream("data-cardholder.bin");
-      ObjectOutputStream out = new ObjectOutputStream(file);
-
-      // Method for serialization of object
-      out.writeObject(travelCards);
-
-      out.close();
-      file.close();
-
-      System.out.println("Object has been serialized");
-
-    }
-    catch(IOException ex)
-    {
-      System.out.println("IOException is caught");
-    }
   }
 
   /**
@@ -109,26 +60,6 @@ public class CardHolder extends UserAccount implements Serializable{
               + card.getCardNumber()
               + " unlinked to CardHolder Account "
               + this.getAccountNum());
-    }
-
-    try
-    {
-      //Saving of object in a file
-      FileOutputStream file = new FileOutputStream("data-cardholder.bin");
-      ObjectOutputStream out = new ObjectOutputStream(file);
-
-      // Method for serialization of object
-      out.writeObject(travelCards);
-
-      out.close();
-      file.close();
-
-      System.out.println("Object has been serialized");
-
-    }
-    catch(IOException ex)
-    {
-      System.out.println("IOException is caught");
     }
   }
 
@@ -205,9 +136,6 @@ public class CardHolder extends UserAccount implements Serializable{
       if (amount <= card1.getBalance() && amount >= 0) {
           card1.deductBalance(amount);
           card2.addBalance(amount);
-          if (card1.getBalance() < 10) {
-              autoLoad(card1);
-          }
       }else if (amount > card1.getBalance()){
           return "Your balance in Card \n"  + card1.getCardNumber()  + " is not enough.";
       }else if (amount < 0) {
@@ -215,33 +143,4 @@ public class CardHolder extends UserAccount implements Serializable{
       }
       return "Transfer balance \n succeed";
   }
-
-  int getAutoLoadStatus() {
-      return autoLoadStatus;
-  }
-
-   void setAutoLoadStatus(int status) {
-        autoLoadStatus = status;
-  }
-
-  double getAccountBalance() {
-      return accountBalance;
-  }
-
-  void addAccountBalance(double amount) {
-      accountBalance += amount;
-  }
-
-  void deductAccountBalance(double amount) {
-      accountBalance -= amount;
-  }
-
-  void autoLoad(Card card) {
-      double difference = 10 - card.getBalance();
-      if (accountBalance >= difference && this.autoLoadStatus == 1) {
-          deductAccountBalance(difference);
-          card.addBalance(difference);
-      }
-  }
-
 }

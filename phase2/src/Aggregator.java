@@ -1,11 +1,15 @@
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Aggregator {
+public class Aggregator implements Serializable{
     /** Stores the total amount of accumulated fares in the system by date */
     private HashMap<String, Double> allFares;
 
@@ -18,40 +22,28 @@ public class Aggregator {
     /** Stores the daily stat information of Transit Line by date*/
     private HashMap<String, TransitLineDailyStat> transitLineDailySummary;
 
-    Aggregator(){
-        this.allFares = new HashMap<>();
-        this.numberOfStations = new HashMap<>();
-        this.availableDate = new HashSet<String>();
-        this.transitLineDailySummary = new HashMap<>();
-/*
-      try
-      {
-        // Reading the object from a file
-        FileInputStream file = new FileInputStream("data-Aggregator.bin");
-        ObjectInputStream in = new ObjectInputStream(file);
+  Aggregator() {
+    this.allFares = new HashMap<>();
+    this.numberOfStations = new HashMap<>();
+    this.availableDate = new HashSet<String>();
+    this.transitLineDailySummary = new HashMap<>();
+  }
 
-        // Method for deserialization of object
-        allFares = (HashMap<String, Double>)in.readObject();
-        numberOfStations = (HashMap<String, Integer>)in.readObject();
 
-        in.close();
-        file.close();
 
-        System.out.println("Object has been deserialized ");
-      }
+  public Set<String> getAvailableDate() {
+    return availableDate;
+  }
 
-      catch(IOException ex)
-      {
-        System.out.println("IOException is caught");
-      }
+  public HashMap<String, Integer> getNumberOfStations() {
+    return numberOfStations;
+  }
 
-      catch(ClassNotFoundException ex)
-      {
-        System.out.println("ClassNotFoundException is caught");
-      }*/
-    }
+  public HashMap<String, TransitLineDailyStat> getTransitLineDailySummary() {
+    return transitLineDailySummary;
+  }
 
-    /** @return amount of fares in system, stored by date. */
+  /** @return amount of fares in system, stored by date. */
     public HashMap<String, Double> getAllFares() {
         return allFares;
     }
@@ -95,27 +87,6 @@ public class Aggregator {
         } else {
             allFares.put(date, fares);
         }
-
-      try
-      {
-        //Saving of object in a file
-        FileOutputStream file = new FileOutputStream("data-Aggregator.bin");
-        ObjectOutputStream out = new ObjectOutputStream(file);
-
-        // Method for serialization of object
-        out.writeObject(allFares);
-
-        out.close();
-        file.close();
-
-        System.out.println("Fares has been serialized");
-
-      }
-      catch(IOException ex)
-      {
-        System.out.println("IOException is caught");
-      }
-
     }
 
     /**
@@ -137,26 +108,6 @@ public class Aggregator {
         } else {
             numberOfStations.put(date, n);
         }
-
-      try
-      {
-        //Saving of object in a file
-        FileOutputStream file = new FileOutputStream("data-Aggregator.bin");
-        ObjectOutputStream out = new ObjectOutputStream(file);
-
-        // Method for serialization of object
-        out.writeObject(numberOfStations);
-
-        out.close();
-        file.close();
-
-        System.out.println("Station has been serialized");
-
-      }
-      catch(IOException ex)
-      {
-        System.out.println("IOException is caught");
-      }
     }
 
     /**
@@ -223,8 +174,7 @@ public class Aggregator {
             TransitLineDailyStat tLDS = new TransitLineDailyStat();
             transitLineDailySummary.put(date, tLDS);
         }
-
-    }
+            }
 
     public boolean isReportAvailable (String date) {
         return availableDate.contains(date);
