@@ -33,7 +33,6 @@ public class TransitSystem implements Serializable {
 
     File file = new File(filePath);
     if (file.exists()) {
-      System.out.println("YAHOO");
       readFromFile(filePath);
     } else {
       file.createNewFile();
