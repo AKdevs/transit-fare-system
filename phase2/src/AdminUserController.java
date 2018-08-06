@@ -1,3 +1,4 @@
+import javafx.beans.property.IntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,13 +13,18 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.util.StringConverter;
+import javafx.scene.control.SpinnerValueFactory.*;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.util.function.UnaryOperator;
 
 
 public class AdminUserController extends Controller implements Initializable {
@@ -35,7 +41,10 @@ public class AdminUserController extends Controller implements Initializable {
         @FXML private Button runDailyReportButton;
         @FXML private ComboBox<String> transitLinesList;
         @FXML private DatePicker transitSchedulingDate;
-        @FXML private TextField transitNumOfTrips;
+        @FXML private Label schedulingDateWarning;
+        @FXML private Label schedulingUnavailableWarning;
+        //@FXML private TextField transitNumOfTrips;
+        @FXML private Spinner<Integer> transitNumOfTrips;
         @FXML private Button setSchedulingButton;
         @FXML private Label schedulingResult;
 
@@ -160,6 +169,56 @@ public class AdminUserController extends Controller implements Initializable {
 
     }
 
+
+
+    public void setTransitScheduling(ActionEvent event) throws IOException {
+        LocalDate date = transitSchedulingDate.getValue();
+        String transitLine = transitLinesList.getValue();
+        schedulingDateWarning.setTextFill(Color.RED);
+        //warning when transit line is not selected
+        if (transitLine == null) {
+            schedulingDateWarning.setText("Please Select a Transit Line!");
+        } else {
+            schedulingDateWarning.setText("");
+            // warning when date is not selected
+            if (date == null) {
+                schedulingDateWarning.setText("Please Select a Date!");
+            } else {
+
+                String dateString = date.toString();
+                schedulingDateWarning.setText("");
+                schedulingUnavailableWarning.setText("");
+                if (system.getTripManager().getAggregator().isReportAvailable(dateString)) {
+                        schedulingResult.setText("");
+                        Integer numToSet = transitNumOfTrips.getValue();
+                        if ((numToSet >= 0) && (numToSet < 1201)) {
+                            SingleTransitLineDailyStat singleTransitStat = system.getTripManager().getAggregator()
+                                    .getTransitLineDailyStat(dateString).getSingleTransitLineDailyStat(transitLine);
+                            singleTransitStat.setNumOfTrips(numToSet);
+                            schedulingResult.setTextFill(Color.DARKGREEN);
+                            String success = "Number of Trips of " + transitLine + " on " + dateString
+                                    + " has been set to " + numToSet + " successfully.";
+                            schedulingResult.setText(success);
+                            //singleTransitStat.setAvgRiderPerTrip();
+                        }
+                        else {
+                            schedulingResult.setText("Number of Trips has to be an integer between 0 and 1200!");
+                            schedulingResult.setTextFill(Color.RED);
+                            }
+
+
+                } else {
+                    schedulingUnavailableWarning.setText("Unable to set record for the selected date.\n" +
+                            "Please select another date.");
+                    schedulingUnavailableWarning.setTextFill(Color.RED);
+                }
+
+
+            }
+        }
+    }
+
+
         //java.util.regex is not available
     /**
      *  Converts format in DatePicker to "yyyy-mm-dd"
@@ -210,6 +269,33 @@ public class AdminUserController extends Controller implements Initializable {
             for (String line : transitLines) {
                 transitLinesList.getItems().add(line);
             }
+
+            /**
+             *  Restricting user input in transitNumOfTrips to be integer only
+             *  The below code was retrieved from Stackoverflow website
+             *  Author: kleopatra
+             *  (Source: https://stackoverflow.com/questions/25885005/insert-only-numbers-in-spinner-control
+             *  retrieved in August 2018)
+             */
+
+            NumberFormat format = NumberFormat.getIntegerInstance();
+            UnaryOperator<TextFormatter.Change> filter = c -> {
+                if (c.isContentChange()) {
+                    ParsePosition parsePosition = new ParsePosition(0);
+                    // NumberFormat evaluates the beginning of the text
+                    format.parse(c.getControlNewText(), parsePosition);
+                    if (parsePosition.getIndex() == 0 ||
+                            parsePosition.getIndex() < c.getControlNewText().length()) {
+                        // reject parsing the complete text failed
+                        return null;
+                    }
+                }
+                return c;
+            };
+            TextFormatter<Integer> priceFormatter = new TextFormatter<Integer>(
+                    new IntegerStringConverter(), 100, filter);
+            transitNumOfTrips.getEditor().setTextFormatter(priceFormatter);
+
 
         }
 

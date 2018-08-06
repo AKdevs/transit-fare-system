@@ -6,7 +6,8 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -142,14 +143,28 @@
             <Insets left="8.0" right="30.0" />
          </padding>
       </Separator>
-      <Label layoutX="10.0" layoutY="142.0" text="Transit Scheduling">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <padding>
-            <Insets left="8.0" />
-         </padding>
-      </Label>
+      <HBox layoutX="10.0" layoutY="179.0">
+         <children>
+            <Label text="Transit Scheduling Record">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+            </Label>
+            <Label fx:id="schedulingUnavailableWarning" wrapText="true">
+               <HBox.margin>
+                  <Insets left="60.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="schedulingDateWarning">
+               <HBox.margin>
+                  <Insets left="15.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
       <HBox spacing="15.0">
          <children>
             <Label text="TransitLine:  ">
@@ -179,8 +194,12 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="transitNumOfTrips" promptText="enter # of trips" />
-            <Button fx:id="setSchedulingButton" mnemonicParsing="false" text="Set Scheduling">
+            <Spinner fx:id="transitNumOfTrips" editable="true">
+               <valueFactory>
+                  <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" initialValue="100" max="99999999" min="0" />
+               </valueFactory>
+            </Spinner>
+            <Button fx:id="setSchedulingButton" mnemonicParsing="false" onAction="#setTransitScheduling" text="Set Scheduling">
                <HBox.margin>
                   <Insets left="50.0" />
                </HBox.margin>
@@ -192,12 +211,12 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Label fx:id="schedulingResult" />
+            <Label fx:id="schedulingResult" textAlignment="CENTER" wrapText="true" />
          </children>
       </HBox>
       <Separator layoutX="10.0" layoutY="131.0">
          <padding>
-            <Insets left="8.0" right="30.0" top="10.0" />
+            <Insets left="8.0" right="30.0" />
          </padding>
       </Separator>
    </children>
