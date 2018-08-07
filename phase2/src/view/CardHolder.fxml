@@ -151,17 +151,22 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label text="Travel Profile">
+                              <Label prefHeight="30.0" prefWidth="137.0" text="Travel Profile">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
+                              <Button onAction="#getCardButtonPushed" fx:id="getCard" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" text="Get A Card">
+                                 <HBox.margin>
+                                    <Insets left="175.0" right="25.0" />
+                                 </HBox.margin>
+                              </Button>
                               <Button fx:id="logOut" mnemonicParsing="false" onAction="#logOutButtonPushed" prefHeight="32.0" prefWidth="88.0" text="Log Out">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="300.0" />
+                                    <Insets right="20.0" />
                                  </HBox.margin>
                               </Button>
                            </children>

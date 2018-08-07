@@ -42,7 +42,6 @@ public class CardHolder extends UserAccount implements Serializable{
       this.travelCards.add(card);
       card.setOwner(this);
       card.linkAccount();
-      card.linkAccount();
       TransitSystem.log(Level.ALL,
           "Card " + card.getCardNumber() + " linked to CardHolder Account " + this.getAccountNum());
     }

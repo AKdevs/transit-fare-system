@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"  tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
   <tabs>
       <Tab text="With an Account">
          <content>
@@ -40,16 +40,16 @@
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#showUserAccount" text="Log In" />
-                              <Button mnemonicParsing="false" text="Close" onAction="#closeButtonPushed" />
+                              <Button mnemonicParsing="false" onAction="#closeButtonPushed" text="Close" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                      <children>
-                        <Label fx:id="welcomeLabel" contentDisplay="CENTER" text="Welcome to GTA Link" textAlignment="CENTER" wrapText="true">
+                        <Label fx:id="welcomeLabel" contentDisplay="CENTER" prefHeight="72.0" prefWidth="252.0" text="Welcome to GTA Link" textAlignment="CENTER" wrapText="true">
                            <font>
-                              <Font name="Century Gothic Bold" size="25.0" />
+                              <Font size="25.0" />
                            </font>
                         </Label>
                      </children>

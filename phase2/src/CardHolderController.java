@@ -1,3 +1,4 @@
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,6 +23,7 @@ import java.util.ResourceBundle;
 public class CardHolderController extends Controller {
 
     // label info
+    @FXML private Button getCard;
     @FXML private Label emailPrompt;
     @FXML private Label passwordPrompt;
     @FXML private Label securityPrompt;
@@ -90,6 +93,34 @@ public class CardHolderController extends Controller {
     }
 
     @FXML
+    void getCardButtonPushed(ActionEvent event) throws IOException {
+        CardHolder loggedInUser =(CardHolder)system.getAccountManager().getLoggedInUser();
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/CreateCardPopup.fxml"));
+        Parent layout = loader.load();
+        CreateCardPopupController controller = loader.getController();
+        controller.storeState(system);
+        controller.createCard();
+        controller.setStage(popupStage);
+        popupStage.setScene(new Scene(layout));
+        popupStage.showAndWait();
+        updateCardBox();
+    }
+
+    void updateCardBox() {
+        CardHolder loggedInUser =(CardHolder)system.getAccountManager().getLoggedInUser();
+        for (Card card: loggedInUser.getTravelCards()) {
+            if (!cards.getItems().contains(card.getCardNumber())) {
+                cards.getItems().add(card.getCardNumber());
+                card1.getItems().add(card.getCardNumber());
+                card2.getItems().add(card.getCardNumber());
+            }
+        }
+        // cards = new ChoiceBox<>(FXCollections.observableArrayList(loggedInUser.getTravelCards()));
+    }
+
+    @FXML
     void transferButtonPushed(ActionEvent event) {
         String c1Num = card1.getSelectionModel().getSelectedItem().toString();
         String c2Num = card2.getSelectionModel().getSelectedItem().toString();
@@ -117,11 +148,7 @@ public class CardHolderController extends Controller {
 
         monthlyCost.setText("Monthly Cost:      " + Double.toString(loggedInUser.getMonthlyCost()));
         accountBalance.setText(Double.toString(loggedInUser.getAccountBalance()));
-        for (Card card: loggedInUser.getTravelCards()) {
-            cards.getItems().add(card.getCardNumber());
-            card1.getItems().add(card.getCardNumber());
-            card2.getItems().add(card.getCardNumber());
-        }
+        updateCardBox();
     }
 
 
