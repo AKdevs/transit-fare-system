@@ -8,12 +8,31 @@ import java.util.ArrayList;
 
 /** Manage all accounts which are stored in TransitSystem. */
 class AccountManager implements Serializable{
+
+  /**
+   * Stores all the user accounts
+   */
   private ArrayList<UserAccount> userAccounts;
+  /**
+   * The current logged in user
+   */
   private UserAccount loggedInUser;
+  /**
+   * Uses passwordManager to manage password for user accounts
+   */
   private PasswordManager passwordManager;
+  /**
+   * The next card holder user number
+   */
   private int nextCardHolderNumber;
+  /**
+   * The next administration user number
+   */
   private int nextAdminUserNumber;
 
+  /**
+   * Constructs an account manager
+   */
   AccountManager(){
     this.userAccounts = new ArrayList<>();
     this.passwordManager = new PasswordManager();
@@ -21,6 +40,12 @@ class AccountManager implements Serializable{
     this.nextAdminUserNumber = 20000001;
   }
 
+  /**
+   * Get the pass word manager
+   *
+   *
+   * @return pass word manager
+   */
   PasswordManager getPasswordManager() {
     return this.passwordManager;
   }
