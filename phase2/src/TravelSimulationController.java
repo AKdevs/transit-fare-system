@@ -139,20 +139,13 @@ public class TravelSimulationController extends Controller implements Initializa
     @FXML
     void tapOutButtonPushed(ActionEvent event) throws IOException {
         String exitTime = exitHour.getSelectionModel().getSelectedItem().toString() + ":" + exitMinute.getSelectionModel().getSelectedItem().toString();
+        Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
         // if the cardHolder was already asked to load money but the cardHolder didn't
         if (tapInInstructions.getText().equals("Declined:\nyour card is out of funds,\n please load money.")) {
       tapOutInstructions.setText("Declined:\nyour card is out of funds,\n please load money.");
-            enterType.getItems().clear();
-            enterTransitLine.getItems().clear();
-            enterHour.getItems().clear();
-            exitHour.getItems().clear();
-            enterMinute.getItems().clear();
-            exitMinute.getItems().clear();
-            enterSpot.getItems().clear();
-            exitSpot.getItems().clear();
+            clearTapInfo();
             TransitSystem.log(Level.ALL,"Declined: Your card is out of funds, please load money.");
         }else {
-            Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
             // if it is the first tap out and it's illegal
             if (associatedEntryCard.getLastTapTime().equals("00:00")) {
                 system
@@ -164,6 +157,8 @@ public class TravelSimulationController extends Controller implements Initializa
                                 exitDate.getText(),
                                 exitType.getText());
                 tapOutInstructions.setText("Illegal tap out");
+                clearTapInfo();
+                tapOutInstructions.setText("");
             }else if (tapOutTimeIllegal(exitHour.getValue().toString(), exitMinute.getValue().toString(), associatedEntryCard.getLastTapTime())){
                 tapOutInstructions.setText("Declined: Illegal tap out time.");
                 TransitSystem.log(Level.ALL,"Declined: Illegal tap out time.");
@@ -177,14 +172,7 @@ public class TravelSimulationController extends Controller implements Initializa
                                 exitDate.getText(),
                                 exitType.getText());
                 tapOutInstructions.setText("Tap Out succeed");
-                enterType.getItems().clear();
-                enterTransitLine.getItems().clear();
-                enterHour.getItems().clear();
-                exitHour.getItems().clear();
-                enterMinute.getItems().clear();
-                exitMinute.getItems().clear();
-                enterSpot.getItems().clear();
-                exitSpot.getItems().clear();
+                clearTapInfo();
                 tapOutInstructions.setText("");
 
                 enterType.getItems().add("Subway");
@@ -202,9 +190,8 @@ public class TravelSimulationController extends Controller implements Initializa
                     initializeTime();
                 }
             }
-            balance.setText(Double.toString(associatedEntryCard.getBalance()));
-
         }
+        balance.setText(Double.toString(associatedEntryCard.getBalance()));
 
     }
 
@@ -320,6 +307,17 @@ public class TravelSimulationController extends Controller implements Initializa
             return true;
         }
         return false;
+    }
+
+    void clearTapInfo() {
+        enterType.getItems().clear();
+        enterTransitLine.getItems().clear();
+        enterHour.getItems().clear();
+        exitHour.getItems().clear();
+        enterMinute.getItems().clear();
+        exitMinute.getItems().clear();
+        enterSpot.getItems().clear();
+        exitSpot.getItems().clear();
     }
 }
 
