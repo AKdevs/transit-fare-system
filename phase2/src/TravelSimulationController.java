@@ -142,6 +142,14 @@ public class TravelSimulationController extends Controller implements Initializa
         // if the cardHolder was already asked to load money but the cardHolder didn't
         if (tapInInstructions.getText().equals("Declined:\nyour card is out of funds,\n please load money.")) {
       tapOutInstructions.setText("Declined:\nyour card is out of funds,\n please load money.");
+            enterType.getItems().clear();
+            enterTransitLine.getItems().clear();
+            enterHour.getItems().clear();
+            exitHour.getItems().clear();
+            enterMinute.getItems().clear();
+            exitMinute.getItems().clear();
+            enterSpot.getItems().clear();
+            exitSpot.getItems().clear();
             TransitSystem.log(Level.ALL,"Declined: Your card is out of funds, please load money.");
         }else {
             Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
@@ -177,6 +185,7 @@ public class TravelSimulationController extends Controller implements Initializa
                 exitMinute.getItems().clear();
                 enterSpot.getItems().clear();
                 exitSpot.getItems().clear();
+                tapOutInstructions.setText("");
 
                 enterType.getItems().add("Subway");
                 enterType.getItems().add("Bus");
