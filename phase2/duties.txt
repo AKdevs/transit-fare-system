@@ -81,3 +81,4 @@ Wenyue Feng
 - Created the view and controller for CardHolder
 - Helped implemented Log
 - UML making
+- JavaDoc adding
