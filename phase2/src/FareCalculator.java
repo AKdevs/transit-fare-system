@@ -2,12 +2,24 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class FareCalculator implements Serializable {
+
+  /**
+   * Sets the fare for each bus trip to be 2.0 dollars
+   */
   private final double busFare = 2.0;
+  /**
+   * Sets the fare for each station as 0.5 dollar
+   */
   private final double stationFare = 0.5;
+  /**
+   * Sets the fare cap as 6 dollars
+   */
   private final double fareCap = 6.0;
   /** Maximum amount of time where the fareCap is applicable. */
   private final int maximumDuration = 120;
-
+  /**
+   * Uses the transit lines to do calculation
+   */
   private HashMap<String, TransitLine> transitLines;
   // private double fare;
   /**
