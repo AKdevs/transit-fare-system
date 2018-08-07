@@ -179,4 +179,14 @@ public class Aggregator implements Serializable{
     public boolean isReportAvailable (String date) {
         return availableDate.contains(date);
     }
+
+    public void deleteOldData(String date){
+        this.allFares.remove(date);
+        this.numberOfStations.remove(date);
+        this.availableDate.remove(date);
+        this.transitLineDailySummary.remove(date);
+
+    }
+
+
 }
