@@ -10,17 +10,33 @@ public class FareCalculator implements Serializable {
 
   private HashMap<String, TransitLine> transitLines;
   // private double fare;
-
+  /**
+   * Get the maximum duration of enters for continue trip
+   *
+   * @return the maximum duration of
+   */
   int getMaximumDuration() {
     return maximumDuration;
   }
-
+  /**
+   * Get the fare cap for bus
+   *
+   * @return fare cap for bus
+   */
   double getFareCap(){return busFare;}
 
+  /**
+   * Add transit lines which are used in calculation
+   */
   void addTransitLines(HashMap<String, TransitLine> transitLines) {
     this.transitLines = transitLines;
   }
 
+  /**
+   * Calculate the fare cost by a continue bus trip
+   *
+   * @return the fare cost by the continue bus trip
+   */
   double calculateContiBusFare(double currentFares) {
     double fare;
     if (currentFares == fareCap) {
@@ -33,6 +49,11 @@ public class FareCalculator implements Serializable {
     return fare;
   }
 
+  /**
+   * Calculate the fare cost by a continue subway trip
+   *
+   * @return the fare cost by the continue subway trip
+   */
   double calculateContiSubFare(double currentFares, int distance) {
     double fare;
     double tripFare = distance * stationFare;
@@ -46,6 +67,11 @@ public class FareCalculator implements Serializable {
     return fare;
   }
 
+  /**
+   * Calculate the fare cost by a trip which one tap in and one tap out
+   *
+   * @return the fare cost by the trip
+   */
   double calculateTripFares(TripSegment ts) {
     double result = 0.0;
     if (ts.getTransitType().equals("B")) {
@@ -64,6 +90,11 @@ public class FareCalculator implements Serializable {
     return result;
   }
 
+  /**
+   * Calculate stations reached of one trip
+   *
+   * @return number of stations reached
+   */
   // for both subway and bus so we can add the number of stations reached to our daily report
   // and also we can calculate subway fares by using the result of this method
   int calculateStationsReached(TripSegment trip) {
@@ -92,6 +123,11 @@ public class FareCalculator implements Serializable {
     }
   }
 
+  /**
+   * Calculate the time period between the current trip enter time and last enter time
+   *
+   * @return the duration in minute
+   */
   int calculateDuration(String lastStartTime, String currentStartTime) {
     int last =
         Integer.parseInt(lastStartTime.substring(0, 2)) * 60
