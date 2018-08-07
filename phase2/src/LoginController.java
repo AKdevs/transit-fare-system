@@ -12,16 +12,35 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LoginController extends Controller {
+    /**
+     * Gives user instructions in Without An Account tab
+     */
     @FXML private Label cardInputInstructions;
+    /**
+     * Gives user instructions in With An Account tab
+     */
     @FXML private Label loginInstructions;
+    /**
+     * Records user's input for account number
+     */
     @FXML private TextField accountNumber;
+    /**
+     * Records user's input for password
+     */
     @FXML private TextField password;
+    /**
+     * Records user's input for card number
+     */
     @FXML private TextField cardNumber;
 
-
+    /**
+     * Shows user their card's information if correct card number is entered,
+     * or prompts them further if not
+     * @param event
+     * @throws IOException
+     */
     public void showCard(ActionEvent event) throws IOException {
         if (cardExists()) {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("view/Card.fxml"));
             Parent cardParent = loader.load();
 
@@ -40,6 +59,12 @@ public class LoginController extends Controller {
 
     }
 
+    /**
+     * Shows user their account profile if correct account number
+     * and password are entered, or prompts them further if not
+     * @param event Log in button is pushed
+     * @throws IOException
+     */
     public void showUserAccount(ActionEvent event) throws IOException {
         String currentAccountNumber = accountNumber.getText();
         String currentPassword = password.getText();
@@ -64,6 +89,12 @@ public class LoginController extends Controller {
         }
     }
 
+    /**
+     *
+     * @param currentAccountNumber
+     * @param currentPassword
+     * @return
+     */
     private UserAccount verifyLogin(String currentAccountNumber, String currentPassword) {
         UserAccount currentAccount = system.getAccountManager().findUserAccount(currentAccountNumber);
         // check for password
@@ -108,7 +139,7 @@ public class LoginController extends Controller {
 
     public void closeButtonPushed(ActionEvent event) throws IOException {
         Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
-        system.saveToFile("serializedobjects.ser");
+        saveData();
         window.close();
     }
 }
