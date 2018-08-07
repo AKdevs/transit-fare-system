@@ -1,4 +1,9 @@
-Phase 2 Duties
+                              CSC 207, 2018 Summer
+                            Project: Transit System
+                                  Group 0134
+
+
+                                Phase 2 Duties
 
 Atharva Karandikar
 - Created the view and controllers for the following windows (see view package for windows)
@@ -19,7 +24,28 @@ Atharva Karandikar
 
 JingJing Zhan
 
+
 Yang Chen
+- Created the view and controllers for the following windows
+    - Admin User
+    - Transit System Daily Report
+
+- Added more statistical data in Daily Report:
+    - Estimated daily cost and profit
+    - Total ridership
+    - Number of stations(stops) serviced by the Transit System
+    - Number of stations(stops) reached/serviced ratio
+    - Ridership breakdown by Transit Line
+
+- Created and defined TransitLineDailyStat and SingleTransitLineDailyStat classes
+to store data used for the above mentioned statistics.
+
+- Added attributes and getter/setter methods in TransitLine, Aggregator, and TripManager
+to collect and retrieve data for daily report.
+
+- Added methods in Aggregator and TransitSystem to delete old data when the system
+is being powered off.
+
 
 Wenyue Feng
 - Redefined TripSegment
