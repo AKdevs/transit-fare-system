@@ -35,7 +35,7 @@ public class FareCalculator implements Serializable {
    *
    * @return fare cap for bus
    */
-  double getFareCap(){return busFare;}
+  double getFareCap(){return fareCap;}
 
   /**
    * Add transit lines which are used in calculation
