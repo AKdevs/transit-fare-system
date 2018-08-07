@@ -119,7 +119,7 @@ public class TravelSimulationController extends Controller implements Initializa
             tapInInstructions.setText("Declined:\nyour card is out of funds,\n please load money.");
             TransitSystem.log(Level.ALL,"Declined: Your card is out of funds, please load money.");
         }else if (tapInTimeIllegal(enterHour.getValue().toString(), enterMinute.getValue().toString(), associatedEntryCard.getLastTapTime())){
-            tapOutInstructions.setText("Declined: Illegal tap in time.");
+            tapInInstructions.setText("Declined: Illegal tap in time.");
             TransitSystem.log(Level.ALL,"Declined: Illegal tap in time.");
         } else {
       system
