@@ -22,29 +22,62 @@ class TripManager implements Serializable{
    */
   private Double avgCostPerStation;
 
+  /**
+   * Constructs a TripManager
+   */
   TripManager() {
     this.fareCalculator = new FareCalculator();
     this.aggregator = new Aggregator();
     this.avgCostPerStation = 0.00;
   }
 
+  /**
+   * Get the aggregator
+   *
+   * @return aggregator
+   */
   Aggregator getAggregator() {
     return aggregator;
   }
 
+  /**
+   * Adds new transit line
+   * @param transitLines all transit lines
+   */
   void addTransitLines(HashMap<String, TransitLine> transitLines) {
     this.transitLines = transitLines;
     fareCalculator.addTransitLines(transitLines);
   }
 
+  /**
+   * Gets average cost per station
+   *
+   * @return average cost per station
+   */
   public Double getAvgCostPerStation() {
     return avgCostPerStation;
   }
 
+  /**
+   * Sets Average cost per station
+   *
+   * @param avgCostPerStation average cost per station
+   */
   public void setAvgCostPerStation(Double avgCostPerStation) {
     this.avgCostPerStation = avgCostPerStation;
   }
 
+  /**
+   * Record the tap in to form a new trip and store it in card,
+   * also deduct the bus fare from card if there is a bus trip
+   *
+   * @param time current time
+   * @param spot current enter spot
+   * @param card related card
+   * @param date current date
+   * @param type trip type
+   * @param transitLine trip related transit line
+   */
   void recordTapIn(String time, String spot, Card card, String date, String type, String transitLine) {
     if (card.getBalance() < 0) {
       TransitSystem.log(Level.ALL,"Declined: Card " + card.getCardNumber() +" is out of funds, please load money.");
@@ -99,6 +132,17 @@ class TripManager implements Serializable{
     }
   }
 
+  /**
+   * Record the tap out to complete the tripSegment which is stored in the card, also
+   * updates the balance in card and reports
+   *
+   *
+   * @param time time of exit
+   * @param spot exit spot
+   * @param card related card
+   * @param date current date
+   * @param type trip type
+   */
   void recordTapOut(String time, String spot, Card card, String date, String type) {
     ArrayList<TripSegment> allTrips = card.getTrips();
     TripSegment current = allTrips.get(allTrips.size() - 1);
@@ -133,12 +177,30 @@ class TripManager implements Serializable{
     }
   }
 
+  /**
+   * Add new trip to Card
+   *
+   *
+   * @param time enter time
+   * @param spot enter spot
+   * @param card related card
+   * @param date enter date
+   * @param type trip type
+   */
   private void addNewTrip(String time, String spot, Card card, String date, String type) {
       TripSegment trip = new TripSegment(spot, time, date, type);
       card.addTrip(trip);
       TransitSystem.log(Level.ALL,"Card " + card.getCardNumber() + "tapped in at " + spot);
   }
 
+  /**
+   * Updates fares in card and reports
+   *
+   *
+   * @param fares fare cost for trip
+   * @param card  related card
+   * @param date date of trip
+   */
   private void updateFares(double fares, Card card, String date) {
       card.updateBalance(fares);
       TransitSystem.log(Level.ALL,fares+" is deducted from card " + card.getCardNumber());
@@ -146,6 +208,13 @@ class TripManager implements Serializable{
       aggregator.updateAllFares(date, fares);
   }
 
+  /**
+   * Update ridershp to tansitLine
+   *
+   *
+   * @param date date of trip
+   * @param transitLine trip related transitLine
+   */
   private void updateRidership(String date, String transitLine) {
       if (transitLine != null) {
           SingleTransitLineDailyStat thisStat = aggregator.getTransitLineDailyStat(date).getSingleTransitLineDailyStat(transitLine);
