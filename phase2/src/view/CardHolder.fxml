@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -17,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CardHolderController">
+<TabPane tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CardHolderController">
    <tabs>
       <Tab text="Account Profile">
          <content>
@@ -182,34 +187,40 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <Label text="Account Balance:">
+                              <Label prefHeight="18.0" prefWidth="143.0" text="Account Balance:">
                                  <font>
                                     <Font size="14.0" />
                                  </font></Label>
-                              <Label fx:id="accountBalance" text="0.0">
+                              <Label fx:id="accountBalance" prefHeight="18.0" prefWidth="58.0" text="0.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font></Label>
-                              <Button fx:id="turnOn" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#turnOnButtonPushed" text="Turn On AutoLoad">
-                                 <HBox.margin>
-                                    <Insets left="90.0" />
-                                 </HBox.margin></Button>
-                              <Button fx:id="turnOff" mnemonicParsing="false" onAction="#turnOffButtonPushed" text="Turn Off AutoLoad" />
+                              <HBox prefHeight="11.0" prefWidth="254.0">
+                                 <children>
+                                    <Label text="Autoload" />
+                                    <Button fx:id="turnOn" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#turnOnButtonPushed" text="On">
+                                       <HBox.margin>
+                                          <Insets left="90.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="turnOff" mnemonicParsing="false" onAction="#turnOffButtonPushed" text="Off" />
+                                 </children>
+                              </HBox>
                            </children>
                         </HBox>
                         <HBox prefHeight="117.0" prefWidth="523.0" spacing="50.0">
                            <children>
-                              <Label prefHeight="20.0" prefWidth="110.0" text="Travel Cards:">
+                              <Label prefHeight="20.0" prefWidth="149.0" text="Travel Cards:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox id="choicebox" fx:id="cards" prefWidth="150.0">
+                              <ChoiceBox id="choicebox" fx:id="cards" prefHeight="27.0" prefWidth="105.0">
                                  <HBox.margin>
                                     <Insets left="110.0" />
                                  </HBox.margin>
                               </ChoiceBox>
-                              <Button fx:id="goToCard" mnemonicParsing="false" onAction="#goToCardButtonPushed" prefHeight="25.0" prefWidth="104.0" text="Go To Card">
+                              <Button fx:id="goToCard" mnemonicParsing="false" onAction="#goToCardButtonPushed" prefHeight="27.0" prefWidth="134.0" text="Go To Card">
                                  <HBox.margin>
                                     <Insets right="20.0" />
                                  </HBox.margin></Button>

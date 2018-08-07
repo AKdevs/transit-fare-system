@@ -52,8 +52,6 @@ class TripManager implements Serializable{
             if (type.equals("B")) {
               lastTrip.setTransitType("continueB");
               double fares = fareCalculator.calculateContiBusFare(lastTrip.getCurrentFares());
-              // apply Observer pattern here? what is observable?
-              //observers are: Card, TransitSystem
               updateFares(fares, card, date);
             }else {
                 lastTrip.setTransitType("continueS");
@@ -130,7 +128,7 @@ class TripManager implements Serializable{
 
   private void updateFares(double fares, Card card, String date) {
       card.updateBalance(fares);
-      TransitSystem.log(Level.ALL,fares+"$ is deducted from card " + card.getCardNumber());
+      TransitSystem.log(Level.ALL,fares+" is deducted from card " + card.getCardNumber());
       card.updateTotalFares(fares);
       aggregator.updateAllFares(date, fares);
   }
@@ -141,6 +139,7 @@ class TripManager implements Serializable{
           thisStat.increaseRidership();
       }
   }
+
 
   private String findTransitLine(String type, String station) {
     for (String id: transitLines.keySet()) {

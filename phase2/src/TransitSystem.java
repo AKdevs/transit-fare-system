@@ -49,7 +49,7 @@ public class TransitSystem implements Serializable {
     logger.setLevel(Level.ALL);
     consoleHandler.setLevel(Level.ALL);
     logger.addHandler(consoleHandler);
-      fh = new FileHandler("/Users/jingjingzhan/Desktop/test_log.txt");
+      fh = new FileHandler("/Users/jingjingzhan/Desktop/log.txt");
       logger.addHandler(fh);
       SimpleFormatter formatter = new SimpleFormatter();
       fh.setFormatter(formatter);

@@ -268,6 +268,7 @@ public class CardHolderController extends Controller {
         CardHolder ch = (CardHolder)ua;
         ch.setAutoLoadStatus(1);
         accountBalance.setText(Double.toString(ch.getAccountBalance()));
+        loadAccountBalanceInstructions.setText("");
     }
 
     @FXML

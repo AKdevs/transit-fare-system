@@ -138,17 +138,17 @@ public class CardHolder extends UserAccount implements Serializable{
       if (amount <= card1.getBalance() && amount >= 0) {
           card1.deductBalance(amount);
           card2.addBalance(amount);
-          if (card1.getBalance() < 10) {
+          TransitSystem.log(Level.ALL, Double.toString(amount) + "transfered from Card " + card1.getCardNumber() +" to " + card2.getCardNumber());
+          if (card1.getBalance() < 10 && autoLoadStatus == 1) {
               autoLoad(card1);
           }
       }else if (amount > card1.getBalance()){
-          TransitSystem.log(Level.ALL,"Your balance in Card \n"  + card1.getCardNumber()  + " is not enough.");
+          TransitSystem.log(Level.ALL,"Your balance in Card "  + card1.getCardNumber()  + " is not enough.");
           return "Your balance in Card \n"  + card1.getCardNumber()  + " is not enough.";
       }else if (amount < 0) {
-          TransitSystem.log(Level.ALL,"Entered negative number to transfer balance for Card \n"  + card1.getCardNumber());
+          TransitSystem.log(Level.ALL,"Entered negative number to transfer balance for Card "  + card1.getCardNumber());
           return "Please type in \n a positive number";
       }
-      TransitSystem.log(Level.ALL, "Transfer Balance from Card "+card1.getCardNumber()+ " to Card " + card2.getCardNumber() + " is succeed.");
       return "Transfer balance \n succeed";
   }
 
@@ -177,6 +177,7 @@ public class CardHolder extends UserAccount implements Serializable{
         if (accountBalance >= difference && this.autoLoadStatus == 1) {
             deductAccountBalance(difference);
             card.addBalance(difference);
+            TransitSystem.log(Level.ALL, Double.toString(difference) + " autoloaded to " + card.getCardNumber());
         }
     }
 

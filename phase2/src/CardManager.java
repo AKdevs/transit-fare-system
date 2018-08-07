@@ -60,7 +60,6 @@ public class CardManager implements Serializable{
     Card newCard = new Card();
     addCard(newCard);
     System.out.println("Card " + newCard.getCardNumber() + " created");
-      TransitSystem.log(Level.ALL, "Card created!!!");
   }
 
   /**
