@@ -20,11 +20,14 @@ public class TransitSystem implements Serializable {
 
   /** Stores system current month */
   private String currentMonth;
-  /** Stores system current date */
+  /** Stores system current date, yyyy-mm-dd */
   private String currentDate;
 
   /** Operating status of system, either "on" or "off" */
   private String operatingStatus = "off";
+
+  /** Stores how many years data will be stored in the system, default is 4 years*/
+  private Integer dataStorePeriod;
 
     private static final Logger logger =
             Logger.getLogger(TransitSystem.class.getName());
@@ -40,6 +43,7 @@ public class TransitSystem implements Serializable {
     accountManager = new AccountManager();
     accountManager.createAdminAccount("root", "", "root");
     cardManager = new CardManager();
+    dataStorePeriod = 4;
 
     try{
     logger.setLevel(Level.ALL);
@@ -89,7 +93,15 @@ public class TransitSystem implements Serializable {
     return cardManager;
   }
 
-  /** @return operating status of the system, either "on" or "off". */
+    public Integer getDataStorePeriod() {
+        return dataStorePeriod;
+    }
+
+    public void setDataStorePeriod(Integer dataStorePeriod) {
+        this.dataStorePeriod = dataStorePeriod;
+    }
+
+    /** @return operating status of the system, either "on" or "off". */
   String getOperatingStatus() {
     return this.operatingStatus;
   }
@@ -123,6 +135,10 @@ public class TransitSystem implements Serializable {
   /** @param date date to be stored. */
   void setCurrentDate(String date) {
     this.currentDate = date;
+  }
+
+  void deleteOldData(String date){
+
   }
 
 
