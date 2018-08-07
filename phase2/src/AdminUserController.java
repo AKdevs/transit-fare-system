@@ -119,9 +119,7 @@ public class AdminUserController extends Controller implements Initializable {
             showSystemStatus();
             powerOnDateWarning.setText("");
             todayDateLabel.setText("");
-            //theTransitSystem.powerOffSystem();
-            //System.out.println(theTransitSystem.getOperatingStatus());
-            //powerResult.setText("The Transit System has been shut down.");
+
         }
 
         public void showSystemStatus() {
@@ -148,19 +146,6 @@ public class AdminUserController extends Controller implements Initializable {
             dailyReportUnavailableWarning.setText("");
             if (system.getTripManager().getAggregator().isReportAvailable(dateString)) {
                 prepareReport(dateString);
-
-                /*
-                HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
-                for (String id: transitLines.keySet()) {
-                    SingleTransitLineDailyStat singleTransitStat = system.getTripManager().getAggregator()
-                            .getTransitLineDailyStat(dateString).getSingleTransitLineDailyStat(id);
-                    System.out.println("Transit: " + singleTransitStat.getId());
-                    System.out.println("Trips: " + singleTransitStat.getNumOfTrips());
-                    System.out.println("Ridership: " + singleTransitStat.getRidership());
-                    System.out.println("Average: " + singleTransitStat.getAvgRiderPerTrip());
-
-                }
-                */
 
             }
             else {
@@ -302,6 +287,12 @@ public class AdminUserController extends Controller implements Initializable {
             Set<String> transitLines =  system.getTransitManager().getTransitLines().keySet();
             for (String line : transitLines) {
                 transitLinesList.getItems().add(line);
+            }
+
+            String currentDate = system.getCurrentDate();
+            if ((currentDate != null) && (system.getOperatingStatus().equals("on"))) {
+                String todayDate = "Today is " + currentDate +".";
+                todayDateLabel.setText(todayDate);
             }
 
             /**
