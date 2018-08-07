@@ -130,10 +130,14 @@ public class DailyReportController extends Controller implements Initializable {
 
         Double decTravelled = travelled + 0.00001;
         //Double decTravelled = 56 + 0.00001;
-        Double ratio = decTravelled / numStationServiced;
-        DecimalFormat df = new DecimalFormat("#.##");
-
-        reachServiceRatioLabel.setText(df.format(ratio));
+        if (numStationServiced == 0) {
+            reachServiceRatioLabel.setText("0");
+        }
+        else {
+            Double ratio = decTravelled / numStationServiced;
+            DecimalFormat df = new DecimalFormat("#.##");
+            reachServiceRatioLabel.setText(df.format(ratio));
+        }
     }
 
     /**
