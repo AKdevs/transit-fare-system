@@ -254,6 +254,7 @@ public class TravelSimulationController extends Controller implements Initializa
     @FXML
     void ok2ButtonPushed(ActionEvent event) throws IOException {
         enterSpot.getItems().clear();
+        exitSpot.getItems().clear();
         String lineId = enterTransitLine.getSelectionModel().getSelectedItem();
         HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
         for (String id : transitLines.keySet()) {
