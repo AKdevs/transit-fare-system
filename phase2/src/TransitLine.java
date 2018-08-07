@@ -11,8 +11,6 @@ class TransitLine implements Serializable {
   private String id;
   /** Number of Stops/Stations in a single-way trip */
   private int numOfStops;
-  /** Stores the number of single-way trips scheduled for the TransitLine on a specific date */
-  private HashMap<String, Integer> numOfTrips;
 
 
   TransitLine(ArrayList<String> points, String type, String id) {
@@ -53,23 +51,6 @@ class TransitLine implements Serializable {
    */
   int getNumOfStops() {return this.numOfStops; }
 
-  /**
-   *
-   * @param date date
-   * @return the number of single-way trips scheduled for the Transit Line on that date
-   */
-  public int getNumOfTrips(String date) {
-    return numOfTrips.get(date);
-  }
-
-  /**
-   * sets the number of single-way trips for date
-   * @param date date
-   * @param numOfTrips number of single-way trips scheduled for this Transit Line
-   */
-  public void setNumOfTrips(String date, int numOfTrips) {
-    this.numOfTrips.put(date,numOfTrips);
-  }
 
   /**
    * Change name of a station/stop in the transit line from oldName to newName.
