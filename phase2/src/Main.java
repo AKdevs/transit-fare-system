@@ -8,7 +8,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        String path="serializedobjects.ser";
+        String path="./serializedobjects.ser";
         TransitSystem mainSystem = new TransitSystem(path);
         mainSystem.readFromFile(path);
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("view/Login.fxml"));
