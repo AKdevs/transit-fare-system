@@ -35,7 +35,7 @@ class Card implements Serializable {
     this.active = true;
     this.trips = new ArrayList<>();
     this.totalFares = 0.0;
-    this.lastTapTime = "unknown";
+    this.lastTapTime = "00:00";
   }
 
   public ArrayList<TripSegment> getMostRecentTrips() {
@@ -112,7 +112,7 @@ class Card implements Serializable {
   void deductBalance(Double fares) {
     if (active) {
       this.balance -= fares;
-        if (this.getBalance() < 10) {
+        if (this.isLinked() && this.getBalance() < 10 && owner.getAutoLoadStatus() == 1) {
             owner.autoLoad(this);
         }
     } else {

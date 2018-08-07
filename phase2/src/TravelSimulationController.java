@@ -70,17 +70,6 @@ public class TravelSimulationController extends Controller implements Initializa
         enterType.getItems().add("Subway");
         enterType.getItems().add("Bus");
 
-
-        /*
-        Code used from https://stackoverflow.com/questions/14522680/javafx-choicebox-events
-        Author: Steve Park
-        enterType.getSelectionModel()
-                .selectedItemProperty()
-                .addListener( (ObservableValue<? extends String> observable, String oldValue, String newValue) -> System.out.println(newValue) );
-
-        */
-
-
         HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
         for (String id : transitLines.keySet()) {
                 enterTransitLine.getItems().add(id);
@@ -130,7 +119,7 @@ public class TravelSimulationController extends Controller implements Initializa
             tapInInstructions.setText("Declined:\nyour card is out of funds,\n please load money.");
             TransitSystem.log(Level.ALL,"Declined: Your card is out of funds, please load money.");
         }else if (tapInTimeIllegal(enterHour.getValue().toString(), enterMinute.getValue().toString(), associatedEntryCard.getLastTapTime())){
-            tapOutInstructions.setText("Declined: Illegal tap in time.");
+            tapInInstructions.setText("Declined: Illegal tap in time.");
             TransitSystem.log(Level.ALL,"Declined: Illegal tap in time.");
         } else {
       system
@@ -157,7 +146,7 @@ public class TravelSimulationController extends Controller implements Initializa
         }else {
             Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
             // if it is the first tap out and it's illegal
-            if (associatedEntryCard.getLastTapTime().equals("unknown")) {
+            if (associatedEntryCard.getLastTapTime().equals("00:00")) {
                 system
                         .getTripManager()
                         .recordTapOut(
@@ -180,6 +169,29 @@ public class TravelSimulationController extends Controller implements Initializa
                                 exitDate.getText(),
                                 exitType.getText());
                 tapOutInstructions.setText("Tap Out succeed");
+                enterType.getItems().clear();
+                enterTransitLine.getItems().clear();
+                enterHour.getItems().clear();
+                exitHour.getItems().clear();
+                enterMinute.getItems().clear();
+                exitMinute.getItems().clear();
+                enterSpot.getItems().clear();
+                exitSpot.getItems().clear();
+
+                enterType.getItems().add("Subway");
+                enterType.getItems().add("Bus");
+
+                HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
+                for (String id : transitLines.keySet()) {
+                    enterTransitLine.getItems().add(id);
+                }
+
+                if (enterHour.getItems().isEmpty()
+                        && enterMinute.getItems().isEmpty()
+                        && exitHour.getItems().isEmpty()
+                        && exitMinute.getItems().isEmpty()) {
+                    initializeTime();
+                }
             }
             balance.setText(Double.toString(associatedEntryCard.getBalance()));
 
@@ -252,6 +264,8 @@ public class TravelSimulationController extends Controller implements Initializa
     void ok1ButtonPushed(ActionEvent event) throws IOException {
         String type = enterType.getValue().substring(0,1);
         exitType.setText(enterType.getValue());
+        enterTransitLine.getItems().clear();
+        enterSpot.getItems().clear();
         HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
         for (String id : transitLines.keySet()) {
             if (transitLines.get(id).getType().equals(type)) {
@@ -262,6 +276,8 @@ public class TravelSimulationController extends Controller implements Initializa
 
     @FXML
     void ok2ButtonPushed(ActionEvent event) throws IOException {
+        enterSpot.getItems().clear();
+        exitSpot.getItems().clear();
         String lineId = enterTransitLine.getSelectionModel().getSelectedItem();
         HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
         for (String id : transitLines.keySet()) {

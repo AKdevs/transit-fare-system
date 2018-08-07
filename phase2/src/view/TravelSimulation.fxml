@@ -81,6 +81,7 @@
             </GridPane>
             <Button fx:id="ok1" layoutX="435.0" layoutY="52.0" mnemonicParsing="false" onAction="#ok1ButtonPushed" text="OK" />
             <Button fx:id="ok2" layoutX="435.0" layoutY="80.0" mnemonicParsing="false" onAction="#ok2ButtonPushed" text="OK" />
+            <Label fx:id="tapInInstructions" layoutX="477.0" layoutY="19.0" prefHeight="91.0" prefWidth="95.0" wrapText="true" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
@@ -114,8 +115,10 @@
                         <ChoiceBox fx:id="exitMinute" prefHeight="27.0" prefWidth="78.0" />
                      </children>
                   </HBox>
+                  <Label fx:id="exitType" alignment="CENTER" prefHeight="25.0" prefWidth="152.0" textAlignment="CENTER" GridPane.columnIndex="1" />
                </children>
             </GridPane>
+            <Label fx:id="tapOutInstructions" layoutX="470.0" layoutY="14.0" prefHeight="91.0" prefWidth="95.0" wrapText="true" />
          </children></AnchorPane>
   </items>
 </SplitPane>
