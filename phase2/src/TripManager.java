@@ -80,7 +80,7 @@ class TripManager implements Serializable{
    */
   void recordTapIn(String time, String spot, Card card, String date, String type, String transitLine) {
     if (card.getBalance() < 0) {
-      TransitSystem.log(Level.ALL,"Declined: Card " + card.getCardNumber() +" is out of funds, please load money.");
+      //TransitSystem.log(Level.ALL,"Declined: Card " + card.getCardNumber() +" is out of funds, please load money.");
     } else {
         updateRidership(date,transitLine);
       // if the cardHolder traveled with this card before
@@ -144,35 +144,73 @@ class TripManager implements Serializable{
    */
   void recordTapOut(String time, String spot, Card card, String date, String type) {
     ArrayList<TripSegment> allTrips = card.getTrips();
-    TripSegment current = allTrips.get(allTrips.size() - 1);
-    // if it is a illegal exit (didn't tap in for this trip)
-    if (current.getExitSpot() != null && !current.getTransitType().equals("continueB")&& !current.getTransitType().equals("continueS") ) {
-      TransitSystem.log(Level.ALL, "Declined: Illegal exit by " + card.getCardNumber() + " at " + spot + "," + time + "," + date);
-      TripSegment ts = new TripSegment("illegal", time, date, type);
-      card.addTrip(ts);
-      TripSegment updatedCurrent = allTrips.get(allTrips.size() - 1);
-      updatedCurrent.setExitSpot(spot);
-      updatedCurrent.setExitTime(time);
-      updateFares(fareCalculator.getFareCap(), card, date);//penalty is charging them the cap for this trip
-    } else { // normal legal exit
-      current.setExitSpot(spot);
-      current.setExitTime(time);
-      TransitSystem.log(Level.ALL,"Card " + card.getCardNumber() + " tapped out at " + spot + "," + time + "," + date);
-      if (current.getTransitType().equals("S")) {
-        double fares = fareCalculator.calculateTripFares(current);
-        current.setCurrentFares(fares);
-        updateFares(fares, card, date);
-        }else if (current.getTransitType().equals("continueS")) {
+    if (allTrips.isEmpty()){
+        TransitSystem.log(
+                Level.ALL,
+                "Declined: Illegal exit by "
+                        + card.getCardNumber()
+                        + " at "
+                        + spot
+                        + ","
+                        + time
+                        + ","
+                        + date);
+        TripSegment ts = new TripSegment("illegal", time, date, type);
+        card.addTrip(ts);
+        TripSegment updatedCurrent = allTrips.get(allTrips.size() - 1);
+        updatedCurrent.setExitSpot(spot);
+        updatedCurrent.setExitTime(time);
+        updateFares(
+                fareCalculator.getFareCap(),
+                card,
+                date); // penalty is charging them the cap for this trip
+    } else {
+      TripSegment current = allTrips.get(allTrips.size() - 1);
+      // if it is a illegal exit (didn't tap in for this trip)
+      if (current.getExitSpot() != null
+          && !current.getTransitType().equals("continueB")
+          && !current.getTransitType().equals("continueS")) {
+        TransitSystem.log(
+            Level.ALL,
+            "Declined: Illegal exit by "
+                + card.getCardNumber()
+                + " at "
+                + spot
+                + ","
+                + time
+                + ","
+                + date);
+        TripSegment ts = new TripSegment("illegal", time, date, type);
+        card.addTrip(ts);
+        TripSegment updatedCurrent = allTrips.get(allTrips.size() - 1);
+        updatedCurrent.setExitSpot(spot);
+        updatedCurrent.setExitTime(time);
+        updateFares(
+            fareCalculator.getFareCap(),
+            card,
+            date); // penalty is charging them the cap for this trip
+      } else { // normal legal exit
+        current.setExitSpot(spot);
+        current.setExitTime(time);
+        TransitSystem.log(
+            Level.ALL,
+            "Card " + card.getCardNumber() + " tapped out at " + spot + "," + time + "," + date);
+        if (current.getTransitType().equals("S")) {
+          double fares = fareCalculator.calculateTripFares(current);
+          current.setCurrentFares(fares);
+          updateFares(fares, card, date);
+        } else if (current.getTransitType().equals("continueS")) {
           int distance = fareCalculator.calculateStationsReached(current);
           double fares = fareCalculator.calculateContiSubFare(current.getCurrentFares(), distance);
           current.setCurrentFares(fares);
           updateFares(fares, card, date);
-      }
+        }
         aggregator.addNumberOfStation(date, fareCalculator.calculateStationsReached(current));
-    }
-    if (current.getTransitType().equals("continueB")
-        || current.getTransitType().equals("continueS")) {
-      current.setTransitType("continuous");
+      }
+      if (current.getTransitType().equals("continueB")
+          || current.getTransitType().equals("continueS")) {
+        current.setTransitType("continuous");
+      }
     }
   }
 
