@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class LoginController extends Controller {
      */
     @FXML private TextField cardNumber;
 
+
     /**
      * Shows user their card's information if correct card number is entered,
      * or prompts them further if not
@@ -40,7 +42,10 @@ public class LoginController extends Controller {
      * @throws IOException
      */
     public void showCard(ActionEvent event) throws IOException {
-        if (cardExists()) {
+        if (system.getOperatingStatus().equals("off")) {
+            cardInputInstructions.setTextFill(Color.RED);
+            cardInputInstructions.setText("Please power on system before proceeding");
+        } else if (cardExists()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("view/Card.fxml"));
             Parent cardParent = loader.load();
 
@@ -79,6 +84,9 @@ public class LoginController extends Controller {
                 Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
                 window.setScene(new Scene(adminUserParent));
                 window.show();
+            } else if (system.getOperatingStatus().equals("off")) {
+                loginInstructions.setTextFill(Color.RED);
+                loginInstructions.setText("Please power on system before proceeding");
             } else {
                 system.getAccountManager().setLoggedInUser(currentAccount);
                 changeWindowPassAccount(event, "view/CardHolder.fxml");
@@ -119,6 +127,11 @@ public class LoginController extends Controller {
     }
 
     public void showAccountCreation(ActionEvent event) throws Exception {
+        if (system.getOperatingStatus().equals("off")) {
+            loginInstructions.setTextFill(Color.RED);
+            loginInstructions.setText("Please power on system before proceeding");
+            return;
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("view/CreateAccount.fxml"));
         Parent createAccountParent = loader.load();
         CreateAccountController controller = loader.getController();
@@ -130,11 +143,21 @@ public class LoginController extends Controller {
     }
 
     public void showCardCreation(ActionEvent event) throws Exception {
-        changeWindow(event, "view/CreateCard.fxml");
+        if (system.getOperatingStatus().equals("off")) {
+            loginInstructions.setTextFill(Color.RED);
+            loginInstructions.setText("Please power on system before proceeding");
+        } else {
+            changeWindow(event, "view/CreateCard.fxml");
+        }
     }
 
     public void showRecovery(ActionEvent event) throws Exception {
-        changeWindow(event, "view/PasswordRecovery.fxml");
+        if (system.getOperatingStatus().equals("off")) {
+            loginInstructions.setTextFill(Color.RED);
+            loginInstructions.setText("Please power on system before proceeding");
+        } else {
+            changeWindow(event, "view/PasswordRecovery.fxml");
+        }
     }
 
     public void closeButtonPushed(ActionEvent event) throws IOException {

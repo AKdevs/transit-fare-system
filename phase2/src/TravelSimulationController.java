@@ -70,6 +70,17 @@ public class TravelSimulationController extends Controller implements Initializa
         enterType.getItems().add("Subway");
         enterType.getItems().add("Bus");
 
+
+        /*
+        Code used from https://stackoverflow.com/questions/14522680/javafx-choicebox-events
+        Author: Steve Park
+        enterType.getSelectionModel()
+                .selectedItemProperty()
+                .addListener( (ObservableValue<? extends String> observable, String oldValue, String newValue) -> System.out.println(newValue) );
+
+        */
+
+
         HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
         for (String id : transitLines.keySet()) {
                 enterTransitLine.getItems().add(id);

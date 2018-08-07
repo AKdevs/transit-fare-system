@@ -94,7 +94,7 @@ class TripManager implements Serializable{
           if (lastTrip.getExitSpot().equals(spot)
               && duration < fareCalculator.getMaximumDuration()) {
             lastTrip.setContiSpot(spot);
-            TransitSystem.log(Level.ALL,"Card " + card.getCardNumber() + "tapped in at " + spot + "," + time + "," + date);
+            TransitSystem.log(Level.ALL,"Card " + card.getCardNumber() + " tapped in at " + spot + "," + time + "," + date);
             if (type.equals("B")) {
               lastTrip.setTransitType("continueB");
               double fares = fareCalculator.calculateContiBusFare(lastTrip.getCurrentFares());

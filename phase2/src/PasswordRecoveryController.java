@@ -26,7 +26,7 @@ public class PasswordRecoveryController extends Controller {
      * @throws IOException
      */
     public void cancelButtonPushed(ActionEvent event) throws IOException {
-        changeWindow(event, "view/login.fxml");
+        changeWindow(event, "view/Login.fxml");
     }
 
     /**

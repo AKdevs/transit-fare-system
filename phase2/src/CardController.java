@@ -47,7 +47,7 @@ public class CardController extends Controller implements Initializable {
 
     public void travelSimulationButtonPushed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("view/travelSimulation.fxml"));
+        loader.setLocation(getClass().getResource("view/TravelSimulation.fxml"));
         Parent travelSimulationParent = loader.load();
 
         Scene travelSimulationScene = new Scene(travelSimulationParent);

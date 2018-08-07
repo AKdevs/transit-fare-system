@@ -60,7 +60,7 @@ public class AdminUserController extends Controller implements Initializable {
         // TransitSystem theTransitSystem = TransitSystem.getInstance();
 
         public void returnToMain(ActionEvent event) throws IOException {
-            changeWindow(event, "view/login.fxml");
+            changeWindowToHome(event);
         }
 
 
