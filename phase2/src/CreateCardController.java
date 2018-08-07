@@ -30,7 +30,7 @@ public class CreateCardController extends Controller {
 
         exitButton.setOnAction(e -> {
             try {
-                changeWindow(e, "view/login.fxml");
+                changeWindow(e, "view/Login.fxml");
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

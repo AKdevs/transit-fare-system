@@ -169,6 +169,29 @@ public class TravelSimulationController extends Controller implements Initializa
                                 exitDate.getText(),
                                 exitType.getText());
                 tapOutInstructions.setText("Tap Out succeed");
+                enterType.getItems().clear();
+                enterTransitLine.getItems().clear();
+                enterHour.getItems().clear();
+                exitHour.getItems().clear();
+                enterMinute.getItems().clear();
+                exitMinute.getItems().clear();
+                enterSpot.getItems().clear();
+                exitSpot.getItems().clear();
+
+                enterType.getItems().add("Subway");
+                enterType.getItems().add("Bus");
+
+                HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
+                for (String id : transitLines.keySet()) {
+                    enterTransitLine.getItems().add(id);
+                }
+
+                if (enterHour.getItems().isEmpty()
+                        && enterMinute.getItems().isEmpty()
+                        && exitHour.getItems().isEmpty()
+                        && exitMinute.getItems().isEmpty()) {
+                    initializeTime();
+                }
             }
             balance.setText(Double.toString(associatedEntryCard.getBalance()));
 

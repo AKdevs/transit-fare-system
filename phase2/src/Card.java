@@ -112,7 +112,7 @@ class Card implements Serializable {
   void deductBalance(Double fares) {
     if (active) {
       this.balance -= fares;
-        if (this.getBalance() < 10) {
+        if (this.getBalance() < 10 && owner != null) {
             owner.autoLoad(this);
         }
     } else {
