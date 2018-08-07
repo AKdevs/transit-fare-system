@@ -276,4 +276,24 @@ class Card implements Serializable {
   }
 
 
+    /**
+     * Deletes old TripSegments in trips.
+     * @param date TripSegments occurred on this date shall be deleted.
+     */
+  void deleteOldTrips(String date) {
+      if (!(this.trips.isEmpty())) {
+          TripSegment currTrip = trips.get(0);
+          while ((currTrip != null) && (currTrip.getDate().equals(date))){
+              trips.remove(0);
+              if (!(trips.isEmpty())) {
+                  currTrip = trips.get(0);
+              }
+              else {
+                  currTrip = null;
+                  break;
+              }
+          }
+      }
+  }
+
 }

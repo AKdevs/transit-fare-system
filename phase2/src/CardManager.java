@@ -75,4 +75,17 @@ public class CardManager implements Serializable{
       return cards;
   }
 
+  /**
+   * Deletes old TripSegments for all Cards in CardManager, which occurred on date.
+   * @param date TripSegments occurred on this date shall be deleted.
+   */
+
+  void deleteOldTrips(String date) {
+    if (!(this.cards.isEmpty())) {
+      for (Card card : this.cards) {
+        card.deleteOldTrips(date);
+      }
+    }
+  }
+
 }
