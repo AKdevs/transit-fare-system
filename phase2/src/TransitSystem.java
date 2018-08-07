@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.*;
@@ -9,6 +8,8 @@ import java.util.Map;
 import java.util.logging.Level;
 
 public class TransitSystem implements Serializable {
+  /** Stores the file path of serialization file */
+  private String filepath;
   /** Stores the trip manager */
   private TripManager tripManager;
   /** Stores the transit manager */
@@ -26,17 +27,16 @@ public class TransitSystem implements Serializable {
   /** Operating status of system, either "on" or "off" */
   private String operatingStatus = "off";
 
-  /** Stores how many years data will be stored in the system, default is 4 years*/
+  /** Stores how many years data will be stored in the system, default is 4 years */
   private Integer dataStorePeriod;
 
-    private static final Logger logger =
-            Logger.getLogger(TransitSystem.class.getName());
-    private static final Handler consoleHandler = new ConsoleHandler();
+  private static final Logger logger = Logger.getLogger(TransitSystem.class.getName());
+  private static final Handler consoleHandler = new ConsoleHandler();
 
-    private static Handler fh;
-
+  private static Handler fh;
 
   public TransitSystem(String filePath) throws ClassNotFoundException, IOException {
+    this.filepath = filePath;
     tripManager = new TripManager();
     transitManager = new TransitManager();
     tripManager.addTransitLines(transitManager.getTransitLines());
@@ -44,6 +44,7 @@ public class TransitSystem implements Serializable {
     accountManager.createAdminAccount("root", "", "root");
     cardManager = new CardManager();
     dataStorePeriod = 4;
+
 
     try{
     logger.setLevel(Level.ALL);
@@ -53,10 +54,9 @@ public class TransitSystem implements Serializable {
       logger.addHandler(fh);
       SimpleFormatter formatter = new SimpleFormatter();
       fh.setFormatter(formatter);
-      } catch (IOException e) {
-        e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-
 
     File file = new File(filePath);
     if (file.exists()) {
@@ -66,24 +66,25 @@ public class TransitSystem implements Serializable {
     }
   }
 
+  private static Logger getLogger() {
+    return logger;
+  }
 
-    private static Logger getLogger(){
-        return logger;
-    }
+  public static void log(Level level, String msg) {
+    getLogger().log(level, msg);
+  }
 
-    public static void log(Level level, String msg){
-        getLogger().log(level, msg);
-    }
+  String getFilepath() {
+    return this.filepath;
+  }
 
   TripManager getTripManager() {
     return tripManager;
   }
 
-
   TransitManager getTransitManager() {
     return transitManager;
   }
-
 
   AccountManager getAccountManager() {
     return accountManager;
@@ -93,15 +94,15 @@ public class TransitSystem implements Serializable {
     return cardManager;
   }
 
-    public Integer getDataStorePeriod() {
-        return dataStorePeriod;
-    }
+  public Integer getDataStorePeriod() {
+    return dataStorePeriod;
+  }
 
-    public void setDataStorePeriod(Integer dataStorePeriod) {
-        this.dataStorePeriod = dataStorePeriod;
-    }
+  public void setDataStorePeriod(Integer dataStorePeriod) {
+    this.dataStorePeriod = dataStorePeriod;
+  }
 
-    /** @return operating status of the system, either "on" or "off". */
+  /** @return operating status of the system, either "on" or "off". */
   String getOperatingStatus() {
     return this.operatingStatus;
   }
@@ -113,9 +114,9 @@ public class TransitSystem implements Serializable {
 
   /** Power off the system. */
   void powerOffSystem() {
-      deleteOldData(currentDate);
+    deleteOldData(currentDate);
     this.operatingStatus = "off";
-    //System.out.println("The TransitSystem has been powered off.");
+    // System.out.println("The TransitSystem has been powered off.");
   }
 
   /** @return current month in MM format */
@@ -138,29 +139,28 @@ public class TransitSystem implements Serializable {
     this.currentDate = date;
   }
 
+  /**
+   * Deletes data of (date - dataStorePeriod) from the system.
+   *
+   * @param date
+   */
+  void deleteOldData(String date) {
+    String todayDate = date;
+    String currentYear = todayDate.substring(0, 4);
+    String currentMMDD = todayDate.substring(4);
 
-    /**
-     * Deletes data of (date - dataStorePeriod) from the system.
-     * @param date
-     */
-  void deleteOldData(String date){
-      String todayDate = date;
-      String currentYear = todayDate.substring(0,4);
-      String currentMMDD = todayDate.substring(4);
+    Integer currentYearInt = Integer.parseInt(currentYear);
+    Integer oldYearInt = currentYearInt - dataStorePeriod;
+    String oldDate = oldYearInt.toString() + currentMMDD;
 
-      Integer currentYearInt = Integer.parseInt(currentYear);
-      Integer oldYearInt = currentYearInt - dataStorePeriod;
-      String oldDate = oldYearInt.toString() + currentMMDD;
+    this.tripManager.getAggregator().deleteOldData(oldDate);
 
-      this.tripManager.getAggregator().deleteOldData(oldDate);
-
-      if (currentMMDD.equals("-03-01")) {
-          String anotherOldDate = oldYearInt.toString() + "-02-29";
-          //System.out.println("Another Old date: "+ anotherOldDate);
-          this.tripManager.getAggregator().deleteOldData(anotherOldDate);
-      }
+    if (currentMMDD.equals("-03-01")) {
+      String anotherOldDate = oldYearInt.toString() + "-02-29";
+      // System.out.println("Another Old date: "+ anotherOldDate);
+      this.tripManager.getAggregator().deleteOldData(anotherOldDate);
+    }
   }
-
 
   public void readFromFile(String path) throws ClassNotFoundException {
     try {
@@ -168,21 +168,17 @@ public class TransitSystem implements Serializable {
       InputStream buffer = new BufferedInputStream(file);
       ObjectInput input = new ObjectInputStream(buffer);
 
-      ArrayList<Object> data = (ArrayList<Object>)input.readObject();
-      tripManager = (TripManager)data.get(0);
-      transitManager = (TransitManager)data.get(1);
-      accountManager = (AccountManager)data.get(2);
-      cardManager = (CardManager)data.get(3);
-      //deserialize all TransitSystem instance fields
+      ArrayList<Object> data = (ArrayList<Object>) input.readObject();
+      tripManager = (TripManager) data.get(0);
+      transitManager = (TransitManager) data.get(1);
+      accountManager = (AccountManager) data.get(2);
+      cardManager = (CardManager) data.get(3);
+      // deserialize all TransitSystem instance fields
       input.close();
       System.out.println("Object has been deserialized ");
-    }
-
-    catch (IOException ex) {
+    } catch (IOException ex) {
       System.out.print("IO Exception caught");
-    }
-
-    catch(ClassNotFoundException ex) {
+    } catch (ClassNotFoundException ex) {
       System.out.println("ClassNotFoundException is caught");
     }
   }
@@ -194,8 +190,8 @@ public class TransitSystem implements Serializable {
     ObjectOutput output = new ObjectOutputStream(buffer);
 
     // serialize the Map
-    //output.writeObject(currentDate);
-   // output.writeObject(currentMonth);
+    // output.writeObject(currentDate);
+    // output.writeObject(currentMonth);
 
     ArrayList<Object> data = new ArrayList<>();
     data.add(tripManager);
@@ -206,6 +202,4 @@ public class TransitSystem implements Serializable {
 
     output.close();
   }
-
 }
-

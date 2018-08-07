@@ -4,9 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PasswordManager implements Serializable{
+    /**
+     * Stores list of security questions available to user
+     */
     private List<String> securityQuestions;
-    private int minimumPasswordLength = 8;
 
+    /**
+     * Creates instance and fills list of security questions
+     */
     PasswordManager() {
         securityQuestions = new ArrayList<>();
         securityQuestions.add("What city was your paternal grandfather born in?");
@@ -15,10 +20,9 @@ public class PasswordManager implements Serializable{
         securityQuestions.add("What was your childhood nickname?");
     }
 
-    String getSecurityQuestion(int index) {
-        return securityQuestions.get(index);
-    }
-
+    /**
+     * @return list of security questions
+     */
     List<String> getQuestionList() {
         return securityQuestions;
     }

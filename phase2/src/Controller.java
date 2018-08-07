@@ -10,11 +10,13 @@ import java.io.IOException;
 public class Controller {
     TransitSystem system;
 
-    void storeState(TransitSystem system) {
+    void storeState(TransitSystem system) throws IOException {
         this.system = system;
+        saveData();
     }
 
     void changeWindow(ActionEvent event, String url) throws IOException {
+        saveData();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
         Parent newWindowParent = loader.load();
         Controller newWindowController = loader.getController();
@@ -25,6 +27,7 @@ public class Controller {
     }
 
     void changeWindowPassAccount(ActionEvent event, String url) throws IOException {
+        saveData();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
         Parent newWindowParent = loader.load();
         CardHolderController newWindowController = loader.getController();
@@ -36,12 +39,17 @@ public class Controller {
     }
 
     void changeWindowToHome(ActionEvent event) throws IOException {
+        saveData();
         changeWindow(event, "view/Login.fxml");
     }
 
-    private void passState(Controller newWindowController) {
+    private void passState(Controller newWindowController) throws IOException {
         if (newWindowController.system == null) {
             newWindowController.storeState(this.system);
         }
+    }
+
+    void saveData() throws IOException {
+        system.saveToFile(system.getFilepath());
     }
 }

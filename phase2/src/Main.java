@@ -11,13 +11,6 @@ public class Main extends Application {
         String path="serializedobjects.ser";
         TransitSystem mainSystem = new TransitSystem(path);
         mainSystem.readFromFile(path);
-        // Create base administrator, this will be moved to serialization
-        // mainSystem.getAccountManager().createAdminAccount("sysadmin", "admin@gmail.com", "sysadmin");
-
-        //FXMLLoader loginLoader = new FXMLLoader();
-        //loginLoader.setLocation(getClass().getResource("view/Login.fxml"));
-        //Parent loginParent = loginLoader.load();
-
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("view/Login.fxml"));
         Parent root = loginLoader.load();
         Scene loginScene = new Scene(root);
