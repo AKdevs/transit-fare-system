@@ -22,6 +22,8 @@ class Card implements Serializable {
   private ArrayList<TripSegment> trips;
   /** Keeps track of total fares accumulated on this card */
   private double totalFares;
+  /** Keeps track of last tap in/out time of this card */
+  private String lastTapTime;
 
 
   /** Constructs a card. */
@@ -33,6 +35,7 @@ class Card implements Serializable {
     this.active = true;
     this.trips = new ArrayList<>();
     this.totalFares = 0.0;
+    this.lastTapTime = "00:00";
   }
 
   public ArrayList<TripSegment> getMostRecentTrips() {
@@ -262,6 +265,14 @@ class Card implements Serializable {
           return "active";
       }
       return "deactivated";
+  }
+
+  void setLastTapTime(String time) {
+      this.lastTapTime = time;
+  }
+
+  String getLastTapTime() {
+      return this.lastTapTime;
   }
 
 

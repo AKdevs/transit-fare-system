@@ -93,6 +93,7 @@ class TripManager implements Serializable{
           // if it is the enter of a continuous trip
           if (lastTrip.getExitSpot().equals(spot)
               && duration < fareCalculator.getMaximumDuration()) {
+              card.setLastTapTime(time);
             lastTrip.setContiSpot(spot);
             TransitSystem.log(Level.ALL,"Card " + card.getCardNumber() + " tapped in at " + spot + "," + time + "," + date);
             if (type.equals("B")) {
@@ -104,6 +105,7 @@ class TripManager implements Serializable{
             }
           } else { // if it is a new trip
               addNewTrip(time, spot, card, date, type);
+              card.setLastTapTime(time);
             if (type.equals("B")) {
                 TripSegment updatedLastTrip = allTrips.get(allTrips.size() - 1);
               double fares = fareCalculator.calculateTripFares(updatedLastTrip);
@@ -117,10 +119,12 @@ class TripManager implements Serializable{
           lastTrip.setExitTime(time);
           TripSegment trip = new TripSegment(spot, time, date, type);
           card.addTrip(trip);
+            card.setLastTapTime(time);
           updateFares(fareCalculator.getFareCap(), card, date);//penalty is charging them the cap for last trip
         }
       } else {// if this is the first time the CardHolder travel with this card
           addNewTrip(time, spot, card, date, type);
+          card.setLastTapTime(time);
           if (type.equals("B")){
           TripSegment updatedLastTrip = card.getTrips().get(card.getTrips().size() - 1);
           double fares = fareCalculator.calculateTripFares(updatedLastTrip);
@@ -160,6 +164,7 @@ class TripManager implements Serializable{
         TripSegment updatedCurrent = allTrips.get(allTrips.size() - 1);
         updatedCurrent.setExitSpot(spot);
         updatedCurrent.setExitTime(time);
+        card.setLastTapTime(time);
         updateFares(
                 fareCalculator.getFareCap(),
                 card,
@@ -185,6 +190,7 @@ class TripManager implements Serializable{
         TripSegment updatedCurrent = allTrips.get(allTrips.size() - 1);
         updatedCurrent.setExitSpot(spot);
         updatedCurrent.setExitTime(time);
+          card.setLastTapTime(time);
         updateFares(
             fareCalculator.getFareCap(),
             card,
@@ -192,6 +198,7 @@ class TripManager implements Serializable{
       } else { // normal legal exit
         current.setExitSpot(spot);
         current.setExitTime(time);
+        card.setLastTapTime(time);
         TransitSystem.log(
             Level.ALL,
             "Card " + card.getCardNumber() + " tapped out at " + spot + "," + time + "," + date);
