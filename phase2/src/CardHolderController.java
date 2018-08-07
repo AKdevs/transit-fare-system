@@ -24,7 +24,7 @@ public class CardHolderController extends Controller {
 
     // label info
     @FXML private Button getCard;
-    @FXML private Label emailPrompt;
+    @FXML private Label namePrompt;
     @FXML private Label passwordPrompt;
     @FXML private Label securityPrompt;
     @FXML private TextField answer1Field;
@@ -32,8 +32,8 @@ public class CardHolderController extends Controller {
     @FXML private ComboBox<String> question1Box;
     @FXML private ComboBox<String> question2Box;
     @FXML private Label accountNumber;
-    @FXML private Label name;
-    @FXML private TextField email;
+    @FXML private Label email;
+    @FXML private TextField name;
     @FXML private PasswordField passField;
     @FXML private PasswordField confirmPassField;
     @FXML private Label monthlyCost;
@@ -166,14 +166,14 @@ public class CardHolderController extends Controller {
     }
 
     @FXML
-    void changeEmailButtonPushed(ActionEvent event) throws IOException {
-        if (email.getText().equals("")) {
-            emailPrompt.setTextFill(Color.RED);
-            emailPrompt.setText("Please enter a valid email!");
+    void changeNameButtonPushed(ActionEvent event) throws IOException {
+        if (name.getText().equals("")) {
+            namePrompt.setTextFill(Color.RED);
+            namePrompt.setText("Please enter a name!");
         } else {
-            system.getAccountManager().getLoggedInUser().setEmail(email.getText());
-            emailPrompt.setTextFill(Color.GREEN);
-            emailPrompt.setText("Email successfully changed!");
+            system.getAccountManager().getLoggedInUser().setName(name.getText());
+            namePrompt.setTextFill(Color.GREEN);
+            namePrompt.setText("Name successfully changed!");
         }
     }
 

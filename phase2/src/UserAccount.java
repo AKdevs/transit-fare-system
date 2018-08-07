@@ -25,6 +25,10 @@ public class UserAccount implements Serializable{
     this.email = email;
   }
 
+  void setName(String name) {
+    this.name = name;
+  }
+
   void setPassword(String password) {
     this.password = password;
   }
