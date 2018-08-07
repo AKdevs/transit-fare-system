@@ -129,7 +129,10 @@ public class TravelSimulationController extends Controller implements Initializa
         if (associatedEntryCard.getBalance() < 0) {
             tapInInstructions.setText("Declined:\nyour card is out of funds,\n please load money.");
             TransitSystem.log(Level.ALL,"Declined: Your card is out of funds, please load money.");
-        }else {
+        }else if (tapInTimeIllegal(enterHour.getValue().toString(), enterMinute.getValue().toString(), associatedEntryCard.getLastTapTime())){
+            tapOutInstructions.setText("Declined: Illegal tap in time.");
+            TransitSystem.log(Level.ALL,"Declined: Illegal tap in time.");
+        } else {
       system
           .getTripManager()
           .recordTapIn(
@@ -147,37 +150,41 @@ public class TravelSimulationController extends Controller implements Initializa
     @FXML
     void tapOutButtonPushed(ActionEvent event) throws IOException {
         String exitTime = exitHour.getSelectionModel().getSelectedItem().toString() + ":" + exitMinute.getSelectionModel().getSelectedItem().toString();
+        // if the cardHolder was already asked to load money but the cardHolder didn't
         if (tapInInstructions.getText().equals("Declined:\nyour card is out of funds,\n please load money.")) {
       tapOutInstructions.setText("Declined:\nyour card is out of funds,\n please load money.");
             TransitSystem.log(Level.ALL,"Declined: Your card is out of funds, please load money.");
+        }else {
+            Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
+            // if it is the first tap out and it's illegal
+            if (associatedEntryCard.getLastTapTime().equals("unknown")) {
+                system
+                        .getTripManager()
+                        .recordTapOut(
+                                exitTime,
+                                exitSpot.getSelectionModel().getSelectedItem().toString(),
+                                associatedEntryCard,
+                                exitDate.getText(),
+                                exitType.getText());
+                tapOutInstructions.setText("Illegal tap out");
+            }else if (tapOutTimeIllegal(exitHour.getValue().toString(), exitMinute.getValue().toString(), associatedEntryCard.getLastTapTime())){
+                tapOutInstructions.setText("Declined: Illegal tap out time.");
+                TransitSystem.log(Level.ALL,"Declined: Illegal tap out time.");
+            } else {
+                system
+                        .getTripManager()
+                        .recordTapOut(
+                                exitTime,
+                                exitSpot.getSelectionModel().getSelectedItem().toString(),
+                                associatedEntryCard,
+                                exitDate.getText(),
+                                exitType.getText());
+                tapOutInstructions.setText("Tap Out succeed");
+            }
+            balance.setText(Double.toString(associatedEntryCard.getBalance()));
+
         }
-        Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
-        //compare time
-        if (enterHour.getValue() == null && enterMinute.getValue() == null) {
-            system
-                    .getTripManager()
-                    .recordTapOut(
-                            exitTime,
-                            exitSpot.getSelectionModel().getSelectedItem().toString(),
-                            associatedEntryCard,
-                            exitDate.getText(),
-                            exitType.getText());
-            tapOutInstructions.setText("");
-        }else if (outTimeIllegal(enterHour.getValue().toString(), exitHour.getValue().toString(), enterMinute.getValue().toString(), exitMinute.getValue().toString())){
-            tapOutInstructions.setText("Declined: Illegal tap out time.");
-            TransitSystem.log(Level.ALL,"Declined: Illegal tap out time.");
-    } else {
-      system
-          .getTripManager()
-          .recordTapOut(
-              exitTime,
-              exitSpot.getSelectionModel().getSelectedItem().toString(),
-              associatedEntryCard,
-              exitDate.getText(),
-              exitType.getText());
-      tapOutInstructions.setText("");
-        }
-        balance.setText(Double.toString(associatedEntryCard.getBalance()));
+
     }
 
 
@@ -268,10 +275,23 @@ public class TravelSimulationController extends Controller implements Initializa
         }
     }
 
-    boolean outTimeIllegal(String tapInHour, String tapOutHour, String tapInMinute, String tapOutMinute) {
-        if (Integer.parseInt(tapInHour) > Integer.parseInt(tapOutHour)) {
+    boolean tapInTimeIllegal(String tapInHour, String tapInMinute, String lastTapTime) {
+        String lastTapHour = lastTapTime.substring(0, 2);
+        String lastTapMinute = lastTapTime.substring(3, 5);
+        if (Integer.parseInt(tapInHour) < Integer.parseInt(lastTapHour)) {
             return true;
-        }else if (Integer.parseInt(tapInHour) == Integer.parseInt(tapOutHour) && Integer.parseInt(tapInMinute) > Integer.parseInt(tapOutMinute)) {
+        }else if (Integer.parseInt(tapInHour) == Integer.parseInt(lastTapHour) && Integer.parseInt(tapInMinute) < Integer.parseInt(lastTapMinute)) {
+            return true;
+        }
+        return false;
+    }
+
+    boolean tapOutTimeIllegal(String tapOutHour, String tapOutMinute, String lastTapTime) {
+        String lastTapHour = lastTapTime.substring(0, 2);
+        String lastTapMinute = lastTapTime.substring(3, 5);
+        if (Integer.parseInt(tapOutHour) < Integer.parseInt(lastTapHour)) {
+            return true;
+        }else if (Integer.parseInt(tapOutHour) == Integer.parseInt(lastTapHour) && Integer.parseInt(tapOutMinute) < Integer.parseInt(lastTapMinute)) {
             return true;
         }
         return false;
