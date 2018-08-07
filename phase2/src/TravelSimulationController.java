@@ -70,7 +70,12 @@ public class TravelSimulationController extends Controller implements Initializa
                 enterTransitLine.getItems().add(id);
             }
 
-        initializeTime();
+        if (enterHour.getItems().isEmpty()
+                && enterMinute.getItems().isEmpty()
+                && exitHour.getItems().isEmpty()
+                && exitMinute.getItems().isEmpty()) {
+            initializeTime();
+        }
     }
 
     public void setSource(int source) {
@@ -162,7 +167,12 @@ public class TravelSimulationController extends Controller implements Initializa
                 }
     }
     });
-        initializeTime();
+    if (enterHour.getItems().isEmpty()
+        && enterMinute.getItems().isEmpty()
+        && exitHour.getItems().isEmpty()
+        && exitMinute.getItems().isEmpty()) {
+      initializeTime();
+        }
     }
 
     void initializeTime() {
@@ -186,11 +196,11 @@ public class TravelSimulationController extends Controller implements Initializa
 
     @FXML
     void ok1ButtonPushed(ActionEvent event) throws IOException {
-        enterType.getValue().substring(0,1);
+        String type = enterType.getValue().substring(0,1);
         exitType.setText(enterType.getValue());
         HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
         for (String id : transitLines.keySet()) {
-            if (transitLines.get(id).getType().equals(enterType)) {
+            if (transitLines.get(id).getType().equals(type)) {
                 enterTransitLine.getItems().add(id);
             }
         }
