@@ -89,7 +89,7 @@ class Card implements Serializable {
     if (active) {
       this.balance += fares;
       TransitSystem.log(Level.ALL,
-          "Sucessfully added $"
+          "Successfully added $"
               + fares
               + " to card "
               + cardNumber
