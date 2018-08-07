@@ -24,13 +24,13 @@ public class CardController extends Controller implements Initializable {
     @FXML private Label status;
     @FXML private Label balance;
     @FXML private Label alert;
+    @FXML private Label recentTrips;
 
     @FXML private Button load10;
     @FXML private Button load20;
     @FXML private Button load50;
     @FXML private Button travelSimulation;
-    @FXML private Button logOut;
-    @FXML private Button backToAccount;
+    @FXML private Button viewRecentTrips;
 
 
     public void setSource(int source) {
@@ -104,5 +104,11 @@ public class CardController extends Controller implements Initializable {
         Card card = this.system.getCardManager().findCard(cardNumber.getText());
         card.addBalance(50.0);
         balance.setText(Double.toString(card.getBalance()));
+    }
+
+    @FXML
+    void viewRecentTripsPushed(ActionEvent event) throws IOException {
+        Card card = this.system.getCardManager().findCard(cardNumber.getText());
+        recentTrips.setText(card.viewMostRecentTrips());
     }
 }

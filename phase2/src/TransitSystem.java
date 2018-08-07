@@ -142,7 +142,7 @@ public class TransitSystem implements Serializable {
   /**
    * Deletes data of (date - dataStorePeriod) from the system.
    *
-   * @param date
+   * @param date data relating to same MM-DD but dataStorePeriod years ago will be deleted.
    */
   void deleteOldData(String date) {
     String todayDate = date;
@@ -154,11 +154,13 @@ public class TransitSystem implements Serializable {
     String oldDate = oldYearInt.toString() + currentMMDD;
 
     this.tripManager.getAggregator().deleteOldData(oldDate);
+    this.cardManager.deleteOldTrips(oldDate);
 
     if (currentMMDD.equals("-03-01")) {
       String anotherOldDate = oldYearInt.toString() + "-02-29";
       // System.out.println("Another Old date: "+ anotherOldDate);
       this.tripManager.getAggregator().deleteOldData(anotherOldDate);
+      this.cardManager.deleteOldTrips(anotherOldDate);
     }
   }
 

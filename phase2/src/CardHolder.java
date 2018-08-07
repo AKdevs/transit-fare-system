@@ -13,6 +13,9 @@ import java.util.logging.Level;
  */
 public class CardHolder extends UserAccount implements Serializable{
 
+  /**
+   * the
+   */
   private ArrayList<Card> travelCards;
   /* Account Number for CardHolder starts at 10000001 to distinguish with other account/card numbers.*/
 
@@ -20,6 +23,8 @@ public class CardHolder extends UserAccount implements Serializable{
     private double accountBalance;
 
     private int autoLoadStatus;
+
+    private final double autoLoadLimit = 10.0;
 
 
     CardHolder(String name, String email, String password) {
@@ -139,7 +144,7 @@ public class CardHolder extends UserAccount implements Serializable{
           card1.deductBalance(amount);
           card2.addBalance(amount);
           TransitSystem.log(Level.ALL, Double.toString(amount) + "transfered from Card " + card1.getCardNumber() +" to " + card2.getCardNumber());
-          if (card1.getBalance() < 10 && autoLoadStatus == 1) {
+          if (card1.getBalance() < autoLoadLimit && autoLoadStatus == 1) {
               autoLoad(card1);
           }
       }else if (amount > card1.getBalance()){
@@ -173,12 +178,16 @@ public class CardHolder extends UserAccount implements Serializable{
     }
 
     void autoLoad(Card card) {
-        double difference = 10 - card.getBalance();
+        double difference = autoLoadLimit - card.getBalance();
         if (accountBalance >= difference && this.autoLoadStatus == 1) {
             deductAccountBalance(difference);
             card.addBalance(difference);
             TransitSystem.log(Level.ALL, Double.toString(difference) + " autoloaded to " + card.getCardNumber());
         }
+    }
+
+    double getAutoLoadLimit() {
+      return this.autoLoadLimit;
     }
 
 }

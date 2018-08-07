@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Aggregator is used to record the reports for the whole transit system
+ */
 public class Aggregator implements Serializable{
     /** Stores the total amount of accumulated fares in the system by date */
     private HashMap<String, Double> allFares;
@@ -22,6 +25,9 @@ public class Aggregator implements Serializable{
     /** Stores the daily stat information of Transit Line by date*/
     private HashMap<String, TransitLineDailyStat> transitLineDailySummary;
 
+  /**
+   * Constructs an aggregator
+   */
   Aggregator() {
     this.allFares = new HashMap<>();
     this.numberOfStations = new HashMap<>();
@@ -29,24 +35,6 @@ public class Aggregator implements Serializable{
     this.transitLineDailySummary = new HashMap<>();
   }
 
-
-
-  public Set<String> getAvailableDate() {
-    return availableDate;
-  }
-
-  public HashMap<String, Integer> getNumberOfStations() {
-    return numberOfStations;
-  }
-
-  public HashMap<String, TransitLineDailyStat> getTransitLineDailySummary() {
-    return transitLineDailySummary;
-  }
-
-  /** @return amount of fares in system, stored by date. */
-    public HashMap<String, Double> getAllFares() {
-        return allFares;
-    }
 
     /**
      * Returns the amount of total fare accumulated in the day.
@@ -174,13 +162,24 @@ public class Aggregator implements Serializable{
             TransitLineDailyStat tLDS = new TransitLineDailyStat();
             transitLineDailySummary.put(date, tLDS);
         }
-            }
+    }
 
+   /**
+   * Checks if the report is available for the required date
+   *
+   * @param date required date for report
+   * @return boolean
+   */
     public boolean isReportAvailable (String date) {
         return availableDate.contains(date);
     }
 
-    public void deleteOldData(String date){
+   /**
+   * Deletes the old data
+    *
+   * @param date date
+   */
+   public void deleteOldData(String date){
         this.allFares.remove(date);
         this.numberOfStations.remove(date);
         this.availableDate.remove(date);

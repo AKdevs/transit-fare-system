@@ -51,9 +51,6 @@ class Card implements Serializable {
     System.out.println(this.trips);
   }
 
-  void addTotalFares(double newfare) {
-    totalFares += newfare;
-  }
 
   /**
    * set the Balance for card
@@ -112,7 +109,7 @@ class Card implements Serializable {
   void deductBalance(Double fares) {
     if (active) {
       this.balance -= fares;
-        if (this.getBalance() < 10 && owner.getAutoLoadStatus() == 1) {
+        if (this.isLinked() && this.getBalance() < owner.getAutoLoadLimit() && owner.getAutoLoadStatus() == 1) {
             owner.autoLoad(this);
         }
     } else {
@@ -203,15 +200,15 @@ class Card implements Serializable {
   }
 
   /** Prints out the three most recent trips which are stored in the card. */
-  void viewMostRecentTrips() {
+  String viewMostRecentTrips() {
     if (trips.size() < 3) {
-      System.out.println(trips);
+      return trips.toString();
     } else {
       ArrayList<TripSegment> result = new ArrayList<>();
       result.add(trips.get(this.getTrips().size() - 3));
       result.add(trips.get(this.getTrips().size() - 2));
       result.add(trips.get(this.getTrips().size() - 1));
-      System.out.println(result);
+      return result.toString();
     }
   }
 
@@ -223,27 +220,22 @@ class Card implements Serializable {
     trips.add(newtrip);
   }
 
+  /**
+   * Updates the balance of the card
+   *
+   * @param fares the amount of fares
+   */
   void updateBalance(double fares) {
     this.deductBalance(fares);
   }
 
+  /**
+   * Updates the total fare cost of the card
+   *
+   * @param fares fare cost
+   */
   void updateTotalFares(double fares) {
     this.totalFares += fares;
-  }
-
-  /**
-   * Returns true iff card balance is positive and card is active.
-   *
-   * @return true iff card balance is positive and card is active.
-   */
-  boolean isEntryAllowed() {
-    if ((this.balance > 0) && (active)) {
-      System.out.println("Accepted");
-      return true;
-    } else {
-      System.out.println("Rejected");
-      return false;
-    }
   }
 
   /**
@@ -275,5 +267,25 @@ class Card implements Serializable {
       return this.lastTapTime;
   }
 
+
+    /**
+     * Deletes old TripSegments in trips.
+     * @param date TripSegments occurred on this date shall be deleted.
+     */
+  void deleteOldTrips(String date) {
+      if (!(this.trips.isEmpty())) {
+          TripSegment currTrip = trips.get(0);
+          while ((currTrip != null) && (currTrip.getDate().equals(date))){
+              trips.remove(0);
+              if (!(trips.isEmpty())) {
+                  currTrip = trips.get(0);
+              }
+              else {
+                  currTrip = null;
+                  break;
+              }
+          }
+      }
+  }
 
 }
