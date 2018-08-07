@@ -45,7 +45,7 @@ JingJing Zhan
 
 
 Yang Chen
-- Created the view and controllers for the following windows
+- Created and defined the view and controllers for the following windows
     - Admin User
     - Transit System Daily Report
 
@@ -62,8 +62,8 @@ to store data used for the above mentioned statistics.
 - Added attributes and getter/setter methods in TransitLine, Aggregator, and TripManager
 to collect and retrieve data for daily report.
 
-- Added methods in Aggregator and TransitSystem to delete old data when the system
-is being powered off.
+- Added methods in Aggregator, Card, CardManager, and TransitSystem to delete old data when
+the system is being powered off.
 
 
 Wenyue Feng
