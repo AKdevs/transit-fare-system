@@ -102,7 +102,7 @@ public class TransitSystem implements Serializable {
   /** Power off the system. */
   void powerOffSystem() {
     this.operatingStatus = "off";
-    System.out.println("The TransitSystem has been powered off.");
+    //System.out.println("The TransitSystem has been powered off.");
   }
 
   /** @return current month in MM format */
