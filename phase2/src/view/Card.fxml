@@ -60,21 +60,21 @@
          </children></AnchorPane>
     <AnchorPane fx:id="back" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <VBox layoutX="14.0" layoutY="23.0" prefHeight="155.0" prefWidth="271.0">
+            <VBox layoutX="48.0" prefHeight="112.0" prefWidth="146.0">
                <children>
-                  <Button fx:id="load10" mnemonicParsing="false" onAction="#load10ButtonPushed" prefHeight="57.0" prefWidth="248.0" text="Load $10">
+                  <Button fx:id="load10" mnemonicParsing="false" onAction="#load10ButtonPushed" prefHeight="31.0" prefWidth="138.0" text="Load $10">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="load20" mnemonicParsing="false" onAction="#load20ButtonPushed" prefHeight="54.0" prefWidth="247.0" text="Load $20">
+                  <Button fx:id="load20" mnemonicParsing="false" onAction="#load20ButtonPushed" prefHeight="36.0" prefWidth="139.0" text="Load $20">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="load50" mnemonicParsing="false" onAction="#load50ButtonPushed" prefHeight="54.0" prefWidth="247.0" text="Load $50">
+                  <Button fx:id="load50" mnemonicParsing="false" onAction="#load50ButtonPushed" prefHeight="27.0" prefWidth="138.0" text="Load $50">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="18.0" />
                      </font>
                   </Button>
                </children>
@@ -89,12 +89,12 @@
                </children>
             </VBox>
             <Label fx:id="alert" layoutX="401.0" layoutY="194.0" />
-            <Button fx:id="viewRecentTrips" layoutX="302.0" layoutY="68.0" mnemonicParsing="false" onAction="#viewRecentTripsPushed" prefHeight="37.0" prefWidth="238.0" text="View Recent Trips">
+            <Button fx:id="viewRecentTrips" layoutX="350.0" layoutY="68.0" mnemonicParsing="false" onAction="#viewRecentTripsPushed" prefHeight="37.0" prefWidth="190.0" text="View Recent Trips">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label fx:id="recentTrips" layoutX="299.0" layoutY="120.0" prefHeight="134.0" prefWidth="238.0" />
+            <Label fx:id="recentTrips" layoutX="2.0" layoutY="106.0" prefHeight="148.0" prefWidth="598.0" />
          </children></AnchorPane>
   </items>
 </SplitPane>
