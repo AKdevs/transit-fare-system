@@ -113,6 +113,7 @@ public class TransitSystem implements Serializable {
 
   /** Power off the system. */
   void powerOffSystem() {
+      deleteOldData(currentDate);
     this.operatingStatus = "off";
     //System.out.println("The TransitSystem has been powered off.");
   }
@@ -137,8 +138,27 @@ public class TransitSystem implements Serializable {
     this.currentDate = date;
   }
 
-  void deleteOldData(String date){
 
+    /**
+     * Deletes data of (date - dataStorePeriod) from the system.
+     * @param date
+     */
+  void deleteOldData(String date){
+      String todayDate = date;
+      String currentYear = todayDate.substring(0,4);
+      String currentMMDD = todayDate.substring(4);
+
+      Integer currentYearInt = Integer.parseInt(currentYear);
+      Integer oldYearInt = currentYearInt - dataStorePeriod;
+      String oldDate = oldYearInt.toString() + currentMMDD;
+
+      this.tripManager.getAggregator().deleteOldData(oldDate);
+
+      if (currentMMDD.equals("-03-01")) {
+          String anotherOldDate = oldYearInt.toString() + "-02-29";
+          //System.out.println("Another Old date: "+ anotherOldDate);
+          this.tripManager.getAggregator().deleteOldData(anotherOldDate);
+      }
   }
 
 
