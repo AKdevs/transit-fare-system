@@ -4,9 +4,22 @@ import java.util.HashMap;
 import java.util.logging.Level;
 
 class TripManager implements Serializable{
+
+  /**
+   * Stores all transit lines
+   */
   private HashMap<String, TransitLine> transitLines;
+  /**
+   * Uses the fareCalculator to do calculations
+   */
   private FareCalculator fareCalculator;
+  /**
+   * Uses the aggregator to update reports
+   */
   private Aggregator aggregator;
+  /**
+   * Specifies the average cost per station
+   */
   private Double avgCostPerStation;
 
   TripManager() {
