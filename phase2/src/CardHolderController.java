@@ -37,7 +37,6 @@ public class CardHolderController extends Controller {
     @FXML private PasswordField passField;
     @FXML private PasswordField confirmPassField;
     @FXML private Label monthlyCost;
-    @FXML private Label chooseCardInstructions;
     @FXML private Label transferBalanceInstructions;
     @FXML private Label linkCardInstructions;
     @FXML private Label accountBalance;
@@ -70,9 +69,7 @@ public class CardHolderController extends Controller {
 
     @FXML
     private void goToCardButtonPushed(ActionEvent event) throws IOException {
-        if (cards.getSelectionModel().getSelectedItem() == null) {
-            chooseCardInstructions.setText("Please choose a card from below");
-        } else {
+        if (cards.getSelectionModel().getSelectedItem() != null) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("view/Card.fxml"));
             Parent cardParent = loader.load();
