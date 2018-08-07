@@ -18,7 +18,7 @@
          <content>
             <VBox alignment="CENTER" prefHeight="152.0" prefWidth="325.0" spacing="10.0">
                <children>
-                  <Label fx:id="welcomeLabel" contentDisplay="CENTER" prefHeight="50.0" prefWidth="252.0" text="Welcome to GTA Link" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="welcomeLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="56.0" prefWidth="435.0" text="Welcome to GTA Link" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -29,7 +29,7 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="loginInstructions" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="242.0" text="Please log in to continue." textAlignment="CENTER" wrapText="true" />
+                  <Label fx:id="loginInstructions" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="357.0" text="Please log in to continue." textAlignment="CENTER" wrapText="true" />
                   <TextField fx:id="accountNumber" promptText="account number">
                      <VBox.margin>
                         <Insets left="175.0" right="175.0" />
@@ -60,7 +60,7 @@
          <content>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                <children>
-                  <Label contentDisplay="CENTER" text="Welcome to GTA Link" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="470.0" text="Welcome to GTA Link" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -68,7 +68,7 @@
                         <Insets bottom="50.0" top="70.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="cardInputInstructions" text="Please enter card number:" />
+                  <Label fx:id="cardInputInstructions" alignment="CENTER" prefHeight="17.0" prefWidth="423.0" text="Please enter card number:" />
                   <TextField fx:id="cardNumber" promptText="card number">
                      <VBox.margin>
                         <Insets bottom="20.0" left="175.0" right="175.0" />
