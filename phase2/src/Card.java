@@ -203,15 +203,15 @@ class Card implements Serializable {
   }
 
   /** Prints out the three most recent trips which are stored in the card. */
-  void viewMostRecentTrips() {
+  String viewMostRecentTrips() {
     if (trips.size() < 3) {
-      System.out.println(trips);
+      return trips.toString();
     } else {
       ArrayList<TripSegment> result = new ArrayList<>();
       result.add(trips.get(this.getTrips().size() - 3));
       result.add(trips.get(this.getTrips().size() - 2));
       result.add(trips.get(this.getTrips().size() - 1));
-      System.out.println(result);
+      return result.toString();
     }
   }
 
