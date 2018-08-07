@@ -50,14 +50,30 @@ class AccountManager implements Serializable{
     return this.passwordManager;
   }
 
+  /**
+   * Gets the last created account
+   *
+   *
+   * @return the last created user account
+   */
   UserAccount getLastCreatedAccount() {
     return userAccounts.get(userAccounts.size() - 1);
   }
 
+  /**
+   * Sets the current logged in user account
+   *
+   * @param ua user Account
+   */
   void setLoggedInUser(UserAccount ua) {
     loggedInUser = ua;
   }
 
+  /**
+   * Gets the logged in user account
+   *
+   * @return logged in user account
+   */
   UserAccount getLoggedInUser() {
     return loggedInUser;
   }
@@ -106,6 +122,11 @@ class AccountManager implements Serializable{
     return null;
   }
 
+  /**
+   * Checks if the user account is admin user
+   * @param ua user account
+   * @return true, if the user account is admin user account; false, if the user account is not admin user account
+   */
   boolean isAdmin(UserAccount ua) {
     return ua instanceof AdminUser;
   }
