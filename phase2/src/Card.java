@@ -52,6 +52,11 @@ class Card implements Serializable {
     totalFares += newfare;
   }
 
+  /**
+   * set the Balance for card
+   *
+   * @param balance the balance in card
+   */
   void setBalance(Double balance) {
     if (active) {
       this.balance = balance;
@@ -60,11 +65,17 @@ class Card implements Serializable {
     }
   }
 
+  /**
+   * Get trips stored in the card
+   * @return trips stored in the card
+   */
   public ArrayList<TripSegment> getTrips() {
     return this.trips;
   }
 
-  /** @return balance on this card */
+  /**
+   * Get balance of the card
+   * @return balance on this card */
   double getBalance() {
     return balance;
   }
@@ -201,6 +212,10 @@ class Card implements Serializable {
     }
   }
 
+  /**
+   * Add a new trip to the trip collection stored in the card
+   * @param newtrip new trip
+   */
   void addTrip(TripSegment newtrip) {
     trips.add(newtrip);
   }
@@ -228,10 +243,20 @@ class Card implements Serializable {
     }
   }
 
+  /**
+   * Set the card number for the card
+   *
+   * @param cardNumber
+   */
   public void setCardNumber(String cardNumber) {
     this.cardNumber = cardNumber;
   }
 
+  /**
+   * Get the status for the card
+   *
+   * @return the status of card
+   */
   String getStatus() {
       if (active) {
           return "active";
