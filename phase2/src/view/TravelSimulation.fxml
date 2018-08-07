@@ -114,6 +114,7 @@
                         <ChoiceBox fx:id="exitMinute" prefHeight="27.0" prefWidth="78.0" />
                      </children>
                   </HBox>
+                  <Label fx:id="exitType" alignment="CENTER" prefHeight="25.0" prefWidth="152.0" textAlignment="CENTER" GridPane.columnIndex="1" />
                </children>
             </GridPane>
          </children></AnchorPane>

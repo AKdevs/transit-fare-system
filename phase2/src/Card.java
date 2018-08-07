@@ -35,7 +35,7 @@ class Card implements Serializable {
     this.active = true;
     this.trips = new ArrayList<>();
     this.totalFares = 0.0;
-    this.lastTapTime = "unknown";
+    this.lastTapTime = "00:00";
   }
 
   public ArrayList<TripSegment> getMostRecentTrips() {
