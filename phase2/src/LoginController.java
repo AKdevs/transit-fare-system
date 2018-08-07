@@ -98,10 +98,11 @@ public class LoginController extends Controller {
     }
 
     /**
-     *
-     * @param currentAccountNumber
-     * @param currentPassword
-     * @return
+     * Returns account corresponding to currentAccountNumber and currentPassword
+     * if it exists, otherwise returns null
+     * @param currentAccountNumber account number to check
+     * @param currentPassword password to check
+     * @return account if it exists, null if it does not
      */
     private UserAccount verifyLogin(String currentAccountNumber, String currentPassword) {
         UserAccount currentAccount = system.getAccountManager().findUserAccount(currentAccountNumber);
@@ -114,18 +115,21 @@ public class LoginController extends Controller {
         return currentAccount;
     }
 
+    /**
+     * Returns true iff card exists
+     * @return true iff card exists
+     */
     private boolean cardExists() {
         String currentCardNumber = cardNumber.getText();
-        /*
-        // temporary bypass
-        if (currentCardNumber.equals("")) {
-            return true;
-        }*/
-
         Card currentCard = system.getCardManager().findCard(currentCardNumber);
         return !(currentCard == null);
     }
 
+    /**
+     * Shows window for creating an account
+     * @param event Sign up button pushed
+     * @throws Exception
+     */
     public void showAccountCreation(ActionEvent event) throws Exception {
         if (system.getOperatingStatus().equals("off")) {
             loginInstructions.setTextFill(Color.RED);
@@ -142,6 +146,11 @@ public class LoginController extends Controller {
         window.show();
     }
 
+    /**
+     * Shows window for creating a card
+     * @param event Get A Card button pushed
+     * @throws Exception
+     */
     public void showCardCreation(ActionEvent event) throws Exception {
         if (system.getOperatingStatus().equals("off")) {
             loginInstructions.setTextFill(Color.RED);
@@ -151,6 +160,11 @@ public class LoginController extends Controller {
         }
     }
 
+    /**
+     * Shows window for resetting password
+     * @param event Forgot Password? button pushed
+     * @throws Exception
+     */
     public void showRecovery(ActionEvent event) throws Exception {
         if (system.getOperatingStatus().equals("off")) {
             loginInstructions.setTextFill(Color.RED);
@@ -160,6 +174,11 @@ public class LoginController extends Controller {
         }
     }
 
+    /**
+     * Changes to Login screen
+     * @param event close button pushed
+     * @throws IOException
+     */
     public void closeButtonPushed(ActionEvent event) throws IOException {
         Stage window = (Stage) (((Node)event.getSource()).getScene().getWindow());
         saveData();

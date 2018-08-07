@@ -15,11 +15,6 @@ public class Main extends Application {
         Parent root = loginLoader.load();
         Scene loginScene = new Scene(root);
 
-
-
-        //LoginController loginController = loginLoader.getController();
-        //loginController.storeState(mainSystem);
-
         Controller controller = loginLoader.getController();
         controller.storeState(mainSystem);
 

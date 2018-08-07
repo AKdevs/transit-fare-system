@@ -11,12 +11,24 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 
 public class CreateCardController extends Controller {
-
+    /**
+     * Layout pane
+     */
     @FXML
     VBox container;
+    /**
+     * Button for creating a card
+     */
     @FXML Button getCardButton;
+    /**
+     * Instructions for the user
+     */
     @FXML Label userMessage;
 
+    /**
+     * Creates a card and displays the card number on the screen
+     * @param event
+     */
     public void createCard(ActionEvent event) {
         system.getCardManager().createCard();
         String createdCardNumber = system.getCardManager().getLastCard().getCardNumber();
