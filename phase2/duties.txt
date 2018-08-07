@@ -22,7 +22,7 @@ Atharva Karandikar
 
 - Implemented Serialization
 
-Isabel Zhan
+JingJing Zhan
 
 
 Yang Chen
@@ -47,4 +47,18 @@ to collect and retrieve data for daily report.
 is being powered off.
 
 
-Amy Feng
+Wenyue Feng
+- Redefined TripSegment
+    - Modified the TripSegment from a single trip with one time tap in and one
+    time tap out to a full trip which includes the continue trip.
+- Implement RecordTapIn and RecordTapOut method in TripManager in easier way
+    - Reduced the amount of helper methods which were only used to
+      help implement the tap in and tap out function.
+- Changed the way of storing trips in Card Class
+    - Reduced two layers of ArrayList used to store the full trip
+    - Simplified the program
+- Created FareCalculator Class
+    - Gathered methods for calculating the fare of different kind of trips
+- Created the view and controller for CardHolder
+- Helped implemented Log
+- UML making
