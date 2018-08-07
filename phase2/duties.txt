@@ -23,6 +23,25 @@ Atharva Karandikar
 - Implemented Serialization
 
 JingJing Zhan
+- Redefined and Fixed the bugs of TripSegment
+    - Modified the TripSegment from one single tap in/out activity to a full trip including the continuous trip
+    - Fixed all the code related to TripSegment
+    - Implemented the methods in FareCalculator and made connection between FareCalculator and TripManager
+
+- Created and implemented the view and controllers for the following windows
+    - Card
+    - TravelSimulation
+
+- Implemented view and controllers for the following windows
+    - CardController
+
+- Implemented methods of changing scenes and passing information between scenes
+
+- Added the following new features
+    - transfer balance from one card to another card
+    - autoload
+
+- Implemented Log
 
 
 Yang Chen
