@@ -13,6 +13,9 @@ import java.util.logging.Level;
  */
 public class CardHolder extends UserAccount implements Serializable{
 
+  /**
+   * the
+   */
   private ArrayList<Card> travelCards;
   /* Account Number for CardHolder starts at 10000001 to distinguish with other account/card numbers.*/
 

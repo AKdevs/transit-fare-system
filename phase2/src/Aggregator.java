@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Aggregator is used to record the reports for the whole transit system
+ */
 public class Aggregator implements Serializable{
     /** Stores the total amount of accumulated fares in the system by date */
     private HashMap<String, Double> allFares;
