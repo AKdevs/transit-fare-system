@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -36,6 +38,9 @@ public class TravelSimulationController extends Controller implements Initializa
     @FXML private Label enterDate;
     @FXML private Label exitDate;
     @FXML private Label exitType;
+    @FXML private Label tapInInstructions;
+    @FXML private Label tapOutInstructions;
+
 
 
     @FXML private ChoiceBox enterSpot;
@@ -110,26 +115,57 @@ public class TravelSimulationController extends Controller implements Initializa
     void tapInButtonPushed(ActionEvent event) throws IOException {
         Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
         String enterTime = enterHour.getSelectionModel().getSelectedItem().toString() + ":" + enterMinute.getSelectionModel().getSelectedItem().toString();
-        system.getTripManager().recordTapIn(
-                        enterTime,
-                        enterSpot.getSelectionModel().getSelectedItem().toString(),
-                        associatedEntryCard,
-                        enterDate.getText(),
-                        enterType.getSelectionModel().getSelectedItem().substring(0,1),
-                        enterTransitLine.getValue());
+        if (associatedEntryCard.getBalance() < 0) {
+            tapInInstructions.setText("Declined:\nyour card is out of funds,\n please load money.");
+            TransitSystem.log(Level.ALL,"Declined: Your card is out of funds, please load money.");
+        }else {
+      system
+          .getTripManager()
+          .recordTapIn(
+              enterTime,
+              enterSpot.getSelectionModel().getSelectedItem().toString(),
+              associatedEntryCard,
+              enterDate.getText(),
+              enterType.getSelectionModel().getSelectedItem().substring(0, 1),
+              enterTransitLine.getValue());
+      tapInInstructions.setText("");
+        }
         balance.setText(Double.toString(associatedEntryCard.getBalance()));
     }
 
     @FXML
     void tapOutButtonPushed(ActionEvent event) throws IOException {
-        Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
         String exitTime = exitHour.getSelectionModel().getSelectedItem().toString() + ":" + exitMinute.getSelectionModel().getSelectedItem().toString();
-        system.getTripManager().recordTapOut(
-                exitTime,
-                exitSpot.getSelectionModel().getSelectedItem().toString(),
-                associatedEntryCard,
-                exitDate.getText(),
-                exitType.getText());
+        if (tapInInstructions.getText().equals("Declined:\nyour card is out of funds,\n please load money.")) {
+      tapOutInstructions.setText("Declined:\nyour card is out of funds,\n please load money.");
+            TransitSystem.log(Level.ALL,"Declined: Your card is out of funds, please load money.");
+        }
+        Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
+        //compare time
+        if (enterHour.getValue() == null && enterMinute.getValue() == null) {
+            system
+                    .getTripManager()
+                    .recordTapOut(
+                            exitTime,
+                            exitSpot.getSelectionModel().getSelectedItem().toString(),
+                            associatedEntryCard,
+                            exitDate.getText(),
+                            exitType.getText());
+            tapOutInstructions.setText("");
+        }else if (outTimeIllegal(enterHour.getValue().toString(), exitHour.getValue().toString(), enterMinute.getValue().toString(), exitMinute.getValue().toString())){
+            tapOutInstructions.setText("Declined: Illegal tap out time.");
+            TransitSystem.log(Level.ALL,"Declined: Illegal tap out time.");
+    } else {
+      system
+          .getTripManager()
+          .recordTapOut(
+              exitTime,
+              exitSpot.getSelectionModel().getSelectedItem().toString(),
+              associatedEntryCard,
+              exitDate.getText(),
+              exitType.getText());
+      tapOutInstructions.setText("");
+        }
         balance.setText(Double.toString(associatedEntryCard.getBalance()));
     }
 
@@ -221,5 +257,15 @@ public class TravelSimulationController extends Controller implements Initializa
         }
     }
 
+    boolean outTimeIllegal(String tapInHour, String tapOutHour, String tapInMinute, String tapOutMinute) {
+        if (Integer.parseInt(tapInHour) > Integer.parseInt(tapOutHour)) {
+            return true;
+        }else if (Integer.parseInt(tapInHour) == Integer.parseInt(tapOutHour) && Integer.parseInt(tapInMinute) > Integer.parseInt(tapOutMinute)) {
+            return true;
+        }
+        return false;
+    }
 }
+
+
 

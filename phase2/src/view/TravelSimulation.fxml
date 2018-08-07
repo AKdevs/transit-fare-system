@@ -85,6 +85,7 @@
             </GridPane>
             <Button fx:id="ok1" layoutX="435.0" layoutY="118.0" mnemonicParsing="false" onAction="#ok1ButtonPushed" text="OK" />
             <Button fx:id="ok2" layoutX="435.0" layoutY="145.0" mnemonicParsing="false" onAction="#ok2ButtonPushed" text="OK" />
+            <Label fx:id="tapInInstructions" layoutX="521.0" layoutY="123.0" prefHeight="17.0" prefWidth="0.0" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
@@ -121,6 +122,7 @@
                   <Label fx:id="exitType" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
+            <Label fx:id="tapOutInstructions" layoutX="501.0" layoutY="89.0" />
          </children></AnchorPane>
   </items>
 </SplitPane>
