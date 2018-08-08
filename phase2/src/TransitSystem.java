@@ -38,14 +38,15 @@ public class TransitSystem implements Serializable {
    * logger for transitSystem
    */
   private static final Logger logger = Logger.getLogger(TransitSystem.class.getName());
-  /**
-   * ConsoleHandler for logger
-   */
-  private static final Handler consoleHandler = new ConsoleHandler();
 
-  private static Handler fh;
+  /** fileHandler for logging */
+  private static Handler fileHandler;
 
-  /**
+  /** Formatter for logging */
+  private SimpleFormatter formatter = new SimpleFormatter();
+
+
+    /**
    * Constructs the transit system
    * @param filePath the file path
    * @throws ClassNotFoundException
@@ -61,18 +62,10 @@ public class TransitSystem implements Serializable {
     cardManager = new CardManager();
     dataStorePeriod = 4;
 
-
-    try{
     logger.setLevel(Level.ALL);
-    consoleHandler.setLevel(Level.ALL);
-    logger.addHandler(consoleHandler);
-      fh = new FileHandler("/Users/jingjingzhan/Desktop/log.txt");
-      logger.addHandler(fh);
-      SimpleFormatter formatter = new SimpleFormatter();
-      fh.setFormatter(formatter);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    fileHandler = new FileHandler("phase2/log.txt");
+    logger.addHandler(fileHandler);
+    fileHandler.setFormatter(formatter);
 
     File file = new File(filePath);
     if (file.exists()) {
