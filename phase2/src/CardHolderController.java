@@ -22,6 +22,9 @@ import java.util.ResourceBundle;
 
 public class CardHolderController extends Controller {
 
+    /**
+     *  Buttons, Labels, TextFields, and PasswordFields in TravelSimulation window
+     */
     // label info
     @FXML private Button getCard;
     @FXML private Label namePrompt;
