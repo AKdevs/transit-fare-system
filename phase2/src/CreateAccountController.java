@@ -18,6 +18,9 @@ import java.net.URL;
 import java.util.*;
 
 public class CreateAccountController extends Controller {
+    /**
+     *  TextField, Labels and ComboBox in CreateAccount window
+     */
     @FXML private Label promptLabel;
     @FXML private ComboBox<String> questionBox1;
     @FXML private ComboBox<String> questionBox2;
