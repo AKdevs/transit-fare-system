@@ -29,11 +29,25 @@ import java.text.DateFormat;
 
 public class DailyReportController extends Controller implements Initializable {
 
+   /**
+   * Report date
+   */
     private String reportDateString;
-    private Double fare;
+  /**
+   * Fare for report
+   */
+  private Double fare;
+  /**
+   * Number of station serviced to traveller
+   */
     private Integer numStationServiced;
-    private TransitLineDailyStat statSummary;
-
+  /**
+   * Daily Statistic for TransitLine
+   */
+  private TransitLineDailyStat statSummary;
+   /**
+   *  Lavels, TableView, TableColume in DailyReport window
+   */
     @FXML private Label dateLabel;
     @FXML private Label fareLabel;
     @FXML private Label costLabel;
@@ -48,7 +62,11 @@ public class DailyReportController extends Controller implements Initializable {
     @FXML private TableColumn<SingleTransitLineDailyStat, Integer> ridershipColumn;
     @FXML private TableColumn<SingleTransitLineDailyStat, Integer> avgRiderColumn;
 
-    public void initReport(String date){
+  /**
+   * Initialize the daily report
+   * @param date
+   */
+  public void initReport(String date){
         this.reportDateString = date;
         showDate();
         showFare(reportDateString);
