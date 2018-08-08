@@ -134,6 +134,7 @@ public class TravelSimulationController extends Controller implements Initializa
       tapInInstructions.setText("");
         }
         balance.setText(Double.toString(associatedEntryCard.getBalance()));
+        saveData();
     }
 
     @FXML
@@ -192,6 +193,7 @@ public class TravelSimulationController extends Controller implements Initializa
             }
         }
         balance.setText(Double.toString(associatedEntryCard.getBalance()));
+        saveData();
 
     }
 
