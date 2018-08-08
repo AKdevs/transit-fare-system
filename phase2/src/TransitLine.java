@@ -13,16 +13,18 @@ class TransitLine implements Serializable {
   private int numOfStops;
 
 
+  /**
+   * Constructs a transit line
+   *
+   * @param points the stations/stops on the transit line
+   * @param type the transit type
+   * @param id id of the transit line
+   */
   TransitLine(ArrayList<String> points, String type, String id) {
     this.points = points;
     this.type = type;
     this.id = id;
     this.numOfStops = points.size();
-  }
-
-  /** @param points ArrayList of String for locations of stops/stations */
-  void setPoints(ArrayList<String> points) {
-    this.points = points;
   }
 
   /** @return list of stops/stations. */
