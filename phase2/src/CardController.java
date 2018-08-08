@@ -19,6 +19,9 @@ public class CardController extends Controller implements Initializable {
     // 0 for Login, 1 for CardHolder
     private int source;
     //private Card myCard;
+    /**
+     *  Buttons, Labels in Card window
+     */
     @FXML private Label cardNumber;
     @FXML private Label owner;
     @FXML private Label status;
