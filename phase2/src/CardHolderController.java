@@ -66,7 +66,11 @@ public class CardHolderController extends Controller {
     @FXML private TextField amount;
 
 
-
+    /**
+     * Changes the scene to Card scene
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void goToCardButtonPushed(ActionEvent event) throws IOException {
         if (cards.getSelectionModel().getSelectedItem() != null) {
@@ -89,6 +93,11 @@ public class CardHolderController extends Controller {
 
     }
 
+    /**
+     * Change the scene to pop up Create card
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void getCardButtonPushed(ActionEvent event) throws IOException {
         CardHolder loggedInUser =(CardHolder)system.getAccountManager().getLoggedInUser();
@@ -105,6 +114,9 @@ public class CardHolderController extends Controller {
         updateCardBox();
     }
 
+    /**
+     * Update the cards in the box for card holder to choose
+     */
     void updateCardBox() {
         CardHolder loggedInUser =(CardHolder)system.getAccountManager().getLoggedInUser();
         for (Card card: loggedInUser.getTravelCards()) {
@@ -117,6 +129,10 @@ public class CardHolderController extends Controller {
         // cards = new ChoiceBox<>(FXCollections.observableArrayList(loggedInUser.getTravelCards()));
     }
 
+    /**
+     * Transfer the wanted balance from card1 to card2
+     * @param event
+     */
     @FXML
     void transferButtonPushed(ActionEvent event) {
         String c1Num = card1.getSelectionModel().getSelectedItem().toString();
@@ -128,12 +144,20 @@ public class CardHolderController extends Controller {
         transferBalanceInstructions.setText(ch.transferBalance(c1, c2, balance));
     }
 
+    /**
+     * Log out from the account
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void logOutButtonPushed(ActionEvent event) throws IOException {
         system.getAccountManager().setLoggedInUser(null);
         changeWindow(event, "view/Login.fxml");
     }
 
+    /**
+     * Initialize the Card Holder Information
+     */
     void initialCardHolderInfo() {
         CardHolder loggedInUser = (CardHolder) system.getAccountManager().getLoggedInUser();
         accountNumber.setText(loggedInUser.getAccountNum());
@@ -149,6 +173,9 @@ public class CardHolderController extends Controller {
     }
 
 
+    /**
+     * Initialize information of question index and answer list
+     */
     public void initializeCustom() {
         ObservableList<String> elements = FXCollections.observableList(
                 system.getAccountManager().
@@ -162,6 +189,11 @@ public class CardHolderController extends Controller {
         answer2Field.setText(ch.getAnswerList().get(1));
     }
 
+    /**
+     * Pops up the message to notice the action of change name
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void changeNameButtonPushed(ActionEvent event) throws IOException {
         if (name.getText().equals("")) {
@@ -174,6 +206,11 @@ public class CardHolderController extends Controller {
         }
     }
 
+    /**
+     * Changes the password, and pops up the message for changing password
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void changePasswordButtonPushed(ActionEvent event) throws IOException {
         if (passField.getText().equals(confirmPassField.getText())) {
@@ -188,7 +225,11 @@ public class CardHolderController extends Controller {
     }
 
 
-
+    /**
+     * Change the security questions
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void changeSecurityQuestionButtonPushed(ActionEvent event) throws IOException {
         if (!question1Box.getValue().equals(question2Box.getValue())) {
@@ -214,6 +255,11 @@ public class CardHolderController extends Controller {
     }
 
 
+    /**
+     * Link Card to the related account
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void linkCardButtonPushed(ActionEvent event) throws IOException {
         String cardNum = linkedCardNum.getText();
@@ -236,6 +282,11 @@ public class CardHolderController extends Controller {
 
     }
 
+    /**
+     * Unlink a card from a account
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void unlinkCardButtonPushed(ActionEvent event) throws IOException {
         String cardNum = unlinkedCardNum.getText();
@@ -259,6 +310,11 @@ public class CardHolderController extends Controller {
     }
 
 
+    /**
+     * Turn on the Auto load
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void turnOnButtonPushed(ActionEvent event) throws IOException {
         UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
@@ -268,6 +324,11 @@ public class CardHolderController extends Controller {
         loadAccountBalanceInstructions.setText("");
     }
 
+    /**
+     * Turn off the auto load
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void turnOffButtonPushed(ActionEvent event) throws IOException {
         UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
@@ -276,6 +337,11 @@ public class CardHolderController extends Controller {
         accountBalance.setText(Double.toString(ch.getAccountBalance()));
     }
 
+    /**
+     * Load 10 dollars to account
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void load10ToAccountButtonPushed(ActionEvent event) throws IOException {
         UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
@@ -289,6 +355,11 @@ public class CardHolderController extends Controller {
         }
     }
 
+    /**
+     * Load 20 dollars to account
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void load20ToAccountButtonPushed(ActionEvent event) throws IOException {
         UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
@@ -302,6 +373,11 @@ public class CardHolderController extends Controller {
         }
     }
 
+    /**
+     * Load 50 dollars to account
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void load50ToAccountButtonPushed(ActionEvent event) throws IOException {
         UserAccount ua = system.getAccountManager().findUserAccount(accountNumber.getText());
