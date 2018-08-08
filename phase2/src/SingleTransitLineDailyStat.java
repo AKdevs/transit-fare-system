@@ -10,6 +10,14 @@ public class SingleTransitLineDailyStat implements Serializable {
     /** stores average number of passengers travelled in Transit Line per trip*/
     private Integer avgRiderPerTrip;
 
+    /**
+     * Constructs a single transit line daily statistic
+     *
+     * @param id id of transit line
+     * @param numOfTrips number of single-way trips operated
+     * @param ridership number of passengers travelled in Transit Line
+     * @param avgRiderPerTrip average number of passengers travelled in Transit Line per trip
+     */
     public SingleTransitLineDailyStat(String id, Integer numOfTrips, Integer ridership, Integer avgRiderPerTrip) {
         this.id = id;
         this.numOfTrips = numOfTrips;
@@ -17,36 +25,59 @@ public class SingleTransitLineDailyStat implements Serializable {
         this.avgRiderPerTrip = avgRiderPerTrip;
     }
 
+    /**
+     * Gets the id of the transit line
+     *
+     * @return id of the transit line
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets the id of the transit line
+     *
+     * @param id id of the transit line
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * Gets the number of single trips
+     *
+     * @return number of single trips
+     */
     public Integer getNumOfTrips() {
         return numOfTrips;
     }
 
+    /**
+     * set the number of single trips
+     *
+     * @param numOfTrips number of trips
+     */
     public void setNumOfTrips(Integer numOfTrips) {
         this.numOfTrips = numOfTrips;
     }
 
+    /**
+     * Gets the amount of single trip passengers on a transit line
+     *
+     * @return number of single trip passengers
+     */
     public Integer getRidership() {
         return ridership;
     }
 
-    public void setRidership(Integer ridership) {
-        this.ridership = ridership;
-    }
-
+    /**
+     * Increases the amount of single trip passengers on a transit line by 1
+     */
     public void increaseRidership() {this.ridership += 1;}
 
-    public Integer getAvgRiderPerTrip() {
-        return avgRiderPerTrip;
-    }
-
+    /**
+     * Sets the average amount of passengers on one single trip
+     */
     public void setAvgRiderPerTrip() {
         if ( numOfTrips == 0) {
             this.avgRiderPerTrip = 0;
