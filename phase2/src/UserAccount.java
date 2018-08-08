@@ -9,10 +9,25 @@ public class UserAccount implements Serializable{
   private String email;
   /** Stores account number of this user account */
   protected String accountNumber;
+  /**
+   * Stores password of the account
+   */
   protected String password;
+  /**
+   * Stores the question index list for the account
+   */
   protected List<Integer> questionIndexList;
+  /**
+   * Stores the answer list of the security question
+   */
   protected List<String> answerList;
 
+  /**
+   * Constructs the user account
+   * @param name name of the user
+   * @param email email of the user
+   * @param password pass word of the account
+   */
   UserAccount(String name, String email, String password) {
     this.name = name;
     this.email = email;
@@ -21,38 +36,79 @@ public class UserAccount implements Serializable{
     this.answerList = new ArrayList<>();
   }
 
+  /**
+   * Set the email for the account
+   * @param email email for user
+   */
   void setEmail(String email) {
     this.email = email;
   }
 
+  /**
+   * Set the name for the account
+   * @param name user name
+   */
   void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * Set the password for the account
+   *
+   * @param password account password
+   */
   void setPassword(String password) {
     this.password = password;
   }
 
+  /**
+   * Get the password of the account
+   * @return password
+   */
   String getPassword() {
     return password;
   }
 
+  /**
+   * Set the question index list for the user account
+   *
+   * @param indexList question index list
+   */
   void setQuestionIndexList(List<Integer> indexList) {
     questionIndexList = indexList;
   }
 
+  /**
+   * Set the answer list for the account
+   * @param answerList answer list
+   */
   void setAnswerList(List<String> answerList) {
     this.answerList = answerList;
   }
 
 
+  /**
+   * Set account number for user account
+   *
+   * @param accountNumber set account number for user account
+   */
   public void setAccountNumber(String accountNumber) {
     this.accountNumber = accountNumber;
   }
 
+  /**
+   * get question index list for the account
+   * @return question index list
+   */
   List<Integer> getQuestionIndexList() {
     return questionIndexList;
   }
+
+  /**
+   * Get the answer list of the account
+   *
+   * @return the answer list
+   */
   List<String> getAnswerList() {
     return answerList;
   }
@@ -82,11 +138,6 @@ public class UserAccount implements Serializable{
     System.out.println("Account " + this.getAccountNum() + " name changed to " + this.name);
   }
 
-
-  /* Functionality handled by Card for phase 1
-  public String viewBalance(Card card){
-
-  } */
 
   /** Prints out information of UserAccount */
   public void viewInfo() {

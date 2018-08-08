@@ -167,7 +167,7 @@ public class CardHolder extends UserAccount implements Serializable{
       if (amount <= card1.getBalance() && amount >= 0) {
           card1.deductBalance(amount);
           card2.addBalance(amount);
-          TransitSystem.log(Level.ALL, Double.toString(amount) + "transfered from Card " + card1.getCardNumber() +" to " + card2.getCardNumber());
+          TransitSystem.log(Level.ALL, Double.toString(amount) + " transferred from Card " + card1.getCardNumber() +" to " + card2.getCardNumber());
           if (card1.getBalance() < autoLoadLimit && autoLoadStatus == 1) {
               autoLoad(card1);
           }
@@ -236,7 +236,7 @@ public class CardHolder extends UserAccount implements Serializable{
     if (accountBalance >= difference && this.autoLoadStatus == 1) {
       deductAccountBalance(difference);
       card.addBalance(difference);
-      TransitSystem.log(Level.ALL, Double.toString(difference) + "$ is autoloaded to " + card.getCardNumber());
+      TransitSystem.log(Level.ALL, Double.toString(difference) + " is autoloaded to " + card.getCardNumber());
       }
   }
 

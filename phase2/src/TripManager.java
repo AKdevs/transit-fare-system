@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 
+/**
+ * Manage trips
+ */
 class TripManager implements Serializable{
 
   /**
@@ -264,17 +267,5 @@ class TripManager implements Serializable{
           SingleTransitLineDailyStat thisStat = aggregator.getTransitLineDailyStat(date).getSingleTransitLineDailyStat(transitLine);
           thisStat.increaseRidership();
       }
-  }
-
-
-  private String findTransitLine(String type, String station) {
-    for (String id: transitLines.keySet()) {
-      ArrayList<String> stations = transitLines.get(id).getPoints();
-      if (transitLines.get(id).getType().equals(type)
-              && stations.contains(station)) {
-        return id;
-      }
-    }
-    return null;
   }
 }

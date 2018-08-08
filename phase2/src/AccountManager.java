@@ -89,7 +89,6 @@ class AccountManager implements Serializable{
     userAccounts.add(newAccount);
     newAccount.setAccountNumber(Integer.toString(nextCardHolderNumber));
     nextCardHolderNumber++;
-    System.out.println("CardHolder Account " + newAccount.getAccountNum() + " created");
   }
 
   /**
@@ -103,7 +102,6 @@ class AccountManager implements Serializable{
     userAccounts.add(newAccount);
     newAccount.setAccountNumber(Integer.toString(nextAdminUserNumber));
     nextAdminUserNumber++;
-    System.out.println("AdminUser Account " + newAccount.getAccountNum() + " created");
   }
 
 
