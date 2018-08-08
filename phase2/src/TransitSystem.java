@@ -118,24 +118,34 @@ public class TransitSystem implements Serializable {
     return tripManager;
   }
 
+  /**
+   * Get the transit Manager
+   *
+   *
+   * @return transit manager
+   */
   TransitManager getTransitManager() {
     return transitManager;
   }
 
+  /**
+   * Gets the account manager
+   *
+   *
+   * @return account manager
+   */
   AccountManager getAccountManager() {
     return accountManager;
   }
 
+  /**
+   * Gets the card manager
+   *
+   *
+   * @return card manager
+   */
   CardManager getCardManager() {
     return cardManager;
-  }
-
-  public Integer getDataStorePeriod() {
-    return dataStorePeriod;
-  }
-
-  public void setDataStorePeriod(Integer dataStorePeriod) {
-    this.dataStorePeriod = dataStorePeriod;
   }
 
   /** @return operating status of the system, either "on" or "off". */
@@ -153,11 +163,6 @@ public class TransitSystem implements Serializable {
     deleteOldData(currentDate);
     this.operatingStatus = "off";
     // System.out.println("The TransitSystem has been powered off.");
-  }
-
-  /** @return current month in MM format */
-  String getCurrentMonth() {
-    return this.currentMonth;
   }
 
   /** @return current date in YY-MM-DD format */
@@ -200,6 +205,13 @@ public class TransitSystem implements Serializable {
     }
   }
 
+  /**
+   * Deserialize data from file
+   *
+   *
+   * @param path file path
+   * @throws ClassNotFoundException
+   */
   public void readFromFile(String path) throws ClassNotFoundException {
     try {
       InputStream file = new FileInputStream(path);
@@ -221,6 +233,12 @@ public class TransitSystem implements Serializable {
     }
   }
 
+  /**
+   * Serialize data to file
+   *
+   * @param filePath file path
+   * @throws IOException
+   */
   public void saveToFile(String filePath) throws IOException {
 
     OutputStream file = new FileOutputStream(filePath);
