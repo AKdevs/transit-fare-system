@@ -76,21 +76,13 @@ public class TransitSystem implements Serializable {
   }
 
   /**
-   * Get logger
-   * @return logger
-   */
-  private static Logger getLogger() {
-    return logger;
-  }
-
-  /**
    * Log the message with specific level
    *
    * @param level logging level
    * @param msg message which is want to show in logger
    */
   public static void log(Level level, String msg) {
-    getLogger().log(level, msg);
+    logger.log(level, msg);
   }
 
   /**
