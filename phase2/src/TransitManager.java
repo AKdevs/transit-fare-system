@@ -18,6 +18,10 @@ class TransitManager implements Serializable{
     defaultSetup();
   }
 
+  /**
+   * Gets all the transit lines
+   * @return transit lines
+   */
   HashMap<String, TransitLine> getTransitLines() {
     return transitLines;
   }
