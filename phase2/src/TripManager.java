@@ -268,16 +268,4 @@ class TripManager implements Serializable{
           thisStat.increaseRidership();
       }
   }
-
-
-  private String findTransitLine(String type, String station) {
-    for (String id: transitLines.keySet()) {
-      ArrayList<String> stations = transitLines.get(id).getPoints();
-      if (transitLines.get(id).getType().equals(type)
-              && stations.contains(station)) {
-        return id;
-      }
-    }
-    return null;
-  }
 }
