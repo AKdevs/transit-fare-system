@@ -14,20 +14,32 @@ import java.util.logging.Level;
 public class CardHolder extends UserAccount implements Serializable{
 
   /**
-   * the
+   * stores all the travel cards that belongs to the card holder
    */
   private ArrayList<Card> travelCards;
-  /* Account Number for CardHolder starts at 10000001 to distinguish with other account/card numbers.*/
+  /**
+   * The account balance for the card holder
+   */
+  private double accountBalance;
+  /**
+   * The status of auto load balance: it is 1 if the cardHolder turned it on,
+   * 0 if the cardHolder turned it off
+   */
+  private int autoLoadStatus;
+  /**
+   * The limit amount of money that is allowed for auto load is 10.0 dollar
+   */
+  private final double autoLoadLimit = 10.0;
 
 
-    private double accountBalance;
-
-    private int autoLoadStatus;
-
-    private final double autoLoadLimit = 10.0;
-
-
-    CardHolder(String name, String email, String password) {
+  /**
+   * Constructs a card holder
+   *
+   * @param name name of card holder account
+   * @param email email of card holder account
+   * @param password password for the card holder account
+   */
+  CardHolder(String name, String email, String password) {
     super(name, email, password);
     this.travelCards = new ArrayList<>();
   }
@@ -134,11 +146,23 @@ public class CardHolder extends UserAccount implements Serializable{
     return result / travelCards.size();
   }
 
+  /**
+   * Gets all the travel cards that belongs to the card holder
+   * @return list of cards
+   */
   ArrayList<Card> getTravelCards() {
       return this.travelCards;
   }
 
 
+  /**
+   * Transfers amount of money from card 1 to card 2.
+   *
+   * @param card1 transfer money form card1
+   * @param card2 transfer money to card2
+   * @param amount the amount of money that wanted to be transferred
+   * @return message of transferring action
+   */
   String transferBalance(Card card1, Card card2, double amount) {
       if (amount <= card1.getBalance() && amount >= 0) {
           card1.deductBalance(amount);
@@ -157,37 +181,72 @@ public class CardHolder extends UserAccount implements Serializable{
       return "Transfer balance \n succeed";
   }
 
+  /**
+   * Gets the status of auto load
+   *
+   * @return 1 if the card holder turns it on, 0 if the card holder turns it off
+   */
     int getAutoLoadStatus() {
         return autoLoadStatus;
     }
 
-    void setAutoLoadStatus(int status) {
+  /**
+   * Sets the auto load status
+   *
+   * @param status 1 if the card holder turns it on, 0 if the card holder turns it off
+   */
+  void setAutoLoadStatus(int status) {
         autoLoadStatus = status;
-    }
+  }
 
-    double getAccountBalance() {
-        return accountBalance;
-    }
+  /**
+   * Gets the account balance
+   *
+   * @return account balance
+   */
+  double getAccountBalance() {
+    return accountBalance;
+  }
 
-    void addAccountBalance(double amount) {
-        accountBalance += amount;
-    }
+  /**
+   * Adds account balance
+   *
+   * @param amount amount of money that is wanted to be added
+   */
+  void addAccountBalance(double amount) {
+    accountBalance += amount;
+  }
 
-    void deductAccountBalance(double amount) {
-        accountBalance -= amount;
-    }
+  /**
+   * Deducts the account balance
+   *
+   * @param amount amount of money that is going to be deducted
+   */
+  void deductAccountBalance(double amount) {
+    accountBalance -= amount;
+  }
 
-    void autoLoad(Card card) {
-        double difference = autoLoadLimit - card.getBalance();
-        if (accountBalance >= difference && this.autoLoadStatus == 1) {
-            deductAccountBalance(difference);
-            card.addBalance(difference);
-            TransitSystem.log(Level.ALL, Double.toString(difference) + " autoloaded to " + card.getCardNumber());
-        }
-    }
+  /**
+   * Auto-loads money to the card that is belongs to the card holder
+   *
+   * @param card related card
+   */
+  void autoLoad(Card card) {
+    double difference = autoLoadLimit - card.getBalance();
+    if (accountBalance >= difference && this.autoLoadStatus == 1) {
+      deductAccountBalance(difference);
+      card.addBalance(difference);
+      TransitSystem.log(Level.ALL, Double.toString(difference) + "$ is autoloaded to " + card.getCardNumber());
+      }
+  }
 
-    double getAutoLoadLimit() {
-      return this.autoLoadLimit;
-    }
+  /**
+   * Gets the limit of auto-load
+   *
+   * @return auto-load limit
+   */
+  double getAutoLoadLimit() {
+    return this.autoLoadLimit;
+  }
 
 }
