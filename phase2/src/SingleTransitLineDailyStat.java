@@ -3,6 +3,7 @@ import java.io.Serializable;
 /**
  * SingleTransitLineDailyStat is used to record and update the statistic for the daily single trip
  */
+
 public class SingleTransitLineDailyStat implements Serializable {
     /** stores id of the Transit Line*/
     private String id;
@@ -21,6 +22,7 @@ public class SingleTransitLineDailyStat implements Serializable {
      * @param ridership number of passengers travelled in Transit Line
      * @param avgRiderPerTrip average number of passengers travelled in Transit Line per trip
      */
+
     public SingleTransitLineDailyStat(String id, Integer numOfTrips, Integer ridership, Integer avgRiderPerTrip) {
         this.id = id;
         this.numOfTrips = numOfTrips;
@@ -74,9 +76,26 @@ public class SingleTransitLineDailyStat implements Serializable {
     }
 
     /**
+     *  Sets ridership
+     * @param ridership ridership
+     */
+    public void setRidership(Integer ridership) {
+        this.ridership = ridership;
+    }
+
+    /**
      * Increases the amount of single trip passengers on a transit line by 1
      */
     public void increaseRidership() {this.ridership += 1;}
+
+
+    /**
+     *  Gets avgRiderPerTrip
+     * @return avgRiderPerTrip
+     */
+    public Integer getAvgRiderPerTrip() {
+        return avgRiderPerTrip;
+    }
 
     /**
      * Sets the average amount of passengers on one single trip
