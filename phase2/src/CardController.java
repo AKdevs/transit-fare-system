@@ -45,6 +45,11 @@ public class CardController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * Transfer the scene from Card to travel simulation scene
+     * @param event
+     * @throws IOException
+     */
     public void travelSimulationButtonPushed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("view/TravelSimulation.fxml"));
@@ -64,10 +69,20 @@ public class CardController extends Controller implements Initializable {
     }
 
 
+    /**
+     * Push the button to log out and change view to login page
+     * @param event
+     * @throws IOException
+     */
     public void logOutButtonPushed(ActionEvent event) throws IOException {
         changeWindow(event,"view/Login.fxml" );
     }
 
+    /**
+     * Back to the cardHolder scene
+     * @param event
+     * @throws IOException
+     */
     public void backToAccountButtonPushed(ActionEvent event) throws IOException {
         changeWindowPassAccount(event, "view/CardHolder.fxml");
     }
@@ -76,6 +91,10 @@ public class CardController extends Controller implements Initializable {
     }
 
 
+    /**
+     * Initialize the card information
+     * @param cardNum
+     */
     void initialCardInfo(String cardNum) {
         Card card = this.system.getCardManager().findCard(cardNum);
         cardNumber.setText(cardNum);
@@ -88,24 +107,44 @@ public class CardController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * Load 20 dollar to card
+     * @param event
+     * @throws IOException
+     */
     public void load20ButtonPushed(ActionEvent event) throws IOException {
         Card card = this.system.getCardManager().findCard(cardNumber.getText());
         card.addBalance(20.0);
         balance.setText(Double.toString(card.getBalance()));
     }
 
+    /**
+     * load 10 dollar to card
+     * @param event
+     * @throws IOException
+     */
     public void load10ButtonPushed(ActionEvent event) throws IOException {
         Card card = this.system.getCardManager().findCard(cardNumber.getText());
         card.addBalance(10.0);
         balance.setText(Double.toString(card.getBalance()));
     }
 
+    /**
+     * load 50 dollar to card
+     * @param event
+     * @throws IOException
+     */
     public void load50ButtonPushed(ActionEvent event) throws IOException {
         Card card = this.system.getCardManager().findCard(cardNumber.getText());
         card.addBalance(50.0);
         balance.setText(Double.toString(card.getBalance()));
     }
 
+    /**
+     * View the recent trips traveled
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void viewRecentTripsPushed(ActionEvent event) throws IOException {
         Card card = this.system.getCardManager().findCard(cardNumber.getText());
