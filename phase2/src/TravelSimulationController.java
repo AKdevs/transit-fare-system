@@ -25,6 +25,10 @@ import javafx.stage.Stage;
 
 public class TravelSimulationController extends Controller implements Initializable {
     private int source; // 0 if loader is CardHolder, 1 if loader is Card
+
+    /**
+     *  Buttons, Labels and ChoiceBoxes in TravelSimulation window
+     */
     @FXML private Button tapIn;
     @FXML private Button tapOut;
     @FXML private Button backToCard;
@@ -54,7 +58,9 @@ public class TravelSimulationController extends Controller implements Initializa
     @FXML private ChoiceBox exitMinute;
 
 
-
+    /**
+     *  initialize Card and CardHolder's information
+     */
     void initialTravelSimulationInfo(String cardNum) {
         Card card = this.system.getCardManager().findCard(cardNum);
         cardNumber.setText(cardNum);
@@ -82,12 +88,18 @@ public class TravelSimulationController extends Controller implements Initializa
             initializeTime();
         }
     }
-
+    /**
+     *  set the value of source
+     */
     public void setSource(int source) {
         this.source = source;
     }
 
-    //change scene method
+    /**
+     * Push the button to go back to Card window
+     * @param event
+     * @throws IOException
+     */
     public void backToCardButtonPushed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("view/Card.fxml"));
@@ -111,6 +123,11 @@ public class TravelSimulationController extends Controller implements Initializa
         window.show();
     }
 
+    /**
+     * Push the button to record tap in information
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void tapInButtonPushed(ActionEvent event) throws IOException {
         Card associatedEntryCard = system.getCardManager().findCard(cardNumber.getText());
@@ -137,6 +154,11 @@ public class TravelSimulationController extends Controller implements Initializa
         saveData();
     }
 
+    /**
+     * Push the button to record tap out information
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void tapOutButtonPushed(ActionEvent event) throws IOException {
         String exitTime = exitHour.getSelectionModel().getSelectedItem().toString() + ":" + exitMinute.getSelectionModel().getSelectedItem().toString();
@@ -197,7 +219,9 @@ public class TravelSimulationController extends Controller implements Initializa
 
     }
 
-
+    /**
+     * Populate transitLine information
+     */
     void populateTransitLine(String type) {
         type.substring(0,1);
         HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
@@ -223,6 +247,10 @@ public class TravelSimulationController extends Controller implements Initializa
         }
     }
     */
+
+    /**
+     * Initialize the window
+     */
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
         enterType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue<? extends String> selected, String oldType, String newType) {
@@ -239,6 +267,9 @@ public class TravelSimulationController extends Controller implements Initializa
         }
     }
 
+    /**
+     * Initialize the choices for time
+     */
     void initializeTime() {
         for (int i = 0; i < 10; i ++) {
             String time = "0" + String.valueOf(i);
@@ -258,6 +289,11 @@ public class TravelSimulationController extends Controller implements Initializa
         }
     }
 
+    /**
+     * Push the button to set TransitLine options
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void ok1ButtonPushed(ActionEvent event) throws IOException {
         String type = enterType.getValue().substring(0,1);
@@ -273,7 +309,7 @@ public class TravelSimulationController extends Controller implements Initializa
     }
 
     /**
-     *
+     * Push the button to set spot options
      * @param event
      * @throws IOException
      */
