@@ -12,6 +12,9 @@ public class CardManager implements Serializable{
   /** Keeps a track of all cards in the system. */
   private ArrayList<Card> cards;
 
+  /**
+   * Construct a card manager
+   */
   CardManager(){
     this.cards = new ArrayList<>();
   }
@@ -31,6 +34,11 @@ public class CardManager implements Serializable{
     return null;
   }
 
+  /**
+   * Get the last card stores in the card manager
+   *
+   * @return the last card
+   */
   Card getLastCard() {
     return cards.get(cards.size() - 1);
   }
@@ -70,15 +78,10 @@ public class CardManager implements Serializable{
     cards.remove(findCard(cardNumber));
   }
 
-  ArrayList<Card> getCards() {
-      return cards;
-  }
-
   /**
    * Deletes old TripSegments for all Cards in CardManager, which occurred on date.
    * @param date TripSegments occurred on this date shall be deleted.
    */
-
   void deleteOldTrips(String date) {
     if (!(this.cards.isEmpty())) {
       for (Card card : this.cards) {

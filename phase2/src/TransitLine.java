@@ -2,6 +2,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * TransitLine is the transit line in the transit system
+ */
 class TransitLine implements Serializable {
   /** Specifies the stops/stations on the transit line, in order */
   private ArrayList<String> points;
@@ -13,16 +16,18 @@ class TransitLine implements Serializable {
   private int numOfStops;
 
 
+  /**
+   * Constructs a transit line
+   *
+   * @param points the stations/stops on the transit line
+   * @param type the transit type
+   * @param id id of the transit line
+   */
   TransitLine(ArrayList<String> points, String type, String id) {
     this.points = points;
     this.type = type;
     this.id = id;
     this.numOfStops = points.size();
-  }
-
-  /** @param points ArrayList of String for locations of stops/stations */
-  void setPoints(ArrayList<String> points) {
-    this.points = points;
   }
 
   /** @return list of stops/stations. */
