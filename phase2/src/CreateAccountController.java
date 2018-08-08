@@ -28,6 +28,9 @@ public class CreateAccountController extends Controller {
     @FXML private TextField email;
     @FXML private TextField password;
 
+    /**
+     * Initialize the create account custom
+     */
     public void initializeCustom() {
         ObservableList<String> elements = FXCollections.observableList(
                         system.getAccountManager().
@@ -38,6 +41,11 @@ public class CreateAccountController extends Controller {
         questionBox2.getSelectionModel().select(1);
     }
 
+    /**
+     * Create account for user
+     * @param event
+     * @throws IOException
+     */
     public void createAccountButtonPushed(ActionEvent event) throws IOException {
         String currentName = name.getText();
         String currentEmail = email.getText();
@@ -80,6 +88,11 @@ public class CreateAccountController extends Controller {
         }
     }
 
+    /**
+     * Clear all the information entered
+     * @param event
+     * @throws IOException
+     */
     public void cancelButtonPushed(ActionEvent event) throws IOException {
         changeWindowToHome(event);
     }
