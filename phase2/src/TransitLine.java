@@ -2,6 +2,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * TransitLine is the transit line in the transit system
+ */
 class TransitLine implements Serializable {
   /** Specifies the stops/stations on the transit line, in order */
   private ArrayList<String> points;
