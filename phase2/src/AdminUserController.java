@@ -28,101 +28,97 @@ import java.util.function.UnaryOperator;
 
 
 public class AdminUserController extends Controller implements Initializable {
-        @FXML private Button returnToMainButton;
-        @FXML private DatePicker systemDate;
-        @FXML private Label powerOnDateWarning;
-        @FXML private Button powerOnButton;
-        @FXML private Button powerOffButton;
-        @FXML private Label systemStatusLabel;
-        @FXML private Label todayDateLabel;
-        @FXML private DatePicker dailyReportDate;
-        @FXML private Label dailyReportDateWarning;
-        @FXML private Label dailyReportUnavailableWarning;
-        @FXML private Button runDailyReportButton;
-        @FXML private ComboBox<String> transitLinesList;
-        @FXML private DatePicker transitSchedulingDate;
-        @FXML private Label schedulingDateWarning;
-        @FXML private Label schedulingUnavailableWarning;
-        //@FXML private TextField transitNumOfTrips;
-        @FXML private Spinner<Integer> transitNumOfTrips;
-        @FXML private Button setSchedulingButton;
-        @FXML private Label schedulingResult;
-        @FXML private Spinner<Double> avgCostPerStation;
-        @FXML private Label costSettingResultLabel;
-        @FXML private Button costSettingButton;
-        @FXML private Button viewCostButton;
+  @FXML private Button returnToMainButton;
+  @FXML private DatePicker systemDate;
+  @FXML private Label powerOnDateWarning;
+  @FXML private Button powerOnButton;
+  @FXML private Button powerOffButton;
+  @FXML private Label systemStatusLabel;
+  @FXML private Label todayDateLabel;
+  @FXML private DatePicker dailyReportDate;
+  @FXML private Label dailyReportDateWarning;
+  @FXML private Label dailyReportUnavailableWarning;
+  @FXML private Button runDailyReportButton;
+  @FXML private ComboBox<String> transitLinesList;
+  @FXML private DatePicker transitSchedulingDate;
+  @FXML private Label schedulingDateWarning;
+  @FXML private Label schedulingUnavailableWarning;
+  //@FXML private TextField transitNumOfTrips;
+  @FXML private Spinner<Integer> transitNumOfTrips;
+  @FXML private Button setSchedulingButton;
+  @FXML private Label schedulingResult;
+  @FXML private Spinner<Double> avgCostPerStation;
+  @FXML private Label costSettingResultLabel;
+  @FXML private Button costSettingButton;
+  @FXML private Button viewCostButton;
 
 
 
-        private final String datePattern = "yyyy-MM-dd";
+  private final String datePattern = "yyyy-MM-dd";
 
 
-        // TransitSystem theTransitSystem = TransitSystem.getInstance();
+  // TransitSystem theTransitSystem = TransitSystem.getInstance();
 
-        public void returnToMain(ActionEvent event) throws IOException {
-            changeWindowToHome(event);
+  public void returnToMain(ActionEvent event) throws IOException {
+    changeWindowToHome(event);
+    }
+
+
+    public void powerOnSystem(ActionEvent event) throws IOException {
+    // theTransitSystem.powerOnSystem();
+      LocalDate date = systemDate.getValue();
+      powerOnDateWarning.setTextFill(Color.RED);
+      // warning when date is not selected
+      if (date == null){
+        powerOnDateWarning.setText("Please Select a Date!");
         }
-
-
-        public void powerOnSystem(ActionEvent event) throws IOException {
-            // theTransitSystem.powerOnSystem();
-            LocalDate date = systemDate.getValue();
-            powerOnDateWarning.setTextFill(Color.RED);
-            // warning when date is not selected
-            if (date == null){
-                powerOnDateWarning.setText("Please Select a Date!");
+        else if (system.getOperatingStatus().equals("on")) {
+        powerOnDateWarning.setText("The System is currently OPERATING!");
+        }
+        else{
+        // clear warning message
+        powerOnDateWarning.setText("");
+        system.powerOnSystem();
+        // set currentDate in Transit System
+        String dateString = date.toString();
+        system.setCurrentDate(dateString);
+        // create initial (date, value) pair in Aggregator
+        system.getTripManager().getAggregator().initializeDate(dateString);
+        //System.out.println("Fare:" + system.getTripManager().getAggregator().getDailyFares(dateString));
+        //System.out.println(system.getTripManager().getAggregator().getDailyStation(dateString));
+        // if TransitLineDailyStat is empty for the day, set up SingleTransitLineDailyStat for each
+        // Transit Line
+        TransitLineDailyStat todayStat = system.getTripManager().getAggregator().getTransitLineDailyStat(dateString);
+        if (todayStat.isEmpty()) {
+          HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
+          for (String id: transitLines.keySet()) {
+            SingleTransitLineDailyStat singleTransitStat = new SingleTransitLineDailyStat(id,0,0,0);
+            todayStat.addSingleTransitLineDailyStat(id, singleTransitStat);
+            }
             }
 
-           else if (system.getOperatingStatus().equals("on")) {
-                powerOnDateWarning.setText("The System is currently OPERATING!");
-            }
-
-            else{
-                // clear warning message
-                powerOnDateWarning.setText("");
-                system.powerOnSystem();
-                // set currentDate in Transit System
-                String dateString = date.toString();
-                system.setCurrentDate(dateString);
-
-                // create initial (date, value) pair in Aggregator
-                system.getTripManager().getAggregator().initializeDate(dateString);
-                //System.out.println("Fare:" + system.getTripManager().getAggregator().getDailyFares(dateString));
-                //System.out.println(system.getTripManager().getAggregator().getDailyStation(dateString));
-
-                // if TransitLineDailyStat is empty for the day, set up SingleTransitLineDailyStat for each
-                // Transit Line
-                TransitLineDailyStat todayStat = system.getTripManager().getAggregator().getTransitLineDailyStat(dateString);
-                if (todayStat.isEmpty()) {
-                    HashMap<String, TransitLine> transitLines = system.getTransitManager().getTransitLines();
-                    for (String id: transitLines.keySet()) {
-                        SingleTransitLineDailyStat singleTransitStat = new SingleTransitLineDailyStat(id,0,0,0);
-                        todayStat.addSingleTransitLineDailyStat(id, singleTransitStat);
-                        }
-                }
-
-                // set display of date in systemDate and todayDateLabel at top
-                systemDate.setPromptText(dateString);
-                String todayDate = "Today is " + dateString +".";
-                todayDateLabel.setText(todayDate);
-
-                //create <date, 0> for attributes in Aggregator and Transit Scheduling
-                showSystemStatus();
-            }
-
-            // powerResult.setText("The Transit System is now operating.");
-            //System.out.println(theTransitSystem.getOperatingStatus());
+            // set display of date in systemDate and todayDateLabel at top
+        systemDate.setPromptText(dateString);
+        String todayDate = "Today is " + dateString +".";
+        todayDateLabel.setText(todayDate);
+        //create <date, 0> for attributes in Aggregator and Transit Scheduling
+        showSystemStatus();
         }
 
-        public void powerOffSystem(ActionEvent event) throws IOException{
-            system.powerOffSystem();
-            showSystemStatus();
-            powerOnDateWarning.setText("");
-            todayDateLabel.setText("");
+        // powerResult.setText("The Transit System is now operating.");
+      //System.out.println(theTransitSystem.getOperatingStatus());
+    }
+    public void powerOffSystem(ActionEvent event) throws IOException{
+     system.powerOffSystem();
+     showSystemStatus();
+     powerOnDateWarning.setText("");
+     todayDateLabel.setText("");
+    }
 
-        }
-
-        public void showSystemStatus() {
+  /**
+   * Show the system status, which is either off or on
+   */
+  public void showSystemStatus() {
             if (system.getOperatingStatus().equals("on")){
                 systemStatusLabel.setText("on");
             systemStatusLabel.setTextFill(Color.GREEN);
@@ -220,6 +216,11 @@ public class AdminUserController extends Controller implements Initializable {
         costSettingResultLabel.setText(message);
     }
 
+  /**
+   * Repare the daily report for the admin User
+   * @param dateString
+   * @throws IOException
+   */
     public void prepareReport(String dateString) throws IOException {
             Stage reportWindow = new Stage();
         FXMLLoader dailyReportLoader = new FXMLLoader(getClass().getResource("view/DailyReport.fxml"));
@@ -270,7 +271,13 @@ public class AdminUserController extends Controller implements Initializable {
    // public void setScheduling
 
 
-
+  /**
+   * Initialize the scene for admin user
+   *
+   *
+   * @param url URL
+   * @param rb Resource Bundle
+   */
         @Override
         public void initialize(URL url, ResourceBundle rb) {
 
@@ -302,7 +309,6 @@ public class AdminUserController extends Controller implements Initializable {
              *  (Source: https://stackoverflow.com/questions/25885005/insert-only-numbers-in-spinner-control
              *  retrieved in August 2018)
              */
-
             NumberFormat intFormat = NumberFormat.getIntegerInstance();
             UnaryOperator<TextFormatter.Change> intFilter = c -> {
                 if (c.isContentChange()) {
