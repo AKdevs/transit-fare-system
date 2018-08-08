@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
 
+/**
+ * TransitSystem is the transit system of the program, which contains all the information
+ */
 public class TransitSystem implements Serializable {
   /** Stores the file path of serialization file */
   private String filepath;
@@ -16,7 +19,9 @@ public class TransitSystem implements Serializable {
   protected TransitManager transitManager;
   /** Stores the account manager */
   private AccountManager accountManager;
-
+  /**
+   * Stores the card manager
+   */
   private CardManager cardManager;
 
   /** Stores system current month */
@@ -29,12 +34,23 @@ public class TransitSystem implements Serializable {
 
   /** Stores how many years data will be stored in the system, default is 4 years */
   private Integer dataStorePeriod;
-
+  /**
+   * logger for transitSystem
+   */
   private static final Logger logger = Logger.getLogger(TransitSystem.class.getName());
+  /**
+   * ConsoleHandler for logger
+   */
   private static final Handler consoleHandler = new ConsoleHandler();
 
   private static Handler fh;
 
+  /**
+   * Constructs the transit system
+   * @param filePath the file path
+   * @throws ClassNotFoundException
+   * @throws IOException
+   */
   public TransitSystem(String filePath) throws ClassNotFoundException, IOException {
     this.filepath = filePath;
     tripManager = new TripManager();
@@ -66,18 +82,38 @@ public class TransitSystem implements Serializable {
     }
   }
 
+  /**
+   * Get logger
+   * @return logger
+   */
   private static Logger getLogger() {
     return logger;
   }
 
+  /**
+   * Log the message with specific level
+   *
+   * @param level logging level
+   * @param msg message which is want to show in logger
+   */
   public static void log(Level level, String msg) {
     getLogger().log(level, msg);
   }
 
+  /**
+   * Gets the file path
+   * @return file path
+   */
   String getFilepath() {
     return this.filepath;
   }
 
+  /**
+   * Gets the trip manager
+   *
+   *
+   * @return trip manager
+   */
   TripManager getTripManager() {
     return tripManager;
   }
