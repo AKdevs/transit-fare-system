@@ -270,6 +270,11 @@ public class TravelSimulationController extends Controller implements Initializa
         }
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void ok2ButtonPushed(ActionEvent event) throws IOException {
         enterSpot.getItems().clear();
