@@ -21,6 +21,8 @@ public class PasswordManager implements Serializable{
     }
 
     /**
+     * Gets the question list
+     *
      * @return list of security questions
      */
     List<String> getQuestionList() {
