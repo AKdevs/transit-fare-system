@@ -1,5 +1,8 @@
 import java.io.Serializable;
 
+/**
+ * SingleTransitLineDailyStat is used to record and update the statistic for the daily single trip
+ */
 public class SingleTransitLineDailyStat implements Serializable {
     /** stores id of the Transit Line*/
     private String id;
