@@ -1,5 +1,8 @@
 import java.io.Serializable;
 
+/**
+ * TripSegment is the full trip with its continue trips
+ */
 public class TripSegment implements Serializable{
 
   /**
