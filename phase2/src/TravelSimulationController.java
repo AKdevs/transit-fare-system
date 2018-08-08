@@ -287,6 +287,13 @@ public class TravelSimulationController extends Controller implements Initializa
         }
     }
 
+    /**
+     * Checks if the tap in time is illegal
+     * @param tapInHour hour of tap in
+     * @param tapInMinute minute of tap in
+     * @param lastTapTime the last tap time
+     * @return tree if the tap in time is illegal
+     */
     boolean tapInTimeIllegal(String tapInHour, String tapInMinute, String lastTapTime) {
         String lastTapHour = lastTapTime.substring(0, 2);
         String lastTapMinute = lastTapTime.substring(3, 5);
@@ -298,6 +305,13 @@ public class TravelSimulationController extends Controller implements Initializa
         return false;
     }
 
+    /**
+     * Checks if the tap out time is illegal
+     * @param tapOutHour hour of tap out
+     * @param tapOutMinute minute of tap out
+     * @param lastTapTime the last tap time
+     * @return tree if the tap out time is illegal
+     */
     boolean tapOutTimeIllegal(String tapOutHour, String tapOutMinute, String lastTapTime) {
         String lastTapHour = lastTapTime.substring(0, 2);
         String lastTapMinute = lastTapTime.substring(3, 5);
@@ -309,6 +323,9 @@ public class TravelSimulationController extends Controller implements Initializa
         return false;
     }
 
+    /**
+     * Clear the tap in and tap out information from the screen
+     */
     void clearTapInfo() {
         enterType.getItems().clear();
         enterTransitLine.getItems().clear();

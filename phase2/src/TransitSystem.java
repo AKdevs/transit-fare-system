@@ -155,7 +155,6 @@ public class TransitSystem implements Serializable {
   void powerOffSystem() {
     deleteOldData(currentDate);
     this.operatingStatus = "off";
-    // System.out.println("The TransitSystem has been powered off.");
   }
 
   /** @return current date in YY-MM-DD format */
@@ -192,7 +191,6 @@ public class TransitSystem implements Serializable {
 
     if (currentMMDD.equals("-03-01")) {
       String anotherOldDate = oldYearInt.toString() + "-02-29";
-      // System.out.println("Another Old date: "+ anotherOldDate);
       this.tripManager.getAggregator().deleteOldData(anotherOldDate);
       this.cardManager.deleteOldTrips(anotherOldDate);
     }
@@ -218,11 +216,8 @@ public class TransitSystem implements Serializable {
       cardManager = (CardManager) data.get(3);
       // deserialize all TransitSystem instance fields
       input.close();
-      System.out.println("Object has been deserialized ");
     } catch (IOException ex) {
-      System.out.print("IO Exception caught");
     } catch (ClassNotFoundException ex) {
-      System.out.println("ClassNotFoundException is caught");
     }
   }
 

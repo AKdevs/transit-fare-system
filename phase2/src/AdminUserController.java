@@ -28,42 +28,121 @@ import java.util.function.UnaryOperator;
 
 
 public class AdminUserController extends Controller implements Initializable {
+
+  /**
+   * Button for return to main
+   */
   @FXML private Button returnToMainButton;
+  /**
+   * DatePicker to pick system date
+   */
   @FXML private DatePicker systemDate;
+  /**
+   * Power on date warning
+   */
   @FXML private Label powerOnDateWarning;
+  /**
+   * Power-on button
+   */
   @FXML private Button powerOnButton;
+  /**
+   * Power-off button
+   */
   @FXML private Button powerOffButton;
+  /**
+   * System status label
+   */
   @FXML private Label systemStatusLabel;
+  /**
+   * current date label
+   */
   @FXML private Label todayDateLabel;
+  /**
+   * Daily report date
+   */
   @FXML private DatePicker dailyReportDate;
+  /**
+   * Warning for daily report date
+   */
   @FXML private Label dailyReportDateWarning;
+  /**
+   * Warning for daily report unavailable
+   */
   @FXML private Label dailyReportUnavailableWarning;
+  /**
+   * Button for run daily report
+   */
   @FXML private Button runDailyReportButton;
+  /**
+   * list for transit lines
+   */
   @FXML private ComboBox<String> transitLinesList;
+  /**
+   * Date for transit scheduling
+   */
   @FXML private DatePicker transitSchedulingDate;
+  /**
+   * Warning for scheduling date
+   */
   @FXML private Label schedulingDateWarning;
+  /**
+   * Warning for scheduling unavailable
+   */
   @FXML private Label schedulingUnavailableWarning;
+  /**
+   * Transit number of trips
+   */
   //@FXML private TextField transitNumOfTrips;
   @FXML private Spinner<Integer> transitNumOfTrips;
+  /**
+   * Set Scheduling button
+   */
   @FXML private Button setSchedulingButton;
+  /**
+   * Scheduling result label
+   */
   @FXML private Label schedulingResult;
+  /**
+   * Average cost per station
+   */
   @FXML private Spinner<Double> avgCostPerStation;
+  /**
+   * Cost setting result Label
+   */
   @FXML private Label costSettingResultLabel;
+  /**
+   * Cost setting button
+   */
   @FXML private Button costSettingButton;
+  /**
+   * View cost button
+   */
   @FXML private Button viewCostButton;
 
 
-
+  /**
+   * Date pattern
+   */
   private final String datePattern = "yyyy-MM-dd";
 
 
   // TransitSystem theTransitSystem = TransitSystem.getInstance();
 
+  /**
+   * Return to main page
+   * @param event Action Event
+   * @throws IOException
+   */
   public void returnToMain(ActionEvent event) throws IOException {
     changeWindowToHome(event);
     }
 
 
+  /**
+   * Power on the transit system
+   * @param event Action event
+   * @throws IOException
+   */
     public void powerOnSystem(ActionEvent event) throws IOException {
     // theTransitSystem.powerOnSystem();
       LocalDate date = systemDate.getValue();
@@ -108,6 +187,12 @@ public class AdminUserController extends Controller implements Initializable {
         // powerResult.setText("The Transit System is now operating.");
       //System.out.println(theTransitSystem.getOperatingStatus());
     }
+
+  /**
+   * Power of the system
+   * @param event
+   * @throws IOException
+   */
     public void powerOffSystem(ActionEvent event) throws IOException{
      system.powerOffSystem();
      showSystemStatus();
@@ -129,7 +214,12 @@ public class AdminUserController extends Controller implements Initializable {
             }
         }
 
-    public void showDailyReport(ActionEvent event) throws IOException {
+  /**
+   * Show the daily report to admin user
+   * @param event
+   * @throws IOException
+   */
+  public void showDailyReport(ActionEvent event) throws IOException {
         LocalDate date = dailyReportDate.getValue();
         dailyReportDateWarning.setTextFill(Color.RED);
         // warning when date is not selected
@@ -154,6 +244,11 @@ public class AdminUserController extends Controller implements Initializable {
     }
 
 
+  /**
+   * Set the transit scheduling
+   * @param event
+   * @throws IOException
+   */
     public void setTransitScheduling(ActionEvent event) throws IOException {
         LocalDate date = transitSchedulingDate.getValue();
         String transitLine = transitLinesList.getValue();
@@ -201,6 +296,11 @@ public class AdminUserController extends Controller implements Initializable {
         }
     }
 
+  /**
+   * Sets the average cost per station
+   * @param event
+   * @throws IOException
+   */
     public void setAvgCost(ActionEvent event) throws IOException {
             Double cost = avgCostPerStation.getValue();
             system.getTripManager().setAvgCostPerStation(cost);
@@ -209,6 +309,11 @@ public class AdminUserController extends Controller implements Initializable {
             costSettingResultLabel.setText(success);
     }
 
+  /**
+   * View the average cost per station
+   * @param event
+   * @throws IOException
+   */
     public void viewAvgCost(ActionEvent event) throws IOException {
             Double cost = system.getTripManager().getAvgCostPerStation();
             String message = "The current setting for Average Cost Per Station is $" + cost +".";
